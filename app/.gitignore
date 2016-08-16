@@ -1,0 +1,8 @@
+/build
+/src/main/assets/paperwork.json
+/.gradle
+/.idea
+
+/local.properties
+*.iml
+.DS_Store
