@@ -5,6 +5,7 @@ apply from: '../code_quality_tools/jacoco.gradle'
 apply plugin: 'com.frogermcs.androiddevmetrics'
 apply from: '../code_quality_tools/quality.gradle'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'io.fabric'
 
 android {
     // Declared in dependencies.gradle in the root of the project.
@@ -12,7 +13,7 @@ android {
     buildToolsVersion versions.buildTools
 
     defaultConfig {
-        applicationId 'ru.yandex.yamblz'
+        applicationId 'ru.yandex.detbr'
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.code // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
@@ -63,6 +64,7 @@ android {
 
         disable 'GoogleAppIndexingWarning' // App does not have deep linking.
         disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.
+        disable 'UnusedResources'
     }
 
     packagingOptions {
@@ -98,6 +100,15 @@ dependencies {
 
     compile libraries.timber
 
+    compile (libraries.retrofit) {
+        exclude module: 'okhttp'
+    }
+    compile libraries.converterGson
+    compile libraries.gson
+    compile libraries.okhttp
+    compile libraries.glide
+    compile libraries.okhttpLogging
+
     // Developer tools (Developer Settings)
     compile libraries.stetho
     compile libraries.leakCanary
@@ -121,6 +132,11 @@ dependencies {
         exclude module: 'recyclerview-v7'
         exclude module: 'support-v4'
     }
+
+    compile(libraries.crashlytics) {
+        transitive = true;
+    }
+    compile libraries.playServicesAnalytics
 }
 
 configurations.all {
@@ -143,3 +159,5 @@ if (withDexcount) {
         maxTreeDepth = Integer.MAX_VALUE
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
