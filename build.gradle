@@ -9,6 +9,7 @@ buildscript {
     repositories {
         jcenter()
         maven { url 'https://plugins.gradle.org/m2/' }
+        maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         // See dependencies.gradle for declaration of plugins.
@@ -38,6 +39,9 @@ buildscript {
 
         // Check latest version of dependencies, task: dependencyUpdates
         classpath gradlePlugins.versions
+
+        // Fabric
+        classpath gradlePlugins.fabric
     }
 
     // Part of workaround for Lint + Retrolambda.
@@ -47,6 +51,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url 'https://maven.fabric.io/public' }
     }
 
     // Workaround to prevent Gradle from stealing focus from other apps during tests run/etc.

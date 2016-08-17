@@ -17,6 +17,7 @@ ext.versions = [
         errorProneCoreVersion        : '2.0.9',
         dexcountPlugin               : '0.5.4',
         versionsGradlePlugin         : '0.13.0',
+        fabricGradlePlugin           : '1.+',
 
         dagger                       : '2.6',
 
@@ -42,6 +43,8 @@ ext.versions = [
         equalsVerifier               : '1.7.5',
         mockito                      : '1.10.19',
         supportTestRunner            : '0.5',
+
+        crashlytics                  : '2.6.2@aar',
 ]
 
 ext.gradlePlugins = [
@@ -54,6 +57,7 @@ ext.gradlePlugins = [
         errorProne       : "net.ltgt.gradle:gradle-errorprone-plugin:$versions.errorProneVersion",
         dexcount         : "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$versions.dexcountPlugin",
         versions         : "com.github.ben-manes:gradle-versions-plugin:$versions.versionsGradlePlugin",
+        fabric           : "io.fabric.tools:gradle:$versions.fabricGradlePlugin",
 ]
 
 ext.libraries = [
@@ -97,4 +101,6 @@ ext.libraries = [
         supportTestRules        : "com.android.support.test:rules:$versions.supportTestRunner",
         espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
         espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+
+        crashlytics             : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
 ]

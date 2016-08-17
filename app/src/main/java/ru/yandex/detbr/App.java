@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
 import ru.yandex.detbr.developer_settings.DevMetricsProxy;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
 import timber.log.Timber;
@@ -20,6 +22,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
         applicationComponent = prepareApplicationComponent().build();
 
         if (BuildConfig.DEBUG) {

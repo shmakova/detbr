@@ -5,6 +5,7 @@ apply from: '../code_quality_tools/jacoco.gradle'
 apply plugin: 'com.frogermcs.androiddevmetrics'
 apply from: '../code_quality_tools/quality.gradle'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'io.fabric'
 
 android {
     // Declared in dependencies.gradle in the root of the project.
@@ -129,6 +130,10 @@ dependencies {
         exclude module: 'support-annotations'
         exclude module: 'recyclerview-v7'
         exclude module: 'support-v4'
+    }
+
+    compile(libraries.crashlytics) {
+        transitive = true;
     }
 }
 
