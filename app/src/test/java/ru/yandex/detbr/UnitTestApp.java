@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import ru.yandex.detbr.developer_settings.DevMetricsProxy;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
 
+@SuppressWarnings("SIC_INNER_SHOULD_BE_STATIC_ANON")
 public class UnitTestApp extends App {
 
     @NonNull
@@ -20,5 +21,10 @@ public class UnitTestApp extends App {
                         };
                     }
                 });
+    }
+
+    @Override
+    protected void setupFabric() {
+
     }
 }

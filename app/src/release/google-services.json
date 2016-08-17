@@ -8,7 +8,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:580306497468:android:e550f89c4057b0d6",
         "android_client_info": {
-          "package_name": "ru.yandex.detbr.release"
+          "package_name": "ru.yandex.detbr"
         }
       },
       "oauth_client": [],

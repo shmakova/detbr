@@ -17,13 +17,15 @@ public class App extends Application {
     private ApplicationComponent applicationComponent;
     private Tracker tracker;
 
-    synchronized public Tracker getDefaultTracker() {
-        if (tracker == null) {
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-            tracker = analytics.newTracker(R.xml.global_tracker);
+    public Tracker getDefaultTracker() {
+        synchronized (this) {
+            if (tracker == null) {
+                GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+                // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
+                tracker = analytics.newTracker(R.xml.global_tracker);
+            }
+            return tracker;
         }
-        return tracker;
     }
 
     // Prevent need in a singleton (global) reference to the application object.
@@ -35,7 +37,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
+        setupFabric();
         applicationComponent = prepareApplicationComponent().build();
 
         if (BuildConfig.DEBUG) {
@@ -58,5 +60,9 @@ public class App extends Application {
     @NonNull
     public ApplicationComponent applicationComponent() {
         return applicationComponent;
+    }
+
+    protected void setupFabric() {
+        Fabric.with(this, new Crashlytics());
     }
 }
