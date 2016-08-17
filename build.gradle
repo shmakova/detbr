@@ -42,6 +42,9 @@ buildscript {
 
         // Fabric
         classpath gradlePlugins.fabric
+
+        // Google services
+        classpath gradlePlugins.googleServices
     }
 
     // Part of workaround for Lint + Retrolambda.

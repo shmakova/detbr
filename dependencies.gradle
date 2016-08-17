@@ -18,6 +18,7 @@ ext.versions = [
         dexcountPlugin               : '0.5.4',
         versionsGradlePlugin         : '0.13.0',
         fabricGradlePlugin           : '1.+',
+        googleServicesGradlePlugin   : '3.0.0',
 
         dagger                       : '2.6',
 
@@ -45,6 +46,7 @@ ext.versions = [
         supportTestRunner            : '0.5',
 
         crashlytics                  : '2.6.2@aar',
+        playServices                 : '9.4.0',
 ]
 
 ext.gradlePlugins = [
@@ -58,6 +60,7 @@ ext.gradlePlugins = [
         dexcount         : "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$versions.dexcountPlugin",
         versions         : "com.github.ben-manes:gradle-versions-plugin:$versions.versionsGradlePlugin",
         fabric           : "io.fabric.tools:gradle:$versions.fabricGradlePlugin",
+        googleServices   : "com.google.gms:google-services:$versions.googleServicesGradlePlugin",
 ]
 
 ext.libraries = [
@@ -102,5 +105,7 @@ ext.libraries = [
         espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
         espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
 
+        // Analytics
         crashlytics             : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
+        playServicesAnalytics   : "com.google.android.gms:play-services-analytics:$versions.playServices",
 ]

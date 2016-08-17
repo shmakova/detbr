@@ -13,7 +13,7 @@ android {
     buildToolsVersion versions.buildTools
 
     defaultConfig {
-        applicationId 'ru.yandex.yamblz'
+        applicationId 'ru.yandex.detbr'
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.code // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
@@ -135,6 +135,7 @@ dependencies {
     compile(libraries.crashlytics) {
         transitive = true;
     }
+    compile libraries.playServicesAnalytics
 }
 
 configurations.all {
@@ -157,3 +158,5 @@ if (withDexcount) {
         maxTreeDepth = Integer.MAX_VALUE
     }
 }
+
+apply plugin: 'com.google.gms.google-services'

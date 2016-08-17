@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "580306497468",
+    "project_id": "firebase-detbr"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:580306497468:android:e550f89c4057b0d6",
+        "android_client_info": {
+          "package_name": "ru.yandex.detbr.release"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDky_kn7DJtD05ZTsmcYLhiLsIidr2ZMeM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-82691491-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
