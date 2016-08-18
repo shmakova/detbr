@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +33,8 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
     ProgressBar progressBar;
     @BindView(R.id.webview)
     WebView webView;
+
+    private SearchView searchView;
 
     @SuppressLint("InflateParams")
     @Override
@@ -68,8 +71,7 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
 
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView =
-                (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
 
@@ -88,7 +90,8 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            loadPageByUrl(query);
+            Toast.makeText(this, query, Toast.LENGTH_LONG).show();
+            searchView.setQuery(query, false);
         } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
 

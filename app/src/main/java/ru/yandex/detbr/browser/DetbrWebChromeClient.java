@@ -25,6 +25,5 @@ public class DetbrWebChromeClient extends WebChromeClient {
     public void onProgressChanged(WebView view, int newProgress) {
         super.onProgressChanged(view, newProgress);
         uiController.updateProgressBar(newProgress);
-        Timber.e(String.valueOf(newProgress));
     }
 }
