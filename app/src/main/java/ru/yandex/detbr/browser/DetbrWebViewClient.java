@@ -1,6 +1,7 @@
 package ru.yandex.detbr.browser;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -21,9 +22,13 @@ public class DetbrWebViewClient extends WebViewClient {
 
     @Override
     public void onPageFinished(@NonNull WebView view, String url) {
-        if (view.isShown()) {
-            uiController.updateUrl(view.getTitle(), url);
-            view.postInvalidate();
-        }
+        uiController.updateUrl(view.getTitle(), url);
+        uiController.hideProgressBar();
+        view.postInvalidate();
+    }
+
+    @Override
+    public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        uiController.showProgressBar();
     }
 }

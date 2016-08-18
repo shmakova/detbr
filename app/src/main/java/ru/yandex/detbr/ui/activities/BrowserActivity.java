@@ -11,23 +11,27 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.webkit.WebChromeClient;
+import android.view.MenuItem;
 import android.webkit.WebView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.yandex.detbr.R;
+import ru.yandex.detbr.browser.DetbrWebChromeClient;
 import ru.yandex.detbr.browser.DetbrWebViewClient;
 import ru.yandex.detbr.ui.other.UIController;
 
 public class BrowserActivity extends AppCompatActivity implements UIController {
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
     @BindView(R.id.webview)
     WebView webView;
-
-    private ActionBar actionBar;
 
     @SuppressLint("InflateParams")
     @Override
@@ -35,7 +39,7 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browser);
         ButterKnife.bind(this);
-        actionBar = getSupportActionBar();
+        initActionBar();
         initWebView();
         handleIntent(getIntent());
     }
@@ -45,7 +49,16 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new DetbrWebViewClient(this));
-        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebChromeClient(new DetbrWebChromeClient(this));
+    }
+
+    private void initActionBar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override
@@ -75,7 +88,7 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(this, query, Toast.LENGTH_LONG).show();
+            loadPageByUrl(query);
         } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
 
@@ -87,9 +100,41 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
 
     @Override
     public void updateUrl(@Nullable String title, @NonNull String url) {
-        if (actionBar != null) {
-            actionBar.setTitle(title);
-            actionBar.setSubtitle(url);
+        toolbar.setTitle(title);
+        toolbar.setSubtitle(url);
+    }
+
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(ProgressBar.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(ProgressBar.GONE);
+    }
+
+    @Override
+    public void updateProgressBar(int progress) {
+        progressBar.setProgress(progress);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

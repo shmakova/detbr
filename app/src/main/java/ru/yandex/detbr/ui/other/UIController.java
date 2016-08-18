@@ -9,4 +9,10 @@ import android.support.annotation.Nullable;
 
 public interface UIController {
     void updateUrl(@Nullable String title, @NonNull String url);
+
+    void showProgressBar();
+
+    void hideProgressBar();
+
+    void updateProgressBar(int progress);
 }
