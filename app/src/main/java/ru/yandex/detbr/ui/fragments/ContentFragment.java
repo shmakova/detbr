@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
 
@@ -27,7 +26,9 @@ public class ContentFragment extends BaseFragment {
 
     @OnClick(R.id.browser_button)
     public void onSearchButtonClick() {
-        onBrowserButtonClickListener.onBrowserButtonCLick("http://yandex.ru");
+        if (onBrowserButtonClickListener != null) {
+            onBrowserButtonClickListener.onBrowserButtonCLick("http://yandex.ru");
+        }
     }
 
     @Override

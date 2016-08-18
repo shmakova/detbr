@@ -12,7 +12,8 @@ import ru.yandex.detbr.ui.other.UIController;
  */
 
 public class DetbrWebViewClient extends WebViewClient {
-    private UIController uiController;
+    @NonNull
+    private final UIController uiController;
 
     public DetbrWebViewClient(@NonNull Activity activity) {
         uiController = (UIController) activity;
