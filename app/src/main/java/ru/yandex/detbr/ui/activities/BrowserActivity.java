@@ -173,8 +173,9 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.like_fab)

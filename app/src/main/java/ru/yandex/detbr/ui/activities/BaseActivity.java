@@ -24,7 +24,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        tracker.send(new HitBuilders.ScreenViewBuilder().build());
+        if (tracker != null) {
+            tracker.setScreenName("Activity");
+            tracker.send(new HitBuilders.ScreenViewBuilder().build());
+        }
     }
 }
 
