@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -52,7 +53,24 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     private void initWebView() {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setAllowContentAccess(true);
+        webSettings.setAllowFileAccess(true);
+        webView.setDrawingCacheBackgroundColor(Color.WHITE);
+        webView.setFocusableInTouchMode(true);
+        webView.setFocusable(true);
+        webView.setDrawingCacheEnabled(false);
+        webView.setWillNotCacheDrawing(true);
+        webView.setBackgroundColor(Color.WHITE);
+        webView.setScrollbarFadingEnabled(true);
+        webView.setSaveEnabled(true);
+        webView.setNetworkAvailable(true);
         webView.setWebViewClient(new BrowserWebViewClient(this));
         webView.setWebChromeClient(new BrowserWebChromeClient(this));
     }
