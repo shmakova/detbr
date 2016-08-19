@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Детский Браузер</string>
     <string name="content">Hello</string>
+    <string name="choose_your_school">Выбери свою школу</string>
 </resources>
