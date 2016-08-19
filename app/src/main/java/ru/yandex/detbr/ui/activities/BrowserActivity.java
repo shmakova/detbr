@@ -168,6 +168,8 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.home_page:
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
