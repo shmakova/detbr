@@ -40,16 +40,18 @@ public final class BrowserUrlUtils {
     }
 
     static String getSafeUrl(String url) {
+        String safeUrl = url;
+
         if (url.contains(GOOGLE_URL) &&
                 !url.contains(GOOGLE_SAFE_PARAMETER) &&
                 url.contains(GOOGLE_QUERY_PARAMETER)) {
-            url += "&" + GOOGLE_SAFE_PARAMETER;
+            safeUrl += "&" + GOOGLE_SAFE_PARAMETER;
         } else if (url.contains(YANDEX_URL) &&
                 !url.contains(YANDEX_SAFE_PARAMETER) &&
                 url.contains(YANDEX_QUERY_PARAMETER)) {
-            url += "&" + YANDEX_SAFE_PARAMETER;
+            safeUrl += "&" + YANDEX_SAFE_PARAMETER;
         }
 
-        return url;
+        return safeUrl;
     }
 }
