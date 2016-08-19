@@ -3,7 +3,6 @@ package ru.yandex.detbr.ui.activities;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.widget.Toast;
 
 import javax.inject.Inject;
 import javax.inject.Named;

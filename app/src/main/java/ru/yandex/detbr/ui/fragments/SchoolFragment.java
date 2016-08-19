@@ -1,7 +1,6 @@
 package ru.yandex.detbr.ui.fragments;
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import java.util.List;
 import butterknife.BindView;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.school.FakeSchoolsData;
+import ru.yandex.detbr.school.SchoolArrayAdapter;
 import ru.yandex.detbr.school.SchoolsData;
 import ru.yandex.detbr.ui.activities.MainActivity;
 
@@ -31,7 +31,7 @@ public class SchoolFragment extends BaseFragment {
     private List<String> schoolData;
 
     private OnIntroduceCompleteListener listener;
-    private SchoolsData listGetter;
+    private SchoolsData dataProvider;
 
     public interface OnIntroduceCompleteListener {
         void onIntroduceComplete();
@@ -45,9 +45,8 @@ public class SchoolFragment extends BaseFragment {
             throw new ClassCastException(getActivity().toString() + " must implement " +
                     OnIntroduceCompleteListener.class.getName());
         }
-        // TODO убрать эту глупую строку. Использовать dagger?
-        listGetter = new FakeSchoolsData();
-        schoolData = listGetter.getSchoolsList();
+        dataProvider = new FakeSchoolsData();
+        schoolData = dataProvider.getSchoolsList();
         listener = (OnIntroduceCompleteListener) getActivity();
     }
 
@@ -66,7 +65,7 @@ public class SchoolFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getContext(),
+        ArrayAdapter<String> adapter = new SchoolArrayAdapter(getContext(),
                 android.R.layout.simple_dropdown_item_1line, schoolData);
         autoCompleteTextView.setAdapter(adapter);
         autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
@@ -82,7 +81,7 @@ public class SchoolFragment extends BaseFragment {
                 InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
                 View currentFocusView = activity.getCurrentFocus();
                 if (currentFocusView != null)
-                imm.hideSoftInputFromWindow(currentFocusView.getWindowToken(),
+                    imm.hideSoftInputFromWindow(currentFocusView.getWindowToken(),
                         InputMethodManager.HIDE_NOT_ALWAYS);
                 saveToSharedPreference(adapterView.getItemAtPosition(i).toString());
                 listener.onIntroduceComplete();
