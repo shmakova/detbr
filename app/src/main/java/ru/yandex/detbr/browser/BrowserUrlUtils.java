@@ -26,7 +26,7 @@ public class BrowserUrlUtils {
         String urlString = query;
 
         if (isValidUrl(query)) {
-            if (!query.startsWith(HTTP_PREFIX) && !query.startsWith(HTTPS_PREFIX)) {
+            if (!(query.startsWith(HTTP_PREFIX) || query.startsWith(HTTPS_PREFIX))) {
                 urlString = HTTP_PREFIX + query;
             }
         } else {
