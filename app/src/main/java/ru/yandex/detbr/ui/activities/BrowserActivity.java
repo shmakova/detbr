@@ -15,18 +15,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.browser.DetbrWebChromeClient;
-import ru.yandex.detbr.browser.DetbrWebViewClient;
-import ru.yandex.detbr.ui.other.UIController;
+import ru.yandex.detbr.browser.BrowserUrlUtils;
+import ru.yandex.detbr.browser.BrowserWebChromeClient;
+import ru.yandex.detbr.browser.BrowserWebViewClient;
+import ru.yandex.detbr.ui.views.BrowserView;
 
-public class BrowserActivity extends AppCompatActivity implements UIController {
+public class BrowserActivity extends AppCompatActivity implements BrowserView {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.progress_bar)
@@ -49,10 +50,11 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new DetbrWebViewClient(this));
-        webView.setWebChromeClient(new DetbrWebChromeClient(this));
+        webView.setWebViewClient(new BrowserWebViewClient(this));
+        webView.setWebChromeClient(new BrowserWebChromeClient(this));
     }
 
     private void initActionBar() {
@@ -90,8 +92,8 @@ public class BrowserActivity extends AppCompatActivity implements UIController {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(this, query, Toast.LENGTH_LONG).show();
             searchView.setQuery(query, false);
+            loadPageByUrl(BrowserUrlUtils.getSafeUrlFromQuery(query));
         } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
 

@@ -5,25 +5,23 @@ import android.support.annotation.NonNull;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
-import ru.yandex.detbr.ui.other.UIController;
-import timber.log.Timber;
+import ru.yandex.detbr.ui.views.BrowserView;
 
 /**
  * Created by shmakova on 18.08.16.
  */
 
-public class DetbrWebChromeClient extends WebChromeClient {
+public class BrowserWebChromeClient extends WebChromeClient {
     @NonNull
-    private final UIController uiController;
+    private final BrowserView browserView;
 
-
-    public DetbrWebChromeClient(@NonNull Activity activity) {
-        this.uiController = (UIController) activity;
+    public BrowserWebChromeClient(@NonNull Activity activity) {
+        this.browserView = (BrowserView) activity;
     }
 
     @Override
     public void onProgressChanged(WebView view, int newProgress) {
         super.onProgressChanged(view, newProgress);
-        uiController.updateProgressBar(newProgress);
+        browserView.updateProgressBar(newProgress);
     }
 }
