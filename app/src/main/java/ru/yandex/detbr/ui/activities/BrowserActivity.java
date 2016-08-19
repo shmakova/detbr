@@ -169,6 +169,9 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
                 onBackPressed();
                 return true;
             case R.id.home_page:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 return true;
         }
         return super.onOptionsItemSelected(item);
