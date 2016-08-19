@@ -30,6 +30,7 @@ public class BrowserWebViewClient extends WebViewClient {
     @Override
     public void onPageStarted(WebView view, String url, Bitmap favicon) {
         browserView.showProgressBar();
+        browserView.resetLike();
     }
 
     @Override

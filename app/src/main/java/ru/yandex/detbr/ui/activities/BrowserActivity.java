@@ -8,6 +8,8 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +24,7 @@ import android.widget.ProgressBar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.browser.BrowserUrlUtils;
 import ru.yandex.detbr.browser.BrowserWebChromeClient;
@@ -35,6 +38,8 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     ProgressBar progressBar;
     @BindView(R.id.webview)
     WebView webView;
+    @BindView(R.id.like_fab)
+    FloatingActionButton fabLike;
 
     private SearchView searchView;
 
@@ -143,6 +148,12 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     }
 
     @Override
+    public void resetLike() {
+        fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                R.drawable.ic_favorite_border_24dp, null));
+    }
+
+    @Override
     public void onBackPressed() {
         if (webView.canGoBack()) {
             webView.goBack();
@@ -159,5 +170,11 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.like_fab)
+    public void onFabLikeClick() {
+        fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                R.drawable.ic_favorite_24dp, null));
     }
 }
