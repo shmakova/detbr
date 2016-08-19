@@ -11,11 +11,4 @@
         android:completionThreshold="1"
         android:hint="@string/choose_your_school"
         android:id="@+id/intro_text_view" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Продолжить"
-        android:id="@+id/intro_btn_continue"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
 </RelativeLayout>

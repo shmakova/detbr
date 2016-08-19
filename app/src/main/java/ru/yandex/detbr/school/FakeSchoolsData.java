@@ -1,12 +1,12 @@
-package ru.yandex.detbr.database_staff;
+package ru.yandex.detbr.school;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FakeSchoolListGetter implements SchoolListGetter {
+public class FakeSchoolsData implements SchoolsData {
     @Override
-    public List<String> getListOfSchools() {
+    public List<String> getSchoolsList() {
         List<String> result = new ArrayList<>();
         result.add("Школа 1");
         result.add("Школа 2");

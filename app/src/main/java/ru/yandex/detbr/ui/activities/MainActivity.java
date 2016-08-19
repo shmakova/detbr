@@ -3,6 +3,7 @@ package ru.yandex.detbr.ui.activities;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,10 +12,10 @@ import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
 import ru.yandex.detbr.ui.fragments.ContentFragment;
-import ru.yandex.detbr.ui.fragments.IntroducingFragment;
+import ru.yandex.detbr.ui.fragments.SchoolFragment;
 import ru.yandex.detbr.ui.other.ViewModifier;
 
-public class MainActivity extends BaseActivity implements IntroducingFragment.onIntroduceCompleteListener{
+public class MainActivity extends BaseActivity implements SchoolFragment.OnIntroduceCompleteListener {
 
     @Inject @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
@@ -28,14 +29,12 @@ public class MainActivity extends BaseActivity implements IntroducingFragment.on
         App.get(this).applicationComponent().inject(this);
 
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
-        // TODO: эта строка нужна только для очистки префов. Убрать в демо
-        getPreferences(MODE_PRIVATE).edit().putString(MainActivity.SCHOOL_TAG, null).apply();
 
         loadDataFromSharedPreference();
         if (school == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_frame_layout, new IntroducingFragment())
+                    .replace(R.id.main_frame_layout, new SchoolFragment())
                     .commit();
         }
         else if (savedInstanceState == null) {
