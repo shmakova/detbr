@@ -15,9 +15,11 @@ import android.widget.AutoCompleteTextView;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.school.FakeSchoolsData;
 import ru.yandex.detbr.school.SchoolArrayAdapter;
 import ru.yandex.detbr.school.SchoolsData;
 import ru.yandex.detbr.ui.activities.MainActivity;
@@ -30,11 +32,19 @@ public class SchoolFragment extends BaseFragment {
     AutoCompleteTextView autoCompleteTextView;
     private List<String> schoolData;
 
-    private OnIntroduceCompleteListener listener;
-    private SchoolsData dataProvider;
+    OnIntroduceCompleteListener listener;
+    @Inject
+    SchoolsData dataProvider;
 
     public interface OnIntroduceCompleteListener {
         void onIntroduceComplete();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        App.get(getContext()).applicationComponent().schoolDataComponent().inject(this);
+        schoolData = dataProvider.getSchoolsList();
     }
 
     @Override
@@ -45,8 +55,6 @@ public class SchoolFragment extends BaseFragment {
             throw new ClassCastException(getActivity().toString() + " must implement " +
                     OnIntroduceCompleteListener.class.getName());
         }
-        dataProvider = new FakeSchoolsData();
-        schoolData = dataProvider.getSchoolsList();
         listener = (OnIntroduceCompleteListener) getActivity();
     }
 
@@ -68,12 +76,14 @@ public class SchoolFragment extends BaseFragment {
         ArrayAdapter<String> adapter = new SchoolArrayAdapter(getContext(),
                 android.R.layout.simple_dropdown_item_1line, schoolData);
         autoCompleteTextView.setAdapter(adapter);
+
         autoCompleteTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 autoCompleteTextView.showDropDown();
             }
         });
+
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
