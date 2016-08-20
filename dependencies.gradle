@@ -30,6 +30,7 @@ ext.versions = [
         gson                         : '2.7',
         okhttp                       : '3.4.1',
         glide                        : '3.7.0',
+        fragmentArgs                 : '3.0.2',
 
         espresso                     : '2.2.1',
         stetho                       : '1.3.1',
@@ -85,6 +86,8 @@ ext.libraries = [
         okhttp                  : "com.squareup.okhttp3:okhttp:$versions.okhttp",
         okhttpLogging           : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
         glide                   : "com.github.bumptech.glide:glide:$versions.glide",
+        fragmentArgs            : "com.hannesdorfmann.fragmentargs:annotation:$versions.fragmentArgs",
+        fragmentArgsProcessor   : "com.hannesdorfmann.fragmentargs:processor:$versions.fragmentArgs",
 
         // Developer Tools
         stetho                  : "com.facebook.stetho:stetho:$versions.stetho",

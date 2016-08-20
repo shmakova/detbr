@@ -109,6 +109,9 @@ dependencies {
     compile libraries.glide
     compile libraries.okhttpLogging
 
+    compile libraries.fragmentArgs
+    apt libraries.fragmentArgsProcessor
+
     // Developer tools (Developer Settings)
     compile libraries.stetho
     compile libraries.leakCanary

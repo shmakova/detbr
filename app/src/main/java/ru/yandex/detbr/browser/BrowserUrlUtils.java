@@ -25,7 +25,7 @@ public final class BrowserUrlUtils {
         return Patterns.WEB_URL.matcher(query).matches();
     }
 
-    public static String getSafeUrlFromQuery(String query) {
+    private static String getSafeUrlFromQuery(String query) {
         String urlString = query;
 
         if (isValidUrl(query)) {
@@ -39,8 +39,8 @@ public final class BrowserUrlUtils {
         return urlString;
     }
 
-    static String getSafeUrl(String url) {
-        String safeUrl = url;
+    public static String getSafeUrl(String url) {
+        String safeUrl = getSafeUrlFromQuery(url);
 
         if (url.contains(GOOGLE_URL) &&
                 !url.contains(GOOGLE_SAFE_PARAMETER) &&
