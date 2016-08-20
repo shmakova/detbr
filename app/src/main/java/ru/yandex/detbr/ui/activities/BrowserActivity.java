@@ -34,7 +34,6 @@ import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.ui.presenters.BrowserPresenter;
 import ru.yandex.detbr.ui.views.BrowserView;
-import timber.log.Timber;
 
 public class BrowserActivity extends AppCompatActivity implements BrowserView {
     @Inject
