@@ -2,4 +2,9 @@
     <string name="app_name">Детский Браузер</string>
     <string name="content">Hello</string>
     <string name="choose_your_school">Выбери свою школу</string>
+    <string name="search_title">Поиск</string>
+    <string name="search_hint">Введите запрос</string>
+    <string name="url_key">url</string>
+    <string name="go_to_yandex">Перейти на http://yandex.ru</string>
+    <string name="home">Вернуться домой</string>
 </resources>

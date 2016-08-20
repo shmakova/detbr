@@ -1,6 +1,8 @@
 package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -14,14 +16,16 @@ import ru.yandex.detbr.ui.fragments.ContentFragment;
 import ru.yandex.detbr.ui.fragments.SchoolFragment;
 import ru.yandex.detbr.ui.other.ViewModifier;
 
-public class MainActivity extends BaseActivity implements SchoolFragment.OnIntroduceCompleteListener {
+public class MainActivity extends BaseActivity implements
+        SchoolFragment.OnIntroduceCompleteListener,
+        ContentFragment.OnBrowserButtonClickListener {
 
     @Inject @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
     public static final String SCHOOL_TAG = "SCHOOL TAG";
     private String school;
 
-    @SuppressLint("InflateParams") // It's okay in our case.
+    @SuppressLint("InflateParams")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,14 @@ public class MainActivity extends BaseActivity implements SchoolFragment.OnIntro
                     .replace(R.id.main_frame_layout, new ContentFragment())
                     .commit();
         }
+    }
+
+    @Override
+    public void onBrowserButtonCLick(String url) {
+        Intent intent = new Intent(this, BrowserActivity.class);
+        intent.setData(Uri.parse(url));
+        intent.setAction(Intent.ACTION_VIEW);
+        startActivity(intent);
     }
 
     void loadDataFromSharedPreference() {
