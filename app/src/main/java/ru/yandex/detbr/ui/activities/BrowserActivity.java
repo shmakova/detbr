@@ -7,13 +7,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -30,6 +30,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import icepick.Icepick;
+import icepick.State;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.ui.presenters.BrowserPresenter;
@@ -49,18 +51,25 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     FloatingActionButton fabLike;
 
     private SearchView searchView;
-    private String currentUrl;
+
+    @State
+    String currentQuery = "";
 
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
+
         App.get(this).applicationComponent().browserComponent().inject(this);
         presenter.bindView(this);
+
         setContentView(R.layout.activity_browser);
         ButterKnife.bind(this);
+
         initActionBar();
         initWebView();
+
         handleIntent(getIntent());
     }
 
@@ -103,6 +112,7 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 presenter.loadUrl(url);
+                currentQuery = url;
                 return true;
             }
         });
@@ -150,18 +160,20 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     }
 
     private void handleIntent(Intent intent) {
+        String query = currentQuery;
+
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            currentUrl = intent.getStringExtra(SearchManager.QUERY);
-            searchView.setQuery(currentUrl, false);
+            query = intent.getStringExtra(SearchManager.QUERY);
+            searchView.setQuery(query, false);
         } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
 
-            if (uri != null) {
-                currentUrl = uri.toString();
+            if (uri != null && currentQuery.isEmpty()) {
+                query = uri.toString();
             }
         }
 
-        presenter.loadUrl(currentUrl);
+        presenter.loadUrl(query);
     }
 
     @Override
@@ -226,5 +238,11 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     protected void onDestroy() {
         presenter.unbindView(this);
         super.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 }

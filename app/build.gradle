@@ -112,6 +112,9 @@ dependencies {
     compile libraries.fragmentArgs
     apt libraries.fragmentArgsProcessor
 
+    compile libraries.icepick
+    provided libraries.icepickProcessor
+
     // Developer tools (Developer Settings)
     compile libraries.stetho
     compile libraries.leakCanary
