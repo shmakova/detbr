@@ -3,11 +3,11 @@ package ru.yandex.detbr.browser;
 import android.util.Patterns;
 
 /**
- * Created by shmakova on 19.08.16.
+ * Created by shmakova on 21.08.16.
  */
 
+public class BrowserModelImpl implements BrowserModel {
 
-public final class BrowserUrlUtils {
     private static final String YANDEX_SEARCH_URL = "https://yandex.ru/yandsearch?family=yes&lr=213&text=";
     private static final String YANDEX_URL = "yandex.";
     private static final String YANDEX_SAFE_PARAMETER = "family=yes";
@@ -17,9 +17,6 @@ public final class BrowserUrlUtils {
     private static final String GOOGLE_QUERY_PARAMETER = "q=";
     private static final String HTTP_PREFIX = "http://";
     private static final String HTTPS_PREFIX = "https://";
-
-    private BrowserUrlUtils() {
-    }
 
     private static boolean isValidUrl(String query) {
         return Patterns.WEB_URL.matcher(query).matches();
@@ -39,7 +36,8 @@ public final class BrowserUrlUtils {
         return urlString;
     }
 
-    public static String getSafeUrl(String url) {
+    @Override
+    public String getSafeUrl(String url) {
         String safeUrl = getSafeUrlFromQuery(url);
 
         if (url.contains(GOOGLE_URL) &&

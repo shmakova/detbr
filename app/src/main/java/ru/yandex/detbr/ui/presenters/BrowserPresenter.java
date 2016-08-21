@@ -1,6 +1,8 @@
 package ru.yandex.detbr.ui.presenters;
 
-import ru.yandex.detbr.browser.BrowserUrlUtils;
+import android.support.annotation.NonNull;
+
+import ru.yandex.detbr.browser.BrowserModel;
 import ru.yandex.detbr.ui.views.BrowserView;
 
 /**
@@ -8,9 +10,15 @@ import ru.yandex.detbr.ui.views.BrowserView;
  */
 
 public class BrowserPresenter extends Presenter<BrowserView> {
+    @NonNull
+    private final BrowserModel browserModel;
+
+    public BrowserPresenter(@NonNull BrowserModel browserModel) {
+        this.browserModel = browserModel;
+    }
 
     public void loadUrl(String query) {
-        String safeUrl = BrowserUrlUtils.getSafeUrl(query);
+        String safeUrl = browserModel.getSafeUrl(query);
         final BrowserView view = view();
 
         if (view != null) {

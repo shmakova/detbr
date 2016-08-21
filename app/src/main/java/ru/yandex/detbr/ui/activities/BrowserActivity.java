@@ -30,8 +30,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import icepick.Icepick;
-import icepick.State;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.ui.presenters.BrowserPresenter;
@@ -51,15 +49,12 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     FloatingActionButton fabLike;
 
     private SearchView searchView;
-
-    @State
-    String currentQuery = "";
+    private String currentQuery;
 
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Icepick.restoreInstanceState(this, savedInstanceState);
 
         App.get(this).applicationComponent().browserComponent().inject(this);
         presenter.bindView(this);
@@ -168,7 +163,7 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
         } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
 
-            if (uri != null && currentQuery.isEmpty()) {
+            if (uri != null && (currentQuery == null || currentQuery.isEmpty())) {
                 query = uri.toString();
             }
         }
@@ -238,11 +233,5 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     protected void onDestroy() {
         presenter.unbindView(this);
         super.onDestroy();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this, outState);
     }
 }
