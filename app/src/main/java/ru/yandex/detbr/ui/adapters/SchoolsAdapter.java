@@ -1,4 +1,4 @@
-package ru.yandex.detbr.schools;
+package ru.yandex.detbr.ui.adapters;
 
 
 import android.content.Context;
