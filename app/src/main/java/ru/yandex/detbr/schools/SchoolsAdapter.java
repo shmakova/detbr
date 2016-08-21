@@ -1,4 +1,4 @@
-package ru.yandex.detbr.school;
+package ru.yandex.detbr.schools;
 
 
 import android.content.Context;
@@ -12,13 +12,13 @@ import android.widget.Filterable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SchoolArrayAdapter extends ArrayAdapter<String> implements Filterable {
+public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
 
     private ArrayList<String> fullList;
     private ArrayList<String> mOriginalValues;
     private ArrayFilter mFilter;
 
-    public SchoolArrayAdapter(Context context, int resource, List<String> objects) {
+    public SchoolsAdapter(Context context, int resource, List<String> objects) {
 
         super(context, resource, objects);
         fullList = (ArrayList<String>) objects;

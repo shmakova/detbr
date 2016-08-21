@@ -12,15 +12,15 @@ import ru.yandex.detbr.developer_settings.DeveloperSettingsComponent;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
 import ru.yandex.detbr.developer_settings.LeakCanaryProxy;
-import ru.yandex.detbr.school.SchoolsDataComponent;
-import ru.yandex.detbr.school.SchoolsDataModule;
+import ru.yandex.detbr.schools.SchoolsComponent;
+import ru.yandex.detbr.schools.SchoolsModule;
 import ru.yandex.detbr.ui.activities.MainActivity;
 
 @Singleton
 @Component(modules = {
         ApplicationModule.class,
         DeveloperSettingsModule.class,
-        SchoolsDataModule.class
+        SchoolsModule.class
 })
 public interface ApplicationComponent {
 
@@ -29,7 +29,7 @@ public interface ApplicationComponent {
     LeakCanaryProxy leakCanaryProxy();
 
     @NonNull
-    SchoolsDataComponent schoolDataComponent();
+    SchoolsComponent schoolsComponent();
 
     @NonNull
     DeveloperSettingsComponent plusDeveloperSettingsComponent();

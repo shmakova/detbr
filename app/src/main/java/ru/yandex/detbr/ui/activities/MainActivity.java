@@ -2,9 +2,12 @@ package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -12,17 +15,23 @@ import javax.inject.Named;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
+import ru.yandex.detbr.schools.SchoolsRepository;
 import ru.yandex.detbr.ui.fragments.ContentFragment;
-import ru.yandex.detbr.ui.fragments.SchoolFragment;
+import ru.yandex.detbr.ui.fragments.ContentFragmentBuilder;
+import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 import ru.yandex.detbr.ui.other.ViewModifier;
 
 public class MainActivity extends BaseActivity implements
-        SchoolFragment.OnIntroduceCompleteListener,
+        SchoolsFragment.OnSchoolClickListener,
         ContentFragment.OnBrowserButtonClickListener {
 
-    @Inject @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
+    @Inject
+    @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
-    public static final String SCHOOL_TAG = "SCHOOL TAG";
+    @Inject
+    SharedPreferences sharedPreferences;
+
+    private FragmentManager supportFragmentManager;
     private String school;
 
     @SuppressLint("InflateParams")
@@ -32,20 +41,26 @@ public class MainActivity extends BaseActivity implements
         App.get(this).applicationComponent().inject(this);
 
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
+        supportFragmentManager = getSupportFragmentManager();
 
         loadDataFromSharedPreference();
+
         if (school == null) {
-            getSupportFragmentManager()
+            supportFragmentManager
                     .beginTransaction()
-                    .replace(R.id.main_frame_layout, new SchoolFragment())
+                    .replace(R.id.main_frame_layout, new SchoolsFragment())
                     .commit();
+        } else if (savedInstanceState == null) {
+            showContentFragment();
         }
-        else if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.main_frame_layout, new ContentFragment())
-                    .commit();
-        }
+    }
+
+    public void showContentFragment() {
+        Fragment fragment = new ContentFragmentBuilder(school).build();
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_frame_layout, fragment)
+                .commit();
     }
 
     @Override
@@ -57,15 +72,12 @@ public class MainActivity extends BaseActivity implements
     }
 
     void loadDataFromSharedPreference() {
-        school = getPreferences(MODE_PRIVATE).getString(SCHOOL_TAG, null);
+        school = sharedPreferences.getString(SchoolsRepository.SCHOOL_TAG, null);
     }
 
     @Override
-    public void onIntroduceComplete() {
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.main_frame_layout, new ContentFragment())
-                .commit();
+    public void onSchoolClick() {
         loadDataFromSharedPreference();
+        showContentFragment();
     }
 }
