@@ -10,6 +10,7 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
@@ -51,6 +52,12 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
         return mFilter;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public void addAll(@NonNull Collection<? extends String> collection) {
+        fullList = (ArrayList<String>) collection;
+        mOriginalValues = new ArrayList<>(fullList);
+    }
 
     private class ArrayFilter extends Filter {
         private final Object lock = new Object();

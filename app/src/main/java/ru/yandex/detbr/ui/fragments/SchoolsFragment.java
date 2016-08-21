@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.schools.SchoolsAdapter;
+import ru.yandex.detbr.ui.adapters.SchoolsAdapter;
 import ru.yandex.detbr.ui.presenters.SchoolsPresenter;
 import ru.yandex.detbr.ui.views.SchoolsView;
 
