@@ -6,4 +6,5 @@
     <string name="url_key">url</string>
     <string name="go_to_yandex">Перейти на http://yandex.ru</string>
     <string name="home">Вернуться домой</string>
+    <string name="cover">Обложка</string>
 </resources>

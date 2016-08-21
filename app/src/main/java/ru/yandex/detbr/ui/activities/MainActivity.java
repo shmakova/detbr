@@ -5,17 +5,22 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.Toast;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
+import ru.yandex.detbr.cards.Card;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
+import ru.yandex.detbr.ui.fragments.CardsFragment;
 import ru.yandex.detbr.ui.fragments.ContentFragment;
 import ru.yandex.detbr.ui.other.ViewModifier;
 
-public class MainActivity extends BaseActivity implements ContentFragment.OnBrowserButtonClickListener {
+public class MainActivity extends BaseActivity implements
+        ContentFragment.OnBrowserButtonClickListener,
+        CardsFragment.OnCardsItemClickListener {
 
     @Inject @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
@@ -31,7 +36,7 @@ public class MainActivity extends BaseActivity implements ContentFragment.OnBrow
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.main_frame_layout, new ContentFragment())
+                    .replace(R.id.main_frame_layout, new CardsFragment())
                     .commit();
         }
     }
@@ -40,6 +45,15 @@ public class MainActivity extends BaseActivity implements ContentFragment.OnBrow
     public void onBrowserButtonCLick(String url) {
         Intent intent = new Intent(this, BrowserActivity.class);
         intent.setData(Uri.parse(url));
+        intent.setAction(Intent.ACTION_VIEW);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCardsItemClick(Card card) {
+        Toast.makeText(this, card.getUrl(), Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(this, BrowserActivity.class);
+        intent.setData(Uri.parse(card.getUrl()));
         intent.setAction(Intent.ACTION_VIEW);
         startActivity(intent);
     }
