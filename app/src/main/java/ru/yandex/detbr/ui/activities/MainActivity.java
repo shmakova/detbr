@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -27,7 +28,6 @@ import ru.yandex.detbr.ui.fragments.ContentFragment;
 import ru.yandex.detbr.ui.fragments.FavouritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 import ru.yandex.detbr.ui.other.ViewModifier;
-import timber.log.Timber;
 
 public class MainActivity extends BaseActivity implements
         SchoolsFragment.OnSchoolClickListener,
@@ -79,8 +79,6 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onTabSelected(@IdRes int tabId) {
-        Timber.e(String.valueOf(tabId));
-
         switch (tabId) {
             case R.id.tab_cards:
                 showCardsFragment();
@@ -90,11 +88,13 @@ public class MainActivity extends BaseActivity implements
                 return;
             case R.id.tab_tabs:
                 launchBrowser("http://ya.ru");
+                return;
             default:
         }
     }
 
     private void showCardsFragment() {
+        bottomBar.setVisibility(View.VISIBLE);
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame_layout, new CardsFragment())
@@ -109,6 +109,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void showSchoolsFragment() {
+        bottomBar.setVisibility(View.GONE);
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame_layout, new SchoolsFragment())
