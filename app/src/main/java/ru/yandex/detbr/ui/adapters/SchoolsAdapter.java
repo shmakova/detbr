@@ -10,7 +10,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
@@ -52,10 +51,8 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
         return mFilter;
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public void addAll(@NonNull Collection<? extends String> collection) {
-        fullList = (ArrayList<String>) collection;
+    public void addAll(@NonNull List<String> objects) {
+        fullList = (ArrayList<String>) objects;
         mOriginalValues = new ArrayList<>(fullList);
     }
 
@@ -81,17 +78,15 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
             } else {
                 final String prefixString = prefix.toString().toLowerCase();
 
-                ArrayList<String> values = mOriginalValues;
-                int count = values.size();
+                int count = mOriginalValues.size();
 
-                ArrayList<String> newValues = new ArrayList<>(count);
+                ArrayList<String> newValues = new ArrayList<>();
 
                 for (int i = 0; i < count; i++) {
-                    String item = values.get(i);
+                    String item = mOriginalValues.get(i);
                     if (item.toLowerCase().contains(prefixString)) {
                         newValues.add(item);
                     }
-
                 }
 
                 results.values = newValues;
@@ -105,9 +100,9 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
 
-            if(results.values!=null){
+            if (results.values != null) {
                 fullList = (ArrayList<String>) results.values;
-            }else{
+            } else {
                 fullList = new ArrayList<>();
             }
             if (results.count > 0) {
