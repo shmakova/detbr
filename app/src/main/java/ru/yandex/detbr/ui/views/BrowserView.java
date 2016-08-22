@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
  */
 
 public interface BrowserView {
-    void updateUrl(@Nullable String title, @NonNull String url);
+    void updateToolbar(@Nullable String title, @NonNull String url);
 
     void showProgressBar();
 
@@ -17,4 +17,6 @@ public interface BrowserView {
     void updateProgressBar(int progress);
 
     void resetLike();
+
+    void loadPageByUrl(String url);
 }

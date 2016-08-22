@@ -31,6 +31,7 @@ ext.versions = [
         okhttp                       : '3.4.1',
         glide                        : '3.7.0',
         fragmentArgs                 : '3.0.2',
+        icepick                      : '3.2.0',
 
         espresso                     : '2.2.1',
         stetho                       : '1.3.1',
@@ -65,13 +66,13 @@ ext.gradlePlugins = [
 ]
 
 ext.libraries = [
-        dagger                  : "com.google.dagger:dagger:$versions.dagger",
-        daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
+        dagger               : "com.google.dagger:dagger:$versions.dagger",
+        daggerCompiler       : "com.google.dagger:dagger-compiler:$versions.dagger",
 
-        autoValue               : "com.google.auto.value:auto-value:$versions.autoValue",
+        autoValue            : "com.google.auto.value:auto-value:$versions.autoValue",
 
-        supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",
-        supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportAnnotations   : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat     : "com.android.support:appcompat-v7:$versions.supportLibs",
         supportDesign        : "com.android.support:design:$versions.supportLibs",
         supportRecyclerView  : "com.android.support:recyclerview-v7:$versions.supportLibs",
         supportCardView      : "com.android.support:cardview-v7:$versions.supportLibs",
@@ -88,6 +89,8 @@ ext.libraries = [
         glide                : "com.github.bumptech.glide:glide:$versions.glide",
         fragmentArgs         : "com.hannesdorfmann.fragmentargs:annotation:$versions.fragmentArgs",
         fragmentArgsProcessor: "com.hannesdorfmann.fragmentargs:processor:$versions.fragmentArgs",
+        icepick              : "frankiesardo:icepick:$versions.icepick",
+        icepickProcessor     : "frankiesardo:icepick-processor:$versions.icepick",
 
         // Developer Tools
         stetho               : "com.facebook.stetho:stetho:$versions.stetho",
@@ -103,12 +106,12 @@ ext.libraries = [
         assertJ              : "org.assertj:assertj-core:$versions.assertJ",
         equalsVerifier       : "nl.jqno.equalsverifier:equalsverifier:$versions.equalsVerifier",
         mockitoCore          : "org.mockito:mockito-core:$versions.mockito",
-        supportTestRunner       : "com.android.support.test:runner:$versions.supportTestRunner",
-        supportTestRules        : "com.android.support.test:rules:$versions.supportTestRunner",
-        espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
-        espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+        supportTestRunner    : "com.android.support.test:runner:$versions.supportTestRunner",
+        supportTestRules     : "com.android.support.test:rules:$versions.supportTestRunner",
+        espressoCore         : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+        espressoContrib      : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
 
         // Analytics
-        crashlytics             : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
-        playServicesAnalytics   : "com.google.android.gms:play-services-analytics:$versions.playServices",
+        crashlytics          : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
+        playServicesAnalytics: "com.google.android.gms:play-services-analytics:$versions.playServices",
 ]

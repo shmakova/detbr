@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,20 +19,26 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.browser.BrowserUrlUtils;
-import ru.yandex.detbr.browser.BrowserWebChromeClient;
-import ru.yandex.detbr.browser.BrowserWebViewClient;
+import ru.yandex.detbr.ui.presenters.BrowserPresenter;
 import ru.yandex.detbr.ui.views.BrowserView;
 
 public class BrowserActivity extends AppCompatActivity implements BrowserView {
+    @Inject
+    BrowserPresenter presenter;
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.progress_bar)
@@ -42,15 +49,22 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     FloatingActionButton fabLike;
 
     private SearchView searchView;
+    private String currentQuery;
 
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        App.get(this).applicationComponent().browserComponent().inject(this);
+        presenter.bindView(this);
+
         setContentView(R.layout.activity_browser);
         ButterKnife.bind(this);
+
         initActionBar();
         initWebView();
+
         handleIntent(getIntent());
     }
 
@@ -76,8 +90,34 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
         webView.setScrollbarFadingEnabled(true);
         webView.setSaveEnabled(true);
         webView.setNetworkAvailable(true);
-        webView.setWebViewClient(new BrowserWebViewClient(this));
-        webView.setWebChromeClient(new BrowserWebChromeClient(this));
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public void onPageFinished(@NonNull WebView view, String url) {
+                updateToolbar(view.getTitle(), url);
+                hideProgressBar();
+                view.postInvalidate();
+            }
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                showProgressBar();
+                resetLike();
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                presenter.loadUrl(url);
+                currentQuery = url;
+                return true;
+            }
+        });
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                updateProgressBar(newProgress);
+            }
+        });
     }
 
     private void initActionBar() {
@@ -103,9 +143,11 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
         return true;
     }
 
-    private void loadPageByUrl(String url) {
+    @Override
+    public void loadPageByUrl(String url) {
         webView.loadUrl(url);
     }
+
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -113,21 +155,24 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     }
 
     private void handleIntent(Intent intent) {
+        String query = currentQuery;
+
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
+            query = intent.getStringExtra(SearchManager.QUERY);
             searchView.setQuery(query, false);
-            loadPageByUrl(BrowserUrlUtils.getSafeUrlFromQuery(query));
         } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
 
-            if (uri != null) {
-                loadPageByUrl(uri.toString());
+            if (uri != null && (currentQuery == null || currentQuery.isEmpty())) {
+                query = uri.toString();
             }
         }
+
+        presenter.loadUrl(query);
     }
 
     @Override
-    public void updateUrl(@Nullable String title, @NonNull String url) {
+    public void updateToolbar(@Nullable String title, @NonNull String url) {
         toolbar.setTitle(title);
         toolbar.setSubtitle(url);
     }
@@ -182,5 +227,11 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     public void onFabLikeClick() {
         fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
                 R.drawable.ic_favorite_24dp, null));
+    }
+
+    @Override
+    protected void onDestroy() {
+        presenter.unbindView(this);
+        super.onDestroy();
     }
 }
