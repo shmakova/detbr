@@ -23,7 +23,8 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.cards.Card;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
 import ru.yandex.detbr.schools.SchoolsModel;
-import ru.yandex.detbr.ui.fragments.CardsFragment;
+import ru.yandex.detbr.ui.fragments.CardFragment;
+import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.ContentFragment;
 import ru.yandex.detbr.ui.fragments.FavouritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
@@ -32,7 +33,7 @@ import ru.yandex.detbr.ui.other.ViewModifier;
 public class MainActivity extends BaseActivity implements
         SchoolsFragment.OnSchoolClickListener,
         ContentFragment.OnBrowserButtonClickListener,
-        CardsFragment.OnCardsItemClickListener,
+        CardFragment.OnCardsItemClickListener,
         FavouritesFragment.OnCardsItemClickListener,
         OnTabSelectListener {
     @BindView(R.id.bottom_bar)
@@ -97,7 +98,7 @@ public class MainActivity extends BaseActivity implements
         bottomBar.setVisibility(View.VISIBLE);
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_frame_layout, new CardsFragment())
+                .replace(R.id.main_frame_layout, new CardsPagerFragment())
                 .commit();
     }
 

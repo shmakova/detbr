@@ -1,38 +1,33 @@
 package ru.yandex.detbr.cards;
 
+import android.os.Parcelable;
+
+import com.google.auto.value.AutoValue;
+
 /**
  * Created by shmakova on 21.08.16.
  */
 
-public class Card {
-    private final String title;
-    private final String url;
-    private final String cover;
+@AutoValue
+public abstract class Card implements Parcelable {
+    public abstract String getTitle();
 
-    public String getTitle() {
-        return title;
+    public abstract String getUrl();
+
+    public abstract String getCover();
+
+    public static Builder builder() {
+        return new AutoValue_Card.Builder();
     }
 
-    public String getUrl() {
-        return url;
-    }
+    @AutoValue.Builder
+    abstract static class Builder {
+        abstract Builder title(String title);
 
-    public Card(String title, String url, String cover) {
-        this.title = title;
-        this.url = url;
-        this.cover = cover;
-    }
+        abstract Builder url(String url);
 
-    public String getCover() {
-        return cover;
-    }
+        abstract Builder cover(String cover);
 
-    @Override
-    public String toString() {
-        return "Card{" +
-                "title='" + title + '\'' +
-                ", url='" + url + '\'' +
-                ", cover='" + cover + '\'' +
-                '}';
+        abstract Card build();
     }
 }
