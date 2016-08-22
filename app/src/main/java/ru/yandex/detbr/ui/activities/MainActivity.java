@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.roughike.bottombar.BottomBar;
@@ -25,7 +24,6 @@ import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
 import ru.yandex.detbr.schools.SchoolsModel;
 import ru.yandex.detbr.ui.fragments.CardsFragment;
 import ru.yandex.detbr.ui.fragments.ContentFragment;
-import ru.yandex.detbr.ui.fragments.ContentFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.FavouritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 import ru.yandex.detbr.ui.other.ViewModifier;
@@ -69,14 +67,6 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-    public void showContentFragment() {
-        Fragment fragment = new ContentFragmentBuilder(school).build();
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.main_frame_layout, fragment)
-                .commit();
-    }
-
     @Override
     public void onBrowserButtonCLick(String url) {
         launchBrowser(url);
@@ -100,6 +90,7 @@ public class MainActivity extends BaseActivity implements
                 return;
             case R.id.tab_tabs:
                 launchBrowser("http://ya.ru");
+            default:
         }
     }
 
