@@ -1,4 +1,4 @@
-package ru.yandex.detbr.cards;
+package ru.yandex.detbr.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
+import ru.yandex.detbr.cards.Card;
 import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
 
 /**
@@ -13,7 +14,7 @@ import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
  */
 
 public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
-    private List<Card> cards;
+    private final List<Card> cards;
 
     public CardsFragmentStatePagerAdapter(FragmentManager fm, List<Card> cards) {
         super(fm);
