@@ -11,17 +11,18 @@ import android.widget.Filterable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
 
-    private ArrayList<String> fullList;
-    private ArrayList<String> mOriginalValues;
+    private List<String> fullList;
+    private List<String> mOriginalValues;
     private ArrayFilter mFilter;
 
     public SchoolsAdapter(Context context, int resource, List<String> objects) {
 
         super(context, resource, objects);
-        fullList = (ArrayList<String>) objects;
+        fullList = objects;
         mOriginalValues = new ArrayList<>(fullList);
 
     }
@@ -52,7 +53,7 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
     }
 
     public void addAll(@NonNull List<String> objects) {
-        fullList = (ArrayList<String>) objects;
+        fullList = objects;
         mOriginalValues = new ArrayList<>(fullList);
     }
 
@@ -62,7 +63,6 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
         @Override
         protected FilterResults performFiltering(CharSequence prefix) {
             FilterResults results = new FilterResults();
-
             if (mOriginalValues == null) {
                 synchronized (lock) {
                     mOriginalValues = new ArrayList<>(fullList);
@@ -76,7 +76,8 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
                     results.count = list.size();
                 }
             } else {
-                final String prefixString = prefix.toString().toLowerCase();
+                Locale locale = Locale.getDefault();
+                final String prefixString = prefix.toString().toLowerCase(locale);
 
                 int count = mOriginalValues.size();
 
@@ -84,7 +85,7 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
 
                 for (int i = 0; i < count; i++) {
                     String item = mOriginalValues.get(i);
-                    if (item.toLowerCase().contains(prefixString)) {
+                    if (item.toLowerCase(locale).contains(prefixString)) {
                         newValues.add(item);
                     }
                 }
@@ -92,14 +93,12 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
                 results.values = newValues;
                 results.count = newValues.size();
             }
-
             return results;
         }
 
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-
             if (results.values != null) {
                 fullList = (ArrayList<String>) results.values;
             } else {
