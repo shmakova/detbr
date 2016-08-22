@@ -14,6 +14,8 @@ import ru.yandex.detbr.developer_settings.DeveloperSettingsComponent;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
 import ru.yandex.detbr.developer_settings.LeakCanaryProxy;
+import ru.yandex.detbr.schools.SchoolsComponent;
+import ru.yandex.detbr.schools.SchoolsModule;
 import ru.yandex.detbr.ui.activities.MainActivity;
 
 @Singleton
@@ -21,12 +23,16 @@ import ru.yandex.detbr.ui.activities.MainActivity;
         ApplicationModule.class,
         DeveloperSettingsModule.class,
         BrowserModule.class,
+        SchoolsModule.class
 })
 public interface ApplicationComponent {
 
     // Provide LeakCanary without injection to leave.
     @NonNull
     LeakCanaryProxy leakCanaryProxy();
+
+    @NonNull
+    SchoolsComponent schoolsComponent();
 
     @NonNull
     DeveloperSettingsComponent plusDeveloperSettingsComponent();

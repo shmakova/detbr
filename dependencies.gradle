@@ -66,20 +66,20 @@ ext.gradlePlugins = [
 ]
 
 ext.libraries = [
-        dagger               : "com.google.dagger:dagger:$versions.dagger",
-        daggerCompiler       : "com.google.dagger:dagger-compiler:$versions.dagger",
+        dagger                  : "com.google.dagger:dagger:$versions.dagger",
+        daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
 
-        autoValue            : "com.google.auto.value:auto-value:$versions.autoValue",
+        autoValue               : "com.google.auto.value:auto-value:$versions.autoValue",
 
-        supportAnnotations   : "com.android.support:support-annotations:$versions.supportLibs",
-        supportAppCompat     : "com.android.support:appcompat-v7:$versions.supportLibs",
-        supportDesign        : "com.android.support:design:$versions.supportLibs",
-        supportRecyclerView  : "com.android.support:recyclerview-v7:$versions.supportLibs",
-        supportCardView      : "com.android.support:cardview-v7:$versions.supportLibs",
+        supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign           : "com.android.support:design:$versions.supportLibs",
+        supportRecyclerView     : "com.android.support:recyclerview-v7:$versions.supportLibs",
+        supportCardView         : "com.android.support:cardview-v7:$versions.supportLibs",
 
-        butterKnife          : "com.jakewharton:butterknife:$versions.butterKnife",
-        butterKnifeCompiler  : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
-        timber               : "com.jakewharton.timber:timber:$versions.timber",
+        butterKnife             : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler     : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        timber                  : "com.jakewharton.timber:timber:$versions.timber",
 
         retrofit             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         converterGson        : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
@@ -93,25 +93,25 @@ ext.libraries = [
         icepickProcessor     : "frankiesardo:icepick-processor:$versions.icepick",
 
         // Developer Tools
-        stetho               : "com.facebook.stetho:stetho:$versions.stetho",
-        leakCanary           : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
-        tinyDancer           : "com.github.brianPlummer:tinydancer:$versions.tinyDancer",
-        lynx                 : "com.github.pedrovgs:lynx:$versions.lynx",
-        devMetricsNoOp       : "com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:$versions.androidDevMetricsGradlePlugin",
-        processPhoenix       : "com.jakewharton:process-phoenix:$versions.processPhoenix",
+        stetho                  : "com.facebook.stetho:stetho:$versions.stetho",
+        leakCanary              : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
+        tinyDancer              : "com.github.brianPlummer:tinydancer:$versions.tinyDancer",
+        lynx                    : "com.github.pedrovgs:lynx:$versions.lynx",
+        devMetricsNoOp          : "com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:$versions.androidDevMetricsGradlePlugin",
+        processPhoenix          : "com.jakewharton:process-phoenix:$versions.processPhoenix",
 
         // Test dependencies
-        junit                : "junit:junit:$versions.junit",
-        robolectric          : "org.robolectric:robolectric:$versions.robolectric",
-        assertJ              : "org.assertj:assertj-core:$versions.assertJ",
-        equalsVerifier       : "nl.jqno.equalsverifier:equalsverifier:$versions.equalsVerifier",
-        mockitoCore          : "org.mockito:mockito-core:$versions.mockito",
-        supportTestRunner    : "com.android.support.test:runner:$versions.supportTestRunner",
-        supportTestRules     : "com.android.support.test:rules:$versions.supportTestRunner",
-        espressoCore         : "com.android.support.test.espresso:espresso-core:$versions.espresso",
-        espressoContrib      : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+        junit                   : "junit:junit:$versions.junit",
+        robolectric             : "org.robolectric:robolectric:$versions.robolectric",
+        assertJ                 : "org.assertj:assertj-core:$versions.assertJ",
+        equalsVerifier          : "nl.jqno.equalsverifier:equalsverifier:$versions.equalsVerifier",
+        mockitoCore             : "org.mockito:mockito-core:$versions.mockito",
+        supportTestRunner       : "com.android.support.test:runner:$versions.supportTestRunner",
+        supportTestRules        : "com.android.support.test:rules:$versions.supportTestRunner",
+        espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+        espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
 
         // Analytics
-        crashlytics          : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
-        playServicesAnalytics: "com.google.android.gms:play-services-analytics:$versions.playServices",
+        crashlytics             : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
+        playServicesAnalytics   : "com.google.android.gms:play-services-analytics:$versions.playServices",
 ]
