@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SchoolsFakeRepository implements SchoolsRepository {
+public class SchoolsModelImpl implements SchoolsModel {
     @Override
     public List<String> getSchoolsList() {
         List<String> result = new ArrayList<>();

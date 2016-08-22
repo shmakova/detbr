@@ -17,8 +17,8 @@ public class SchoolsModule {
     @NonNull
     @Provides
     @Singleton
-    public SchoolsRepository provideSchoolsRepository() {
-        return new SchoolsFakeRepository();
+    public SchoolsModel provideSchoolsRepository() {
+        return new SchoolsModelImpl();
     }
 
     @Provides
@@ -29,8 +29,8 @@ public class SchoolsModule {
 
     @Provides
     @NonNull
-    public SchoolsPresenter provideSchoolsPresenter(@NonNull SchoolsRepository schoolsRepository,
+    public SchoolsPresenter provideSchoolsPresenter(@NonNull SchoolsModel schoolsModel,
                                                     @NonNull SharedPreferences sharedPreferences) {
-        return new SchoolsPresenter(schoolsRepository, sharedPreferences);
+        return new SchoolsPresenter(schoolsModel, sharedPreferences);
     }
 }
