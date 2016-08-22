@@ -3,7 +3,7 @@ package ru.yandex.detbr.ui.presenters;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
-import ru.yandex.detbr.schools.SchoolsRepository;
+import ru.yandex.detbr.schools.SchoolsModel;
 import ru.yandex.detbr.ui.views.SchoolsView;
 
 /**
@@ -12,13 +12,13 @@ import ru.yandex.detbr.ui.views.SchoolsView;
 
 public class SchoolsPresenter extends Presenter<SchoolsView> {
     @NonNull
-    private final SchoolsRepository schoolsRepository;
+    private final SchoolsModel schoolsModel;
     @NonNull
     private final SharedPreferences sharedPreferences;
 
-    public SchoolsPresenter(@NonNull SchoolsRepository schoolsRepository,
+    public SchoolsPresenter(@NonNull SchoolsModel schoolsModel,
                             @NonNull SharedPreferences sharedPreferences) {
-        this.schoolsRepository = schoolsRepository;
+        this.schoolsModel = schoolsModel;
         this.sharedPreferences = sharedPreferences;
     }
 
@@ -26,14 +26,14 @@ public class SchoolsPresenter extends Presenter<SchoolsView> {
         final SchoolsView view = view();
 
         if (view != null) {
-            view.setSchoolsData(schoolsRepository.getSchoolsList());
+            view.setSchoolsData(schoolsModel.getSchoolsList());
         }
     }
 
     public void saveSchool(String school) {
         sharedPreferences
                 .edit()
-                .putString(SchoolsRepository.SCHOOL_TAG, school)
+                .putString(SchoolsModel.SCHOOL_TAG, school)
                 .apply();
     }
 }

@@ -22,13 +22,12 @@ import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.cards.Card;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
+import ru.yandex.detbr.schools.SchoolsModel;
 import ru.yandex.detbr.ui.fragments.CardsFragment;
-import ru.yandex.detbr.schools.SchoolsRepository;
 import ru.yandex.detbr.ui.fragments.ContentFragment;
 import ru.yandex.detbr.ui.fragments.ContentFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.FavouritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
-
 import ru.yandex.detbr.ui.other.ViewModifier;
 import timber.log.Timber;
 
@@ -64,7 +63,7 @@ public class MainActivity extends BaseActivity implements
         loadDataFromSharedPreference();
 
         if (school == null) {
-            showSchoolsFragment()
+            showSchoolsFragment();
         } else if (savedInstanceState == null) {
             showCardsFragment();
         }
@@ -133,12 +132,12 @@ public class MainActivity extends BaseActivity implements
     }
 
     void loadDataFromSharedPreference() {
-        school = sharedPreferences.getString(SchoolsRepository.SCHOOL_TAG, null);
+        school = sharedPreferences.getString(SchoolsModel.SCHOOL_TAG, null);
     }
 
     @Override
     public void onSchoolClick() {
         loadDataFromSharedPreference();
-        showContentFragment();
+        showCardsFragment();
     }
 }
