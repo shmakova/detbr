@@ -85,7 +85,9 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();
             presenter.saveSchool(adapterView.getItemAtPosition(i).toString());
-            onSchoolClickListener.onSchoolClick();
+            if (onSchoolClickListener != null) {
+                onSchoolClickListener.onSchoolClick();
+            }
         });
     }
 
@@ -108,7 +110,9 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
 
     @Override
     public void setSchoolsData(List<String> schools) {
-        schoolsAdapter.addAll(schools);
+        if (schoolsAdapter != null) {
+            schoolsAdapter.addAll(schools);
+        }
     }
 
     @Override

@@ -99,10 +99,10 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
         @SuppressWarnings("unchecked")
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
-            if (results.values != null) {
-                fullList = (ArrayList<String>) results.values;
-            } else {
+            if (results.values == null) {
                 fullList = new ArrayList<>();
+            } else {
+                fullList = (ArrayList<String>) results.values;
             }
             if (results.count > 0) {
                 notifyDataSetChanged();
