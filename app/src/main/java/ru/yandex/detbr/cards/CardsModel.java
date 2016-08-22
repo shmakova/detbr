@@ -7,5 +7,7 @@ import java.util.List;
  */
 
 public interface CardsModel {
-    List<Card> getCardsList();
+    List<Card> getCardsListBySchool();
+
+    List<Card> getFavouriteCards();
 }

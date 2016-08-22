@@ -21,7 +21,15 @@ public class CardsPresenter extends Presenter<CardsView> {
         final CardsView view = view();
 
         if (view != null) {
-            view.setCardsData(cardsModel.getCardsList());
+            view.setCardsData(cardsModel.getCardsListBySchool());
+        }
+    }
+
+    public void loadFavouriteCards() {
+        final CardsView view = view();
+
+        if (view != null) {
+            view.setCardsData(cardsModel.getFavouriteCards());
         }
     }
 }

@@ -115,6 +115,8 @@ dependencies {
     compile libraries.icepick
     provided libraries.icepickProcessor
 
+    compile libraries.bottomBar
+
     // Developer tools (Developer Settings)
     compile libraries.stetho
     compile libraries.leakCanary
