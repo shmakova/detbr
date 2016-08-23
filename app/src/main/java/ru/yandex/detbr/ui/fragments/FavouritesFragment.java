@@ -76,7 +76,7 @@ public class FavouritesFragment extends BaseFragment implements CardsView {
 
     @Override
     public void setCategories(List<Category> categories) {
-
+        // no categories yet
     }
 
     @Override
