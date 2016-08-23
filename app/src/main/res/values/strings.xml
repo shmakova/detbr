@@ -11,4 +11,6 @@
     <string name="cards">Карточки</string>
     <string name="tabs">Табы</string>
     <string name="favorites">Избранное</string>
+    <string name="cards_title">Популярные темы в школе</string>
+    <string name="like_content_description">Лайк</string>
 </resources>

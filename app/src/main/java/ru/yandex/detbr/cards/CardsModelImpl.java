@@ -94,4 +94,20 @@ public class CardsModelImpl implements CardsModel {
                 .build());
         return cards;
     }
+
+    @Override
+    public List<Category> getCategories() {
+        List<Category> categories = new ArrayList<>();
+        categories.add(Category.builder().title("Покемоны").build());
+        categories.add(Category.builder().title("Фильмы").build());
+        categories.add(Category.builder().title("Велосипеды").build());
+        categories.add(Category.builder().title("Статьи").build());
+        categories.add(Category.builder().title("Вещи").build());
+        categories.add(Category.builder().title("Образование").build());
+        categories.add(Category.builder().title("Спорт").build());
+        categories.add(Category.builder().title("Игры").build());
+        categories.add(Category.builder().title("Мультфильмы").build());
+        categories.add(Category.builder().title("Животные").build());
+        return categories;
+    }
 }

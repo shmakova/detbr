@@ -62,6 +62,7 @@ public class CardFragment extends BaseFragment {
         if (card != null) {
             Glide.with(getActivity())
                     .load(card.getCover())
+                    .centerCrop()
                     .crossFade()
                     .into(cover);
 

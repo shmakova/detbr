@@ -32,4 +32,12 @@ public class CardsPresenter extends Presenter<CardsView> {
             view.setCardsData(cardsModel.getFavouriteCards());
         }
     }
+
+    public void loadCategories() {
+        final CardsView view = view();
+
+        if (view != null) {
+            view.setCategories(cardsModel.getCategories());
+        }
+    }
 }

@@ -44,6 +44,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.CardViewHold
 
         Glide.with(context)
                 .load(card.getCover())
+                .centerCrop()
                 .crossFade()
                 .into(holder.cover);
 
