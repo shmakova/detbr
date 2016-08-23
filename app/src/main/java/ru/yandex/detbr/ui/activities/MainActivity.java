@@ -9,6 +9,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -21,9 +22,11 @@ import butterknife.ButterKnife;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.cards.Card;
+import ru.yandex.detbr.cards.Category;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
 import ru.yandex.detbr.schools.SchoolsModel;
-import ru.yandex.detbr.ui.fragments.CardsFragment;
+import ru.yandex.detbr.ui.fragments.CardFragment;
+import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.ContentFragment;
 import ru.yandex.detbr.ui.fragments.FavouritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
@@ -32,9 +35,10 @@ import ru.yandex.detbr.ui.other.ViewModifier;
 public class MainActivity extends BaseActivity implements
         SchoolsFragment.OnSchoolClickListener,
         ContentFragment.OnBrowserButtonClickListener,
-        CardsFragment.OnCardsItemClickListener,
+        CardFragment.OnCardsItemClickListener,
         FavouritesFragment.OnCardsItemClickListener,
-        OnTabSelectListener {
+        OnTabSelectListener,
+        CardsPagerFragment.OnCategoriesItemClickListener {
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
 
@@ -97,7 +101,7 @@ public class MainActivity extends BaseActivity implements
         bottomBar.setVisibility(View.VISIBLE);
         supportFragmentManager
                 .beginTransaction()
-                .replace(R.id.main_frame_layout, new CardsFragment())
+                .replace(R.id.main_frame_layout, new CardsPagerFragment())
                 .commit();
     }
 
@@ -131,5 +135,10 @@ public class MainActivity extends BaseActivity implements
     public void onSchoolClick() {
         loadDataFromSharedPreference();
         showCardsFragment();
+    }
+
+    @Override
+    public void onCategoriesItemClick(Category category) {
+        Toast.makeText(this, category.getTitle(), Toast.LENGTH_SHORT).show();
     }
 }

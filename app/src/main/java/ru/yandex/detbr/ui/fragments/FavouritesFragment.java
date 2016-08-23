@@ -18,7 +18,8 @@ import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.cards.Card;
-import ru.yandex.detbr.cards.CardsAdapter;
+import ru.yandex.detbr.cards.Category;
+import ru.yandex.detbr.ui.adapters.CardsAdapter;
 import ru.yandex.detbr.ui.presenters.CardsPresenter;
 import ru.yandex.detbr.ui.views.CardsView;
 
@@ -48,7 +49,7 @@ public class FavouritesFragment extends BaseFragment implements CardsView {
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_cards, container, false);
+        return inflater.inflate(R.layout.fragment_favourites, container, false);
     }
 
     @Override
@@ -71,6 +72,11 @@ public class FavouritesFragment extends BaseFragment implements CardsView {
             }
         });
         recyclerView.setAdapter(cardsAdapter);
+    }
+
+    @Override
+    public void setCategories(List<Category> categories) {
+        // no categories yet
     }
 
     @Override

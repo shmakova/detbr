@@ -10,4 +10,6 @@ public interface CardsModel {
     List<Card> getCardsListBySchool();
 
     List<Card> getFavouriteCards();
+
+    List<Category> getCategories();
 }

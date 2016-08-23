@@ -1,4 +1,4 @@
-package ru.yandex.detbr.cards;
+package ru.yandex.detbr.ui.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +16,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
+import ru.yandex.detbr.cards.Card;
 
 /**
  * Created by shmakova on 21.08.16.
@@ -43,6 +44,7 @@ public class CardsAdapter extends RecyclerView.Adapter<CardsAdapter.CardViewHold
 
         Glide.with(context)
                 .load(card.getCover())
+                .centerCrop()
                 .crossFade()
                 .into(holder.cover);
 
