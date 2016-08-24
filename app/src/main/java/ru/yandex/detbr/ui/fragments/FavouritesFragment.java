@@ -55,7 +55,7 @@ public class FavouritesFragment extends BaseFragment implements CardsView {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.bindView(this);
-        resetToolbar();
+        hideToolbar();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);

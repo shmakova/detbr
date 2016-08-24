@@ -72,6 +72,7 @@ public abstract class BaseFragment extends Fragment {
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
 
         if (actionBar != null) {
+            actionBar.show();
             actionBar.setDisplayHomeAsUpEnabled(isDisplayHomeAsUpEnabled);
             actionBar.setTitle(title);
 
@@ -88,6 +89,15 @@ public abstract class BaseFragment extends Fragment {
             actionBar.setDisplayHomeAsUpEnabled(false);
             actionBar.setTitle(getString(R.string.app_name));
             actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(getActivity(), R.color.color_primary)));
+        }
+    }
+
+    protected void hideToolbar() {
+        resetToolbar();
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.hide();
         }
     }
 }

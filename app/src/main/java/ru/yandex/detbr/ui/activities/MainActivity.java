@@ -9,10 +9,13 @@ import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -42,12 +45,15 @@ public class MainActivity extends BaseActivity implements
         CardFragment.OnCardsItemClickListener,
         FavouritesFragment.OnCardsItemClickListener,
         OnTabSelectListener,
-        CategoriesFragment.OnCategoriesItemClickListener {
+        CategoriesFragment.OnCategoriesItemClickListener,
+        FloatingSearchView.OnMenuItemClickListener,
+        FloatingSearchView.OnSearchListener {
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-
+    @BindView(R.id.floating_search_view)
+    FloatingSearchView floatingSearchView;
 
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
@@ -57,6 +63,7 @@ public class MainActivity extends BaseActivity implements
 
     private FragmentManager supportFragmentManager;
     private String school;
+    private ActionBar actionBar;
 
     @SuppressLint("InflateParams")
     @Override
@@ -68,7 +75,10 @@ public class MainActivity extends BaseActivity implements
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
         bottomBar.setOnTabSelectListener(this);
+        floatingSearchView.setOnMenuItemClickListener(this);
+        floatingSearchView.setOnSearchListener(this);
 
         loadDataFromSharedPreference();
 
@@ -105,35 +115,50 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-    private void showCardsFragment() {
+    private void showNavigationBars() {
         bottomBar.setVisibility(View.VISIBLE);
+        actionBar.hide();
+        floatingSearchView.setVisibility(View.VISIBLE);
+    }
+
+    private void showCardsFragment() {
+        showNavigationBars();
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame_layout, new CardsPagerFragment())
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
                 .commit();
     }
 
     private void showFavouritesFragment() {
+        showNavigationBars();
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame_layout, new FavouritesFragment())
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
                 .commit();
     }
 
     private void showSchoolsFragment() {
         bottomBar.setVisibility(View.GONE);
+        floatingSearchView.setVisibility(View.GONE);
+        actionBar.show();
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame_layout, new SchoolsFragment())
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
                 .commit();
     }
 
     private void showCategoryCardsFragment(Category category) {
         bottomBar.setVisibility(View.GONE);
+        actionBar.show();
+        floatingSearchView.setVisibility(View.GONE);
         Fragment fragment = new CategoryCardsPagerFragmentBuilder(category).build();
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.main_frame_layout, fragment)
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
                 .addToBackStack(null)
                 .commit();
     }
@@ -168,5 +193,30 @@ public class MainActivity extends BaseActivity implements
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        showNavigationBars();
+    }
+
+    @Override
+    public void onActionMenuItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_voice_rec) {
+            displaySpeechRecognizer();
+        }
+    }
+
+    @Override
+    public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+        // no suggestions yet
+    }
+
+    @Override
+    public void onSearchAction(String currentQuery) {
+        launchBrowser(currentQuery);
     }
 }

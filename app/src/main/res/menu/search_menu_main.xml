@@ -6,7 +6,4 @@
         android:icon="@drawable/ic_mic_black_24dp"
         android:title="@string/action_voice_rec"
         app:showAsAction="always"/>
-    <item
-        android:id="@+id/home_page"
-        android:title="@string/home"/>
 </menu>

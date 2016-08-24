@@ -120,6 +120,7 @@ dependencies {
     provided libraries.icepickProcessor
 
     compile libraries.bottomBar
+    compile libraries.floatingSearchView
 
     // Developer tools (Developer Settings)
     compile libraries.stetho

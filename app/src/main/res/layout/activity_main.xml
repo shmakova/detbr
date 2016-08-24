@@ -42,6 +42,8 @@
                 android:layout_alignParentBottom="true"
                 app:bb_tabXmlResource="@xml/bottombar_tabs"/>
 
+            <include layout="@layout/floating_search_view"/>
+
         </RelativeLayout>
     </android.support.design.widget.CoordinatorLayout>
 
