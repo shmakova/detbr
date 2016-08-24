@@ -58,7 +58,6 @@ public class CardsModelImpl implements CardsModel {
         cards.add(Card.builder()
                 .title("11 комиксов о том, как изменилась наша жизнь с появлением интернета")
                 .url("https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/")
-                .cover("https://files3.adme.ru/files/news/part_129/1299765/10455565-810-1000-53c212670e-1470661968.jpg")
                 .build());
         cards.add(Card.builder()
                 .title("Смотреть Гравити Фолз")

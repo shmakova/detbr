@@ -8,6 +8,7 @@ import java.util.List;
 
 import ru.yandex.detbr.cards.Card;
 import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
+import ru.yandex.detbr.ui.fragments.ImageCardFragmentBuilder;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -23,7 +24,13 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return new CardFragmentBuilder(cards.get(position)).build();
+        Card card = cards.get(position);
+
+        if (card.getCover() == null || card.getCover().isEmpty()) {
+            return new CardFragmentBuilder(card).build();
+        } else {
+            return new ImageCardFragmentBuilder(card).build();
+        }
     }
 
     @Override
