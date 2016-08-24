@@ -3,6 +3,7 @@ package ru.yandex.detbr.ui.presenters;
 import android.support.annotation.NonNull;
 
 import ru.yandex.detbr.cards.CardsModel;
+import ru.yandex.detbr.categories.Category;
 import ru.yandex.detbr.ui.views.CardsView;
 
 /**
@@ -33,11 +34,11 @@ public class CardsPresenter extends Presenter<CardsView> {
         }
     }
 
-    public void loadCategories() {
+    public void loadCardsByCategory(Category category) {
         final CardsView view = view();
 
         if (view != null) {
-            view.setCategories(cardsModel.getCategories());
+            view.setCardsData(cardsModel.getCardsByCategory(category));
         }
     }
 }

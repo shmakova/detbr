@@ -12,7 +12,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.cards.Category;
+import ru.yandex.detbr.categories.Category;
 
 /**
  * Created by shmakova on 23.08.16.

@@ -1,6 +1,7 @@
 package ru.yandex.detbr.cards;
 
 import android.os.Parcelable;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 
@@ -14,6 +15,7 @@ public abstract class Card implements Parcelable {
 
     public abstract String getUrl();
 
+    @Nullable
     public abstract String getCover();
 
     public static Builder builder() {

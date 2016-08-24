@@ -59,6 +59,7 @@ public class CardFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         if (card != null) {
             Glide.with(getActivity())
                     .load(card.getCover())
