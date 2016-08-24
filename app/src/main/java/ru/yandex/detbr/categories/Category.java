@@ -1,4 +1,4 @@
-package ru.yandex.detbr.cards;
+package ru.yandex.detbr.categories;
 
 import android.os.Parcelable;
 import android.support.annotation.Nullable;
@@ -16,6 +16,9 @@ public abstract class Category implements Parcelable {
     @Nullable
     public abstract String getCover();
 
+    @Nullable
+    public abstract String getBackgroundColor();
+
     public static Builder builder() {
         return new AutoValue_Category.Builder();
     }
@@ -25,6 +28,8 @@ public abstract class Category implements Parcelable {
         abstract Builder title(String title);
 
         abstract Builder cover(String cover);
+
+        abstract Builder backgroundColor(String backgroundColor);
 
         abstract Category build();
     }

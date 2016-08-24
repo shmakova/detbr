@@ -7,9 +7,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
@@ -22,11 +24,13 @@ import butterknife.ButterKnife;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.cards.Card;
-import ru.yandex.detbr.cards.Category;
+import ru.yandex.detbr.categories.Category;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
 import ru.yandex.detbr.schools.SchoolsModel;
 import ru.yandex.detbr.ui.fragments.CardFragment;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
+import ru.yandex.detbr.ui.fragments.CategoriesFragment;
+import ru.yandex.detbr.ui.fragments.CategoryCardsPagerFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.ContentFragment;
 import ru.yandex.detbr.ui.fragments.FavouritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
@@ -38,9 +42,12 @@ public class MainActivity extends BaseActivity implements
         CardFragment.OnCardsItemClickListener,
         FavouritesFragment.OnCardsItemClickListener,
         OnTabSelectListener,
-        CardsPagerFragment.OnCategoriesItemClickListener {
+        CategoriesFragment.OnCategoriesItemClickListener {
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
@@ -60,6 +67,7 @@ public class MainActivity extends BaseActivity implements
 
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
         ButterKnife.bind(this);
+        setSupportActionBar(toolbar);
         bottomBar.setOnTabSelectListener(this);
 
         loadDataFromSharedPreference();
@@ -120,6 +128,16 @@ public class MainActivity extends BaseActivity implements
                 .commit();
     }
 
+    private void showCategoryCardsFragment(Category category) {
+        bottomBar.setVisibility(View.GONE);
+        Fragment fragment = new CategoryCardsPagerFragmentBuilder(category).build();
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_frame_layout, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     private void launchBrowser(String url) {
         Intent intent = new Intent(this, BrowserActivity.class);
         intent.setData(Uri.parse(url));
@@ -139,6 +157,16 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onCategoriesItemClick(Category category) {
-        Toast.makeText(this, category.getTitle(), Toast.LENGTH_SHORT).show();
+        showCategoryCardsFragment(category);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

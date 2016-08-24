@@ -11,6 +11,8 @@ import ru.yandex.detbr.browser.BrowserComponent;
 import ru.yandex.detbr.browser.BrowserModule;
 import ru.yandex.detbr.cards.CardsComponent;
 import ru.yandex.detbr.cards.CardsModule;
+import ru.yandex.detbr.categories.CategoriesComponent;
+import ru.yandex.detbr.categories.CategoriesModule;
 import ru.yandex.detbr.developer_settings.DevMetricsProxy;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsComponent;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
@@ -26,7 +28,8 @@ import ru.yandex.detbr.ui.activities.MainActivity;
         DeveloperSettingsModule.class,
         BrowserModule.class,
         CardsModule.class,
-        SchoolsModule.class
+        SchoolsModule.class,
+        CategoriesModule.class
 })
 public interface ApplicationComponent {
 
@@ -45,6 +48,9 @@ public interface ApplicationComponent {
 
     @NonNull
     CardsComponent cardsComponent();
+
+    @NonNull
+    CategoriesComponent categoriesComponent();
 
     DeveloperSettingsModel developerSettingModel();
 
