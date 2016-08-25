@@ -14,8 +14,6 @@ public interface BrowserView {
 
     void hideProgressBar();
 
-    void updateProgressBar(int progress);
-
     void resetLike();
 
     void loadPageByUrl(String url);

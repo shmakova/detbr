@@ -1,8 +1,6 @@
 package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -12,18 +10,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
+
+import com.arlib.floatingsearchview.FloatingSearchView;
+import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 
 import javax.inject.Inject;
 
@@ -35,20 +29,17 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.ui.presenters.BrowserPresenter;
 import ru.yandex.detbr.ui.views.BrowserView;
 
-public class BrowserActivity extends AppCompatActivity implements BrowserView {
+public class BrowserActivity extends BaseActivity implements
+        BrowserView,
+        FloatingSearchView.OnMenuItemClickListener, FloatingSearchView.OnSearchListener, FloatingSearchView.OnHomeActionClickListener {
     @Inject
     BrowserPresenter presenter;
 
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
     @BindView(R.id.webview)
     WebView webView;
     @BindView(R.id.like_fab)
     FloatingActionButton fabLike;
 
-    private SearchView searchView;
     private String currentQuery;
 
     @SuppressLint("InflateParams")
@@ -61,8 +52,10 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
 
         setContentView(R.layout.activity_browser);
         ButterKnife.bind(this);
+        floatingSearchView.setOnMenuItemClickListener(this);
+        floatingSearchView.setOnSearchListener(this);
+        floatingSearchView.setOnHomeActionClickListener(this);
 
-        initActionBar();
         initWebView();
 
         handleIntent(getIntent());
@@ -111,36 +104,7 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
                 return true;
             }
         });
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                updateProgressBar(newProgress);
-            }
-        });
-    }
-
-    private void initActionBar() {
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.search_menu, menu);
-
-        SearchManager searchManager =
-                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        searchView.setSearchableInfo(
-                searchManager.getSearchableInfo(getComponentName()));
-
-        return true;
+        webView.setWebChromeClient(new WebChromeClient());
     }
 
     @Override
@@ -157,13 +121,10 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     private void handleIntent(Intent intent) {
         String query = currentQuery;
 
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            query = intent.getStringExtra(SearchManager.QUERY);
-            searchView.setQuery(query, false);
-        } else if (Intent.ACTION_VIEW.equals(intent.getAction())) {
+        if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
 
-            if (uri != null && (currentQuery == null || currentQuery.isEmpty())) {
+            if (uri != null) {
                 query = uri.toString();
             }
         }
@@ -173,23 +134,17 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
 
     @Override
     public void updateToolbar(@Nullable String title, @NonNull String url) {
-        toolbar.setTitle(title);
-        toolbar.setSubtitle(url);
+        floatingSearchView.setSearchText(url);
     }
 
     @Override
     public void showProgressBar() {
-        progressBar.setVisibility(ProgressBar.VISIBLE);
+        floatingSearchView.showProgress();
     }
 
     @Override
     public void hideProgressBar() {
-        progressBar.setVisibility(ProgressBar.GONE);
-    }
-
-    @Override
-    public void updateProgressBar(int progress) {
-        progressBar.setProgress(progress);
+        floatingSearchView.hideProgress();
     }
 
     @Override
@@ -233,5 +188,38 @@ public class BrowserActivity extends AppCompatActivity implements BrowserView {
     protected void onDestroy() {
         presenter.unbindView(this);
         super.onDestroy();
+    }
+
+    @Override
+    public void onActionMenuItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        switch (id) {
+            case R.id.action_voice_rec:
+                displaySpeechRecognizer();
+                break;
+            case R.id.home_page:
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
+        // no suggestions yet
+    }
+
+    @Override
+    public void onSearchAction(String currentQuery) {
+        presenter.loadUrl(currentQuery);
+    }
+
+    @Override
+    public void onHomeClicked() {
+        onBackPressed();
     }
 }

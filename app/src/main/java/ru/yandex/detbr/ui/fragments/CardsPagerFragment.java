@@ -25,7 +25,7 @@ public class CardsPagerFragment extends BaseCardsPagerFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter.bindView(this);
-        resetToolbar();
+        hideToolbar();
 
         if (fragmentManager != null) {
             fragmentManager

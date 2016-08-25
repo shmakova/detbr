@@ -3,7 +3,7 @@
     <string name="content">Hello</string>
     <string name="choose_your_school">Выбери свою школу</string>
     <string name="search_title">Поиск</string>
-    <string name="search_hint">Введите запрос</string>
+    <string name="search_hint">Поиск&#8230;</string>
     <string name="url_key">url</string>
     <string name="go_to_yandex">Перейти на http://yandex.ru</string>
     <string name="home">Вернуться домой</string>
@@ -15,4 +15,5 @@
     <string name="like_content_description">Лайк</string>
     <string name="favourite_cards_title">Понравившиеся карточки</string>
     <string name="category_cover">category cover</string>
+    <string name="action_voice_rec">Голосовой набор</string>
 </resources>

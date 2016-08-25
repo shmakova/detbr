@@ -7,10 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
@@ -29,8 +27,6 @@ public class CardFragment extends BaseFragment {
     @Arg
     Card card;
 
-    @BindView(R.id.cover)
-    ImageView cover;
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.url)
@@ -53,7 +49,7 @@ public class CardFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.cards_item, container, false);
+        return inflater.inflate(R.layout.item_card, container, false);
     }
 
     @Override
@@ -61,12 +57,6 @@ public class CardFragment extends BaseFragment {
         super.onViewCreated(view, savedInstanceState);
 
         if (card != null) {
-            Glide.with(getActivity())
-                    .load(card.getCover())
-                    .centerCrop()
-                    .crossFade()
-                    .into(cover);
-
             title.setText(card.getTitle());
             url.setText(card.getUrl());
         }

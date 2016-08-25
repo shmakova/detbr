@@ -53,7 +53,6 @@ public class CardsModelImpl implements CardsModel {
         cards.add(Card.builder()
                 .title("Невероятные оптические иллюзии от профессора математики")
                 .url("https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/")
-                .cover("https://lifehacker.ru/wp-content/uploads/2016/07/topVH_1467364830.jpg")
                 .build());
         cards.add(Card.builder()
                 .title("11 комиксов о том, как изменилась наша жизнь с появлением интернета")
@@ -84,7 +83,6 @@ public class CardsModelImpl implements CardsModel {
         cards.add(Card.builder()
                 .title("Невероятные оптические иллюзии от профессора математики")
                 .url("https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/")
-                .cover("https://lifehacker.ru/wp-content/uploads/2016/07/topVH_1467364830.jpg")
                 .build());
         cards.add(Card.builder()
                 .title("11 комиксов о том, как изменилась наша жизнь с появлением интернета")
@@ -95,6 +93,19 @@ public class CardsModelImpl implements CardsModel {
                 .title("Смотреть Гравити Фолз")
                 .url("https://yandex.ru/video/search?text=гравити%20фолз")
                 .cover("http://theheroes.ru/wp-content/uploads/2016/02/gravityfalls.jpg")
+                .build());
+        cards.add(Card.builder()
+                .title("10 велосипедов для подростков")
+                .url("https://market.yandex.ru/collections/10-velosipedov-dlja-podrostkov?track=fr_325422_snippet")
+                .build());
+        cards.add(Card.builder()
+                .title("Выбираем велосипед для подростка")
+                .url("https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet")
+                .cover("https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg")
+                .build());
+        cards.add(Card.builder()
+                .title("Такие разные горные велосипеды")
+                .url("https://market.yandex.ru/articles/takie-raznye-gornye-velosipedy?track=fr_325422_snippet")
                 .build());
         return cards;
     }
@@ -201,7 +212,6 @@ public class CardsModelImpl implements CardsModel {
                 cards.add(Card.builder()
                         .title("Невероятные оптические иллюзии от профессора математики")
                         .url("https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/")
-                        .cover("https://lifehacker.ru/wp-content/uploads/2016/07/topVH_1467364830.jpg")
                         .build());
                 cards.add(Card.builder()
                         .title("11 комиксов о том, как изменилась наша жизнь с появлением интернета")
