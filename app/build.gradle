@@ -122,6 +122,8 @@ dependencies {
     compile libraries.bottomBar
     compile libraries.floatingSearchView
 
+    compile libraries.adapterDelegates
+
     // Developer tools (Developer Settings)
     compile libraries.stetho
     compile libraries.leakCanary

@@ -64,7 +64,7 @@ public class FavouritesFragment extends BaseFragment implements CardsView {
 
     @Override
     public void setCardsData(List<Card> cards) {
-        CardsAdapter cardsAdapter = new CardsAdapter(cards, (position) -> {
+        CardsAdapter cardsAdapter = new CardsAdapter(getActivity(), cards, (position) -> {
             Card card = cards.get(position);
 
             if (onCardsItemClickListener != null) {
