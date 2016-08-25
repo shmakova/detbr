@@ -4,9 +4,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
@@ -31,6 +33,8 @@ public class CardFragment extends BaseFragment {
     TextView title;
     @BindView(R.id.url)
     TextView url;
+    @BindView(R.id.like_btn)
+    ImageView like;
 
     private OnCardsItemClickListener onCardsItemClickListener;
 
@@ -86,5 +90,11 @@ public class CardFragment extends BaseFragment {
         if (onCardsItemClickListener != null) {
             onCardsItemClickListener.onCardsItemClick(card);
         }
+    }
+
+    @OnClick(R.id.like_btn)
+    public void onLikeButtonClick() {
+        like.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                R.drawable.ic_favorite_24dp, null));
     }
 }
