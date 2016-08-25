@@ -57,8 +57,18 @@ public class BrowserActivity extends BaseActivity implements
         floatingSearchView.setOnHomeActionClickListener(this);
 
         initWebView();
+        if (savedInstanceState == null) {
+            handleIntent(getIntent());
+        }
+        else {
+            webView.restoreState(savedInstanceState);
+        }
+    }
 
-        handleIntent(getIntent());
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        webView.saveState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
