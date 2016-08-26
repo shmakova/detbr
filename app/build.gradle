@@ -20,7 +20,7 @@ android {
         versionName versions.name
 
         // Make generated apks contain version name and code.
-        archivesBaseName = "app-${versions.name}-${versions.code}"
+        archivesBaseName = "detbr-${versions.name}${versions.code}"
     }
 
     compileOptions {
