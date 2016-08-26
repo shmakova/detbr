@@ -35,6 +35,7 @@ public class CardFragment extends BaseFragment {
     TextView url;
     @BindView(R.id.like_btn)
     ImageView like;
+    private Boolean hasLike;
 
     private OnCardsItemClickListener onCardsItemClickListener;
 
@@ -46,6 +47,7 @@ public class CardFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentArgs.inject(this);
+        hasLike = card.getLike() == null? false : card.getLike();
     }
 
     @NonNull
@@ -94,7 +96,18 @@ public class CardFragment extends BaseFragment {
 
     @OnClick(R.id.like_btn)
     public void onLikeButtonClick() {
-        like.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                R.drawable.ic_favorite_24dp, null));
+        hasLike = !hasLike;
+        setLikeDrawable(hasLike);
+    }
+
+    private void setLikeDrawable (Boolean hasLike) {
+        if (hasLike) {
+            like.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.ic_favorite_24dp, null));
+        }
+        else {
+            like.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.ic_favorite_border_24dp, null));
+        }
     }
 }

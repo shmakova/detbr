@@ -99,6 +99,8 @@ dependencies {
     apt libraries.autoValue
     apt libraries.autoValueParcel
 
+    compile libraries.storIO
+
     compile libraries.butterKnife
     apt libraries.butterKnifeCompiler
 
