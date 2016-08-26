@@ -38,29 +38,26 @@ public class ImageCardAdapterDelegate extends CardAdapterDelegate {
         return new ImageCardViewHolder(inflater.inflate(R.layout.item_image_card, parent, false), listener);
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull List<Card> items, int position,
-                                 @NonNull RecyclerView.ViewHolder holder) {
-        ImageCardViewHolder viewHolder = (ImageCardViewHolder) holder;
-        Card card = items.get(position);
-        Context context = viewHolder.cover.getContext();
-
-        Glide.with(context)
-                .load(card.getCover())
-                .centerCrop()
-                .crossFade()
-                .into(viewHolder.cover);
-
-        viewHolder.title.setText(card.getTitle());
-        viewHolder.url.setText(card.getUrl());
-    }
-
     static class ImageCardViewHolder extends CardViewHolder {
         @BindView(R.id.cover)
         ImageView cover;
 
         ImageCardViewHolder(View itemView, OnCardItemClickListener onCardItemClickListener) {
             super(itemView, onCardItemClickListener);
+        }
+
+        void bind(Card card) {
+            title.setText(card.getTitle());
+            url.setText(card.getUrl());
+            likeButton.setChecked(card.getLike());
+
+            Context context = cover.getContext();
+
+            Glide.with(context)
+                    .load(card.getCover())
+                    .centerCrop()
+                    .crossFade()
+                    .into(cover);
         }
     }
 }

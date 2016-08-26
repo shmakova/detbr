@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.hannesdorfmann.adapterdelegates2.AdapterDelegate;
@@ -50,9 +51,7 @@ public class CardAdapterDelegate implements AdapterDelegate<List<Card>> {
 
         CardViewHolder viewHolder = (CardViewHolder) holder;
         Card card = items.get(position);
-
-        viewHolder.title.setText(card.getTitle());
-        viewHolder.url.setText(card.getUrl());
+        viewHolder.bind(card);
     }
 
     static class CardViewHolder extends RecyclerView.ViewHolder {
@@ -60,6 +59,8 @@ public class CardAdapterDelegate implements AdapterDelegate<List<Card>> {
         TextView title;
         @BindView(R.id.url)
         TextView url;
+        @BindView(R.id.like_btn)
+        CheckBox likeButton;
 
         private final OnCardItemClickListener listener;
 
@@ -67,6 +68,12 @@ public class CardAdapterDelegate implements AdapterDelegate<List<Card>> {
             super(itemView);
             ButterKnife.bind(this, itemView);
             listener = onCardItemClickListener;
+        }
+
+        void bind(Card card) {
+            title.setText(card.getTitle());
+            url.setText(card.getUrl());
+            likeButton.setChecked(card.getLike());
         }
 
         @OnClick(R.id.card)
