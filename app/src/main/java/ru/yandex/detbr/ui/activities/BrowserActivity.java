@@ -61,7 +61,18 @@ public class BrowserActivity extends BaseActivity implements
 
         initWebView();
 
-        handleIntent(getIntent());
+        if (savedInstanceState == null) {
+            handleIntent(getIntent());
+        }
+        else {
+            webView.restoreState(savedInstanceState);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        webView.saveState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
