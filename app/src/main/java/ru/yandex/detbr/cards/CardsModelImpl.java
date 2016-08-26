@@ -74,38 +74,46 @@ public class CardsModelImpl implements CardsModel {
                 .title("Лонгборд Penny Original 22\"")
                 .url("https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls")
                 .cover("https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg")
+                .like(true)
                 .build());
         cards.add(Card.builder()
                 .title("10 иллюстраций о том, каким видят мир творческие люди")
                 .url("https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet")
                 .cover("https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg")
+                .like(true)
                 .build());
         cards.add(Card.builder()
                 .title("Невероятные оптические иллюзии от профессора математики")
                 .url("https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/")
+                .like(true)
                 .build());
         cards.add(Card.builder()
                 .title("11 комиксов о том, как изменилась наша жизнь с появлением интернета")
                 .url("https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/")
                 .cover("https://files3.adme.ru/files/news/part_129/1299765/10455565-810-1000-53c212670e-1470661968.jpg")
+                .like(true)
                 .build());
         cards.add(Card.builder()
                 .title("Смотреть Гравити Фолз")
                 .url("https://yandex.ru/video/search?text=гравити%20фолз")
                 .cover("http://theheroes.ru/wp-content/uploads/2016/02/gravityfalls.jpg")
+                .like(true)
                 .build());
         cards.add(Card.builder()
                 .title("10 велосипедов для подростков")
                 .url("https://market.yandex.ru/collections/10-velosipedov-dlja-podrostkov?track=fr_325422_snippet")
+                .like(true)
                 .build());
         cards.add(Card.builder()
                 .title("Выбираем велосипед для подростка")
                 .url("https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet")
                 .cover("https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg")
+                .like(true)
                 .build());
         cards.add(Card.builder()
                 .title("Такие разные горные велосипеды")
                 .url("https://market.yandex.ru/articles/takie-raznye-gornye-velosipedy?track=fr_325422_snippet")
+                .like(true)
                 .build());
         return cards;
     }

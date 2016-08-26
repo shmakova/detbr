@@ -123,6 +123,7 @@ dependencies {
     compile libraries.floatingSearchView
 
     compile libraries.adapterDelegates
+    compile libraries.appintro
 
     // Developer tools (Developer Settings)
     compile libraries.stetho

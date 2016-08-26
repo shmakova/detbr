@@ -18,11 +18,10 @@ public abstract class Card implements Parcelable {
     @Nullable
     public abstract String getCover();
 
-    @Nullable
-    public abstract Boolean getLike();
+    public abstract boolean getLike();
 
     public static Builder builder() {
-        return new AutoValue_Card.Builder();
+        return new AutoValue_Card.Builder().like(false);
     }
 
     @AutoValue.Builder
@@ -33,7 +32,7 @@ public abstract class Card implements Parcelable {
 
         abstract Builder cover(String cover);
 
-        abstract Builder like(Boolean like);
+        abstract Builder like(boolean like);
 
         abstract Card build();
     }
