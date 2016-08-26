@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import ru.yandex.detbr.YamblzRobolectricUnitTestRunner;
-import ru.yandex.detbr.ui.adapters.DeveloperSettingsSpinnerAdapter.SelectionOption;
-
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,6 +14,9 @@ import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import ru.yandex.detbr.YamblzRobolectricUnitTestRunner;
+import ru.yandex.detbr.ui.adapters.DeveloperSettingsSpinnerAdapter.SelectionOption;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;

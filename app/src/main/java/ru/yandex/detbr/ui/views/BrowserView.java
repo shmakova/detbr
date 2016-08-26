@@ -1,7 +1,6 @@
 package ru.yandex.detbr.ui.views;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 /**
  * Created by shmakova on 19.08.16.
