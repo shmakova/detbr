@@ -70,8 +70,9 @@ public class MainActivity extends BaseActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.get(this).applicationComponent().inject(this);
-        supportFragmentManager = getSupportFragmentManager();
+        showIntro();
 
+        supportFragmentManager = getSupportFragmentManager();
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -87,6 +88,24 @@ public class MainActivity extends BaseActivity implements
         } else if (savedInstanceState == null) {
             showCardsFragment();
         }
+    }
+
+    private void showIntro() {
+        Thread thread = new Thread(() -> {
+            boolean isFirstStart = sharedPreferences.getBoolean("firstStart", true);
+
+            if (isFirstStart) {
+                Intent intent = new Intent(this, IntroActivity.class);
+                startActivity(intent);
+
+                sharedPreferences
+                        .edit()
+                        .putBoolean("firstStart", false)
+                        .apply();
+            }
+        });
+
+        thread.start();
     }
 
     @Override

@@ -17,4 +17,7 @@
     <string name="category_cover">category cover</string>
     <string name="action_voice_rec">Голосовой набор</string>
     <string name="unsafe_page">Небезопасная страница</string>
+    <string name="app_intro">Привет!</string>
+    <string name="intro_text">Чтобы начать пользоваться браузером, выбери школу</string>
+    <string name="choose_school">Выбрать школу</string>
 </resources>

@@ -47,9 +47,7 @@ public class ImageCardAdapterDelegate extends CardAdapterDelegate {
         }
 
         void bind(Card card) {
-            title.setText(card.getTitle());
-            url.setText(card.getUrl());
-            likeButton.setChecked(card.getLike());
+            super.bind(card);
 
             Context context = cover.getContext();
 
