@@ -17,4 +17,6 @@ public interface BrowserView {
     void resetLike();
 
     void loadPageByUrl(String url);
+
+    void showError();
 }

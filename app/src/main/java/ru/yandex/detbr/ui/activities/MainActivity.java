@@ -70,8 +70,9 @@ public class MainActivity extends BaseActivity implements
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.get(this).applicationComponent().inject(this);
-        supportFragmentManager = getSupportFragmentManager();
+        showIntro();
 
+        supportFragmentManager = getSupportFragmentManager();
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
@@ -87,6 +88,24 @@ public class MainActivity extends BaseActivity implements
         } else if (savedInstanceState == null) {
             showCardsFragment();
         }
+    }
+
+    private void showIntro() {
+        Thread thread = new Thread(() -> {
+            boolean isFirstStart = sharedPreferences.getBoolean("firstStart", true);
+
+            if (isFirstStart) {
+                Intent intent = new Intent(this, IntroActivity.class);
+                startActivity(intent);
+
+                sharedPreferences
+                        .edit()
+                        .putBoolean("firstStart", false)
+                        .apply();
+            }
+        });
+
+        thread.start();
     }
 
     @Override
@@ -109,7 +128,6 @@ public class MainActivity extends BaseActivity implements
                 showFavouritesFragment();
                 return;
             case R.id.tab_tabs:
-                launchBrowser("http://ya.ru");
                 return;
             default:
         }
@@ -123,31 +141,19 @@ public class MainActivity extends BaseActivity implements
 
     private void showCardsFragment() {
         showNavigationBars();
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.main_frame_layout, new CardsPagerFragment())
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
-                .commit();
+        showFragment(new CardsPagerFragment());
     }
 
     private void showFavouritesFragment() {
         showNavigationBars();
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.main_frame_layout, new FavouritesFragment())
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
-                .commit();
+        showFragment(new FavouritesFragment());
     }
 
     private void showSchoolsFragment() {
         bottomBar.setVisibility(View.GONE);
         floatingSearchView.setVisibility(View.GONE);
         actionBar.show();
-        supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.main_frame_layout, new SchoolsFragment())
-                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
-                .commit();
+        showFragment(new SchoolsFragment());
     }
 
     private void showCategoryCardsFragment(Category category) {
@@ -160,6 +166,14 @@ public class MainActivity extends BaseActivity implements
                 .replace(R.id.main_frame_layout, fragment)
                 .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
                 .addToBackStack(null)
+                .commit();
+    }
+
+    private void showFragment(Fragment fragment) {
+        supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.main_frame_layout, fragment)
+                .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out, android.R.anim.fade_in, android.R.anim.fade_out)
                 .commit();
     }
 

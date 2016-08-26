@@ -2,6 +2,8 @@ package ru.yandex.detbr.browser;
 
 import android.util.Patterns;
 
+import java.util.Locale;
+
 /**
  * Created by shmakova on 21.08.16.
  */
@@ -23,14 +25,14 @@ public class BrowserModelImpl implements BrowserModel {
     }
 
     private static String getSafeUrlFromQuery(String query) {
-        String urlString = query;
+        String urlString = query.toLowerCase(Locale.getDefault());
 
-        if (isValidUrl(query)) {
-            if (!(query.startsWith(HTTP_PREFIX) || query.startsWith(HTTPS_PREFIX))) {
-                urlString = HTTP_PREFIX + query;
+        if (isValidUrl(urlString)) {
+            if (!(urlString.startsWith(HTTP_PREFIX) || urlString.startsWith(HTTPS_PREFIX))) {
+                urlString = HTTP_PREFIX + urlString;
             }
         } else {
-            urlString = YANDEX_SEARCH_URL + query;
+            urlString = YANDEX_SEARCH_URL + urlString;
         }
 
         return urlString;

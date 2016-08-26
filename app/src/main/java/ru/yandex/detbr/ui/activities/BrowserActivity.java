@@ -15,6 +15,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
@@ -31,7 +32,9 @@ import ru.yandex.detbr.ui.views.BrowserView;
 
 public class BrowserActivity extends BaseActivity implements
         BrowserView,
-        FloatingSearchView.OnMenuItemClickListener, FloatingSearchView.OnSearchListener, FloatingSearchView.OnHomeActionClickListener {
+        FloatingSearchView.OnMenuItemClickListener,
+        FloatingSearchView.OnSearchListener,
+        FloatingSearchView.OnHomeActionClickListener {
     @Inject
     BrowserPresenter presenter;
 
@@ -122,6 +125,10 @@ public class BrowserActivity extends BaseActivity implements
         webView.loadUrl(url);
     }
 
+    @Override
+    public void showError() {
+        Toast.makeText(this, R.string.unsafe_page, Toast.LENGTH_LONG).show();
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {
