@@ -1,4 +1,23 @@
 <resources>
     <string name="app_name">Детский Браузер</string>
     <string name="content">Hello</string>
+    <string name="choose_your_school">Выбери свою школу</string>
+    <string name="search_title">Поиск</string>
+    <string name="search_hint">Поиск&#8230;</string>
+    <string name="url_key">url</string>
+    <string name="go_to_yandex">Перейти на http://yandex.ru</string>
+    <string name="home">Вернуться домой</string>
+    <string name="cover">Обложка</string>
+    <string name="cards">Карточки</string>
+    <string name="tabs">Табы</string>
+    <string name="favorites">Избранное</string>
+    <string name="cards_title">Популярные темы в школе</string>
+    <string name="like_content_description">Лайк</string>
+    <string name="favourite_cards_title">Понравившиеся карточки</string>
+    <string name="category_cover">category cover</string>
+    <string name="action_voice_rec">Голосовой набор</string>
+    <string name="unsafe_page">Небезопасная страница</string>
+    <string name="app_intro">Привет!</string>
+    <string name="intro_text">Чтобы начать пользоваться браузером, выбери школу</string>
+    <string name="choose_school">Выбрать школу</string>
 </resources>
