@@ -21,12 +21,14 @@ import ru.yandex.detbr.developer_settings.LeakCanaryProxy;
 import ru.yandex.detbr.schools.SchoolsComponent;
 import ru.yandex.detbr.schools.SchoolsModule;
 import ru.yandex.detbr.ui.activities.MainActivity;
+import ru.yandex.detbr.wot.WotModule;
 
 @Singleton
 @Component(modules = {
         ApplicationModule.class,
         DeveloperSettingsModule.class,
         BrowserModule.class,
+        WotModule.class,
         CardsModule.class,
         SchoolsModule.class,
         CategoriesModule.class
