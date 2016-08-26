@@ -61,7 +61,17 @@ public class BrowserActivity extends BaseActivity implements
 
         initWebView();
 
-        handleIntent(getIntent());
+        if (savedInstanceState == null) {
+            handleIntent(getIntent());
+        } else {
+            webView.restoreState(savedInstanceState);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        webView.saveState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -89,13 +99,14 @@ public class BrowserActivity extends BaseActivity implements
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(@NonNull WebView view, String url) {
-                updateToolbar(view.getTitle(), url);
+                updateToolbar(url);
                 hideProgressBar();
                 view.postInvalidate();
             }
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                updateToolbar(url);
                 showProgressBar();
                 resetLike();
             }
@@ -140,7 +151,7 @@ public class BrowserActivity extends BaseActivity implements
     }
 
     @Override
-    public void updateToolbar(@Nullable String title, @NonNull String url) {
+    public void updateToolbar(@NonNull String url) {
         floatingSearchView.setSearchText(url);
     }
 
