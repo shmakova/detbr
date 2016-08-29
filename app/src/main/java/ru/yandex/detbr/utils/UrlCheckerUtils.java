@@ -19,6 +19,9 @@ public class UrlCheckerUtils {
     private static final String HTTP_PREFIX = "http://";
     private static final String HTTPS_PREFIX = "https://";
 
+    private UrlCheckerUtils() {
+    }
+
     private static boolean isValidUrl(String query) {
         return Patterns.WEB_URL.matcher(query).matches();
     }
