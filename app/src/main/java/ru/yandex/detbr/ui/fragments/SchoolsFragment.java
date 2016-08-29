@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.FrameLayout;
+
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,21 +29,20 @@ import ru.yandex.detbr.ui.adapters.SchoolsAdapter;
 import ru.yandex.detbr.ui.presenters.SchoolsPresenter;
 import ru.yandex.detbr.ui.views.SchoolsView;
 
-public class SchoolsFragment extends BaseMvpFragment<SchoolsView, SchoolsPresenter> implements SchoolsView {
-    @Inject
-    SchoolsPresenter presenter;
+public class SchoolsFragment
+        extends BaseLceFragment<FrameLayout, List<String>, SchoolsView, SchoolsPresenter>
+        implements SchoolsView {
+
+    public interface OnSchoolClickListener {
+        void onSchoolClick();
+    }
 
     @BindView(R.id.schools_autocomplete)
     AutoCompleteTextView autoCompleteTextView;
 
     private SchoolsAdapter schoolsAdapter;
     private SchoolsComponent schoolsComponent;
-
-    OnSchoolClickListener onSchoolClickListener;
-
-    public interface OnSchoolClickListener {
-        void onSchoolClick();
-    }
+    private OnSchoolClickListener onSchoolClickListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +88,6 @@ public class SchoolsFragment extends BaseMvpFragment<SchoolsView, SchoolsPresent
         schoolsAdapter = new SchoolsAdapter(getActivity(),
                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
         autoCompleteTextView.setAdapter(schoolsAdapter);
-        presenter.loadSchools();
 
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();
@@ -96,6 +96,11 @@ public class SchoolsFragment extends BaseMvpFragment<SchoolsView, SchoolsPresent
                 onSchoolClickListener.onSchoolClick();
             }
         });
+    }
+
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return null;
     }
 
     private void hideKeyboard() {
@@ -116,9 +121,22 @@ public class SchoolsFragment extends BaseMvpFragment<SchoolsView, SchoolsPresent
     }
 
     @Override
-    public void setSchoolsData(List<String> schools) {
-        if (schoolsAdapter != null) {
-            schoolsAdapter.addAll(schools);
-        }
+    public void setData(List<String> data) {
+        schoolsAdapter.addAll(data);
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
+        presenter.loadSchools(pullToRefresh);
+    }
+
+    @Override
+    public LceViewState<List<String>, SchoolsView> createViewState() {
+        return new RetainingLceViewState<>();
+    }
+
+    @Override
+    public List<String> getData() {
+        return schoolsAdapter.getItems();
     }
 }

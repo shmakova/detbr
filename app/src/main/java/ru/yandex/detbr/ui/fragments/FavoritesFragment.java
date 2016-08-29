@@ -24,7 +24,6 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.FavoritesComponent;
 import ru.yandex.detbr.di.modules.FavoritesModule;
-import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.adapters.CardsAdapter;
 import ru.yandex.detbr.ui.presenters.FavoritesPresenter;
 import ru.yandex.detbr.ui.views.FavoritesView;
@@ -35,6 +34,10 @@ import ru.yandex.detbr.utils.ErrorMessageDeterminer;
  */
 
 public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, FavoritesView, FavoritesPresenter> implements FavoritesView {
+    public interface OnCardsItemClickListener {
+        void onCardsItemClick(Card card);
+    }
+
     @Inject
     ErrorMessageDeterminer errorMessageDeterminer;
 
@@ -43,12 +46,7 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
 
     private FavoritesComponent favoritesComponent;
     private CardsAdapter adapter;
-
     private OnCardsItemClickListener onCardsItemClickListener;
-
-    public interface OnCardsItemClickListener {
-        void onCardsItemClick(Card card);
-    }
 
     @NonNull
     @Override
@@ -67,7 +65,6 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ((MainActivity) getActivity()).hideToolbar();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);

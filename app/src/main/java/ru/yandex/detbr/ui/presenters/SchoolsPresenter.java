@@ -3,18 +3,17 @@ package ru.yandex.detbr.ui.presenters;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
-import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+import java.util.List;
 
 import ru.yandex.detbr.data.repository.DataRepository;
 import ru.yandex.detbr.ui.views.SchoolsView;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import rx.Observable;
 
 /**
  * Created by shmakova on 21.08.16.
  */
 
-public class SchoolsPresenter extends MvpBasePresenter<SchoolsView> {
+public class SchoolsPresenter extends BaseRxPresenter<SchoolsView, List<String>> {
     @NonNull
     private final DataRepository dataRepository;
     @NonNull
@@ -26,15 +25,9 @@ public class SchoolsPresenter extends MvpBasePresenter<SchoolsView> {
         this.sharedPreferences = sharedPreferences;
     }
 
-    public void loadSchools() {
-        final SchoolsView view = getView();
-
-        if (isViewAttached()) {
-            dataRepository.getSchoolsList()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(view::setSchoolsData);
-        }
+    public void loadSchools(boolean pullToRefresh) {
+        Observable<List<String>> observable = dataRepository.getSchoolsList();
+        subscribe(observable, pullToRefresh);
     }
 
     public void saveSchool(String school) {

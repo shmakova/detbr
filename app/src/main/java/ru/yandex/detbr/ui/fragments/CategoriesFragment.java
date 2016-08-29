@@ -35,6 +35,11 @@ import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Category>, CategoriesView, CategoriesPresenter>
         implements CategoriesView {
+
+    public interface OnCategoriesItemClickListener {
+        void onCategoriesItemClick(Category category);
+    }
+
     @Inject
     ErrorMessageDeterminer errorMessageDeterminer;
 
@@ -42,11 +47,6 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     RecyclerView categories;
 
     private OnCategoriesItemClickListener onCategoriesItemClickListener;
-
-    public interface OnCategoriesItemClickListener {
-        void onCategoriesItemClick(Category category);
-    }
-
     private CategoriesComponent categoriesComponent;
     private CategoriesAdapter adapter;
 

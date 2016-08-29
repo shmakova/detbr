@@ -7,5 +7,17 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  */
 
 public interface MainView extends MvpView {
+    void showNavigationBars();
 
+    void hideNavigationBars();
+
+    void showToolbar();
+
+    void hideToolbar();
+
+    void resetToolbar();
+
+    void updateToolbar(String title, Boolean isDisplayHomeAsUpEnabled, String color);
+
+    void showSpeechRecognizer();
 }

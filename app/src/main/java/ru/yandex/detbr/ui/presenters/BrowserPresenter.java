@@ -23,12 +23,13 @@ import timber.log.Timber;
  */
 
 public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
-    @NonNull
-    private final WotService wotService;
 
     private interface UrlCheckListener {
         void urlChecked(boolean isGood);
     }
+
+    @NonNull
+    private final WotService wotService;
 
     public BrowserPresenter(@NonNull WotService wotService) {
         this.wotService = wotService;
