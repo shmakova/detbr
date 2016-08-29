@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -50,6 +52,14 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     Switch tinyDancerSwitch;
 
     private DeveloperSettingsComponent developerSettingsComponent;
+    private Handler mainThreadHandler;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainThreadHandler = App.get(context).applicationComponent().mainThreadHandler();
+    }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,8 +100,9 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     @AnyThread
     public void changeBuildVersionCode(@NonNull String versionCode) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert buildVersionCodeTextView != null;
-            buildVersionCodeTextView.setText(versionCode);
+            if (buildVersionCodeTextView != null) {
+                buildVersionCodeTextView.setText(versionCode);
+            }
         });
     }
 
@@ -99,8 +110,9 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     @AnyThread
     public void changeBuildVersionName(@NonNull String versionName) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert buildVersionNameTextView != null;
-            buildVersionNameTextView.setText(versionName);
+            if (buildVersionNameTextView != null) {
+                buildVersionNameTextView.setText(versionName);
+            }
         });
     }
 
@@ -108,8 +120,9 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     @AnyThread
     public void changeStethoState(boolean enabled) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert stethoSwitch != null;
-            stethoSwitch.setChecked(enabled);
+            if (stethoSwitch != null) {
+                stethoSwitch.setChecked(enabled);
+            }
         });
     }
 
@@ -117,8 +130,9 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     @AnyThread
     public void changeLeakCanaryState(boolean enabled) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert leakCanarySwitch != null;
-            leakCanarySwitch.setChecked(enabled);
+            if (leakCanarySwitch != null) {
+                leakCanarySwitch.setChecked(enabled);
+            }
         });
     }
 
@@ -126,8 +140,9 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     @AnyThread
     public void changeTinyDancerState(boolean enabled) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert tinyDancerSwitch != null;
-            tinyDancerSwitch.setChecked(enabled);
+            if (tinyDancerSwitch != null) {
+                tinyDancerSwitch.setChecked(enabled);
+            }
         });
     }
 
@@ -154,5 +169,29 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     void showLog() {
         Context context = getActivity();
         context.startActivity(LynxActivity.getIntent(context, lynxConfig));
+    }
+
+    protected void runOnUiThreadIfFragmentAlive(@NonNull Runnable runnable) {
+        if (Looper.myLooper() == Looper.getMainLooper() && isFragmentAlive()) {
+            runnable.run();
+        } else {
+            if (mainThreadHandler != null) {
+                mainThreadHandler.post(() -> {
+                    if (isFragmentAlive()) {
+                        runnable.run();
+                    }
+                });
+            }
+        }
+    }
+
+    private boolean isFragmentAlive() {
+        return getActivity() != null && isAdded() && !isDetached() && getView() != null && !isRemoving();
+    }
+
+    @Override
+    public void onDestroy() {
+        App.get(getContext()).applicationComponent().leakCanaryProxy().watch(this);
+        super.onDestroy();
     }
 }
