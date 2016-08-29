@@ -33,11 +33,9 @@ public class CategoriesPresenter extends BaseRxPresenter<CategoriesView, List<Ca
     }
 
     public void onCategoryClick(Observable<Category> positionClicks) {
-        CategoriesView view = getView();
-
-        if (view != null) {
+        if (isViewAttached()) {
             compositeSubscription.add(
-                    positionClicks.subscribe(view::showCategoryCards));
+                    positionClicks.subscribe(category -> getView().showCategoryCards(category)));
         }
     }
 
