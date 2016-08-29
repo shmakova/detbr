@@ -16,9 +16,9 @@ import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.FavoritesModule;
+import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.SchoolsModule;
 import ru.yandex.detbr.di.modules.WotNetworkModule;
-import ru.yandex.detbr.ui.activities.BaseActivity;
 import ru.yandex.detbr.ui.activities.MainActivity;
 
 @Singleton
@@ -51,6 +51,9 @@ public interface ApplicationComponent {
     @NonNull
     CategoriesComponent plus(CategoriesModule module);
 
+    @NonNull
+    MainComponent plus(MainModule module);
+
     DeveloperSettingsModel developerSettingModel();
 
     DevMetricsProxy devMetricsProxy();
@@ -58,8 +61,6 @@ public interface ApplicationComponent {
     @NonNull
     @Named(ApplicationModule.MAIN_THREAD_HANDLER)
     Handler mainThreadHandler();
-
-    void inject(@NonNull BaseActivity baseActivity);
 
     void inject(@NonNull MainActivity mainActivity);
 }

@@ -15,8 +15,7 @@ import ru.yandex.detbr.ui.presenters.BrowserPresenter;
 public class BrowserModule {
     @Provides
     @NonNull
-    public BrowserPresenter provideBrowserPresenter(
-            @NonNull WotService wotService) {
+    public BrowserPresenter provideBrowserPresenter(@NonNull WotService wotService) {
         return new BrowserPresenter(wotService);
     }
 }

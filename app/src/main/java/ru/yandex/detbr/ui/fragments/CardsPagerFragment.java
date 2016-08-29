@@ -24,7 +24,6 @@ public class CardsPagerFragment extends BaseCardsPagerFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //hideToolbar();
 
         if (fragmentManager != null) {
             fragmentManager

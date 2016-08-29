@@ -10,16 +10,12 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.MenuItem;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,9 +31,6 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         FloatingSearchView.OnMenuItemClickListener,
         FloatingSearchView.OnSearchListener,
         FloatingSearchView.OnHomeActionClickListener {
-    @Inject
-    BrowserPresenter presenter;
-
     @BindView(R.id.webview)
     WebView webView;
     @BindView(R.id.like_fab)
@@ -45,16 +38,15 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Nullable
     private UrlListener listener;
+    @Nullable
     private BrowserComponent browserComponent;
 
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        injectDependencies();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browser);
-
-        browserComponent = App.get(this).applicationComponent().plus(new BrowserModule());
-        browserComponent.inject(this);
 
         floatingSearchView.setOnMenuItemClickListener(this);
         floatingSearchView.setOnSearchListener(this);
@@ -65,6 +57,11 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         if (savedInstanceState == null) {
             handleIntent(getIntent());
         }
+    }
+
+    private void injectDependencies() {
+        browserComponent = App.get(this).applicationComponent().plus(new BrowserModule());
+        browserComponent.inject(this);
     }
 
     @NonNull
@@ -95,7 +92,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         webView.setScrollbarFadingEnabled(true);
         webView.setSaveEnabled(true);
         webView.setNetworkAvailable(true);
-        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(presenter.provideWebViewClient());
+        webView.setWebChromeClient(presenter.provideWebChromeClient());
     }
 
     @Override
@@ -114,7 +112,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     private void handleIntent(Intent intent) {
-        String query = "https://ya.ru";
+        String query = "";
 
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
@@ -137,14 +135,6 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     @Override
     public void setOnUrlListener(UrlListener listener) {
         this.listener = listener;
-    }
-
-    @Override
-    public void setWebViewCallbacks(WebViewClient client) {
-        if (client == null) {
-            client = new WebViewClient();
-        }
-        webView.setWebViewClient(client);
     }
 
     @Override
@@ -202,7 +192,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
         switch (id) {
             case R.id.action_voice_rec:
-                displaySpeechRecognizer();
+                showSpeechRecognizer();
                 break;
             case R.id.home_page:
                 presenter.onHomeClicked();

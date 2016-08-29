@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -31,9 +32,9 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.DataRepository;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.data.repository.models.Category;
-import ru.yandex.detbr.di.components.CardsComponent;
-import ru.yandex.detbr.di.modules.CardsModule;
+import ru.yandex.detbr.di.components.MainComponent;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
+import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.ui.fragments.CardFragment;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.CategoriesFragment;
@@ -41,15 +42,18 @@ import ru.yandex.detbr.ui.fragments.CategoryCardsPagerFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 import ru.yandex.detbr.ui.other.ViewModifier;
+import ru.yandex.detbr.ui.presenters.MainPresenter;
+import ru.yandex.detbr.ui.views.MainView;
 
-public class MainActivity extends BaseActivity implements
+public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> implements
         SchoolsFragment.OnSchoolClickListener,
         CardFragment.OnCardsItemClickListener,
         FavoritesFragment.OnCardsItemClickListener,
         OnTabSelectListener,
         CategoriesFragment.OnCategoriesItemClickListener,
         FloatingSearchView.OnMenuItemClickListener,
-        FloatingSearchView.OnSearchListener {
+        FloatingSearchView.OnSearchListener,
+        MainView {
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
     @BindView(R.id.toolbar)
@@ -66,13 +70,14 @@ public class MainActivity extends BaseActivity implements
     private FragmentManager supportFragmentManager;
     private String school;
     private ActionBar actionBar;
-    private CardsComponent cardsComponent;
+    private MainComponent mainComponent;
 
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        injectDependencies();
         super.onCreate(savedInstanceState);
-        App.get(this).applicationComponent().inject(this);
+
         showIntro();
         supportFragmentManager = getSupportFragmentManager();
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
@@ -91,11 +96,15 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-    public CardsComponent cardsComponent() {
-        if (cardsComponent == null) {
-            cardsComponent = App.get(this).applicationComponent().plus(new CardsModule());
-        }
-        return cardsComponent;
+    @NonNull
+    @Override
+    public MainPresenter createPresenter() {
+        return mainComponent.presenter();
+    }
+
+    private void injectDependencies() {
+        mainComponent = App.get(this).applicationComponent().plus(new MainModule());
+        mainComponent.inject(this);
     }
 
     private void showIntro() {
@@ -223,7 +232,7 @@ public class MainActivity extends BaseActivity implements
         int id = item.getItemId();
 
         if (id == R.id.action_voice_rec) {
-            displaySpeechRecognizer();
+            showSpeechRecognizer();
         }
     }
 

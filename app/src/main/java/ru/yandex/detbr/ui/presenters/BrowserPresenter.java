@@ -2,6 +2,7 @@ package ru.yandex.detbr.ui.presenters;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -24,7 +25,6 @@ import timber.log.Timber;
 public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final WotService wotService;
-    private final WebViewClient client;
 
     private interface UrlCheckListener {
         void urlChecked(boolean isGood);
@@ -32,14 +32,12 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
     public BrowserPresenter(@NonNull WotService wotService) {
         this.wotService = wotService;
-        this.client = new BrowserWebViewClient();
     }
 
     @Override
     public void attachView(BrowserView view) {
         super.attachView(view);
         view.setOnUrlListener(this::loadUrl);
-        view.setWebViewCallbacks(client);
     }
 
     public void onHomeClicked() {
@@ -73,6 +71,14 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         } catch (URISyntaxException e) {
             Timber.e(e, "Error while parsing url");
         }
+    }
+
+    public WebViewClient provideWebViewClient() {
+        return new BrowserWebViewClient();
+    }
+
+    public WebChromeClient provideWebChromeClient() {
+        return new WebChromeClient();
     }
 
     private class BrowserWebViewClient extends WebViewClient {

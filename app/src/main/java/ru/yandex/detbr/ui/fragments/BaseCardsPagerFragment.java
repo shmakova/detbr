@@ -15,10 +15,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.CardsComponent;
-import ru.yandex.detbr.ui.activities.MainActivity;
+import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.ui.adapters.CardsFragmentStatePagerAdapter;
 import ru.yandex.detbr.ui.presenters.CardsPresenter;
 import ru.yandex.detbr.ui.views.CardsView;
@@ -49,7 +50,7 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cardsComponent = ((MainActivity) getActivity()).cardsComponent();
+        cardsComponent = App.get(getContext()).applicationComponent().plus(new CardsModule());
         cardsComponent.inject(this);
         fragmentManager = getChildFragmentManager();
     }

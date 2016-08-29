@@ -2,7 +2,6 @@ package ru.yandex.detbr.ui.views;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.webkit.WebViewClient;
 
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
@@ -19,8 +18,6 @@ public interface BrowserView extends MvpView {
     }
 
     void setOnUrlListener(UrlListener listener);
-
-    void setWebViewCallbacks(WebViewClient client);
 
     void showSearchText(@Nullable String title, @NonNull String url);
 
