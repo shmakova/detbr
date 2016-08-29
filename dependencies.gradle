@@ -7,7 +7,7 @@ ext.versions = [
         compileSdk                   : 23,
         buildTools                   : '24.0.1',
 
-        androidGradlePlugin          : '2.2.0-beta2',
+        androidGradlePlugin          : '2.2.0-beta3',
         aptGradlePlugin              : '1.8',
         retrolambdaGradlePlugin      : '3.2.5',
         lombokGradlePlugin           : '0.2.3.a2',
@@ -19,6 +19,9 @@ ext.versions = [
         versionsGradlePlugin         : '0.13.0',
         fabricGradlePlugin           : '1.+',
         googleServicesGradlePlugin   : '3.0.0',
+
+        rxJava                       : '1.1.8',
+        rxAndroid                    : '1.2.1',
 
         dagger                       : '2.6',
 
@@ -39,6 +42,8 @@ ext.versions = [
         floatingSearchView           : '2.0.3',
         adapterDelegates             : '2.0.1',
         appintro                     : '4.0.0',
+
+        mosby                        : '2.0.1',
 
         espresso                     : '2.2.1',
         stetho                       : '1.3.1',
@@ -89,8 +94,13 @@ ext.libraries = [
         butterKnifeCompiler  : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
         timber               : "com.jakewharton.timber:timber:$versions.timber",
 
+        rxJava               : "io.reactivex:rxjava:$versions.rxJava",
+        rxAndroid            : "io.reactivex:rxandroid:$versions.rxAndroid",
+
         retrofit             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         converterGson        : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        retrofitRx           : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
+
         gson                 : "com.google.code.gson:gson:$versions.gson",
         okhttp               : "com.squareup.okhttp3:okhttp:$versions.okhttp",
         okhttpLogging        : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
@@ -103,6 +113,9 @@ ext.libraries = [
         floatingSearchView   : "com.github.arimorty:floatingsearchview:$versions.floatingSearchView",
         adapterDelegates     : "com.hannesdorfmann:adapterdelegates2:$versions.adapterDelegates",
         appintro             : "com.github.paolorotolo:appintro:$versions.appintro",
+
+        mosby                : "com.hannesdorfmann.mosby:mvp:$versions.mosby",
+        mosbyViewstate       : "com.hannesdorfmann.mosby:viewstate:$versions.mosby",
 
         // Developer Tools
         stetho               : "com.facebook.stetho:stetho:$versions.stetho",

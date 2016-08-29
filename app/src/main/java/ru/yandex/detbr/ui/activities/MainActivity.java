@@ -3,12 +3,15 @@ package ru.yandex.detbr.ui.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -23,27 +26,26 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.cards.Card;
-import ru.yandex.detbr.categories.Category;
-import ru.yandex.detbr.developer_settings.DeveloperSettingsModule;
-import ru.yandex.detbr.schools.SchoolsModel;
+import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.di.components.CardsComponent;
+import ru.yandex.detbr.di.modules.CardsModule;
+import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.ui.fragments.CardFragment;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.CategoriesFragment;
 import ru.yandex.detbr.ui.fragments.CategoryCardsPagerFragmentBuilder;
-import ru.yandex.detbr.ui.fragments.ContentFragment;
-import ru.yandex.detbr.ui.fragments.FavouritesFragment;
+import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 import ru.yandex.detbr.ui.other.ViewModifier;
 
 public class MainActivity extends BaseActivity implements
         SchoolsFragment.OnSchoolClickListener,
-        ContentFragment.OnBrowserButtonClickListener,
         CardFragment.OnCardsItemClickListener,
-        FavouritesFragment.OnCardsItemClickListener,
+        FavoritesFragment.OnCardsItemClickListener,
         OnTabSelectListener,
         CategoriesFragment.OnCategoriesItemClickListener,
         FloatingSearchView.OnMenuItemClickListener,
@@ -64,6 +66,7 @@ public class MainActivity extends BaseActivity implements
     private FragmentManager supportFragmentManager;
     private String school;
     private ActionBar actionBar;
+    private CardsComponent cardsComponent;
 
     @SuppressLint("InflateParams")
     @Override
@@ -71,10 +74,8 @@ public class MainActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         App.get(this).applicationComponent().inject(this);
         showIntro();
-
         supportFragmentManager = getSupportFragmentManager();
         setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
-        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         bottomBar.setOnTabSelectListener(this);
@@ -88,6 +89,13 @@ public class MainActivity extends BaseActivity implements
         } else if (savedInstanceState == null) {
             showCardsFragment();
         }
+    }
+
+    public CardsComponent cardsComponent() {
+        if (cardsComponent == null) {
+            cardsComponent = App.get(this).applicationComponent().plus(new CardsModule());
+        }
+        return cardsComponent;
     }
 
     private void showIntro() {
@@ -106,11 +114,6 @@ public class MainActivity extends BaseActivity implements
         });
 
         thread.start();
-    }
-
-    @Override
-    public void onBrowserButtonCLick(String url) {
-        launchBrowser(url);
     }
 
     @Override
@@ -146,7 +149,7 @@ public class MainActivity extends BaseActivity implements
 
     private void showFavouritesFragment() {
         showNavigationBars();
-        showFragment(new FavouritesFragment());
+        showFragment(new FavoritesFragment());
     }
 
     private void showSchoolsFragment() {
@@ -185,7 +188,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     void loadDataFromSharedPreference() {
-        school = sharedPreferences.getString(SchoolsModel.SCHOOL_TAG, null);
+        school = sharedPreferences.getString(DataRepository.SCHOOL_TAG, null);
     }
 
     @Override
@@ -232,5 +235,33 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onSearchAction(String currentQuery) {
         launchBrowser(currentQuery);
+    }
+
+    public void updateToolbar(String title, Boolean isDisplayHomeAsUpEnabled, String color) {
+        if (actionBar != null) {
+            actionBar.show();
+            actionBar.setDisplayHomeAsUpEnabled(isDisplayHomeAsUpEnabled);
+            actionBar.setTitle(title);
+
+            if (color != null) {
+                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(color)));
+            }
+        }
+    }
+
+    public void resetToolbar() {
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+            actionBar.setTitle(getString(R.string.app_name));
+            actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.color_primary)));
+        }
+    }
+
+    public void hideToolbar() {
+        resetToolbar();
+
+        if (actionBar != null) {
+            actionBar.hide();
+        }
     }
 }

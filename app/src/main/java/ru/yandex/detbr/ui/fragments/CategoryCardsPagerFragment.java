@@ -17,7 +17,8 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
 import butterknife.BindView;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.categories.Category;
+import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.ui.activities.MainActivity;
 
 /**
  * Created by shmakova on 21.08.16.
@@ -49,10 +50,13 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.bindView(this);
-        updateToolbar(category.getTitle(), true, category.getBackgroundColor());
+        ((MainActivity) getActivity()).updateToolbar(category.getTitle(), true, category.getBackgroundColor());
         setCover();
-        presenter.loadCardsByCategory(category);
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
+        presenter.loadCardsByCategory(category, pullToRefresh);
     }
 
     private void setCover() {
@@ -66,6 +70,4 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
             categoryCardsWrapper.setBackgroundColor(Color.parseColor(category.getBackgroundColor()));
         }
     }
-
-
 }

@@ -20,4 +20,5 @@
     <string name="app_intro">Привет!</string>
     <string name="intro_text">Чтобы начать пользоваться браузером, выбери школу</string>
     <string name="choose_school">Выбрать школу</string>
+    <string name="error_text">Ошибка! Нажмите здесь, чтобы повторить загрузку</string>
 </resources>

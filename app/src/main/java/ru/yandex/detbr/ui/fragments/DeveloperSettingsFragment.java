@@ -25,15 +25,12 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
+import ru.yandex.detbr.di.components.DeveloperSettingsComponent;
 import ru.yandex.detbr.performance.AnyThread;
 import ru.yandex.detbr.ui.presenters.DeveloperSettingsPresenter;
 import ru.yandex.detbr.ui.views.DeveloperSettingsView;
 
-public class DeveloperSettingsFragment extends BaseFragment implements DeveloperSettingsView {
-
-    @Inject
-    DeveloperSettingsPresenter presenter;
-
+public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettingsView, DeveloperSettingsPresenter> implements DeveloperSettingsView {
     @Inject
     LynxConfig lynxConfig;
 
@@ -52,10 +49,13 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @BindView(R.id.developer_settings_tiny_dancer_switch)
     Switch tinyDancerSwitch;
 
+    private DeveloperSettingsComponent developerSettingsComponent;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.get(getContext()).applicationComponent().plusDeveloperSettingsComponent().inject(this);
+        developerSettingsComponent = App.get(getContext()).applicationComponent().plusDeveloperSettingsComponent();
+        developerSettingsComponent.inject(this);
     }
 
     @NonNull
@@ -64,11 +64,10 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         return inflater.inflate(R.layout.fragment_developer_settings, container, false);
     }
 
+    @NonNull
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        presenter.bindView(this);
+    public DeveloperSettingsPresenter createPresenter() {
+        return developerSettingsComponent.presenter();
     }
 
     @OnCheckedChanged(R.id.developer_settings_stetho_switch)
@@ -156,11 +155,4 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         Context context = getActivity();
         context.startActivity(LynxActivity.getIntent(context, lynxConfig));
     }
-
-    @Override
-    public void onDestroyView() {
-        presenter.unbindView(this);
-        super.onDestroyView();
-    }
-
 }

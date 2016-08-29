@@ -16,7 +16,7 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.cards.Card;
+import ru.yandex.detbr.data.repository.models.Card;
 
 /**
  * Created by shmakova on 22.08.16.

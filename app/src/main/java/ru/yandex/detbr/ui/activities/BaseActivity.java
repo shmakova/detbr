@@ -4,8 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.google.android.gms.analytics.HitBuilders;
@@ -13,7 +16,10 @@ import com.google.android.gms.analytics.Tracker;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 
@@ -21,16 +27,16 @@ public abstract class BaseActivity extends AppCompatActivity {
     private static final int SPEECH_REQUEST_CODE = 1;
 
     @BindView(R.id.floating_search_view)
-    FloatingSearchView floatingSearchView;
+    protected FloatingSearchView floatingSearchView;
 
-    private Tracker tracker;
+    @Inject
+    Tracker tracker;
 
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App application = (App) getApplication();
-        tracker = application.getDefaultTracker();
+        App.get(this).applicationComponent().inject(this);
     }
 
     @Override
@@ -59,6 +65,24 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setContentView(View view) {
+        super.setContentView(view);
+        ButterKnife.bind(this);
+    }
+
+    @Override
+    public void setContentView(View view, ViewGroup.LayoutParams params) {
+        super.setContentView(view, params);
+        ButterKnife.bind(this);
     }
 }
 

@@ -24,8 +24,7 @@ public class CardsPagerFragment extends BaseCardsPagerFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.bindView(this);
-        hideToolbar();
+        //hideToolbar();
 
         if (fragmentManager != null) {
             fragmentManager
@@ -33,7 +32,5 @@ public class CardsPagerFragment extends BaseCardsPagerFragment {
                     .replace(R.id.categories_frame_layout, new CategoriesFragment())
                     .commit();
         }
-
-        presenter.loadCards();
     }
 }

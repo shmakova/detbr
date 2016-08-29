@@ -3,8 +3,8 @@ package ru.yandex.detbr.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,20 +21,21 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
+import ru.yandex.detbr.di.components.SchoolsComponent;
+import ru.yandex.detbr.di.modules.SchoolsModule;
 import ru.yandex.detbr.ui.adapters.SchoolsAdapter;
 import ru.yandex.detbr.ui.presenters.SchoolsPresenter;
 import ru.yandex.detbr.ui.views.SchoolsView;
 
-public class SchoolsFragment extends BaseFragment implements SchoolsView {
+public class SchoolsFragment extends BaseMvpFragment<SchoolsView, SchoolsPresenter> implements SchoolsView {
     @Inject
     SchoolsPresenter presenter;
-    @Inject
-    SharedPreferences sharedPreferences;
 
     @BindView(R.id.schools_autocomplete)
     AutoCompleteTextView autoCompleteTextView;
 
     private SchoolsAdapter schoolsAdapter;
+    private SchoolsComponent schoolsComponent;
 
     OnSchoolClickListener onSchoolClickListener;
 
@@ -45,8 +46,8 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.get(getContext()).applicationComponent().schoolsComponent().inject(this);
-        presenter.bindView(this);
+        schoolsComponent = App.get(getContext()).applicationComponent().plus(new SchoolsModule());
+        schoolsComponent.inject(this);
     }
 
     @Override
@@ -71,6 +72,12 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_schools, container, false);
+    }
+
+    @NonNull
+    @Override
+    public SchoolsPresenter createPresenter() {
+        return schoolsComponent.presenter();
     }
 
     @Override
@@ -113,11 +120,5 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
         if (schoolsAdapter != null) {
             schoolsAdapter.addAll(schools);
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        presenter.unbindView(this);
-        super.onDestroyView();
     }
 }
