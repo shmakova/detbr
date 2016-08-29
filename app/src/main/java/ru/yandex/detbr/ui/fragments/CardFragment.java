@@ -24,11 +24,6 @@ import ru.yandex.detbr.data.repository.models.Card;
 
 @FragmentWithArgs
 public class CardFragment extends BaseFragment {
-
-    public interface OnCardsItemClickListener {
-        void onCardsItemClick(Card card);
-    }
-
     @Arg
     Card card;
 
@@ -38,6 +33,10 @@ public class CardFragment extends BaseFragment {
     TextView url;
 
     private OnCardsItemClickListener onCardsItemClickListener;
+
+    public interface OnCardsItemClickListener {
+        void onCardsItemClick(Card card);
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

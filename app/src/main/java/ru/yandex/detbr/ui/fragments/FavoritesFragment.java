@@ -34,10 +34,6 @@ import ru.yandex.detbr.utils.ErrorMessageDeterminer;
  */
 
 public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, FavoritesView, FavoritesPresenter> implements FavoritesView {
-    public interface OnCardsItemClickListener {
-        void onCardsItemClick(Card card);
-    }
-
     @Inject
     ErrorMessageDeterminer errorMessageDeterminer;
 
@@ -47,6 +43,10 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
     private FavoritesComponent favoritesComponent;
     private CardsAdapter adapter;
     private OnCardsItemClickListener onCardsItemClickListener;
+
+    public interface OnCardsItemClickListener {
+        void onCardsItemClick(Card card);
+    }
 
     @NonNull
     @Override
@@ -105,7 +105,7 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
 
     @Override
     public List<Card> getData() {
-        return (adapter != null) ? adapter.getItems() : null;
+        return (adapter == null) ? null : adapter.getItems();
     }
 
     @Override

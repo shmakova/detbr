@@ -33,16 +33,16 @@ public class SchoolsFragment
         extends BaseLceFragment<FrameLayout, List<String>, SchoolsView, SchoolsPresenter>
         implements SchoolsView {
 
-    public interface OnSchoolClickListener {
-        void onSchoolClick();
-    }
-
     @BindView(R.id.schools_autocomplete)
     AutoCompleteTextView autoCompleteTextView;
 
     private SchoolsAdapter schoolsAdapter;
     private SchoolsComponent schoolsComponent;
     private OnSchoolClickListener onSchoolClickListener;
+
+    public interface OnSchoolClickListener {
+        void onSchoolClick();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -143,6 +143,6 @@ public class SchoolsFragment
 
     @Override
     public List<String> getData() {
-        return (schoolsAdapter != null) ? schoolsAdapter.getItems() : null;
+        return (schoolsAdapter == null) ? null : schoolsAdapter.getItems();
     }
 }

@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.yandex.detbr.R;
@@ -23,11 +21,7 @@ import rx.subjects.PublishSubject;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
     private List<Category> categories;
-    private PublishSubject<Category> onClickSubject = PublishSubject.create();
-
-    @Inject
-    public CategoriesAdapter() {
-    }
+    private final PublishSubject<Category> onClickSubject = PublishSubject.create();
 
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -104,10 +104,8 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onActionMenuItemSelected(@IdRes int id) {
-        if (id == R.id.action_voice_rec) {
-            if (isViewAttached()) {
-                getView().showSpeechRecognizer();
-            }
+        if (id == R.id.action_voice_rec && isViewAttached()) {
+            getView().showSpeechRecognizer();
         }
     }
 

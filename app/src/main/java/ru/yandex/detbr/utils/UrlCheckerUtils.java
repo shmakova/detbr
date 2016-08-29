@@ -8,7 +8,7 @@ import java.util.Locale;
  * Created by shmakova on 28.08.16.
  */
 
-public class UrlCheckerUtils {
+public final class UrlCheckerUtils {
     private static final String YANDEX_SEARCH_URL = "https://yandex.ru/yandsearch?family=yes&lr=213&text=";
     private static final String YANDEX_URL = "yandex.";
     private static final String YANDEX_SAFE_PARAMETER = "family=yes";

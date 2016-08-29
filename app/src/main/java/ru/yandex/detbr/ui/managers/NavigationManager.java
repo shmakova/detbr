@@ -21,13 +21,13 @@ import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 
 public class NavigationManager {
 
-    public interface NavigationListener {
-        void onNavigationBack();
-    }
-
     private NavigationListener listener;
     private FragmentManager fragmentManager;
     private Activity activity;
+
+    public interface NavigationListener {
+        void onNavigationBack();
+    }
 
     public void init(FragmentManager fragmentManager, Activity activity) {
         this.fragmentManager = fragmentManager;

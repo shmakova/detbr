@@ -17,7 +17,7 @@ import ru.yandex.detbr.ui.presenters.MainPresenter;
 
 @Module
 public class MainModule {
-    private MainActivity mainActivity;
+    private final MainActivity mainActivity;
 
     public MainModule(MainActivity mainActivity) {
         this.mainActivity = mainActivity;

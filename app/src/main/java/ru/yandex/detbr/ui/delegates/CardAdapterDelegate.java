@@ -24,7 +24,7 @@ import ru.yandex.detbr.data.repository.models.Card;
 
 
 public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, CardAdapterDelegate.CardViewHolder> {
-    private OnCardItemClickListener listener;
+    private final OnCardItemClickListener listener;
 
     public CardAdapterDelegate(OnCardItemClickListener onCardItemClickListener) {
         listener = onCardItemClickListener;
