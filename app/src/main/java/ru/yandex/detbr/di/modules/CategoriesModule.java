@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.di.scopes.PerFragment;
 import ru.yandex.detbr.ui.adapters.CategoriesAdapter;
 import ru.yandex.detbr.ui.presenters.CategoriesPresenter;
 
@@ -22,6 +23,7 @@ public class CategoriesModule {
 
     @Provides
     @NonNull
+    @PerFragment
     public CategoriesAdapter provideCategoriesAdapter() {
         return new CategoriesAdapter();
     }

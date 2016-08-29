@@ -14,6 +14,7 @@ import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.CategoryCardsPagerFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
+import ru.yandex.detbr.ui.fragments.TabsFragment;
 
 /**
  * Created by shmakova on 29.08.16.
@@ -79,6 +80,10 @@ public class NavigationManager {
 
     public void openCards() {
         openAsRoot(new CardsPagerFragment());
+    }
+
+    public void openTabs() {
+        openAsRoot(new TabsFragment());
     }
 
     public void openFavorites() {

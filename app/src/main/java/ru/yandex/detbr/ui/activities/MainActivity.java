@@ -31,6 +31,7 @@ import ru.yandex.detbr.data.repository.models.Category;
 import ru.yandex.detbr.di.components.MainComponent;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.MainModule;
+import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.ui.fragments.CardFragment;
 import ru.yandex.detbr.ui.fragments.CategoriesFragment;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
@@ -88,7 +89,7 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     }
 
     private void injectDependencies() {
-        mainComponent = App.get(this).applicationComponent().plus(new MainModule(this));
+        mainComponent = App.get(this).applicationComponent().plus(new MainModule(), new NavigationModule(this));
         mainComponent.inject(this);
     }
 
@@ -123,7 +124,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Override
     public void showNavigationBars() {
         bottomBar.setVisibility(View.VISIBLE);
-        actionBar.hide();
         floatingSearchView.setVisibility(View.VISIBLE);
     }
 
@@ -131,6 +131,16 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     public void hideNavigationBars() {
         bottomBar.setVisibility(View.GONE);
         floatingSearchView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideSearchView() {
+        floatingSearchView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showSearchView() {
+        floatingSearchView.setVisibility(View.VISIBLE);
     }
 
     @Override

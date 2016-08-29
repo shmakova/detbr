@@ -17,7 +17,9 @@ import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.FavoritesModule;
 import ru.yandex.detbr.di.modules.MainModule;
+import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.SchoolsModule;
+import ru.yandex.detbr.di.modules.TabsModule;
 import ru.yandex.detbr.di.modules.WotNetworkModule;
 import ru.yandex.detbr.ui.activities.MainActivity;
 
@@ -52,7 +54,10 @@ public interface ApplicationComponent {
     CategoriesComponent plus(CategoriesModule module);
 
     @NonNull
-    MainComponent plus(MainModule module);
+    TabsComponent plus(TabsModule module, NavigationModule navigationModule);
+
+    @NonNull
+    MainComponent plus(MainModule mainModule, NavigationModule navigationModule);
 
     DeveloperSettingsModel developerSettingModel();
 

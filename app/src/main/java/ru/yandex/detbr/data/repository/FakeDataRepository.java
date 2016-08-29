@@ -24,20 +24,14 @@ public class FakeDataRepository implements DataRepository {
         categories.add(Category.builder()
                 .title("Фильмы")
                 .backgroundColor("#5CB4DC")
-                .cover("http://iconspot.ru/files/322337.png")
+                .cover("http://flaticons.net/gd/makefg.php?i=icons/Miscellaneous/Film-Reel.png")
                 .build());
-        categories.add(Category.builder()
-                .title("Велосипеды")
-                .cover("http://iconspot.ru/files/107227.png")
+        categories.add(Category.builder().title("Вещи")
                 .backgroundColor("#FFB940")
                 .build());
-        categories.add(Category.builder().title("Статьи").build());
-        categories.add(Category.builder().title("Вещи").build());
-        categories.add(Category.builder().title("Образование").build());
-        categories.add(Category.builder().title("Спорт").build());
-        categories.add(Category.builder().title("Игры").build());
-        categories.add(Category.builder().title("Мультфильмы").build());
-        categories.add(Category.builder().title("Животные").build());
+        categories.add(Category.builder().title("Мультфильмы")
+                .backgroundColor("#2DBE60")
+                .build());
         return Observable.just(categories);
     }
 
