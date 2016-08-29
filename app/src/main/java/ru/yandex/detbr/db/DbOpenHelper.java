@@ -18,6 +18,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CardsTable.getCreateTableQuery());
+        sqLiteDatabase.execSQL(CardsTable.fillDatabaseWithDefaultCards());
     }
 
     @Override

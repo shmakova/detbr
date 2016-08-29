@@ -82,7 +82,6 @@ public class MainActivity extends BaseActivity implements
         floatingSearchView.setOnSearchListener(this);
 
         loadDataFromSharedPreference();
-
         if (school == null) {
             showSchoolsFragment();
         } else if (savedInstanceState == null) {

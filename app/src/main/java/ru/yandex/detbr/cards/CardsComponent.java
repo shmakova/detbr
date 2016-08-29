@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Subcomponent;
 import ru.yandex.detbr.ui.fragments.BaseCardsPagerFragment;
+import ru.yandex.detbr.ui.fragments.CardFragment;
 import ru.yandex.detbr.ui.fragments.FavouritesFragment;
 
 /**
@@ -15,4 +16,6 @@ public interface CardsComponent {
     void inject(@NonNull BaseCardsPagerFragment baseCardsPagerFragment);
 
     void inject(@NonNull FavouritesFragment favouritesFragment);
+
+    void inject(@NonNull CardFragment cardFragment);
 }

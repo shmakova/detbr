@@ -1,6 +1,7 @@
 package ru.yandex.detbr.cards;
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -72,7 +73,8 @@ public class CardAdapterDelegate implements AdapterDelegate<List<Card>> {
 
         void bind(Card card) {
             title.setText(card.getTitle());
-            url.setText(card.getUrl());
+            Uri uri = Uri.parse(card.getUrl());
+            url.setText(uri.getHost());
             likeButton.setChecked(card.getLike());
         }
 

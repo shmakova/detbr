@@ -2,6 +2,8 @@ package ru.yandex.detbr.cards;
 
 import android.support.annotation.NonNull;
 
+import com.pushtorefresh.storio.sqlite.StorIOSQLite;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -29,7 +31,7 @@ public class CardsModule {
     @Provides
     @NonNull
     @Singleton
-    public CardsModelImpl provideCardsModelImpl() {
-        return new CardsModelImpl();
+    public CardsModelImpl provideCardsModelImpl(@NonNull StorIOSQLite storIOSQLite) {
+        return new CardsModelImpl(storIOSQLite);
     }
 }

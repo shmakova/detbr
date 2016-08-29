@@ -13,6 +13,7 @@ import ru.yandex.detbr.cards.CardsComponent;
 import ru.yandex.detbr.cards.CardsModule;
 import ru.yandex.detbr.categories.CategoriesComponent;
 import ru.yandex.detbr.categories.CategoriesModule;
+import ru.yandex.detbr.db.DbModule;
 import ru.yandex.detbr.developer_settings.DevMetricsProxy;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsComponent;
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
@@ -31,7 +32,8 @@ import ru.yandex.detbr.wot.WotModule;
         WotModule.class,
         CardsModule.class,
         SchoolsModule.class,
-        CategoriesModule.class
+        CategoriesModule.class,
+        DbModule.class
 })
 public interface ApplicationComponent {
 

@@ -1,24 +1,30 @@
 package ru.yandex.detbr.ui.fragments;
 
 import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
+import com.pushtorefresh.storio.sqlite.StorIOSQLite;
+import com.pushtorefresh.storio.sqlite.queries.RawQuery;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.cards.Card;
+import ru.yandex.detbr.db.tables.CardsTable;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -28,14 +34,15 @@ import ru.yandex.detbr.cards.Card;
 public class CardFragment extends BaseFragment {
     @Arg
     Card card;
+    @Inject
+    StorIOSQLite storIOSQLite;
 
     @BindView(R.id.title)
     TextView title;
     @BindView(R.id.url)
     TextView url;
     @BindView(R.id.like_btn)
-    ImageView like;
-    private Boolean hasLike;
+    CheckBox likeButton;
 
     private OnCardsItemClickListener onCardsItemClickListener;
 
@@ -47,7 +54,7 @@ public class CardFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentArgs.inject(this);
-        hasLike = card.getLike() == null? false : card.getLike();
+        App.get(getContext()).applicationComponent().cardsComponent().inject(this);
     }
 
     @NonNull
@@ -64,7 +71,9 @@ public class CardFragment extends BaseFragment {
 
         if (card != null) {
             title.setText(card.getTitle());
-            url.setText(card.getUrl());
+            Uri uri = Uri.parse(card.getUrl());
+            url.setText(uri.getHost());
+            likeButton.setChecked(card.getLike());
         }
     }
 
@@ -96,18 +105,17 @@ public class CardFragment extends BaseFragment {
 
     @OnClick(R.id.like_btn)
     public void onLikeButtonClick() {
-        hasLike = !hasLike;
-        setLikeDrawable(hasLike);
-    }
-
-    private void setLikeDrawable (Boolean hasLike) {
-        if (hasLike) {
-            like.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                    R.drawable.ic_favorite_24dp, null));
-        }
-        else {
-            like.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                    R.drawable.ic_favorite_border_24dp, null));
-        }
+        Thread thread = new Thread(() -> {
+            storIOSQLite
+                    .executeSQL()
+                    .withQuery(RawQuery.builder()
+                            .query("UPDATE " + CardsTable.TABLE + " SET "
+                             + CardsTable.COLUMN_LIKE + " = ? WHERE " + CardsTable.COLUMN_URL + " = ?")
+                            .args(likeButton.isChecked(), card.getUrl())
+                            .build())
+                    .prepare()
+                    .executeAsBlocking();
+        });
+        thread.start();
     }
 }
