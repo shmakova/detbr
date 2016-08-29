@@ -56,7 +56,15 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
         if (savedInstanceState == null) {
             handleIntent(getIntent());
+        } else {
+            webView.restoreState(savedInstanceState);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        webView.saveState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     private void injectDependencies() {
