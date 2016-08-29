@@ -51,9 +51,13 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        injectDependencies();
+        return inflater.inflate(R.layout.fragment_favorites, container, false);
+    }
+
+    private void injectDependencies() {
         favoritesComponent = App.get(getContext()).applicationComponent().plus(new FavoritesModule());
         favoritesComponent.inject(this);
-        return inflater.inflate(R.layout.fragment_favorites, container, false);
     }
 
     @NonNull
@@ -101,7 +105,7 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
 
     @Override
     public List<Card> getData() {
-        return adapter.getItems();
+        return (adapter != null) ? adapter.getItems() : null;
     }
 
     @Override

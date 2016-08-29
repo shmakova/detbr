@@ -52,8 +52,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     BottomBar bottomBar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.floating_search_view)
-    FloatingSearchView floatingSearchView;
 
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)

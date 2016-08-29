@@ -47,6 +47,10 @@ public class SchoolsFragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        injectDependencies();
+    }
+
+    private void injectDependencies() {
         schoolsComponent = App.get(getContext()).applicationComponent().plus(new SchoolsModule());
         schoolsComponent.inject(this);
     }
@@ -122,7 +126,9 @@ public class SchoolsFragment
 
     @Override
     public void setData(List<String> data) {
-        schoolsAdapter.addAll(data);
+        if (schoolsAdapter != null) {
+            schoolsAdapter.addAll(data);
+        }
     }
 
     @Override
@@ -137,6 +143,6 @@ public class SchoolsFragment
 
     @Override
     public List<String> getData() {
-        return schoolsAdapter.getItems();
+        return (schoolsAdapter != null) ? schoolsAdapter.getItems() : null;
     }
 }

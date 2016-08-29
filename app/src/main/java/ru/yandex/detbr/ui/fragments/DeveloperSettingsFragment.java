@@ -51,6 +51,7 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     @BindView(R.id.developer_settings_tiny_dancer_switch)
     Switch tinyDancerSwitch;
 
+    @NonNull
     private DeveloperSettingsComponent developerSettingsComponent;
     private Handler mainThreadHandler;
 
@@ -64,6 +65,10 @@ public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettings
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        injectDependencies();
+    }
+
+    private void injectDependencies() {
         developerSettingsComponent = App.get(getContext()).applicationComponent().plusDeveloperSettingsComponent();
         developerSettingsComponent.inject(this);
     }

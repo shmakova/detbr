@@ -39,6 +39,7 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
     ViewPager cardsPager;
 
     protected FragmentManager fragmentManager;
+    @NonNull
     private CardsComponent cardsComponent;
 
     @NonNull
@@ -50,9 +51,13 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        injectDependencies();
+        fragmentManager = getChildFragmentManager();
+    }
+
+    private void injectDependencies() {
         cardsComponent = App.get(getContext()).applicationComponent().plus(new CardsModule());
         cardsComponent.inject(this);
-        fragmentManager = getChildFragmentManager();
     }
 
     @Override

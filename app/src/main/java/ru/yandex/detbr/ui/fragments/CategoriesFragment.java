@@ -54,8 +54,7 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        categoriesComponent = App.get(getContext()).applicationComponent().plus(new CategoriesModule());
-        categoriesComponent.inject(this);
+        injectDependencies();
         return inflater.inflate(R.layout.fragment_categories, container, false);
     }
 
@@ -69,6 +68,11 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
         categories.setLayoutManager(linearLayoutManager);
     }
 
+    private void injectDependencies() {
+        categoriesComponent = App.get(getContext()).applicationComponent().plus(new CategoriesModule());
+        categoriesComponent.inject(this);
+    }
+
     @NonNull
     @Override
     public LceViewState<List<Category>, CategoriesView> createViewState() {
@@ -77,7 +81,7 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
 
     @Override
     public List<Category> getData() {
-        return adapter.getCategories();
+        return (adapter != null) ? adapter.getCategories() : null;
     }
 
     @Override
@@ -93,9 +97,11 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
 
     @Override
     public void setData(List<Category> data) {
-        adapter.setCategories(data);
-        adapter.notifyDataSetChanged();
-        presenter.onCategoryClick(adapter.getPositionClicks());
+        if (adapter != null) {
+            adapter.setCategories(data);
+            adapter.notifyDataSetChanged();
+            presenter.onCategoryClick(adapter.getPositionClicks());
+        }
     }
 
     @Override
@@ -105,7 +111,9 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
 
     @Override
     public void showCategoryCards(Category category) {
-        onCategoriesItemClickListener.onCategoriesItemClick(category);
+        if (onCategoriesItemClickListener != null) {
+            onCategoriesItemClickListener.onCategoriesItemClick(category);
+        }
     }
 
 

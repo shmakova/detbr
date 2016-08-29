@@ -18,7 +18,9 @@ import ru.yandex.detbr.ui.presenters.CategoriesPresenter;
 public interface CategoriesComponent {
     void inject(@NonNull CategoriesFragment categoriesFragment);
 
+    @NonNull
     CategoriesPresenter presenter();
 
+    @NonNull
     CategoriesAdapter adapter();
 }

@@ -268,12 +268,12 @@ public class FakeDataRepository implements DataRepository {
 
     @Override
     public Observable<List<String>> getSchoolsList() {
-        return Observable.just(new ArrayList<String>() {{
-            add("ГБОУ г. Москвы лицей №1535");
-            add("ГБОУ г. Москвы центр образования №57 «Пятьдесят седьмая школа»");
-            add("ГБОУ г. Москвы «Многопрофильный лицей №1501»");
-            add("ГБОУ г. Москвы лицей «Вторая школа»");
-            add("ГБОУ г. Москвы «Школа-интернат «Интеллектуал»");
-        }});
+        List<String> schools = new ArrayList<>();
+        schools.add("ГБОУ г. Москвы лицей №1535");
+        schools.add("ГБОУ г. Москвы центр образования №57 «Пятьдесят седьмая школа»");
+        schools.add("ГБОУ г. Москвы «Многопрофильный лицей №1501»");
+        schools.add("ГБОУ г. Москвы лицей «Вторая школа»");
+        schools.add("ГБОУ г. Москвы «Школа-интернат «Интеллектуал»");
+        return Observable.just(schools);
     }
 }
