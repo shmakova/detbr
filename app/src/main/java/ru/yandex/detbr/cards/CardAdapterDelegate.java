@@ -84,7 +84,7 @@ public class CardAdapterDelegate implements AdapterDelegate<List<Card>> {
                 listener.onCardItemClick(getAdapterPosition());
             }
         }
-        
+
         @OnClick(R.id.like_btn)
         void onLikeClick() {
             if (listener != null) {

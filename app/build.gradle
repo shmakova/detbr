@@ -104,6 +104,8 @@ dependencies {
     compile libraries.butterKnife
     apt libraries.butterKnifeCompiler
 
+    compile libraries.jsoup
+
     compile libraries.timber
 
     compile (libraries.retrofit) {

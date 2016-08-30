@@ -65,8 +65,7 @@ public class BrowserActivity extends BaseActivity implements
         initWebView();
         if (savedInstanceState == null) {
             handleIntent(getIntent());
-        }
-        else {
+        } else {
             webView.restoreState(savedInstanceState);
         }
     }

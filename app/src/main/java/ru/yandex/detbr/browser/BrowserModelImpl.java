@@ -33,22 +33,23 @@ public class BrowserModelImpl implements BrowserModel {
             }
         } else {
             urlString = YANDEX_SEARCH_URL + urlString;
+            urlString = urlString.replace(' ', '+');
         }
 
         return urlString;
     }
 
     @Override
-    public String getSafeUrl(String url) {
-        String safeUrl = getSafeUrlFromQuery(url);
+    public String getSafeUrl(String query) {
+        String safeUrl = getSafeUrlFromQuery(query);
 
-        if (url.contains(GOOGLE_URL) &&
-                !url.contains(GOOGLE_SAFE_PARAMETER) &&
-                url.contains(GOOGLE_QUERY_PARAMETER)) {
+        if (query.contains(GOOGLE_URL) &&
+                !query.contains(GOOGLE_SAFE_PARAMETER) &&
+                query.contains(GOOGLE_QUERY_PARAMETER)) {
             safeUrl += "&" + GOOGLE_SAFE_PARAMETER;
-        } else if (url.contains(YANDEX_URL) &&
-                !url.contains(YANDEX_SAFE_PARAMETER) &&
-                url.contains(YANDEX_QUERY_PARAMETER)) {
+        } else if (query.contains(YANDEX_URL) &&
+                !query.contains(YANDEX_SAFE_PARAMETER) &&
+                query.contains(YANDEX_QUERY_PARAMETER)) {
             safeUrl += "&" + YANDEX_SAFE_PARAMETER;
         }
 

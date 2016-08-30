@@ -31,6 +31,8 @@ ext.versions = [
         butterKnife                  : '8.2.1',
         timber                       : '4.2.0',
 
+        jsoup                        : '1.8.3',
+
         retrofit                     : '2.1.0',
         gson                         : '2.7',
         okhttp                       : '3.4.1',
@@ -92,6 +94,8 @@ ext.libraries = [
         butterKnife          : "com.jakewharton:butterknife:$versions.butterKnife",
         butterKnifeCompiler  : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
         timber               : "com.jakewharton.timber:timber:$versions.timber",
+
+        jsoup                : "org.jsoup:jsoup:$versions.jsoup",
 
         retrofit             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         converterGson        : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
