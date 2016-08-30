@@ -7,10 +7,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
@@ -28,8 +26,6 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
     @Arg
     Category category;
 
-    @BindView(R.id.category_cover)
-    ImageView cover;
     @BindView(R.id.category_cards_wrapper)
     LinearLayout categoryCardsWrapper;
 
@@ -48,8 +44,18 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        super.onViewCreated
+                (view, savedInstanceState);
         setCover();
+        CategoriesFragment categoriesFragment = new CategoriesFragmentBuilder()
+                .category(category)
+                .build();
+        if (fragmentManager != null) {
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.categories_frame_layout, categoriesFragment)
+                    .commit();
+        }
     }
 
     @Override
@@ -58,12 +64,6 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
     }
 
     private void setCover() {
-        Glide.with(getActivity())
-                .load(category.getCover())
-                .centerCrop()
-                .crossFade()
-                .into(cover);
-
         if (category.getBackgroundColor() != null) {
             categoryCardsWrapper.setBackgroundColor(Color.parseColor(category.getBackgroundColor()));
         }

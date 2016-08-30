@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.hannesdorfmann.fragmentargs.FragmentArgs;
+import com.hannesdorfmann.fragmentargs.annotation.Arg;
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
@@ -33,8 +36,11 @@ import ru.yandex.detbr.utils.ErrorMessageDeterminer;
  * Created by shmakova on 24.08.16.
  */
 
+@FragmentWithArgs
 public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Category>, CategoriesView, CategoriesPresenter>
         implements CategoriesView {
+    @Arg(required = false)
+    Category category;
 
     @Inject
     ErrorMessageDeterminer errorMessageDeterminer;
@@ -48,6 +54,12 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
 
     public interface OnCategoriesItemClickListener {
         void onCategoriesItemClick(Category category);
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        FragmentArgs.inject(this);
     }
 
     @NonNull
@@ -105,7 +117,7 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
 
     @Override
     public void loadData(boolean pullToRefresh) {
-        presenter.loadCategories(pullToRefresh);
+        presenter.loadCategories(category, pullToRefresh);
     }
 
     @Override

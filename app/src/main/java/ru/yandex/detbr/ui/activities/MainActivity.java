@@ -177,7 +177,7 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        showNavigationBars();
+        presenter.onBackPressed();
     }
 
     @Override

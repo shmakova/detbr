@@ -126,4 +126,11 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     public void onCardsItemClick(Card card) {
         navigationManager.openBrowser(card.getUrl());
     }
+
+    public void onBackPressed() {
+        if (isViewAttached()) {
+            getView().showNavigationBars();
+            getView().hideToolbar();
+        }
+    }
 }

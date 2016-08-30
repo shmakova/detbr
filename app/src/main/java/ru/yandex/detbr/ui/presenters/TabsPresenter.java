@@ -49,6 +49,6 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>> {
     }
 
     public void onAddTabClick() {
-        navigationManager.openBrowser("");
+        navigationManager.openBrowser("http://ya.ru");
     }
 }

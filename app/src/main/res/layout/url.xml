@@ -11,17 +11,20 @@
         android:id="@+id/url"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
         android:layout_weight="1"
         android:ellipsize="end"
         android:maxLines="1"
+        android:padding="16dp"
         android:textColor="@color/grey"/>
 
     <CheckBox
         android:id="@+id/like_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:button="@drawable/grey_like"/>
+        android:button="@drawable/grey_like"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"/>
 
 </LinearLayout>

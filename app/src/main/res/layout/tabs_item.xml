@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
     tools:ignore="RtlHardcoded">
 
     <ImageView
@@ -41,9 +40,10 @@
     <ImageView
         android:id="@+id/remove_btn"
         android:layout_width="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_close_black_24dp"
-        android:contentDescription="@string/remove_tab"/>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:contentDescription="@string/remove_tab"
+        android:padding="16dp"
+        android:src="@drawable/ic_close_black_24dp"/>
 </RelativeLayout>
