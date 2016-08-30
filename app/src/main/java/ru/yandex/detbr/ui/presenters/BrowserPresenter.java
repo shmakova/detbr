@@ -3,8 +3,6 @@ package ru.yandex.detbr.ui.presenters;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import com.pushtorefresh.storio.sqlite.StorIOSQLite;
-
 import java.net.URI;
 import java.net.URISyntaxException;
 

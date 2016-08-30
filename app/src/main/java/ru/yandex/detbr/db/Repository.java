@@ -10,11 +10,11 @@ import ru.yandex.detbr.cards.Card;
  */
 
 public interface Repository {
-    public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like);
+    void saveCardToRepository(String title, String url, @Nullable String cover, boolean like);
 
-    public void saveCardToRepository(@NonNull Card card);
+    void saveCardToRepository(@NonNull Card card);
 
-    public void changeLike(@NonNull String url);
+    void changeLike(@NonNull String url);
 
-    public boolean getLikeFromUrl(@NonNull String url);
+    boolean getLikeFromUrl(@NonNull String url);
 }
