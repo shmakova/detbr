@@ -30,7 +30,7 @@ public class DeveloperSettingsPresenterTest {
     public void bindView_shouldSendBuildVersionCodeToTheView() {
         when(developerSettingsModel.getBuildVersionCode()).thenReturn("test build version code");
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         verify(developerSettingsView).changeBuildVersionCode("test build version code");
     }
 
@@ -38,7 +38,7 @@ public class DeveloperSettingsPresenterTest {
     public void bindView_shouldSendBuildVersionNameToTheView() {
         when(developerSettingsModel.getBuildVersionName()).thenReturn("test build version name");
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         verify(developerSettingsView).changeBuildVersionName("test build version name");
     }
 
@@ -46,7 +46,7 @@ public class DeveloperSettingsPresenterTest {
     public void bindView_shouldSendStethoEnabledStateToTheView() {
         when(developerSettingsModel.isStethoEnabled()).thenReturn(true);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         verify(developerSettingsView).changeStethoState(true);
         verify(developerSettingsModel).isStethoEnabled();
     }
@@ -55,7 +55,7 @@ public class DeveloperSettingsPresenterTest {
     public void bindView_shouldSendStethoDisabledStateToTheView() {
         when(developerSettingsModel.isStethoEnabled()).thenReturn(false);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         verify(developerSettingsView).changeStethoState(false);
         verify(developerSettingsModel).isStethoEnabled();
     }
@@ -64,7 +64,7 @@ public class DeveloperSettingsPresenterTest {
     public void bindView_shouldSendLeakCanaryEnabledStateToTheView() {
         when(developerSettingsModel.isLeakCanaryEnabled()).thenReturn(true);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         verify(developerSettingsView).changeLeakCanaryState(true);
         verify(developerSettingsModel).isLeakCanaryEnabled();
     }
@@ -73,7 +73,7 @@ public class DeveloperSettingsPresenterTest {
     public void bindView_shouldSendLeakCanaryDisabledStateToTheView() {
         when(developerSettingsModel.isLeakCanaryEnabled()).thenReturn(false);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         verify(developerSettingsView).changeLeakCanaryState(false);
         verify(developerSettingsModel).isLeakCanaryEnabled();
     }
@@ -82,7 +82,7 @@ public class DeveloperSettingsPresenterTest {
     public void bindView_shouldSendTinyDancerEnabledStateToTheView() {
         when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(true);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         verify(developerSettingsView).changeTinyDancerState(true);
         verify(developerSettingsModel).isTinyDancerEnabled();
     }
@@ -91,7 +91,7 @@ public class DeveloperSettingsPresenterTest {
     public void bindView_shouldSendTinyDancerDisabledStateToTheView() {
         when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(false);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         verify(developerSettingsView).changeTinyDancerState(false);
         verify(developerSettingsModel).isTinyDancerEnabled();
     }
@@ -100,7 +100,7 @@ public class DeveloperSettingsPresenterTest {
     public void changeStethoState_shouldNoOpIfStateAlreadySameAndEnabled() {
         when(developerSettingsModel.isStethoEnabled()).thenReturn(true);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         developerSettingsPresenter.changeStethoState(true);
 
         verify(developerSettingsModel, never()).changeStethoState(anyBoolean());
@@ -112,7 +112,7 @@ public class DeveloperSettingsPresenterTest {
     public void changeStethoState_shouldNoOpIfStateAlreadySameAndDisabled() {
         when(developerSettingsModel.isStethoEnabled()).thenReturn(false);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         developerSettingsPresenter.changeStethoState(false);
 
         verify(developerSettingsModel, never()).changeStethoState(anyBoolean());
@@ -122,7 +122,7 @@ public class DeveloperSettingsPresenterTest {
 
     @Test
     public void changeStethoState_shouldEnableStethoAndNotifyView() {
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
 
         developerSettingsPresenter.changeStethoState(true);
         verify(developerSettingsModel).changeStethoState(true);
@@ -132,7 +132,7 @@ public class DeveloperSettingsPresenterTest {
 
     @Test
     public void changeStethoState_shouldDisableStethoAndNotifyView() {
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
 
         when(developerSettingsModel.isStethoEnabled()).thenReturn(true);
         developerSettingsPresenter.changeStethoState(false);
@@ -143,7 +143,7 @@ public class DeveloperSettingsPresenterTest {
 
     @Test
     public void changeStethoState_shouldDisableStethoAndNotifyViewAndAskAppRestartIfStethoWasAlreadyEnabled() {
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
 
         when(developerSettingsModel.isStethoEnabled()).thenReturn(true);
 
@@ -158,7 +158,7 @@ public class DeveloperSettingsPresenterTest {
     public void changeLeakCanaryState_shouldNoOpIfStateAlreadySameAndEnabled() {
         when(developerSettingsModel.isLeakCanaryEnabled()).thenReturn(true);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         developerSettingsPresenter.changeLeakCanaryState(true);
 
         verify(developerSettingsModel, never()).changeLeakCanaryState(anyBoolean());
@@ -170,7 +170,7 @@ public class DeveloperSettingsPresenterTest {
     public void changeLeakCanaryState_shouldNoOpIfStateAlreadySameAndDisabled() {
         when(developerSettingsModel.isLeakCanaryEnabled()).thenReturn(false);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         developerSettingsPresenter.changeLeakCanaryState(false);
 
         verify(developerSettingsModel, never()).changeLeakCanaryState(anyBoolean());
@@ -180,7 +180,7 @@ public class DeveloperSettingsPresenterTest {
 
     @Test
     public void changeLeakCanaryState_shouldEnableLeakCanaryAndNotifyView() {
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
 
         developerSettingsPresenter.changeLeakCanaryState(true);
         verify(developerSettingsModel).changeLeakCanaryState(true);
@@ -190,7 +190,7 @@ public class DeveloperSettingsPresenterTest {
 
     @Test
     public void changeLeakCanaryState_shouldDisableLeakCanaryAndNotifyView() {
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
 
         when(developerSettingsModel.isLeakCanaryEnabled()).thenReturn(true);
 
@@ -204,7 +204,7 @@ public class DeveloperSettingsPresenterTest {
     public void changeTinyDancerState_shouldNoOpIfStateAlreadySameAndEnabled() {
         when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(true);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         developerSettingsPresenter.changeTinyDancerState(true);
 
         verify(developerSettingsModel, never()).changeTinyDancerState(anyBoolean());
@@ -216,7 +216,7 @@ public class DeveloperSettingsPresenterTest {
     public void changeTinyDancerState_shouldNoOpIfStateAlreadySameAndDisabled() {
         when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(false);
 
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
         developerSettingsPresenter.changeTinyDancerState(false);
 
         verify(developerSettingsModel, never()).changeTinyDancerState(anyBoolean());
@@ -226,7 +226,7 @@ public class DeveloperSettingsPresenterTest {
 
     @Test
     public void changeTinyDancerState_shouldEnableTinyDancerAndNotifyView() {
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
 
         developerSettingsPresenter.changeTinyDancerState(true);
         verify(developerSettingsModel).changeTinyDancerState(true);
@@ -237,7 +237,7 @@ public class DeveloperSettingsPresenterTest {
     @Test
     public void changeTinyDancerState_shouldDisableTinyDancerAndNotifyView() {
         when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(true);
-        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.attachView(developerSettingsView);
 
         developerSettingsPresenter.changeTinyDancerState(false);
         verify(developerSettingsModel).changeTinyDancerState(false);
