@@ -44,17 +44,16 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated
-                (view, savedInstanceState);
+        super.onViewCreated(view, savedInstanceState);
         setCover();
         CategoriesFragment categoriesFragment = new CategoriesFragmentBuilder()
                 .category(category)
                 .build();
         if (fragmentManager != null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.categories_frame_layout, categoriesFragment)
-                    .commit();
+//            fragmentManager
+//                    .beginTransaction()
+//                    .replace(R.id.categories_frame_layout, categoriesFragment)
+//                    .commit();
         }
     }
 
