@@ -18,6 +18,7 @@ import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.cards.Card;
+import ru.yandex.detbr.cards.OnCardClickListener;
 import ru.yandex.detbr.ui.adapters.CardsAdapter;
 import ru.yandex.detbr.ui.presenters.CardsPresenter;
 import ru.yandex.detbr.ui.views.CardsView;
@@ -64,11 +65,21 @@ public class FavouritesFragment extends BaseFragment implements CardsView {
 
     @Override
     public void setCardsData(List<Card> cards) {
-        CardsAdapter cardsAdapter = new CardsAdapter(getActivity(), cards, (position) -> {
-            Card card = cards.get(position);
+        CardsAdapter cardsAdapter = new CardsAdapter(getActivity(), cards, new OnCardClickListener() {
+            @Override
+            public void onCardItemClick(int position) {
+                Card card = cards.get(position);
 
-            if (onCardsItemClickListener != null) {
-                onCardsItemClickListener.onCardsItemClick(card);
+                if (onCardsItemClickListener != null) {
+                    onCardsItemClickListener.onCardsItemClick(card);
+                }
+            }
+
+            @Override
+            public void onLikeClick(int position) {
+                Card card = cards.get(position);
+
+                presenter.changeLike(card.getUrl());
             }
         });
         recyclerView.setAdapter(cardsAdapter);

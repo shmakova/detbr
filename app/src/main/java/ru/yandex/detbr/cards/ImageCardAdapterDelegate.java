@@ -22,8 +22,8 @@ import ru.yandex.detbr.R;
 
 public class ImageCardAdapterDelegate extends CardAdapterDelegate {
 
-    public ImageCardAdapterDelegate(Activity activity, OnCardItemClickListener onCardItemClickListener) {
-        super(activity, onCardItemClickListener);
+    public ImageCardAdapterDelegate(Activity activity, OnCardClickListener onCardClickListener) {
+        super(activity, onCardClickListener);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class ImageCardAdapterDelegate extends CardAdapterDelegate {
         @BindView(R.id.cover)
         ImageView cover;
 
-        ImageCardViewHolder(View itemView, OnCardItemClickListener onCardItemClickListener) {
-            super(itemView, onCardItemClickListener);
+        ImageCardViewHolder(View itemView, OnCardClickListener onCardClickListener) {
+            super(itemView, onCardClickListener);
         }
 
         void bind(Card card) {

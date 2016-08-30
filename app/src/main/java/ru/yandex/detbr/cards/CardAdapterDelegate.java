@@ -27,11 +27,11 @@ import ru.yandex.detbr.R;
 public class CardAdapterDelegate implements AdapterDelegate<List<Card>> {
 
     protected LayoutInflater inflater;
-    protected OnCardItemClickListener listener;
+    protected OnCardClickListener listener;
 
-    public CardAdapterDelegate(Activity activity, OnCardItemClickListener onCardItemClickListener) {
+    public CardAdapterDelegate(Activity activity, OnCardClickListener onCardClickListener) {
         inflater = activity.getLayoutInflater();
-        listener = onCardItemClickListener;
+        listener = onCardClickListener;
     }
 
     @Override
@@ -63,12 +63,12 @@ public class CardAdapterDelegate implements AdapterDelegate<List<Card>> {
         @BindView(R.id.like_btn)
         CheckBox likeButton;
 
-        private final OnCardItemClickListener listener;
+        private final OnCardClickListener listener;
 
-        CardViewHolder(View itemView, OnCardItemClickListener onCardItemClickListener) {
+        CardViewHolder(View itemView, OnCardClickListener onCardClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            listener = onCardItemClickListener;
+            listener = onCardClickListener;
         }
 
         void bind(Card card) {
@@ -82,6 +82,13 @@ public class CardAdapterDelegate implements AdapterDelegate<List<Card>> {
         void onCardItemClick() {
             if (listener != null) {
                 listener.onCardItemClick(getAdapterPosition());
+            }
+        }
+        
+        @OnClick(R.id.like_btn)
+        void onLikeClick() {
+            if (listener != null) {
+                listener.onLikeClick(getAdapterPosition());
             }
         }
     }
