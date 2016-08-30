@@ -3,7 +3,7 @@ package ru.yandex.detbr.db.tables;
 
 import android.support.annotation.NonNull;
 
-public class CardsTable {
+public final class CardsTable {
     @NonNull
     public static final String TABLE = "cards_table";
 
@@ -36,6 +36,7 @@ public class CardsTable {
                 + ");";
     }
 
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     @NonNull
     public static String fillDatabaseWithDefaultCards() {
         return "INSERT INTO " + TABLE +

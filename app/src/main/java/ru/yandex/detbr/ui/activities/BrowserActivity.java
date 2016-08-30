@@ -206,11 +206,11 @@ public class BrowserActivity extends BaseActivity implements
 
     @OnClick(R.id.like_fab)
     public void onFabLikeClick() {
-        if (!isPageInCard) {
+        if (isPageInCard) {
+            presenter.changeLike(currentUrl);
+        } else {
             presenter.saveCardToRepository(webView.getTitle(), currentUrl, null, true);
             isPageInCard = true;
-        } else {
-            presenter.changeLike(currentUrl);
         }
         isHasLike = !isHasLike;
         setLike(isHasLike);

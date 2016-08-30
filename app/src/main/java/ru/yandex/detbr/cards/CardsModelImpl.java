@@ -16,7 +16,7 @@ import ru.yandex.detbr.db.tables.CardsTable;
 
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class CardsModelImpl implements CardsModel {
-    private StorIOSQLite storIOSQLite;
+    private final StorIOSQLite storIOSQLite;
 
     public CardsModelImpl(StorIOSQLite storIOSQLite) {
         this.storIOSQLite = storIOSQLite;

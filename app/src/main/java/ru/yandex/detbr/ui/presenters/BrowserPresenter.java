@@ -28,7 +28,7 @@ public class BrowserPresenter extends Presenter<BrowserView> {
     private final WotService wotService;
 
     @NonNull
-    private Repository repository;
+    private final Repository repository;
 
     public BrowserPresenter(@NonNull BrowserModel browserModel, @NonNull WotService wotService,
                             @NonNull Repository repository) {

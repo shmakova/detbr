@@ -16,7 +16,7 @@ import ru.yandex.detbr.db.tables.CardsTable;
 
 public class RepositoryImpl implements Repository {
     @NonNull
-    private StorIOSQLite storIOSQLite;
+    private final StorIOSQLite storIOSQLite;
 
     public RepositoryImpl(@NonNull StorIOSQLite storIOSQLite) {
         this.storIOSQLite = storIOSQLite;

@@ -16,7 +16,7 @@ public class CardsPresenter extends Presenter<CardsView> {
     private final CardsModel cardsModel;
 
     @NonNull
-    private Repository repository;
+    private final Repository repository;
 
     public CardsPresenter(@NonNull CardsModel cardsModel, @NonNull Repository repository) {
         this.cardsModel = cardsModel;
