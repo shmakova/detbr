@@ -38,7 +38,7 @@ public class FakeDataRepository implements DataRepository {
         List<Card> cards = new ArrayList<>();
         cards.add(Card.builder()
                 .title("КАК ИГРАТЬ В POKEMON GO")
-                .url("https://www.youtube.com/watch?v=oglUmHzAqyQ")
+                .url("https://m.youtube.com/watch?v=tV9EErN3x-k")
                 .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
                 .build());
         cards.add(Card.builder()
@@ -239,7 +239,7 @@ public class FakeDataRepository implements DataRepository {
                         .build());
                 cards.add(Card.builder()
                         .title("КАК ИГРАТЬ В POKEMON GO")
-                        .url("https://www.youtube.com/watch?v=oglUmHzAqyQ")
+                        .url("https://m.youtube.com/watch?v=tV9EErN3x-k")
                         .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
                         .build());
                 cards.add(Card.builder()
