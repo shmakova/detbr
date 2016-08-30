@@ -14,6 +14,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.tabs.models.Tab;
 import rx.Observable;
@@ -80,6 +81,13 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
                     .centerCrop()
                     .crossFade()
                     .into(preview);
+        }
+
+        @OnClick(R.id.remove_btn)
+        void onRemoveButtonClick() {
+            final int position = getAdapterPosition();
+            tabs.remove(position);
+            notifyItemRemoved(position);
         }
     }
 }

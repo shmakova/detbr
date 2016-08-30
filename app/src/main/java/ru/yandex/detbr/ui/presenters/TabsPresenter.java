@@ -47,4 +47,8 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>> {
             compositeSubscription.unsubscribe();
         }
     }
+
+    public void onAddTabClick() {
+        navigationManager.openBrowser("");
+    }
 }

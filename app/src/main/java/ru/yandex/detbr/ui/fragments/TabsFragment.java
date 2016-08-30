@@ -18,6 +18,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.tabs.models.Tab;
@@ -26,6 +27,7 @@ import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.TabsModule;
 import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.adapters.TabsAdapter;
+import ru.yandex.detbr.ui.other.DividerItemDecoration;
 import ru.yandex.detbr.ui.presenters.TabsPresenter;
 import ru.yandex.detbr.ui.views.TabsView;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
@@ -72,6 +74,8 @@ public class TabsFragment extends BaseLceFragment<FrameLayout, List<Tab>, TabsVi
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(getActivity(), R.drawable.divider));
     }
 
     @Override
@@ -102,5 +106,10 @@ public class TabsFragment extends BaseLceFragment<FrameLayout, List<Tab>, TabsVi
     @Override
     public void loadData(boolean pullToRefresh) {
         presenter.loadTabs(pullToRefresh);
+    }
+
+    @OnClick(R.id.add_tab_fab)
+    public void onAddTabClick() {
+        presenter.onAddTabClick();
     }
 }
