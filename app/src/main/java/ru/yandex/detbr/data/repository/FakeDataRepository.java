@@ -37,11 +37,6 @@ public class FakeDataRepository implements DataRepository {
     public Observable<List<Card>> getCardsListBySchool() {
         List<Card> cards = new ArrayList<>();
         cards.add(Card.builder()
-                .title("КАК ИГРАТЬ В POKEMON GO")
-                .url("https://m.youtube.com/watch?v=tV9EErN3x-k")
-                .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
-                .build());
-        cards.add(Card.builder()
                 .title("LEGO Angry Birds")
                 .url("http://www.lego.com/ru-ru/angrybirdsmovie?icmp=CORUFRAngryBirds")
                 .cover("http://cache.lego.com/r/www/-/media/catalogs/themes/franchises/theme%20cards%202016/angrybirds.jpg")
@@ -63,6 +58,7 @@ public class FakeDataRepository implements DataRepository {
                 .build());
         cards.add(Card.builder()
                 .title("5 МИРОВЫХ РЕКОРДОВ POKEMON GO")
+                .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
                 .url("http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html")
                 .build());
         cards.add(Card.builder()
@@ -109,11 +105,6 @@ public class FakeDataRepository implements DataRepository {
                 .cover("https://www.kinopoisk.ru/images/film_big/723988.jpg")
                 .build());
         cards.add(Card.builder()
-                .title("Играем в Pokémon Go на велосипеде")
-                .url("http://www.veloturist.org.ua/igraem-v-pokemon-go-na-velosipede/")
-                .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
-                .build());
-        cards.add(Card.builder()
                 .title("15 крутых дизайнерских вещиц, с которыми жизнь станет приятнее")
                 .url("https://www.adme.ru/tvorchestvo-dizajn/15-krutyh-dizajnerskih-veschic-s-kotorymi-zhizn-stanet-priyatnee-1152260/")
                 .cover("https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg")
@@ -148,11 +139,6 @@ public class FakeDataRepository implements DataRepository {
                 .title("Большой и добрый великан")
                 .url("https://www.kinopoisk.ru/film/840885")
                 .cover("https://www.kinopoisk.ru/images/film_big/840885.jpg")
-                .build());
-        cards.add(Card.builder()
-                .title("Играем в Pokémon Go на велосипеде")
-                .url("http://www.veloturist.org.ua/igraem-v-pokemon-go-na-velosipede/")
-                .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
                 .build());
         cards.add(Card.builder()
                 .title("10 велосипедов для подростков")
@@ -233,21 +219,13 @@ public class FakeDataRepository implements DataRepository {
         switch (category.getTitle()) {
             case "Покемоны":
                 cards.add(Card.builder()
-                        .title("Играем в Pokémon Go на велосипеде")
-                        .url("http://www.veloturist.org.ua/igraem-v-pokemon-go-na-velosipede/")
-                        .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("КАК ИГРАТЬ В POKEMON GO")
-                        .url("https://m.youtube.com/watch?v=tV9EErN3x-k")
-                        .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
-                        .build());
-                cards.add(Card.builder()
                         .title("5 МИРОВЫХ РЕКОРДОВ POKEMON GO")
+                        .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
                         .url("http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html")
                         .build());
                 cards.add(Card.builder()
                         .title("О ЧИТАХ В POKEMON GO")
+                        .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
                         .url("http://gopokemongo.ru/o-chitah-v-pokemon-go.html")
                         .build());
                 cards.add(Card.builder()
@@ -294,11 +272,6 @@ public class FakeDataRepository implements DataRepository {
                 cards.add(Card.builder()
                         .title("Как велогонщики Тур де Франс побеждают ветер")
                         .url("http://www.veloturist.org.ua/kak-velogonshhiki-tur-de-frans-pobezhdayut-veter/")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Играем в Pokémon Go на велосипеде")
-                        .url("http://www.veloturist.org.ua/igraem-v-pokemon-go-na-velosipede/")
-                        .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
                         .build());
                 cards.add(Card.builder()
                         .title("10 велосипедов для подростков")
