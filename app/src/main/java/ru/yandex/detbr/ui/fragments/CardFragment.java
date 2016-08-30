@@ -14,8 +14,6 @@ import android.widget.TextView;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
-import com.pushtorefresh.storio.sqlite.StorIOSQLite;
-import com.pushtorefresh.storio.sqlite.queries.RawQuery;
 
 import javax.inject.Inject;
 
@@ -24,7 +22,7 @@ import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.cards.Card;
-import ru.yandex.detbr.db.tables.CardsTable;
+import ru.yandex.detbr.ui.presenters.CardsPresenter;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -35,7 +33,7 @@ public class CardFragment extends BaseFragment {
     @Arg
     Card card;
     @Inject
-    StorIOSQLite storIOSQLite;
+    CardsPresenter presenter;
 
     @BindView(R.id.title)
     TextView title;
@@ -105,17 +103,8 @@ public class CardFragment extends BaseFragment {
 
     @OnClick(R.id.like_btn)
     public void onLikeButtonClick() {
-        Thread thread = new Thread(() -> {
-            storIOSQLite
-                    .executeSQL()
-                    .withQuery(RawQuery.builder()
-                            .query("UPDATE " + CardsTable.TABLE + " SET "
-                             + CardsTable.COLUMN_LIKE + " = ? WHERE " + CardsTable.COLUMN_URL + " = ?")
-                            .args(likeButton.isChecked(), card.getUrl())
-                            .build())
-                    .prepare()
-                    .executeAsBlocking();
-        });
-        thread.start();
+        if (card != null) {
+            presenter.changeLike(card.getUrl());
+        }
     }
 }

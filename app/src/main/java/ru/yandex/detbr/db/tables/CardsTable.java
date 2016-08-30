@@ -22,6 +22,9 @@ public class CardsTable {
     @NonNull
     public static final String COLUMN_LIKE = "like";
 
+    private CardsTable() {
+    }
+
     @NonNull
     public static String getCreateTableQuery() {
         return "CREATE TABLE " + TABLE + "("

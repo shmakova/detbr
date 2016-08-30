@@ -1,4 +1,4 @@
-package ru.yandex.detbr.cards.resolvers;
+package ru.yandex.detbr.db.resolvers;
 
 import android.content.ContentValues;
 import android.support.annotation.NonNull;
@@ -14,7 +14,7 @@ import ru.yandex.detbr.db.tables.CardsTable;
 public class CardPutResolver extends DefaultPutResolver<Card> {
     @Override
     @NonNull
-    protected InsertQuery mapToInsertQuery(@NonNull Card object) {
+    protected InsertQuery mapToInsertQuery(@NonNull Card card) {
         return InsertQuery.builder()
                 .table(CardsTable.TABLE)
                 .build();

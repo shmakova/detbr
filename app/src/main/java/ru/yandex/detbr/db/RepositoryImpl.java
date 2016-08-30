@@ -1,0 +1,81 @@
+package ru.yandex.detbr.db;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import com.pushtorefresh.storio.sqlite.StorIOSQLite;
+import com.pushtorefresh.storio.sqlite.queries.Query;
+import com.pushtorefresh.storio.sqlite.queries.RawQuery;
+
+import ru.yandex.detbr.cards.Card;
+import ru.yandex.detbr.db.tables.CardsTable;
+
+/**
+ * Created by user on 30.08.16.
+ */
+
+public class RepositoryImpl implements Repository {
+    @NonNull
+    private StorIOSQLite storIOSQLite;
+
+    public RepositoryImpl(@NonNull StorIOSQLite storIOSQLite) {
+        this.storIOSQLite = storIOSQLite;
+    }
+
+    @Override
+    public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
+        Card card = Card.builder()
+                .title(title)
+                .url(url)
+                .cover(cover)
+                .like(like)
+                .build();
+        saveCardToRepository(card);
+    }
+
+    @Override
+    public void saveCardToRepository(@NonNull Card card) {
+        // TODO rx
+        Thread thread = new Thread(() -> {
+            storIOSQLite
+                    .put()
+                    .object(card)
+                    .prepare()
+                    .executeAsBlocking();
+        });
+        thread.start();
+    }
+
+    @Override
+    public void changeLike(@NonNull String url) {
+        // TODO rx
+        Thread thread = new Thread(() -> {
+            storIOSQLite
+                    .executeSQL()
+                    .withQuery(RawQuery.builder()
+                            .query("UPDATE " + CardsTable.TABLE + " SET "
+                                    + CardsTable.COLUMN_LIKE + " = ~" + CardsTable.COLUMN_LIKE + "&1"
+                                    + " WHERE " + CardsTable.COLUMN_URL + " = ?")
+                            .args(url)
+                            .build())
+                    .prepare()
+                    .executeAsBlocking();
+        });
+        thread.start();
+    }
+
+    @Override
+    public boolean getLikeFromUrl(@NonNull String url) {
+        Card card = storIOSQLite
+                .get()
+                .object(Card.class)
+                .withQuery(Query.builder()
+                    .table(CardsTable.TABLE)
+                    .where(CardsTable.COLUMN_URL + " = ?")
+                    .whereArgs(url)
+                    .build())
+                .prepare()
+                .executeAsBlocking();
+        return card != null && card.getLike();
+    }
+}

@@ -44,6 +44,9 @@ public class BrowserActivity extends BaseActivity implements
     FloatingActionButton fabLike;
 
     private String currentQuery;
+    private String currentUrl;
+    private boolean isPageInCard;
+    private boolean isHasLike;
 
     @SuppressLint("InflateParams")
     @Override
@@ -107,7 +110,9 @@ public class BrowserActivity extends BaseActivity implements
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 showProgressBar();
-                resetLike();
+                isHasLike = isPageInCard = presenter.getLikeFromUrl(url);
+                setLike(isPageInCard);
+                currentUrl = url;
             }
 
             @Override
@@ -165,9 +170,14 @@ public class BrowserActivity extends BaseActivity implements
     }
 
     @Override
-    public void resetLike() {
-        fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                R.drawable.ic_favorite_border_24dp, null));
+    public void setLike(boolean like) {
+        if (like) {
+            fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.ic_favorite_24dp, null));
+        } else {
+            fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.ic_favorite_border_24dp, null));
+        }
     }
 
     @Override
@@ -197,8 +207,14 @@ public class BrowserActivity extends BaseActivity implements
 
     @OnClick(R.id.like_fab)
     public void onFabLikeClick() {
-        fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                R.drawable.ic_favorite_24dp, null));
+        if (!isPageInCard) {
+            presenter.saveCardToRepository(webView.getTitle(), currentUrl, null, true);
+            isPageInCard = true;
+        } else {
+            presenter.changeLike(currentUrl);
+        }
+        isHasLike = !isHasLike;
+        setLike(isHasLike);
     }
 
     @Override

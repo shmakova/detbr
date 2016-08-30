@@ -25,15 +25,15 @@ public abstract class Card implements Parcelable {
     }
 
     @AutoValue.Builder
-    abstract static class Builder {
-        abstract Builder title(String title);
+    public abstract static class Builder {
+        public abstract Builder title(String title);
 
-        abstract Builder url(String url);
+        public abstract Builder url(String url);
 
-        abstract Builder cover(String cover);
+        public abstract Builder cover(String cover);
 
-        abstract Builder like(boolean like);
+        public abstract Builder like(boolean like);
 
-        abstract Card build();
+        public abstract Card build();
     }
 }

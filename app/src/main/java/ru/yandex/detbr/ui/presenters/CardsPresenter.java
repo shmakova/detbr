@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import ru.yandex.detbr.cards.CardsModel;
 import ru.yandex.detbr.categories.Category;
+import ru.yandex.detbr.db.Repository;
 import ru.yandex.detbr.ui.views.CardsView;
 
 /**
@@ -14,8 +15,12 @@ public class CardsPresenter extends Presenter<CardsView> {
     @NonNull
     private final CardsModel cardsModel;
 
-    public CardsPresenter(@NonNull CardsModel cardsModel) {
+    @NonNull
+    private Repository repository;
+
+    public CardsPresenter(@NonNull CardsModel cardsModel, @NonNull Repository repository) {
         this.cardsModel = cardsModel;
+        this.repository = repository;
     }
 
     public void loadCards() {
@@ -40,5 +45,9 @@ public class CardsPresenter extends Presenter<CardsView> {
         if (view != null) {
             view.setCardsData(cardsModel.getCardsByCategory(category));
         }
+    }
+
+    public void changeLike(@NonNull String url) {
+        repository.changeLike(url);
     }
 }

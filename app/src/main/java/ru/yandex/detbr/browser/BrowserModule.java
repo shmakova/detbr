@@ -6,6 +6,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.yandex.detbr.db.Repository;
 import ru.yandex.detbr.ui.presenters.BrowserPresenter;
 import ru.yandex.detbr.wot.WotService;
 
@@ -19,8 +20,9 @@ public class BrowserModule {
     @NonNull
     public BrowserPresenter provideBrowserPresenter(
             @NonNull BrowserModelImpl browserModel,
-            @NonNull WotService wotService) {
-        return new BrowserPresenter(browserModel, wotService);
+            @NonNull WotService wotService,
+            @NonNull Repository repository) {
+        return new BrowserPresenter(browserModel, wotService, repository);
     }
 
     @Provides

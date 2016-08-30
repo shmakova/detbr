@@ -1,4 +1,4 @@
-package ru.yandex.detbr.cards.resolvers;
+package ru.yandex.detbr.db.resolvers;
 
 import android.support.annotation.NonNull;
 

@@ -8,6 +8,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.yandex.detbr.db.Repository;
 import ru.yandex.detbr.ui.presenters.CardsPresenter;
 
 /**
@@ -18,8 +19,8 @@ import ru.yandex.detbr.ui.presenters.CardsPresenter;
 public class CardsModule {
     @Provides
     @NonNull
-    public CardsPresenter provideCardsPresenter(@NonNull CardsModel cardsModel) {
-        return new CardsPresenter(cardsModel);
+    public CardsPresenter provideCardsPresenter(@NonNull CardsModel cardsModel, @NonNull Repository repository) {
+        return new CardsPresenter(cardsModel, repository);
     }
 
     @Provides

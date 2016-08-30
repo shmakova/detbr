@@ -13,9 +13,9 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import ru.yandex.detbr.cards.Card;
-import ru.yandex.detbr.cards.resolvers.CardDeleteResolver;
-import ru.yandex.detbr.cards.resolvers.CardGetResolver;
-import ru.yandex.detbr.cards.resolvers.CardPutResolver;
+import ru.yandex.detbr.db.resolvers.CardDeleteResolver;
+import ru.yandex.detbr.db.resolvers.CardGetResolver;
+import ru.yandex.detbr.db.resolvers.CardPutResolver;
 
 
 @Module
@@ -39,5 +39,19 @@ public class DbModule {
     @Singleton
     public SQLiteOpenHelper provideSQLiteOpenHelper(@NonNull Application application) {
         return new DbOpenHelper(application);
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public Repository provideRepository(@NonNull RepositoryImpl repositoryImpl) {
+        return repositoryImpl;
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public RepositoryImpl provideRepositoryImpl(@NonNull StorIOSQLite storIOSQLite) {
+        return new RepositoryImpl(storIOSQLite);
     }
 }
