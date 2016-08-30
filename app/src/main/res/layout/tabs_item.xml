@@ -10,7 +10,7 @@
         android:id="@+id/preview"
         android:layout_width="120dp"
         android:layout_height="160dp"
-        android:layout_marginRight="16dp"
+        android:layout_margin="16dp"
         android:contentDescription="@string/cover"/>
 
     <LinearLayout
