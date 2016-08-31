@@ -16,7 +16,8 @@ android {
         applicationId 'ru.yandex.detbr'
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode versions.code // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
+        versionCode versions.code
+        // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
         versionName versions.name
 
         // Make generated apks contain version name and code.
@@ -107,7 +108,7 @@ dependencies {
     compile libraries.rxJava
     compile libraries.rxAndroid
 
-    compile (libraries.retrofit) {
+    compile(libraries.retrofit) {
         exclude module: 'okhttp'
     }
     compile libraries.converterGson

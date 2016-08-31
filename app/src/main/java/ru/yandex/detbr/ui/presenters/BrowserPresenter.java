@@ -98,7 +98,9 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         @Override
         public void onPageFinished(@NonNull WebView webView, String url) {
             if (isViewAttached()) {
-                getView().showSearchText(webView.getTitle(), url);
+                if (UrlCheckerUtils.isHttpLink(url)) {
+                    getView().showSearchText(webView.getTitle(), url);
+                }
                 getView().hideProgress();
                 webView.postInvalidate();
                 tabsManager.updateTab(Tab.builder()

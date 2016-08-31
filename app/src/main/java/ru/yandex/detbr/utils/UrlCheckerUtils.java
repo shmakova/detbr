@@ -55,4 +55,8 @@ public final class UrlCheckerUtils {
 
         return url;
     }
+
+    public static boolean isHttpLink(String url) {
+        return url.startsWith(HTTP_PREFIX) || url.startsWith(HTTPS_PREFIX);
+    }
 }

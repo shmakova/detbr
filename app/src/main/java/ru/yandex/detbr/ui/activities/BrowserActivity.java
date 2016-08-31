@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
@@ -32,6 +31,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         FloatingSearchView.OnMenuItemClickListener,
         FloatingSearchView.OnSearchListener,
         FloatingSearchView.OnHomeActionClickListener {
+    private static final String CHILD_SAFETY_HTML = "file:///android_asset/child_safety.html";
+
     @BindView(R.id.webview)
     WebView webView;
     @BindView(R.id.like_fab)
@@ -116,7 +117,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void showError() {
-        Toast.makeText(this, R.string.unsafe_page, Toast.LENGTH_LONG).show();
+        webView.loadUrl(CHILD_SAFETY_HTML);
     }
 
     @Override
