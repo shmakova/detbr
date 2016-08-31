@@ -210,6 +210,16 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     }
 
     @Override
+    public void setBottomBarActiveTabDefaultColor() {
+        //bottomBar.setActiveTabColor(ContextCompat.getColor(this, R.color.active_grey));
+    }
+
+    @Override
+    public void setBottomBarActiveTabCustomColor() {
+        //bottomBar.setActiveTabColor(ContextCompat.getColor(this, R.color.yellow));
+    }
+
+    @Override
     public void resetToolbar() {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(false);

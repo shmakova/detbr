@@ -45,34 +45,37 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     private void openSchools() {
         if (isViewAttached()) {
+            navigationManager.openSchools();
             getView().hideNavigationBars();
             getView().showToolbar();
-            navigationManager.openSchools();
         }
     }
 
     private void openCards() {
         if (isViewAttached()) {
+            navigationManager.openCards();
+            getView().setBottomBarActiveTabDefaultColor();
             getView().showNavigationBars();
             getView().hideToolbar();
-            navigationManager.openCards();
         }
     }
 
     private void openFavorites() {
         if (isViewAttached()) {
+            navigationManager.openFavorites();
+            getView().setBottomBarActiveTabDefaultColor();
             getView().showNavigationBars();
             getView().hideToolbar();
-            navigationManager.openFavorites();
         }
     }
 
     private void openTabs() {
         if (isViewAttached()) {
+            navigationManager.openTabs();
+            getView().setBottomBarActiveTabCustomColor();
             getView().showNavigationBars();
             getView().hideSearchView();
             getView().hideToolbar();
-            navigationManager.openTabs();
         }
     }
 

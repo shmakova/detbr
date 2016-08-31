@@ -7,5 +7,8 @@
     <color name="grey">#777777</color>
     <color name="light_grey">#dddddd</color>
     <color name="background_grey">#F8F8F8</color>
-    <color name="yellow">#ffd54f</color>
+    <color name="yellow">#ffc400</color>
+    <color name="active_grey">#424242</color>
+    <color name="inactive_grey">#bdbdbd</color>
+    <color name="bar_grey">#212121</color>
 </resources>

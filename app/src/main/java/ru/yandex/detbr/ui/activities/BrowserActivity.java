@@ -12,6 +12,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
@@ -35,6 +36,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     WebView webView;
     @BindView(R.id.like_fab)
     FloatingActionButton fabLike;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Nullable
     private UrlListener listener;
@@ -143,6 +146,11 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
+    public void updateProgress(int newProgress) {
+        progressBar.setProgress(newProgress);
+    }
+
+    @Override
     public void setOnUrlListener(UrlListener listener) {
         this.listener = listener;
     }
@@ -154,12 +162,12 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void showProgress() {
-        floatingSearchView.showProgress();
+        progressBar.setVisibility(ProgressBar.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-        floatingSearchView.hideProgress();
+        progressBar.setVisibility(ProgressBar.GONE);
     }
 
     @Override

@@ -89,7 +89,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     public WebChromeClient provideWebChromeClient() {
-        return new WebChromeClient();
+        return new BrowserWebChromeClient();
     }
 
     private class BrowserWebViewClient extends WebViewClient {
@@ -143,6 +143,17 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             }
 
             return thumbnail;
+        }
+    }
+
+    private class BrowserWebChromeClient extends WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            if (isViewAttached()) {
+                getView().updateProgress(newProgress);
+                Timber.e(String.valueOf(newProgress));
+            }
         }
     }
 }

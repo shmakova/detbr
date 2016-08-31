@@ -40,6 +40,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_alignParentBottom="true"
+                android:background="@color/white"
+                app:bb_activeTabColor="@color/active_grey"
+                app:bb_behavior="shifting"
+                app:bb_inActiveTabColor="@color/inactive_grey"
                 app:bb_tabXmlResource="@xml/bottombar_tabs"/>
 
             <include layout="@layout/floating_search_view"/>
