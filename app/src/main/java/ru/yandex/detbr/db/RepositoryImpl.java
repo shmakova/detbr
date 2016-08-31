@@ -2,7 +2,6 @@ package ru.yandex.detbr.db;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.queries.Query;
@@ -10,13 +9,13 @@ import com.pushtorefresh.storio.sqlite.queries.RawQuery;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
 
 import ru.yandex.detbr.cards.Card;
 import ru.yandex.detbr.db.tables.CardsTable;
+import timber.log.Timber;
 
 /**
  * Created by user on 30.08.16.
@@ -62,6 +61,7 @@ public class RepositoryImpl implements Repository {
                 .executeAsBlocking();
     }
 
+
     private String getCoverUrl(@NonNull String url) {
         try {
             Document doc = Jsoup.connect(url).maxBodySize(0).get();
@@ -70,7 +70,7 @@ public class RepositoryImpl implements Repository {
                 return images.get(0).attr("src");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            Timber.e(e, "Error");
         }
         return null;
     }
