@@ -69,8 +69,14 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
         }
 
         public void bind(Tab tab) {
-            url.setText(tab.getUrl());
-            title.setText(tab.getTitle());
+            url.setText(tab.getHost());
+
+            if (tab.getTitle() != null && tab.getTitle().isEmpty()) {
+                title.setVisibility(View.GONE);
+            } else {
+                title.setVisibility(View.VISIBLE);
+                title.setText(tab.getTitle());
+            }
 
             if (tab.getPreview() != null) {
                 preview.setImageBitmap(tab.getPreview());

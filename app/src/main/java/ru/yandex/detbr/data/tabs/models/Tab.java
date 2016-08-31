@@ -5,6 +5,11 @@ import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import timber.log.Timber;
+
 /**
  * Created by shmakova on 29.08.16.
  */
@@ -19,6 +24,19 @@ public abstract class Tab {
 
     @Nullable
     public abstract Bitmap getPreview();
+
+    public String getHost() {
+        String host = "";
+
+        try {
+            URI uri = new URI(getUrl());
+            host = uri.getHost();
+        } catch (URISyntaxException e) {
+            Timber.e(e, "Error while parsing url");
+        }
+
+        return host;
+    }
 
     public static Builder builder() {
         return new AutoValue_Tab.Builder();

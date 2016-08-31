@@ -18,6 +18,7 @@ import ru.yandex.detbr.data.wot_network.WotService;
 import ru.yandex.detbr.ui.managers.TabsManager;
 import ru.yandex.detbr.ui.views.BrowserView;
 import ru.yandex.detbr.utils.UrlCheckerUtils;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -32,6 +33,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     private final WotService wotService;
     @NonNull
     private final TabsManager tabsManager;
+    private Subscription subscription;
 
     public BrowserPresenter(@NonNull WotService wotService, @NonNull TabsManager tabsManager) {
         this.wotService = wotService;
@@ -75,7 +77,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             URI uri = new URI(url);
             String domain = uri.getHost() + "/";
 
-            wotService.getLinkReputation(domain)
+            subscription = wotService.getLinkReputation(domain)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(wotResponse -> listener.urlChecked(wotResponse.isSafe()));
@@ -146,13 +148,20 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         }
     }
 
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+        if (!retainInstance && subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
+
     private class BrowserWebChromeClient extends WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             if (isViewAttached()) {
                 getView().updateProgress(newProgress);
-                Timber.e(String.valueOf(newProgress));
             }
         }
     }

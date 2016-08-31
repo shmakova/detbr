@@ -11,4 +11,5 @@
     <color name="active_grey">#424242</color>
     <color name="inactive_grey">#bdbdbd</color>
     <color name="bar_grey">#212121</color>
+    <color name="tab_background">#363636</color>
 </resources>

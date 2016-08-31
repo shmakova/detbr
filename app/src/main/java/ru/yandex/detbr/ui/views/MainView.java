@@ -24,8 +24,4 @@ public interface MainView extends MvpView {
     void updateToolbar(String title, Boolean isDisplayHomeAsUpEnabled, String color);
 
     void showSpeechRecognizer();
-
-    void setBottomBarActiveTabDefaultColor();
-
-    void setBottomBarActiveTabCustomColor();
 }

@@ -54,7 +54,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private void openCards() {
         if (isViewAttached()) {
             navigationManager.openCards();
-            getView().setBottomBarActiveTabDefaultColor();
             getView().showNavigationBars();
             getView().hideToolbar();
         }
@@ -63,7 +62,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private void openFavorites() {
         if (isViewAttached()) {
             navigationManager.openFavorites();
-            getView().setBottomBarActiveTabDefaultColor();
             getView().showNavigationBars();
             getView().hideToolbar();
         }
@@ -72,7 +70,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private void openTabs() {
         if (isViewAttached()) {
             navigationManager.openTabs();
-            getView().setBottomBarActiveTabCustomColor();
             getView().showNavigationBars();
             getView().hideSearchView();
             getView().hideToolbar();

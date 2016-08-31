@@ -111,7 +111,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void loadPageByUrl(String url) {
-        webView.loadUrl(url);
+        this.webView.loadUrl(url);
     }
 
     @Override
@@ -142,6 +142,9 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void close() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         finish();
     }
 
@@ -181,7 +184,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         if (webView.canGoBack()) {
             webView.goBack();
         } else {
-            super.onBackPressed();
+            presenter.onHomeClicked();
         }
     }
 
