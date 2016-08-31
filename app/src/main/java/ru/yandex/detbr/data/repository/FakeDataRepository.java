@@ -342,18 +342,9 @@ public class FakeDataRepository implements DataRepository {
                 break;
             default:
                 cards.add(Card.builder()
-                        .title("Лонгборд Penny Original 22\"")
-                        .url("https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls")
-                        .cover("https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg")
-                        .build());
-                cards.add(Card.builder()
                         .title("10 иллюстраций о том, каким видят мир творческие люди")
                         .url("https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet")
                         .cover("https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Невероятные оптические иллюзии от профессора математики")
-                        .url("https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/")
                         .build());
                 cards.add(Card.builder()
                         .title("11 комиксов о том, как изменилась наша жизнь с появлением интернета")

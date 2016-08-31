@@ -139,7 +139,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 picture.draw(canvas);
                 float factor = width / (float) bitmap.getWidth();
                 Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
-                height = (height > scaledBitmap.getHeight()) ? scaledBitmap.getHeight() : height;
+                height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
                 thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
 
                 bitmap.recycle();

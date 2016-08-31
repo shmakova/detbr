@@ -11,7 +11,7 @@ import rx.Observable;
  */
 
 public class FakeTabsRepository implements TabsRepository {
-    private List<Tab> tabs = new ArrayList<>();
+    private final List<Tab> tabs;
 
     public FakeTabsRepository() {
         tabs = new ArrayList<>();

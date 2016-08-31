@@ -13,7 +13,10 @@ import com.hannesdorfmann.mosby.mvp.lce.LceAnimator;
  * Created by shmakova on 31.08.16.
  */
 
-public class CustomLceAnimator extends LceAnimator {
+public final class CustomLceAnimator extends LceAnimator {
+
+    private CustomLceAnimator() {
+    }
 
     public static void showLoading(@NonNull View loadingView, @NonNull View contentView,
                                    @NonNull View errorView) {

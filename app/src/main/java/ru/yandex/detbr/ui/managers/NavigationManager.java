@@ -55,15 +55,6 @@ public class NavigationManager {
         }
     }
 
-    private void popEveryFragment() {
-        int backStackCount = fragmentManager.getBackStackEntryCount();
-
-        for (int i = 0; i < backStackCount; i++) {
-            int backStackId = fragmentManager.getBackStackEntryAt(i).getId();
-            fragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-    }
-
     private void clearBackStack() {
         if (fragmentManager.getBackStackEntryCount() > 0) {
             FragmentManager.BackStackEntry first = fragmentManager.getBackStackEntryAt(0);
