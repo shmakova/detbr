@@ -199,13 +199,13 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Override
     public void updateToolbar(String title, Boolean isDisplayHomeAsUpEnabled, String color) {
         if (actionBar != null) {
-            actionBar.show();
             actionBar.setDisplayHomeAsUpEnabled(isDisplayHomeAsUpEnabled);
             actionBar.setTitle(title);
 
             if (color != null) {
                 actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(color)));
             }
+            actionBar.show();
         }
     }
 

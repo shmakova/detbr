@@ -10,7 +10,11 @@ import rx.Observable;
  */
 
 public interface TabsRepository {
-    Observable<List<Tab>> getTabs();
+    Observable<List<Tab>> getSavedTabs();
 
     void addTab(Tab tab);
+
+    void removeTab(Tab tab);
+
+    void removeLastTab();
 }

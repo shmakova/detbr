@@ -1,14 +1,11 @@
 package ru.yandex.detbr.ui.adapters;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -74,13 +71,10 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
         public void bind(Tab tab) {
             url.setText(tab.getUrl());
             title.setText(tab.getTitle());
-            Context context = preview.getContext();
 
-            Glide.with(context)
-                    .load(tab.getPreview())
-                    .centerCrop()
-                    .crossFade()
-                    .into(preview);
+            if (tab.getPreview() != null) {
+                preview.setImageBitmap(tab.getPreview());
+            }
         }
 
         @OnClick(R.id.remove_btn)

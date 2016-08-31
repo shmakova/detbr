@@ -1,6 +1,8 @@
 package ru.yandex.detbr.ui.presenters;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Picture;
 import android.support.annotation.NonNull;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -11,7 +13,9 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import ru.yandex.detbr.data.tabs.models.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
+import ru.yandex.detbr.ui.managers.TabsManager;
 import ru.yandex.detbr.ui.views.BrowserView;
 import ru.yandex.detbr.utils.UrlCheckerUtils;
 import rx.android.schedulers.AndroidSchedulers;
@@ -26,9 +30,12 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
     @NonNull
     private final WotService wotService;
+    @NonNull
+    private final TabsManager tabsManager;
 
-    public BrowserPresenter(@NonNull WotService wotService) {
+    public BrowserPresenter(@NonNull WotService wotService, @NonNull TabsManager tabsManager) {
         this.wotService = wotService;
+        this.tabsManager = tabsManager;
     }
 
     private interface UrlCheckListener {
@@ -38,7 +45,10 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @Override
     public void attachView(BrowserView view) {
         super.attachView(view);
-        view.setOnUrlListener(this::loadUrl);
+        view.setOnUrlListener(url -> {
+            tabsManager.addTab(Tab.builder().url(url).build());
+            loadUrl(url);
+        });
     }
 
     public void onHomeClicked() {
@@ -89,6 +99,11 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 getView().showSearchText(webView.getTitle(), url);
                 getView().hideProgress();
                 webView.postInvalidate();
+                tabsManager.updateTab(Tab.builder()
+                        .preview(getSnapshot(webView))
+                        .url(webView.getUrl())
+                        .title(webView.getTitle())
+                        .build());
             }
         }
 
@@ -104,6 +119,30 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             loadUrl(url);
             return true;
+        }
+
+        private Bitmap getSnapshot(WebView webView) {
+            final int width = 320;
+            int height = 480;
+            Picture picture = webView.capturePicture();
+            Bitmap thumbnail = null;
+
+            if (picture.getWidth() > 0 && picture.getHeight() > 0) {
+                Bitmap bitmap = Bitmap.createBitmap(picture.getWidth(),
+                        picture.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+
+                picture.draw(canvas);
+                float factor = width / (float) bitmap.getWidth();
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
+                height = (height > scaledBitmap.getHeight()) ? scaledBitmap.getHeight() : height;
+                thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
+
+                bitmap.recycle();
+                scaledBitmap.recycle();
+            }
+
+            return thumbnail;
         }
     }
 }

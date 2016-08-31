@@ -36,18 +36,27 @@ public class NavigationManager {
     }
 
     private void open(Fragment fragment) {
+        if (!isRootFragmentVisible()) {
+            popEveryFragment();
+        }
+
         if (fragmentManager != null) {
             fragmentManager.beginTransaction()
                     .replace(R.id.main_frame_layout, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(fragment.toString())
+                    .addToBackStack(null)
                     .commit();
         }
     }
 
     private void openAsRoot(Fragment fragment) {
         popEveryFragment();
-        open(fragment);
+        if (fragmentManager != null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_frame_layout, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .commit();
+        }
     }
 
     private void popEveryFragment() {
@@ -59,14 +68,6 @@ public class NavigationManager {
         }
     }
 
-    private void popNotRootFragments() {
-        int backStackCount = fragmentManager.getBackStackEntryCount();
-
-        for (int i = backStackCount - 1; i > 1; i--) {
-            int backStackId = fragmentManager.getBackStackEntryAt(i).getId();
-            fragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        }
-    }
 
     public void navigateBack(Activity activity) {
         if (fragmentManager.getBackStackEntryCount() == 1) {
@@ -100,7 +101,6 @@ public class NavigationManager {
     }
 
     public void openCategoryCards(Category category) {
-        popNotRootFragments();
         Fragment fragment = new CategoryCardsPagerFragmentBuilder(category).build();
         open(fragment);
     }

@@ -50,10 +50,10 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
                 .category(category)
                 .build();
         if (fragmentManager != null) {
-//            fragmentManager
-//                    .beginTransaction()
-//                    .replace(R.id.categories_frame_layout, categoriesFragment)
-//                    .commit();
+            fragmentManager
+                    .beginTransaction()
+                    .replace(R.id.categories_frame_layout, categoriesFragment)
+                    .commit();
         }
     }
 

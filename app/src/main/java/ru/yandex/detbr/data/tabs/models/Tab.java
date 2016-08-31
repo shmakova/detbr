@@ -1,5 +1,6 @@
 package ru.yandex.detbr.data.tabs.models;
 
+import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
@@ -17,7 +18,7 @@ public abstract class Tab {
     public abstract String getUrl();
 
     @Nullable
-    public abstract String getPreview();
+    public abstract Bitmap getPreview();
 
     public static Builder builder() {
         return new AutoValue_Tab.Builder();
@@ -29,7 +30,7 @@ public abstract class Tab {
 
         public abstract Builder url(String url);
 
-        public abstract Builder preview(String preview);
+        public abstract Builder preview(Bitmap preview);
 
         public abstract Tab build();
     }

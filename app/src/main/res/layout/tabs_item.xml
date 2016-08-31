@@ -11,12 +11,14 @@
         android:layout_width="120dp"
         android:layout_height="160dp"
         android:layout_margin="16dp"
-        android:contentDescription="@string/cover"/>
+        android:src="@drawable/ic_broken_image_black_24dp"
+        android:contentDescription="@string/preview"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
+        android:layout_marginRight="16dp"
         android:layout_toRightOf="@+id/preview"
         android:orientation="vertical">
 

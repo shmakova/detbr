@@ -18,6 +18,9 @@ import dagger.Provides;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.DataRepository;
 import ru.yandex.detbr.data.repository.FakeDataRepository;
+import ru.yandex.detbr.data.tabs.FakeTabsRepository;
+import ru.yandex.detbr.data.tabs.TabsRepository;
+import ru.yandex.detbr.ui.managers.TabsManager;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 @Module
@@ -57,6 +60,18 @@ public class ApplicationModule {
     @Singleton
     public ErrorMessageDeterminer providesErrorMessageDeterminer() {
         return new ErrorMessageDeterminer();
+    }
+
+    @Provides
+    @Singleton
+    public TabsManager providesTabsManager(TabsRepository tabsRepository) {
+        return new TabsManager(tabsRepository);
+    }
+
+    @Provides
+    @Singleton
+    public TabsRepository provideTabsRepository() {
+        return new FakeTabsRepository();
     }
 
     @Provides

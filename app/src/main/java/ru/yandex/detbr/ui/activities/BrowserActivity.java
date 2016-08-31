@@ -91,6 +91,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         webSettings.setDisplayZoomControls(false);
         webSettings.setAllowContentAccess(true);
         webSettings.setAllowFileAccess(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
         webView.setDrawingCacheBackgroundColor(Color.WHITE);
         webView.setFocusableInTouchMode(true);
         webView.setFocusable(true);
