@@ -20,7 +20,7 @@ android {
         versionName versions.name
 
         // Make generated apks contain version name and code.
-        archivesBaseName = "app-${versions.name}-${versions.code}"
+        archivesBaseName = "detbr-${versions.name}${versions.code}"
     }
 
     compileOptions {
@@ -109,10 +109,15 @@ dependencies {
 
     compile libraries.timber
 
+    compile libraries.rxJava
+    compile libraries.rxAndroid
+
     compile (libraries.retrofit) {
         exclude module: 'okhttp'
     }
     compile libraries.converterGson
+    compile libraries.retrofitRx
+
     compile libraries.gson
     compile libraries.okhttp
     compile libraries.glide
@@ -129,6 +134,9 @@ dependencies {
 
     compile libraries.adapterDelegates
     compile libraries.appintro
+
+    compile libraries.mosby
+    compile libraries.mosbyViewstate
 
     // Developer tools (Developer Settings)
     compile libraries.stetho

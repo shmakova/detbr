@@ -3,40 +3,42 @@ package ru.yandex.detbr.ui.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
+import android.widget.FrameLayout;
+
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
+import ru.yandex.detbr.di.components.SchoolsComponent;
+import ru.yandex.detbr.di.modules.SchoolsModule;
 import ru.yandex.detbr.ui.adapters.SchoolsAdapter;
 import ru.yandex.detbr.ui.presenters.SchoolsPresenter;
 import ru.yandex.detbr.ui.views.SchoolsView;
 
-public class SchoolsFragment extends BaseFragment implements SchoolsView {
-    @Inject
-    SchoolsPresenter presenter;
-    @Inject
-    SharedPreferences sharedPreferences;
+public class SchoolsFragment
+        extends BaseLceFragment<FrameLayout, List<String>, SchoolsView, SchoolsPresenter>
+        implements SchoolsView {
 
     @BindView(R.id.schools_autocomplete)
     AutoCompleteTextView autoCompleteTextView;
 
     private SchoolsAdapter schoolsAdapter;
-
-    OnSchoolClickListener onSchoolClickListener;
+    private SchoolsComponent schoolsComponent;
+    private OnSchoolClickListener onSchoolClickListener;
 
     public interface OnSchoolClickListener {
         void onSchoolClick();
@@ -45,8 +47,12 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.get(getContext()).applicationComponent().schoolsComponent().inject(this);
-        presenter.bindView(this);
+        injectDependencies();
+    }
+
+    private void injectDependencies() {
+        schoolsComponent = App.get(getContext()).applicationComponent().plus(new SchoolsModule());
+        schoolsComponent.inject(this);
     }
 
     @Override
@@ -73,6 +79,12 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
         return inflater.inflate(R.layout.fragment_schools, container, false);
     }
 
+    @NonNull
+    @Override
+    public SchoolsPresenter createPresenter() {
+        return schoolsComponent.presenter();
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -80,7 +92,6 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
         schoolsAdapter = new SchoolsAdapter(getActivity(),
                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
         autoCompleteTextView.setAdapter(schoolsAdapter);
-        presenter.loadSchools();
 
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();
@@ -89,6 +100,11 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
                 onSchoolClickListener.onSchoolClick();
             }
         });
+    }
+
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return null;
     }
 
     private void hideKeyboard() {
@@ -109,15 +125,24 @@ public class SchoolsFragment extends BaseFragment implements SchoolsView {
     }
 
     @Override
-    public void setSchoolsData(List<String> schools) {
+    public void setData(List<String> data) {
         if (schoolsAdapter != null) {
-            schoolsAdapter.addAll(schools);
+            schoolsAdapter.addAll(data);
         }
     }
 
     @Override
-    public void onDestroyView() {
-        presenter.unbindView(this);
-        super.onDestroyView();
+    public void loadData(boolean pullToRefresh) {
+        presenter.loadSchools(pullToRefresh);
+    }
+
+    @Override
+    public LceViewState<List<String>, SchoolsView> createViewState() {
+        return new RetainingLceViewState<>();
+    }
+
+    @Override
+    public List<String> getData() {
+        return (schoolsAdapter == null) ? null : schoolsAdapter.getItems();
     }
 }

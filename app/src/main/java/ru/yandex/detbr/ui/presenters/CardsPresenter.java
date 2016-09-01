@@ -2,52 +2,37 @@ package ru.yandex.detbr.ui.presenters;
 
 import android.support.annotation.NonNull;
 
-import ru.yandex.detbr.cards.CardsModel;
-import ru.yandex.detbr.categories.Category;
-import ru.yandex.detbr.db.Repository;
+import java.util.List;
+
+import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.repository.models.Category;
 import ru.yandex.detbr.ui.views.CardsView;
+import rx.Observable;
 
 /**
  * Created by shmakova on 21.08.16.
  */
 
-public class CardsPresenter extends Presenter<CardsView> {
+public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
     @NonNull
-    private final CardsModel cardsModel;
+    private final DataRepository dataRepository;
 
-    @NonNull
-    private final Repository repository;
-
-    public CardsPresenter(@NonNull CardsModel cardsModel, @NonNull Repository repository) {
-        this.cardsModel = cardsModel;
-        this.repository = repository;
+    public CardsPresenter(@NonNull DataRepository dataRepository) {
+        this.dataRepository = dataRepository;
     }
 
-    public void loadCards() {
-        final CardsView view = view();
-
-        if (view != null) {
-            view.setCardsData(cardsModel.getCardsListBySchool());
-        }
+    public void loadCards(boolean pullToRefresh) {
+        Observable<List<Card>> observable = dataRepository.getCardsListBySchool();
+        subscribe(observable, pullToRefresh);
     }
 
-    public void loadFavouriteCards() {
-        final CardsView view = view();
-
-        if (view != null) {
-            view.setCardsData(cardsModel.getFavouriteCards());
-        }
-    }
-
-    public void loadCardsByCategory(Category category) {
-        final CardsView view = view();
-
-        if (view != null) {
-            view.setCardsData(cardsModel.getCardsByCategory(category));
-        }
+    public void loadCardsByCategory(Category category, boolean pullToRefresh) {
+        Observable<List<Card>> observable = dataRepository.getCardsByCategory(category);
+        subscribe(observable, pullToRefresh);
     }
 
     public void changeLike(@NonNull String url) {
-        repository.changeLike(url);
+        dataRepository.changeLike(url);
     }
 }

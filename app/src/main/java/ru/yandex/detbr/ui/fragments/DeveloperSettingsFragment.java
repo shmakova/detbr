@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -25,15 +27,12 @@ import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
+import ru.yandex.detbr.di.components.DeveloperSettingsComponent;
 import ru.yandex.detbr.performance.AnyThread;
 import ru.yandex.detbr.ui.presenters.DeveloperSettingsPresenter;
 import ru.yandex.detbr.ui.views.DeveloperSettingsView;
 
-public class DeveloperSettingsFragment extends BaseFragment implements DeveloperSettingsView {
-
-    @Inject
-    DeveloperSettingsPresenter presenter;
-
+public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettingsView, DeveloperSettingsPresenter> implements DeveloperSettingsView {
     @Inject
     LynxConfig lynxConfig;
 
@@ -52,10 +51,26 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @BindView(R.id.developer_settings_tiny_dancer_switch)
     Switch tinyDancerSwitch;
 
+    @NonNull
+    private DeveloperSettingsComponent developerSettingsComponent;
+    private Handler mainThreadHandler;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mainThreadHandler = App.get(context).applicationComponent().mainThreadHandler();
+    }
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.get(getContext()).applicationComponent().plusDeveloperSettingsComponent().inject(this);
+        injectDependencies();
+    }
+
+    private void injectDependencies() {
+        developerSettingsComponent = App.get(getContext()).applicationComponent().plusDeveloperSettingsComponent();
+        developerSettingsComponent.inject(this);
     }
 
     @NonNull
@@ -64,11 +79,10 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         return inflater.inflate(R.layout.fragment_developer_settings, container, false);
     }
 
+    @NonNull
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        presenter.bindView(this);
+    public DeveloperSettingsPresenter createPresenter() {
+        return developerSettingsComponent.presenter();
     }
 
     @OnCheckedChanged(R.id.developer_settings_stetho_switch)
@@ -91,8 +105,9 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @AnyThread
     public void changeBuildVersionCode(@NonNull String versionCode) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert buildVersionCodeTextView != null;
-            buildVersionCodeTextView.setText(versionCode);
+            if (buildVersionCodeTextView != null) {
+                buildVersionCodeTextView.setText(versionCode);
+            }
         });
     }
 
@@ -100,8 +115,9 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @AnyThread
     public void changeBuildVersionName(@NonNull String versionName) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert buildVersionNameTextView != null;
-            buildVersionNameTextView.setText(versionName);
+            if (buildVersionNameTextView != null) {
+                buildVersionNameTextView.setText(versionName);
+            }
         });
     }
 
@@ -109,8 +125,9 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @AnyThread
     public void changeStethoState(boolean enabled) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert stethoSwitch != null;
-            stethoSwitch.setChecked(enabled);
+            if (stethoSwitch != null) {
+                stethoSwitch.setChecked(enabled);
+            }
         });
     }
 
@@ -118,8 +135,9 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @AnyThread
     public void changeLeakCanaryState(boolean enabled) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert leakCanarySwitch != null;
-            leakCanarySwitch.setChecked(enabled);
+            if (leakCanarySwitch != null) {
+                leakCanarySwitch.setChecked(enabled);
+            }
         });
     }
 
@@ -127,8 +145,9 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @AnyThread
     public void changeTinyDancerState(boolean enabled) {
         runOnUiThreadIfFragmentAlive(() -> {
-            assert tinyDancerSwitch != null;
-            tinyDancerSwitch.setChecked(enabled);
+            if (tinyDancerSwitch != null) {
+                tinyDancerSwitch.setChecked(enabled);
+            }
         });
     }
 
@@ -157,10 +176,27 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         context.startActivity(LynxActivity.getIntent(context, lynxConfig));
     }
 
-    @Override
-    public void onDestroyView() {
-        presenter.unbindView(this);
-        super.onDestroyView();
+    protected void runOnUiThreadIfFragmentAlive(@NonNull Runnable runnable) {
+        if (Looper.myLooper() == Looper.getMainLooper() && isFragmentAlive()) {
+            runnable.run();
+        } else {
+            if (mainThreadHandler != null) {
+                mainThreadHandler.post(() -> {
+                    if (isFragmentAlive()) {
+                        runnable.run();
+                    }
+                });
+            }
+        }
     }
 
+    private boolean isFragmentAlive() {
+        return getActivity() != null && isAdded() && !isDetached() && getView() != null && !isRemoving();
+    }
+
+    @Override
+    public void onDestroy() {
+        App.get(getContext()).applicationComponent().leakCanaryProxy().watch(this);
+        super.onDestroy();
+    }
 }

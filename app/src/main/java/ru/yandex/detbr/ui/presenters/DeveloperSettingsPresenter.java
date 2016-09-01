@@ -2,10 +2,12 @@ package ru.yandex.detbr.ui.presenters;
 
 import android.support.annotation.NonNull;
 
+import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
+
 import ru.yandex.detbr.developer_settings.DeveloperSettingsModelImpl;
 import ru.yandex.detbr.ui.views.DeveloperSettingsView;
 
-public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView> {
+public class DeveloperSettingsPresenter extends MvpBasePresenter<DeveloperSettingsView> {
 
     @NonNull
     private final DeveloperSettingsModelImpl developerSettingsModel;
@@ -15,14 +17,14 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
     }
 
     @Override
-    public void bindView(@NonNull DeveloperSettingsView view) {
-        super.bindView(view);
-
+    public void attachView(DeveloperSettingsView view) {
+        super.attachView(view);
         view.changeBuildVersionCode(developerSettingsModel.getBuildVersionCode());
         view.changeBuildVersionName(developerSettingsModel.getBuildVersionName());
         view.changeStethoState(developerSettingsModel.isStethoEnabled());
         view.changeLeakCanaryState(developerSettingsModel.isLeakCanaryEnabled());
         view.changeTinyDancerState(developerSettingsModel.isTinyDancerEnabled());
+
     }
 
     public void changeStethoState(boolean enabled) {
@@ -34,9 +36,9 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
 
         developerSettingsModel.changeStethoState(enabled);
 
-        final DeveloperSettingsView view = view();
+        final DeveloperSettingsView view = getView();
 
-        if (view != null) {
+        if (isViewAttached()) {
             view.showMessage("Stetho was " + booleanToEnabledDisabled(enabled));
 
             if (stethoWasEnabled) {
@@ -52,9 +54,9 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
 
         developerSettingsModel.changeLeakCanaryState(enabled);
 
-        final DeveloperSettingsView view = view();
+        final DeveloperSettingsView view = getView();
 
-        if (view != null) {
+        if (isViewAttached()) {
             view.showMessage("LeakCanary was " + booleanToEnabledDisabled(enabled));
             view.showAppNeedsToBeRestarted(); // LeakCanary can not be enabled on demand (or it's possible?)
         }
@@ -67,9 +69,9 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
 
         developerSettingsModel.changeTinyDancerState(enabled);
 
-        final DeveloperSettingsView view = view();
+        final DeveloperSettingsView view = getView();
 
-        if (view != null) {
+        if (isViewAttached()) {
             view.showMessage("TinyDancer was " + booleanToEnabledDisabled(enabled));
         }
     }

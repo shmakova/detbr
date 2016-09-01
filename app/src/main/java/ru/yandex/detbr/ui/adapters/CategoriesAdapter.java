@@ -10,33 +10,33 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.categories.Category;
+import ru.yandex.detbr.data.repository.models.Category;
+import rx.Observable;
+import rx.subjects.PublishSubject;
 
 /**
  * Created by shmakova on 23.08.16.
  */
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
-    private final List<Category> categories;
-    private final CategoryViewHolder.OnItemCLickListener onItemClickListener;
-
-    public CategoriesAdapter(List<Category> categories, CategoryViewHolder.OnItemCLickListener onItemClickListener) {
-        this.categories = categories;
-        this.onItemClickListener = onItemClickListener;
-    }
+    private List<Category> categories;
+    private final PublishSubject<Category> onClickSubject = PublishSubject.create();
 
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_item, parent, false);
-        return new CategoryViewHolder(convertView, onItemClickListener);
+        return new CategoryViewHolder(convertView);
     }
 
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         Category category = categories.get(position);
-        holder.category.setText(category.getTitle());
+        holder.bind(category);
+    }
+
+    public Observable<Category> getPositionClicks() {
+        return onClickSubject.asObservable();
     }
 
     @Override
@@ -44,27 +44,26 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         return categories.size();
     }
 
-    public static class CategoryViewHolder extends RecyclerView.ViewHolder {
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
+    }
+
+    public class CategoryViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.category)
         TextView category;
 
-        private final OnItemCLickListener listener;
-
-        public interface OnItemCLickListener {
-            void onItemClick(int position);
-        }
-
-        CategoryViewHolder(View itemView, OnItemCLickListener onItemClickListener) {
+        CategoryViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            listener = onItemClickListener;
+            itemView.setOnClickListener(v -> onClickSubject.onNext(categories.get(getAdapterPosition())));
         }
 
-        @OnClick(R.id.category)
-        void onCategoryItemClick() {
-            if (listener != null) {
-                listener.onItemClick(getAdapterPosition());
-            }
+        public void bind(Category category) {
+            this.category.setText(category.getTitle());
         }
     }
 }
