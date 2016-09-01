@@ -33,15 +33,13 @@ public class RepositoryImpl implements Repository {
     public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
         // TODO rx
         Thread thread = new Thread(() -> {
-            if (isCardAlreadyExist(url)) {
-                Card card = Card.builder()
-                        .title(title)
-                        .url(url)
-                        .cover(cover == null ? getCoverUrl(url) : cover)
-                        .like(like)
-                        .build();
-                saveCard(card);
-            }
+            Card card = Card.builder()
+                    .title(title)
+                    .url(url)
+                    .cover(cover == null ? getCoverUrl(url) : cover)
+                    .like(like)
+                    .build();
+            saveCard(card);
         });
         thread.start();
     }
@@ -50,9 +48,7 @@ public class RepositoryImpl implements Repository {
     public void saveCardToRepository(@NonNull Card card) {
         // TODO rx
         Thread thread = new Thread(() -> {
-            if (isCardAlreadyExist(card.getUrl())) {
-                saveCard(card);
-            }
+            saveCard(card);
         });
         thread.start();
     }
@@ -65,13 +61,14 @@ public class RepositoryImpl implements Repository {
                 .executeAsBlocking();
     }
 
-    private boolean isCardAlreadyExist(@NonNull String url) {
+    @Override
+    public boolean isCardAlreadyExist(@NonNull String url) {
         Card card = storIOSQLite
                 .get()
                 .object(Card.class)
                 .withQuery(Query.builder()
                         .table(CardsTable.TABLE)
-                        .where(CardsTable.COLUMN_URL + " = ?")
+                        .where(CardsTable.COLUMN_URL + " LIKE ?")
                         .whereArgs(url)
                         .build())
                 .prepare()
@@ -101,7 +98,7 @@ public class RepositoryImpl implements Repository {
                     .withQuery(RawQuery.builder()
                             .query("UPDATE " + CardsTable.TABLE + " SET "
                                     + CardsTable.COLUMN_LIKE + " = ~" + CardsTable.COLUMN_LIKE + "&1"
-                                    + " WHERE " + CardsTable.COLUMN_URL + " = ?")
+                                    + " WHERE " + CardsTable.COLUMN_URL + " LIKE ?")
                             .args(url)
                             .build())
                     .prepare()
@@ -117,7 +114,7 @@ public class RepositoryImpl implements Repository {
                 .object(Card.class)
                 .withQuery(Query.builder()
                     .table(CardsTable.TABLE)
-                    .where(CardsTable.COLUMN_URL + " = ?")
+                    .where(CardsTable.COLUMN_URL + " LIKE ?")
                     .whereArgs(url)
                     .build())
                 .prepare()

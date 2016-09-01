@@ -85,4 +85,8 @@ public class BrowserPresenter extends Presenter<BrowserView> {
     public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
         repository.saveCardToRepository(title, url, cover, like);
     }
+
+    public boolean isCardAlreadyExist(@NonNull String url) {
+        return repository.isCardAlreadyExist(url);
+    }
 }

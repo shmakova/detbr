@@ -17,4 +17,6 @@ public interface Repository {
     void changeLike(@NonNull String url);
 
     boolean getLikeFromUrl(@NonNull String url);
+
+    boolean isCardAlreadyExist(@NonNull String url);
 }

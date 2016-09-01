@@ -109,8 +109,10 @@ public class BrowserActivity extends BaseActivity implements
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 showProgressBar();
-                isHasLike = isPageInCard = presenter.getLikeFromUrl(url);
-                setLike(isPageInCard);
+                // TODO rx
+                isPageInCard = presenter.isCardAlreadyExist(url);
+                isHasLike = isPageInCard && presenter.getLikeFromUrl(url);
+                setLike(isHasLike);
                 currentUrl = url;
             }
 

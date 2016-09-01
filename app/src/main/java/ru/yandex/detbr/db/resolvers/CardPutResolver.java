@@ -25,7 +25,7 @@ public class CardPutResolver extends DefaultPutResolver<Card> {
     protected UpdateQuery mapToUpdateQuery(@NonNull Card card) {
         return UpdateQuery.builder()
                 .table(CardsTable.TABLE)
-                .where(CardsTable.COLUMN_URL + " = ?")
+                .where(CardsTable.COLUMN_URL + " LIKE ?")
                 .whereArgs(card.getUrl())
                 .build();
     }
