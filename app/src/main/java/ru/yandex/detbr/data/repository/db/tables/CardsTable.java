@@ -30,7 +30,7 @@ public final class CardsTable {
         return "CREATE TABLE " + TABLE + "("
                 + COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY, "
                 + COLUMN_TITLE + " TEXT NOT NULL, "
-                + COLUMN_URL + " TEXT NOT NULL, "
+                + COLUMN_URL + " TEXT NOT NULL UNIQUE, "
                 + COLUMN_COVER + " TEXT, "
                 + COLUMN_LIKE + " INTEGER NOT NULL"
                 + ");";
