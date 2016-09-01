@@ -11,19 +11,15 @@ import android.webkit.WebViewClient;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import ru.yandex.detbr.data.repository.DataRepository;
 import ru.yandex.detbr.data.tabs.models.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
 import ru.yandex.detbr.ui.managers.TabsManager;
 import ru.yandex.detbr.ui.views.BrowserView;
-import ru.yandex.detbr.utils.UrlCheckerUtils;
+import ru.yandex.detbr.utils.UrlUtils;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 /**
  * Created by shmakova on 19.08.16.
@@ -72,7 +68,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     private void loadUrl(String query) {
-        String safeUrl = UrlCheckerUtils.getSafeUrlFromQuery(query);
+        String safeUrl = UrlUtils.getSafeUrlFromQuery(query);
         checkUrlBeforeLoad(safeUrl, valid -> {
             if (isViewAttached()) {
                 if (valid) {
@@ -85,17 +81,12 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     private void checkUrlBeforeLoad(String url, UrlCheckListener listener) {
-        try {
-            URI uri = new URI(url);
-            String domain = uri.getHost() + "/";
+        String domain = UrlUtils.getHost(url) + "/";
 
-            subscription = wotService.getLinkReputation(domain)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(wotResponse -> listener.urlChecked(wotResponse.isSafe()));
-        } catch (URISyntaxException e) {
-            Timber.e(e, "Error while parsing url");
-        }
+        subscription = wotService.getLinkReputation(domain)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(wotResponse -> listener.urlChecked(wotResponse.isSafe()));
     }
 
     private boolean getLikeFromUrl(@NonNull String url) {
@@ -141,7 +132,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         @Override
         public void onPageFinished(@NonNull WebView webView, String url) {
             if (isViewAttached()) {
-                if (UrlCheckerUtils.isHttpLink(url)) {
+                if (UrlUtils.isHttpLink(url)) {
                     getView().showSearchText(webView.getTitle(), url);
                 }
                 getView().hideProgress();
