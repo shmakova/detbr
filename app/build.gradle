@@ -16,11 +16,12 @@ android {
         applicationId 'ru.yandex.detbr'
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode versions.code // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
+        versionCode versions.code
+        // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
         versionName versions.name
 
         // Make generated apks contain version name and code.
-        archivesBaseName = "app-${versions.name}-${versions.code}"
+        archivesBaseName = "detbr-${versions.name}${versions.code}"
     }
 
     compileOptions {
@@ -65,6 +66,7 @@ android {
         disable 'GoogleAppIndexingWarning' // App does not have deep linking.
         disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.
         disable 'UnusedResources'
+        disable 'TrustAllX509TrustManager' // problems in Jsoup-library
     }
 
     packagingOptions {
@@ -99,15 +101,24 @@ dependencies {
     apt libraries.autoValue
     apt libraries.autoValueParcel
 
+    compile libraries.storIO
+
     compile libraries.butterKnife
     apt libraries.butterKnifeCompiler
 
+    compile libraries.jsoup
+
     compile libraries.timber
 
-    compile (libraries.retrofit) {
+    compile libraries.rxJava
+    compile libraries.rxAndroid
+
+    compile(libraries.retrofit) {
         exclude module: 'okhttp'
     }
     compile libraries.converterGson
+    compile libraries.retrofitRx
+
     compile libraries.gson
     compile libraries.okhttp
     compile libraries.glide
@@ -124,6 +135,9 @@ dependencies {
 
     compile libraries.adapterDelegates
     compile libraries.appintro
+
+    compile libraries.mosby
+    compile libraries.mosbyViewstate
 
     // Developer tools (Developer Settings)
     compile libraries.stetho

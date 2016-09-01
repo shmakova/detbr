@@ -9,6 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+
+import com.hannesdorfmann.fragmentargs.FragmentArgs;
+import com.hannesdorfmann.fragmentargs.annotation.Arg;
+import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
+import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
 import java.util.List;
 
@@ -17,62 +24,110 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.categories.Category;
+import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.di.components.CategoriesComponent;
+import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.ui.adapters.CategoriesAdapter;
+import ru.yandex.detbr.ui.animators.CustomLceAnimator;
 import ru.yandex.detbr.ui.presenters.CategoriesPresenter;
 import ru.yandex.detbr.ui.views.CategoriesView;
+import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 /**
  * Created by shmakova on 24.08.16.
  */
 
-public class CategoriesFragment extends BaseFragment implements CategoriesView {
+@FragmentWithArgs
+public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Category>, CategoriesView, CategoriesPresenter>
+        implements CategoriesView {
+    @Arg(required = false)
+    Category category;
+
     @Inject
-    CategoriesPresenter presenter;
+    ErrorMessageDeterminer errorMessageDeterminer;
 
     @BindView(R.id.categories_list)
     RecyclerView categories;
 
     private OnCategoriesItemClickListener onCategoriesItemClickListener;
+    private CategoriesComponent categoriesComponent;
+    private CategoriesAdapter adapter;
 
     public interface OnCategoriesItemClickListener {
         void onCategoriesItemClick(Category category);
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.get(getContext()).applicationComponent().categoriesComponent().inject(this);
+        FragmentArgs.inject(this);
     }
 
     @NonNull
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        injectDependencies();
         return inflater.inflate(R.layout.fragment_categories, container, false);
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter.bindView(this);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
+        adapter = categoriesComponent.adapter();
+        categories.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false);
         categories.setLayoutManager(linearLayoutManager);
-        presenter.loadCategories();
+    }
+
+    private void injectDependencies() {
+        categoriesComponent = App.get(getContext()).applicationComponent().plus(new CategoriesModule());
+        categoriesComponent.inject(this);
+    }
+
+    @NonNull
+    @Override
+    public LceViewState<List<Category>, CategoriesView> createViewState() {
+        return new RetainingLceViewState<>();
     }
 
     @Override
-    public void setCategories(List<Category> categoriesList) {
-        CategoriesAdapter categoriesAdapter = new CategoriesAdapter(categoriesList, (position) -> {
-            Category category = categoriesList.get(position);
-
-            if (onCategoriesItemClickListener != null) {
-                onCategoriesItemClickListener.onCategoriesItemClick(category);
-            }
-        });
-
-        categories.setAdapter(categoriesAdapter);
+    public List<Category> getData() {
+        return (adapter == null) ? null : adapter.getCategories();
     }
+
+    @Override
+    protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
+        return errorMessageDeterminer.getErrorMessage(e, pullToRefresh);
+    }
+
+    @NonNull
+    @Override
+    public CategoriesPresenter createPresenter() {
+        return categoriesComponent.presenter();
+    }
+
+    @Override
+    public void setData(List<Category> data) {
+        if (adapter != null) {
+            adapter.setCategories(data);
+            adapter.notifyDataSetChanged();
+            presenter.onCategoryClick(adapter.getPositionClicks());
+        }
+    }
+
+    @Override
+    public void loadData(boolean pullToRefresh) {
+        presenter.loadCategories(category, pullToRefresh);
+    }
+
+    @Override
+    public void showCategoryCards(Category category) {
+        if (onCategoriesItemClickListener != null) {
+            onCategoriesItemClickListener.onCategoriesItemClick(category);
+        }
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -93,8 +148,12 @@ public class CategoriesFragment extends BaseFragment implements CategoriesView {
     }
 
     @Override
-    public void onDestroyView() {
-        presenter.unbindView(this);
-        super.onDestroyView();
+    protected void animateContentViewIn() {
+        CustomLceAnimator.showContent(loadingView, contentView, errorView);
+    }
+
+    @Override
+    protected void animateLoadingViewIn() {
+        CustomLceAnimator.showLoading(loadingView, contentView, errorView);
     }
 }

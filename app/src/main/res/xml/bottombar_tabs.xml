@@ -3,13 +3,17 @@
     <tab
         id="@+id/tab_cards"
         icon="@drawable/ic_cards_outline"
-        title="@string/cards"/>
+        title="@string/cards"
+        barColorWhenSelected="@color/white"/>
     <tab
         id="@+id/tab_favorites"
         icon="@drawable/ic_favorite_border_24dp"
-        title="@string/favorites"/>
+        title="@string/favorites"
+        barColorWhenSelected="@color/white"/>
     <tab
         id="@+id/tab_tabs"
         icon="@drawable/ic_view_carousel_24dp"
-        title="@string/tabs"/>
+        title="@string/tabs"
+        barColorWhenSelected="@color/bar_grey"
+        activeColor="@color/yellow"/>
 </tabs>

@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
@@ -16,7 +17,10 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.cards.Card;
+import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
+import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
+import ru.yandex.detbr.utils.UrlUtils;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -31,12 +35,11 @@ public class CardFragment extends BaseFragment {
     TextView title;
     @BindView(R.id.url)
     TextView url;
+    @BindView(R.id.like_btn)
+    CheckBox likeButton;
 
     private OnCardsItemClickListener onCardsItemClickListener;
-
-    public interface OnCardsItemClickListener {
-        void onCardsItemClick(Card card);
-    }
+    private OnLikeClickListener onLikeClickListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +61,8 @@ public class CardFragment extends BaseFragment {
 
         if (card != null) {
             title.setText(card.getTitle());
-            url.setText(card.getUrl());
+            url.setText(UrlUtils.getHost(card.getUrl()));
+            likeButton.setChecked(card.getLike());
         }
     }
 
@@ -71,7 +75,13 @@ public class CardFragment extends BaseFragment {
                     OnCardsItemClickListener.class.getName());
         }
 
+        if (!(getActivity() instanceof OnLikeClickListener)) {
+            throw new ClassCastException(getActivity().toString() + " must implement " +
+                    OnLikeClickListener.class.getName());
+        }
+
         onCardsItemClickListener = (OnCardsItemClickListener) getActivity();
+        onLikeClickListener = (OnLikeClickListener) getActivity();
     }
 
     @Override
@@ -85,6 +95,13 @@ public class CardFragment extends BaseFragment {
     public void onCardClick() {
         if (onCardsItemClickListener != null) {
             onCardsItemClickListener.onCardsItemClick(card);
+        }
+    }
+
+    @OnClick(R.id.like_btn)
+    public void onLikeButtonClick() {
+        if (onLikeClickListener != null) {
+            onLikeClickListener.onLikeClick(card);
         }
     }
 }
