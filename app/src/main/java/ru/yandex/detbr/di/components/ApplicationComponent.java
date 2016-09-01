@@ -14,6 +14,7 @@ import ru.yandex.detbr.di.modules.ApplicationModule;
 import ru.yandex.detbr.di.modules.BrowserModule;
 import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.di.modules.CategoriesModule;
+import ru.yandex.detbr.di.modules.DbModule;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.FavoritesModule;
 import ru.yandex.detbr.di.modules.MainModule;
@@ -25,7 +26,8 @@ import ru.yandex.detbr.ui.activities.MainActivity;
 @Component(modules = {
         ApplicationModule.class,
         DeveloperSettingsModule.class,
-        WotNetworkModule.class
+        WotNetworkModule.class,
+        DbModule.class
 })
 public interface ApplicationComponent {
 

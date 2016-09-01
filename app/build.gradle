@@ -65,6 +65,7 @@ android {
         disable 'GoogleAppIndexingWarning' // App does not have deep linking.
         disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.
         disable 'UnusedResources'
+        disable 'TrustAllX509TrustManager' // problems in Jsoup-library
     }
 
     packagingOptions {
@@ -99,8 +100,12 @@ dependencies {
     apt libraries.autoValue
     apt libraries.autoValueParcel
 
+    compile libraries.storIO
+
     compile libraries.butterKnife
     apt libraries.butterKnifeCompiler
+
+    compile libraries.jsoup
 
     compile libraries.timber
 

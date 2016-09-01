@@ -28,9 +28,13 @@ ext.versions = [
         autoValue                    : '1.2',
         autoValueParcel              : '1.0.3',
 
+        storIO                       : '1.10.0',
+
         supportLibs                  : '24.1.1',
         butterKnife                  : '8.2.1',
         timber                       : '4.2.0',
+
+        jsoup                        : '1.8.3',
 
         retrofit                     : '2.1.0',
         gson                         : '2.7',
@@ -84,6 +88,8 @@ ext.libraries = [
         autoValue            : "com.google.auto.value:auto-value:$versions.autoValue",
         autoValueParcel      : "frankiesardo:auto-parcel:$versions.autoValueParcel",
 
+        storIO               : "com.pushtorefresh.storio:sqlite:$versions.storIO",
+
         supportAnnotations   : "com.android.support:support-annotations:$versions.supportLibs",
         supportAppCompat     : "com.android.support:appcompat-v7:$versions.supportLibs",
         supportDesign        : "com.android.support:design:$versions.supportLibs",
@@ -93,6 +99,8 @@ ext.libraries = [
         butterKnife          : "com.jakewharton:butterknife:$versions.butterKnife",
         butterKnifeCompiler  : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
         timber               : "com.jakewharton.timber:timber:$versions.timber",
+
+        jsoup                : "org.jsoup:jsoup:$versions.jsoup",
 
         rxJava               : "io.reactivex:rxjava:$versions.rxJava",
         rxAndroid            : "io.reactivex:rxandroid:$versions.rxAndroid",
