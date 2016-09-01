@@ -52,8 +52,6 @@ public final class CardsTable {
                 + "(" + "\"Выбираем велосипед для подростка\", " + "\"https://market.yandex.ru/articles/" +
                 "vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet\", "
                 + "\"https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg\", " + "0" + "), "
-                + "(" + "\"Невероятные оптические иллюзии от профессора математики\", " + "\"https://lifehacker.ru/2016/07/04/" +
-                "kokichi-sugihara-illusion/\", null, " + "0" + "), "
                 + "(" + "\"5 МИРОВЫХ РЕКОРДОВ POKEMON GO\", " + "\"http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html\", "
                 + "\"http://img.youtube.com/vi/tV9EErN3x-k/0.jpg\", " + "0" + "), "
                 + "(" + "\"Варкрафт\", " + "\"https://www.kinopoisk.ru/film/277328\", "

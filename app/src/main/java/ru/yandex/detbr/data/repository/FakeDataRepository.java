@@ -71,7 +71,8 @@ public class FakeDataRepository implements DataRepository {
                         .table(CardsTable.TABLE)
                         .build())
                 .prepare()
-                .asRxObservable();
+                .asRxObservable()
+                .first();
     }
 
     @Override
@@ -85,7 +86,8 @@ public class FakeDataRepository implements DataRepository {
                         .whereArgs("1")
                         .build())
                 .prepare()
-                .asRxObservable();
+                .asRxObservable()
+                .first();
     }
 
     @Override
