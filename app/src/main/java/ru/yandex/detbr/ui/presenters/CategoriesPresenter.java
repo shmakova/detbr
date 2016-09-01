@@ -2,26 +2,48 @@ package ru.yandex.detbr.ui.presenters;
 
 import android.support.annotation.NonNull;
 
-import ru.yandex.detbr.categories.CategoriesModel;
+import java.util.List;
+
+import javax.inject.Inject;
+
+import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.repository.models.Category;
 import ru.yandex.detbr.ui.views.CategoriesView;
+import rx.Observable;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by shmakova on 24.08.16.
  */
 
-public class CategoriesPresenter extends Presenter<CategoriesView> {
+public class CategoriesPresenter extends BaseRxPresenter<CategoriesView, List<Category>> {
     @NonNull
-    private final CategoriesModel categoriesModel;
+    private final DataRepository dataRepository;
+    private final CompositeSubscription compositeSubscription;
 
-    public CategoriesPresenter(@NonNull CategoriesModel categoriesModel) {
-        this.categoriesModel = categoriesModel;
+    @Inject
+    public CategoriesPresenter(@NonNull DataRepository dataRepository) {
+        this.dataRepository = dataRepository;
+        compositeSubscription = new CompositeSubscription();
     }
 
-    public void loadCategories() {
-        final CategoriesView view = view();
+    public void loadCategories(boolean pullToRefresh) {
+        Observable<List<Category>> observable = dataRepository.getCategories();
+        subscribe(observable, pullToRefresh);
+    }
 
-        if (view != null) {
-            view.setCategories(categoriesModel.getCategories());
+    public void onCategoryClick(Observable<Category> positionClicks) {
+        if (isViewAttached()) {
+            compositeSubscription.add(
+                    positionClicks.subscribe(category -> getView().showCategoryCards(category)));
+        }
+    }
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+        if (compositeSubscription.hasSubscriptions()) {
+            compositeSubscription.unsubscribe();
         }
     }
 }

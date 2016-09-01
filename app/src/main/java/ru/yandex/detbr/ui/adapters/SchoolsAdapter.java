@@ -32,6 +32,10 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
         return fullList.size();
     }
 
+    public List<String> getItems() {
+        return fullList;
+    }
+
     @Override
     public String getItem(int position) {
         return fullList.get(position);

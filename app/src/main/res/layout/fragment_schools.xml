@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contentView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/loading_view"/>
+
+    <include layout="@layout/error_view"/>
 
     <AutoCompleteTextView
         android:id="@+id/schools_autocomplete"
@@ -13,4 +18,4 @@
         android:completionThreshold="1"
         android:hint="@string/choose_your_school"
         android:imeOptions="actionDone"/>
-</RelativeLayout>
+</FrameLayout>

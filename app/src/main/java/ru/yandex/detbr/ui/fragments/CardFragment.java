@@ -15,14 +15,12 @@ import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
 import butterknife.OnClick;
-import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.cards.Card;
-import ru.yandex.detbr.ui.presenters.CardsPresenter;
+import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
+import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -32,8 +30,6 @@ import ru.yandex.detbr.ui.presenters.CardsPresenter;
 public class CardFragment extends BaseFragment {
     @Arg
     Card card;
-    @Inject
-    CardsPresenter presenter;
 
     @BindView(R.id.title)
     TextView title;
@@ -43,16 +39,12 @@ public class CardFragment extends BaseFragment {
     CheckBox likeButton;
 
     private OnCardsItemClickListener onCardsItemClickListener;
-
-    public interface OnCardsItemClickListener {
-        void onCardsItemClick(Card card);
-    }
+    private OnLikeClickListener onLikeClickListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentArgs.inject(this);
-        App.get(getContext()).applicationComponent().cardsComponent().inject(this);
     }
 
     @NonNull
@@ -69,6 +61,7 @@ public class CardFragment extends BaseFragment {
 
         if (card != null) {
             title.setText(card.getTitle());
+            // Todo перенести в модель
             Uri uri = Uri.parse(card.getUrl());
             url.setText(uri.getHost());
             likeButton.setChecked(card.getLike());
@@ -84,7 +77,13 @@ public class CardFragment extends BaseFragment {
                     OnCardsItemClickListener.class.getName());
         }
 
+        if (!(getActivity() instanceof OnLikeClickListener)) {
+            throw new ClassCastException(getActivity().toString() + " must implement " +
+                    OnLikeClickListener.class.getName());
+        }
+
         onCardsItemClickListener = (OnCardsItemClickListener) getActivity();
+        onLikeClickListener = (OnLikeClickListener) getActivity();
     }
 
     @Override
@@ -103,8 +102,8 @@ public class CardFragment extends BaseFragment {
 
     @OnClick(R.id.like_btn)
     public void onLikeButtonClick() {
-        if (card != null) {
-            presenter.changeLike(card.getUrl());
+        if (onLikeClickListener != null) {
+            onLikeClickListener.onLikeClick(card);
         }
     }
 }

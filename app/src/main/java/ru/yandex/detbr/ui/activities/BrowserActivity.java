@@ -2,7 +2,6 @@ package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,58 +10,50 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.MenuItem;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 
-import javax.inject.Inject;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
+import ru.yandex.detbr.di.components.BrowserComponent;
+import ru.yandex.detbr.di.modules.BrowserModule;
 import ru.yandex.detbr.ui.presenters.BrowserPresenter;
 import ru.yandex.detbr.ui.views.BrowserView;
 
-public class BrowserActivity extends BaseActivity implements
+public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresenter> implements
         BrowserView,
         FloatingSearchView.OnMenuItemClickListener,
         FloatingSearchView.OnSearchListener,
         FloatingSearchView.OnHomeActionClickListener {
-    @Inject
-    BrowserPresenter presenter;
-
     @BindView(R.id.webview)
     WebView webView;
     @BindView(R.id.like_fab)
     FloatingActionButton fabLike;
 
-    private String currentQuery;
-    private String currentUrl;
-    private boolean isPageInCard;
-    private boolean isHasLike;
+    @Nullable
+    private UrlListener listener;
+    @Nullable
+    private BrowserComponent browserComponent;
 
     @SuppressLint("InflateParams")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        injectDependencies();
         super.onCreate(savedInstanceState);
-
-        App.get(this).applicationComponent().browserComponent().inject(this);
-        presenter.bindView(this);
-
         setContentView(R.layout.activity_browser);
-        ButterKnife.bind(this);
+
         floatingSearchView.setOnMenuItemClickListener(this);
         floatingSearchView.setOnSearchListener(this);
         floatingSearchView.setOnHomeActionClickListener(this);
 
         initWebView();
+
         if (savedInstanceState == null) {
             handleIntent(getIntent());
         } else {
@@ -74,6 +65,17 @@ public class BrowserActivity extends BaseActivity implements
     protected void onSaveInstanceState(Bundle outState) {
         webView.saveState(outState);
         super.onSaveInstanceState(outState);
+    }
+
+    private void injectDependencies() {
+        browserComponent = App.get(this).applicationComponent().plus(new BrowserModule());
+        browserComponent.inject(this);
+    }
+
+    @NonNull
+    @Override
+    public BrowserPresenter createPresenter() {
+        return browserComponent.presenter();
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -98,32 +100,8 @@ public class BrowserActivity extends BaseActivity implements
         webView.setScrollbarFadingEnabled(true);
         webView.setSaveEnabled(true);
         webView.setNetworkAvailable(true);
-        webView.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(@NonNull WebView view, String url) {
-                updateToolbar(view.getTitle(), url);
-                hideProgressBar();
-                view.postInvalidate();
-            }
-
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                showProgressBar();
-                // TODO rx
-                isPageInCard = presenter.isCardAlreadyExist(url);
-                isHasLike = isPageInCard && presenter.getLikeFromUrl(url);
-                setLike(isHasLike);
-                currentUrl = url;
-            }
-
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                presenter.loadUrl(url);
-                currentQuery = url;
-                return true;
-            }
-        });
-        webView.setWebChromeClient(new WebChromeClient());
+        webView.setWebViewClient(presenter.provideWebViewClient());
+        webView.setWebChromeClient(presenter.provideWebChromeClient());
     }
 
     @Override
@@ -142,7 +120,7 @@ public class BrowserActivity extends BaseActivity implements
     }
 
     private void handleIntent(Intent intent) {
-        String query = currentQuery;
+        String query = "";
 
         if (Intent.ACTION_VIEW.equals(intent.getAction())) {
             Uri uri = intent.getData();
@@ -152,21 +130,33 @@ public class BrowserActivity extends BaseActivity implements
             }
         }
 
-        presenter.loadUrl(query);
+        if (listener != null) {
+            listener.onUrl(query);
+        }
     }
 
     @Override
-    public void updateToolbar(@Nullable String title, @NonNull String url) {
+    public void close() {
+        finish();
+    }
+
+    @Override
+    public void setOnUrlListener(UrlListener listener) {
+        this.listener = listener;
+    }
+
+    @Override
+    public void showSearchText(@Nullable String title, @NonNull String url) {
         floatingSearchView.setSearchText(url);
     }
 
     @Override
-    public void showProgressBar() {
+    public void showProgress() {
         floatingSearchView.showProgress();
     }
 
     @Override
-    public void hideProgressBar() {
+    public void hideProgress() {
         floatingSearchView.hideProgress();
     }
 
@@ -197,9 +187,7 @@ public class BrowserActivity extends BaseActivity implements
                 onBackPressed();
                 return true;
             case R.id.home_page:
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                presenter.onHomeClicked();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -208,20 +196,7 @@ public class BrowserActivity extends BaseActivity implements
 
     @OnClick(R.id.like_fab)
     public void onFabLikeClick() {
-        if (isPageInCard) {
-            presenter.changeLike(currentUrl);
-        } else {
-            presenter.saveCardToRepository(webView.getTitle(), currentUrl, null, true);
-            isPageInCard = true;
-        }
-        isHasLike = !isHasLike;
-        setLike(isHasLike);
-    }
-
-    @Override
-    protected void onDestroy() {
-        presenter.unbindView(this);
-        super.onDestroy();
+        presenter.onLikeClick(webView.getTitle(), webView.getUrl());
     }
 
     @Override
@@ -230,12 +205,10 @@ public class BrowserActivity extends BaseActivity implements
 
         switch (id) {
             case R.id.action_voice_rec:
-                displaySpeechRecognizer();
+                showSpeechRecognizer();
                 break;
             case R.id.home_page:
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+                presenter.onHomeClicked();
                 break;
             default:
                 break;
@@ -249,7 +222,9 @@ public class BrowserActivity extends BaseActivity implements
 
     @Override
     public void onSearchAction(String currentQuery) {
-        presenter.loadUrl(currentQuery);
+        if (listener != null) {
+            listener.onUrl(currentQuery);
+        }
     }
 
     @Override
