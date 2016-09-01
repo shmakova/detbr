@@ -2,13 +2,17 @@ package ru.yandex.detbr.utils;
 
 import android.util.Patterns;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Locale;
+
+import timber.log.Timber;
 
 /**
  * Created by shmakova on 28.08.16.
  */
 
-public final class UrlCheckerUtils {
+public final class UrlUtils {
     private static final String YANDEX_SEARCH_URL = "https://yandex.ru/yandsearch?family=yes&lr=213&text=";
     private static final String YANDEX_URL = "yandex.";
     private static final String YANDEX_SAFE_PARAMETER = "family=yes";
@@ -19,7 +23,7 @@ public final class UrlCheckerUtils {
     private static final String HTTP_PREFIX = "http://";
     private static final String HTTPS_PREFIX = "https://";
 
-    private UrlCheckerUtils() {
+    private UrlUtils() {
     }
 
     private static boolean isValidUrl(String query) {
@@ -55,5 +59,22 @@ public final class UrlCheckerUtils {
         }
 
         return safeUrl;
+    }
+
+    public static String getHost(String url) {
+        String host = "";
+
+        try {
+            URI uri = new URI(url);
+            host = uri.getHost();
+        } catch (URISyntaxException e) {
+            Timber.e(e, "Error while parsing url");
+        }
+
+        return host;
+    }
+
+    public static boolean isHttpLink(String url) {
+        return url.startsWith(HTTP_PREFIX) || url.startsWith(HTTPS_PREFIX);
     }
 }

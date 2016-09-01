@@ -13,6 +13,8 @@ public interface BrowserView extends MvpView {
 
     void close();
 
+    void updateProgress(int newProgress);
+
     interface UrlListener {
         void onUrl(String url);
     }

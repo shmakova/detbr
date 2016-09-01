@@ -12,7 +12,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.Toast;
+import android.widget.ProgressBar;
 
 import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
@@ -31,10 +31,14 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         FloatingSearchView.OnMenuItemClickListener,
         FloatingSearchView.OnSearchListener,
         FloatingSearchView.OnHomeActionClickListener {
+    private static final String CHILD_SAFETY_HTML = "file:///android_asset/child_safety.html";
+
     @BindView(R.id.webview)
     WebView webView;
     @BindView(R.id.like_fab)
     FloatingActionButton fabLike;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Nullable
     private UrlListener listener;
@@ -91,6 +95,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         webSettings.setDisplayZoomControls(false);
         webSettings.setAllowContentAccess(true);
         webSettings.setAllowFileAccess(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
         webView.setDrawingCacheBackgroundColor(Color.WHITE);
         webView.setFocusableInTouchMode(true);
         webView.setFocusable(true);
@@ -111,7 +117,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void showError() {
-        Toast.makeText(this, R.string.unsafe_page, Toast.LENGTH_LONG).show();
+        webView.loadUrl(CHILD_SAFETY_HTML);
     }
 
     @Override
@@ -137,7 +143,15 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void close() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void updateProgress(int newProgress) {
+        progressBar.setProgress(newProgress);
     }
 
     @Override
@@ -152,12 +166,12 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void showProgress() {
-        floatingSearchView.showProgress();
+        progressBar.setVisibility(ProgressBar.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-        floatingSearchView.hideProgress();
+        progressBar.setVisibility(ProgressBar.GONE);
     }
 
     @Override
@@ -176,7 +190,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         if (webView.canGoBack()) {
             webView.goBack();
         } else {
-            super.onBackPressed();
+            presenter.onHomeClicked();
         }
     }
 

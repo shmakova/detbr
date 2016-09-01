@@ -1,6 +1,5 @@
 package ru.yandex.detbr.ui.delegates;
 
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +17,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.utils.UrlUtils;
 
 /**
  * Created by shmakova on 25.08.16.
@@ -65,8 +65,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
 
         void bind(Card card) {
             title.setText(card.getTitle());
-            Uri uri = Uri.parse(card.getUrl());
-            url.setText(uri.getHost());
+            url.setText(UrlUtils.getHost(card.getUrl()));
             likeButton.setChecked(card.getLike());
         }
 

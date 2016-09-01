@@ -27,8 +27,13 @@ public class CategoriesPresenter extends BaseRxPresenter<CategoriesView, List<Ca
         compositeSubscription = new CompositeSubscription();
     }
 
-    public void loadCategories(boolean pullToRefresh) {
-        Observable<List<Category>> observable = dataRepository.getCategories();
+    public void loadCategories(Category category, boolean pullToRefresh) {
+        Observable<List<Category>> observable = dataRepository
+                .getCategories()
+                .map(categories -> {
+                    categories.remove(category);
+                    return categories;
+                });
         subscribe(observable, pullToRefresh);
     }
 

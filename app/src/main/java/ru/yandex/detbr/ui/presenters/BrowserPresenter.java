@@ -1,6 +1,8 @@
 package ru.yandex.detbr.ui.presenters;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Picture;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.webkit.WebChromeClient;
@@ -9,16 +11,15 @@ import android.webkit.WebViewClient;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.tabs.models.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
+import ru.yandex.detbr.ui.managers.TabsManager;
 import ru.yandex.detbr.ui.views.BrowserView;
-import ru.yandex.detbr.utils.UrlCheckerUtils;
+import ru.yandex.detbr.utils.UrlUtils;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 /**
  * Created by shmakova on 19.08.16.
@@ -29,17 +30,22 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final WotService wotService;
     @NonNull
+    private final TabsManager tabsManager;
+    @NonNull
     private final DataRepository dataRepository;
+    private Subscription subscription;
 
     private String currentUrl;
     private boolean isPageInCard;
     private boolean isPageLiked;
 
-
     public BrowserPresenter(@NonNull WotService wotService,
+                            @NonNull TabsManager tabsManager,
                             @NonNull DataRepository dataRepository) {
+
         this.wotService = wotService;
         this.dataRepository = dataRepository;
+        this.tabsManager = tabsManager;
     }
 
     private interface UrlCheckListener {
@@ -49,7 +55,10 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @Override
     public void attachView(BrowserView view) {
         super.attachView(view);
-        view.setOnUrlListener(this::loadUrl);
+        view.setOnUrlListener(url -> {
+            tabsManager.addTab(Tab.builder().url(url).build());
+            loadUrl(url);
+        });
     }
 
     public void onHomeClicked() {
@@ -59,7 +68,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     private void loadUrl(String query) {
-        String safeUrl = UrlCheckerUtils.getSafeUrlFromQuery(query);
+        String safeUrl = UrlUtils.getSafeUrlFromQuery(query);
         checkUrlBeforeLoad(safeUrl, valid -> {
             if (isViewAttached()) {
                 if (valid) {
@@ -72,17 +81,12 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     private void checkUrlBeforeLoad(String url, UrlCheckListener listener) {
-        try {
-            URI uri = new URI(url);
-            String domain = uri.getHost() + "/";
+        String domain = UrlUtils.getHost(url) + "/";
 
-            wotService.getLinkReputation(domain)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(wotResponse -> listener.urlChecked(wotResponse.isSafe()));
-        } catch (URISyntaxException e) {
-            Timber.e(e, "Error while parsing url");
-        }
+        subscription = wotService.getLinkReputation(domain)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(wotResponse -> listener.urlChecked(wotResponse.isSafe()));
     }
 
     private boolean getLikeFromUrl(@NonNull String url) {
@@ -121,16 +125,23 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     public WebChromeClient provideWebChromeClient() {
-        return new WebChromeClient();
+        return new BrowserWebChromeClient();
     }
 
     private class BrowserWebViewClient extends WebViewClient {
         @Override
         public void onPageFinished(@NonNull WebView webView, String url) {
             if (isViewAttached()) {
-                getView().showSearchText(webView.getTitle(), url);
+                if (UrlUtils.isHttpLink(url)) {
+                    getView().showSearchText(webView.getTitle(), url);
+                }
                 getView().hideProgress();
                 webView.postInvalidate();
+                tabsManager.updateTab(Tab.builder()
+                        .preview(getSnapshot(webView))
+                        .url(webView.getUrl())
+                        .title(webView.getTitle())
+                        .build());
             }
         }
 
@@ -150,6 +161,48 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             loadUrl(url);
             return true;
+        }
+
+        private Bitmap getSnapshot(WebView webView) {
+            final int width = 320;
+            int height = 480;
+            Picture picture = webView.capturePicture();
+            Bitmap thumbnail = null;
+
+            if (picture.getWidth() > 0 && picture.getHeight() > 0) {
+                Bitmap bitmap = Bitmap.createBitmap(picture.getWidth(),
+                        picture.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+
+                picture.draw(canvas);
+                float factor = width / (float) bitmap.getWidth();
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
+                height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
+                thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
+
+                bitmap.recycle();
+                scaledBitmap.recycle();
+            }
+
+            return thumbnail;
+        }
+    }
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+        if (!retainInstance && subscription != null && !subscription.isUnsubscribed()) {
+            subscription.unsubscribe();
+        }
+    }
+
+    private class BrowserWebChromeClient extends WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            if (isViewAttached()) {
+                getView().updateProgress(newProgress);
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.CategoryCardsPagerFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
+import ru.yandex.detbr.ui.fragments.TabsFragment;
 
 /**
  * Created by shmakova on 29.08.16.
@@ -39,24 +40,28 @@ public class NavigationManager {
             fragmentManager.beginTransaction()
                     .replace(R.id.main_frame_layout, fragment)
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(fragment.toString())
+                    .addToBackStack(null)
                     .commit();
         }
     }
 
     private void openAsRoot(Fragment fragment) {
-        popEveryFragment();
-        open(fragment);
-    }
-
-    private void popEveryFragment() {
-        int backStackCount = fragmentManager.getBackStackEntryCount();
-
-        for (int i = 0; i < backStackCount; i++) {
-            int backStackId = fragmentManager.getBackStackEntryAt(i).getId();
-            fragmentManager.popBackStack(backStackId, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        clearBackStack();
+        if (fragmentManager != null) {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.main_frame_layout, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .commit();
         }
     }
+
+    private void clearBackStack() {
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            FragmentManager.BackStackEntry first = fragmentManager.getBackStackEntryAt(0);
+            fragmentManager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
 
     public void navigateBack(Activity activity) {
         if (fragmentManager.getBackStackEntryCount() == 1) {
@@ -81,11 +86,16 @@ public class NavigationManager {
         openAsRoot(new CardsPagerFragment());
     }
 
+    public void openTabs() {
+        openAsRoot(new TabsFragment());
+    }
+
     public void openFavorites() {
         openAsRoot(new FavoritesFragment());
     }
 
     public void openCategoryCards(Category category) {
+        clearBackStack();
         Fragment fragment = new CategoryCardsPagerFragmentBuilder(category).build();
         open(fragment);
     }

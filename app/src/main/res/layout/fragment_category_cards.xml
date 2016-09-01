@@ -3,15 +3,14 @@
               android:id="@+id/category_cards_wrapper"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:paddingTop="40dp"
+              android:paddingBottom="56dp"
               android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/category_cover"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:contentDescription="@string/category_cover"/>
+    <FrameLayout
+        android:id="@+id/categories_frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <FrameLayout
         android:id="@+id/contentView"

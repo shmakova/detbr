@@ -50,25 +50,34 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     private void openSchools() {
         if (isViewAttached()) {
+            navigationManager.openSchools();
             getView().hideNavigationBars();
             getView().showToolbar();
-            navigationManager.openSchools();
         }
     }
 
     private void openCards() {
         if (isViewAttached()) {
+            navigationManager.openCards();
             getView().showNavigationBars();
             getView().hideToolbar();
-            navigationManager.openCards();
         }
     }
 
     private void openFavorites() {
         if (isViewAttached()) {
+            navigationManager.openFavorites();
             getView().showNavigationBars();
             getView().hideToolbar();
-            navigationManager.openFavorites();
+        }
+    }
+
+    private void openTabs() {
+        if (isViewAttached()) {
+            navigationManager.openTabs();
+            getView().showNavigationBars();
+            getView().hideSearchView();
+            getView().hideToolbar();
         }
     }
 
@@ -94,6 +103,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
                 openFavorites();
                 return;
             case R.id.tab_tabs:
+                openTabs();
                 return;
             default:
         }
@@ -124,5 +134,12 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     public void onLikeClick(Card card) {
         dataRepository.changeLike(card.getUrl());
+    }
+
+    public void onBackPressed() {
+        if (isViewAttached()) {
+            getView().showNavigationBars();
+            getView().hideToolbar();
+        }
     }
 }

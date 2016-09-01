@@ -11,6 +11,10 @@ public interface MainView extends MvpView {
 
     void hideNavigationBars();
 
+    void hideSearchView();
+
+    void showSearchView();
+
     void showToolbar();
 
     void hideToolbar();

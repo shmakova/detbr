@@ -25,10 +25,11 @@ public class CardsPagerFragment extends BaseCardsPagerFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        CategoriesFragment categoriesFragment = new CategoriesFragmentBuilder().build();
         if (fragmentManager != null) {
             fragmentManager
                     .beginTransaction()
-                    .replace(R.id.categories_frame_layout, new CategoriesFragment())
+                    .replace(R.id.categories_frame_layout, categoriesFragment)
                     .commit();
         }
     }

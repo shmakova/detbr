@@ -21,6 +21,7 @@ import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.CardsComponent;
 import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.ui.adapters.CardsFragmentStatePagerAdapter;
+import ru.yandex.detbr.ui.animators.CustomLceAnimator;
 import ru.yandex.detbr.ui.presenters.CardsPresenter;
 import ru.yandex.detbr.ui.views.CardsView;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
@@ -85,5 +86,15 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
     @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
         return errorMessageDeterminer.getErrorMessage(e, pullToRefresh);
+    }
+
+    @Override
+    protected void animateContentViewIn() {
+        CustomLceAnimator.showContent(loadingView, contentView, errorView);
+    }
+
+    @Override
+    protected void animateLoadingViewIn() {
+        CustomLceAnimator.showLoading(loadingView, contentView, errorView);
     }
 }

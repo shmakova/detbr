@@ -3,17 +3,17 @@
     <string name="content">Hello</string>
     <string name="choose_your_school">Выбери свою школу</string>
     <string name="search_title">Поиск</string>
-    <string name="search_hint">Поиск&#8230;</string>
+    <string name="search_hint">Поиск в интернете&#8230;</string>
     <string name="url_key">url</string>
     <string name="go_to_yandex">Перейти на http://yandex.ru</string>
     <string name="home">Вернуться домой</string>
     <string name="cover">Обложка</string>
     <string name="cards">Карточки</string>
-    <string name="tabs">Табы</string>
-    <string name="favorites">Избранное</string>
-    <string name="cards_title">Популярные темы в школе</string>
+    <string name="tabs">Вкладки</string>
+    <string name="favorites">Любимое</string>
+    <string name="cards_title">Популярные темы</string>
     <string name="like_content_description">Лайк</string>
-    <string name="favourite_cards_title">Понравившиеся карточки</string>
+    <string name="favourite_cards_title">Любимые карточки</string>
     <string name="category_cover">category cover</string>
     <string name="action_voice_rec">Голосовой набор</string>
     <string name="unsafe_page">Небезопасная страница</string>
@@ -21,4 +21,6 @@
     <string name="intro_text">Чтобы начать пользоваться браузером, выбери школу</string>
     <string name="choose_school">Выбрать школу</string>
     <string name="error_text">Ошибка! Нажмите здесь, чтобы повторить загрузку</string>
+    <string name="remove_tab">Удалить вкладку</string>
+    <string name="preview">Превью страницы</string>
 </resources>

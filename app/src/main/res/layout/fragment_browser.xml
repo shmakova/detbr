@@ -29,7 +29,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
-        android:id="@+id/scroll_view"
+        android:id="@+id/webview_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -48,7 +48,7 @@
         android:layout_gravity="bottom|right"
         android:layout_margin="16dp"
         android:src="@drawable/ic_favorite_border_24dp"
-        app:layout_anchor="@id/scroll_view"
+        app:layout_anchor="@id/webview_wrapper"
         app:layout_anchorGravity="bottom|right|end"
         tools:ignore="RtlHardcoded"/>
 
