@@ -49,14 +49,16 @@ public final class CardsTable {
                 + "\"http://cache.lego.com/r/www/-/media/catalogs/themes/franchises/theme%20cards%202016/angrybirds.jpg\", " + "0" + "), "
                 + "(" + "\"Играем в Pokémon Go на велосипеде\", " + "\"http://www.veloturist.org.ua/igraem-v-pokemon-go-na-velosipede/\", "
                 + "\"http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg\", " + "0" + "), "
-                + "(" + "\"Выбираем велосипед для подростка\", " + "\"https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet\", "
+                + "(" + "\"Выбираем велосипед для подростка\", " + "\"https://market.yandex.ru/articles/" +
+                "vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet\", "
                 + "\"https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg\", " + "0" + "), "
                 + "(" + "\"Лонгборд Penny Original 22\"\"\", " + "\"https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls\", "
                 + "\"https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg\", " + "0" + "), "
                 + "(" + "\"10 иллюстраций о том, каким видят мир творческие люди\", "
                 + "\"https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet\", "
                 + "\"https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg\", " + "0" + "), "
-                + "(" + "\"Невероятные оптические иллюзии от профессора математики\", " + "\"https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/\", "
+                + "(" + "\"Невероятные оптические иллюзии от профессора математики\", " + "\"https://lifehacker.ru/2016/07/04/" +
+                "kokichi-sugihara-illusion/\", "
                 + "null, " + "0" + "), "
                 + "(" + "\"11 комиксов о том, как изменилась наша жизнь с появлением интернета\", "
                 + "\"https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/\", "
