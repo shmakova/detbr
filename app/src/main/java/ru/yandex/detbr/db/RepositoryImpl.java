@@ -33,13 +33,15 @@ public class RepositoryImpl implements Repository {
     public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
         // TODO rx
         Thread thread = new Thread(() -> {
-            Card card = Card.builder()
-                    .title(title)
-                    .url(url)
-                    .cover(cover == null? getCoverUrl(url) : cover)
-                    .like(like)
-                    .build();
-            saveCard(card);
+            if (isCardAlreadyExist(url)) {
+                Card card = Card.builder()
+                        .title(title)
+                        .url(url)
+                        .cover(cover == null ? getCoverUrl(url) : cover)
+                        .like(like)
+                        .build();
+                saveCard(card);
+            }
         });
         thread.start();
     }
@@ -48,7 +50,9 @@ public class RepositoryImpl implements Repository {
     public void saveCardToRepository(@NonNull Card card) {
         // TODO rx
         Thread thread = new Thread(() -> {
-            saveCard(card);
+            if (isCardAlreadyExist(card.getUrl())) {
+                saveCard(card);
+            }
         });
         thread.start();
     }
@@ -61,6 +65,19 @@ public class RepositoryImpl implements Repository {
                 .executeAsBlocking();
     }
 
+    private boolean isCardAlreadyExist(@NonNull String url) {
+        Card card = storIOSQLite
+                .get()
+                .object(Card.class)
+                .withQuery(Query.builder()
+                        .table(CardsTable.TABLE)
+                        .where(CardsTable.COLUMN_URL + " = ?")
+                        .whereArgs(url)
+                        .build())
+                .prepare()
+                .executeAsBlocking();
+        return card != null;
+    }
 
     private String getCoverUrl(@NonNull String url) {
         try {
