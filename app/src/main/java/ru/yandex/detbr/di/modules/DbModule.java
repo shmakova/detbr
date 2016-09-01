@@ -28,10 +28,10 @@ public class DbModule {
         return DefaultStorIOSQLite.builder()
                 .sqliteOpenHelper(sqLiteOpenHelper)
                 .addTypeMapping(Card.class, SQLiteTypeMapping.<Card>builder()
-                    .putResolver(new CardPutResolver())
-                    .getResolver(new CardGetResolver())
-                    .deleteResolver(new CardDeleteResolver())
-                    .build())
+                        .putResolver(new CardPutResolver())
+                        .getResolver(new CardGetResolver())
+                        .deleteResolver(new CardDeleteResolver())
+                        .build())
                 .build();
     }
 
