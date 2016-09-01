@@ -6,8 +6,8 @@ import android.support.annotation.NonNull;
 
 import com.pushtorefresh.storio.sqlite.operations.get.DefaultGetResolver;
 
-import ru.yandex.detbr.cards.Card;
 import ru.yandex.detbr.data.repository.db.tables.CardsTable;
+import ru.yandex.detbr.data.repository.models.Card;
 
 public class CardGetResolver extends DefaultGetResolver<Card> {
     @Override

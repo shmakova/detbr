@@ -2,6 +2,7 @@ package ru.yandex.detbr.ui.presenters;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -11,9 +12,8 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import ru.yandex.detbr.data.repository.DataRepository;
 import ru.yandex.detbr.data.wot_network.WotService;
-import ru.yandex.detbr.data.wot_network.models.WotResponse;
-import ru.yandex.detbr.db.Repository;
 import ru.yandex.detbr.ui.views.BrowserView;
 import ru.yandex.detbr.utils.UrlCheckerUtils;
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,13 +29,17 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final WotService wotService;
     @NonNull
-    private final Repository repository;
+    private final DataRepository dataRepository;
+
+    private String currentUrl;
+    private boolean isPageInCard;
+    private boolean isPageLiked;
 
 
     public BrowserPresenter(@NonNull WotService wotService,
-                            @NonNull Repository repository) {
+                            @NonNull DataRepository dataRepository) {
         this.wotService = wotService;
-        this.repository = repository;
+        this.dataRepository = dataRepository;
     }
 
     private interface UrlCheckListener {
@@ -81,6 +85,33 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         }
     }
 
+    private boolean getLikeFromUrl(@NonNull String url) {
+        return dataRepository.getLikeFromUrl(url);
+    }
+
+    private void changeLike(@NonNull String url) {
+        dataRepository.changeLike(url);
+    }
+
+    private void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
+        dataRepository.saveCardToRepository(title, url, cover, like);
+    }
+
+    public void onLikeClick(String title, String url) {
+        if (isPageInCard) {
+            changeLike(currentUrl);
+        } else {
+            saveCardToRepository(title, url, null, true);
+            isPageInCard = true;
+        }
+
+        isPageLiked = !isPageLiked;
+
+        if (isViewAttached()) {
+            getView().setLike(isPageLiked);
+        }
+    }
+
     public WebViewClient provideWebViewClient() {
         return new BrowserWebViewClient();
     }
@@ -103,7 +134,9 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         public void onPageStarted(WebView webView, String url, Bitmap favicon) {
             if (isViewAttached()) {
                 getView().showProgress();
-                getView().resetLike();
+                isPageLiked = isPageInCard = getLikeFromUrl(url);
+                getView().setLike(isPageInCard);
+                currentUrl = url;
             }
         }
 
@@ -112,17 +145,5 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             loadUrl(url);
             return true;
         }
-    }
-
-    public boolean getLikeFromUrl(@NonNull String url) {
-        return repository.getLikeFromUrl(url);
-    }
-
-    public void changeLike(@NonNull String url) {
-        repository.changeLike(url);
-    }
-
-    public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
-        repository.saveCardToRepository(title, url, cover, like);
     }
 }

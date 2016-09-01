@@ -40,10 +40,6 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     private UrlListener listener;
     @Nullable
     private BrowserComponent browserComponent;
-    private String currentQuery;
-    private String currentUrl;
-    private boolean isPageInCard;
-    private boolean isHasLike;
 
     @SuppressLint("InflateParams")
     @Override
@@ -200,14 +196,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @OnClick(R.id.like_fab)
     public void onFabLikeClick() {
-        if (isPageInCard) {
-            presenter.changeLike(currentUrl);
-        } else {
-            presenter.saveCardToRepository(webView.getTitle(), currentUrl, null, true);
-            isPageInCard = true;
-        }
-        isHasLike = !isHasLike;
-        setLike(isHasLike);
+        presenter.onLikeClick(webView.getTitle(), webView.getUrl());
     }
 
     @Override

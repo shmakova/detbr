@@ -19,12 +19,13 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
+import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 
 /**
  * Created by shmakova on 22.08.16.
  */
 
-//Todo презентер впилить
 @FragmentWithArgs
 public class CardFragment extends BaseFragment {
     @Arg
@@ -38,10 +39,7 @@ public class CardFragment extends BaseFragment {
     CheckBox likeButton;
 
     private OnCardsItemClickListener onCardsItemClickListener;
-
-    public interface OnCardsItemClickListener {
-        void onCardsItemClick(Card card);
-    }
+    private OnLikeClickListener onLikeClickListener;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,7 +77,13 @@ public class CardFragment extends BaseFragment {
                     OnCardsItemClickListener.class.getName());
         }
 
+        if (!(getActivity() instanceof OnLikeClickListener)) {
+            throw new ClassCastException(getActivity().toString() + " must implement " +
+                    OnLikeClickListener.class.getName());
+        }
+
         onCardsItemClickListener = (OnCardsItemClickListener) getActivity();
+        onLikeClickListener = (OnLikeClickListener) getActivity();
     }
 
     @Override
@@ -98,8 +102,8 @@ public class CardFragment extends BaseFragment {
 
     @OnClick(R.id.like_btn)
     public void onLikeButtonClick() {
-        if (card != null) {
-            presenter.changeLike(card.getUrl());
+        if (onLikeClickListener != null) {
+            onLikeClickListener.onLikeClick(card);
         }
     }
 }

@@ -1,15 +1,25 @@
 package ru.yandex.detbr.data.repository;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.queries.Query;
+import com.pushtorefresh.storio.sqlite.queries.RawQuery;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ru.yandex.detbr.data.repository.db.tables.CardsTable;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.data.repository.models.Category;
 import rx.Observable;
-import ru.yandex.detbr.db.tables.CardsTable;
+import timber.log.Timber;
 
 /**
  * Created by shmakova on 28.08.16.
@@ -52,21 +62,44 @@ public class FakeDataRepository implements DataRepository {
     }
 
     @Override
-    public List<Card> getCardsListBySchool() {
-        return storIOSQLite
-                .get()
-                .listOfObjects(Card.class)
-                .withQuery(Query.builder()
-                        .table(CardsTable.TABLE)
-                        .build())
-                .prepare()
-                // TODO rx
-                .executeAsBlocking();
+    public Observable<List<Card>> getCardsListBySchool() {
+        List<Card> cards = new ArrayList<>();
+        cards.add(Card.builder()
+                .title("Играем в Pokémon Go на велосипеде")
+                .url("http://www.veloturist.org.ua/igraem-v-pokemon-go-na-velosipede/")
+                .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
+                .build());
+        cards.add(Card.builder()
+                .title("КАК ИГРАТЬ В POKEMON GO")
+                .url("https://www.youtube.com/watch?v=tV9EErN3x-k")
+                .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
+                .build());
+        cards.add(Card.builder()
+                .title("5 МИРОВЫХ РЕКОРДОВ POKEMON GO")
+                .url("http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html")
+                .build());
+        cards.add(Card.builder()
+                .title("О ЧИТАХ В POKEMON GO")
+                .url("http://gopokemongo.ru/o-chitah-v-pokemon-go.html")
+                .build());
+        cards.add(Card.builder()
+                .title("Официальный сайт Pokemon")
+                .url("http://www.pokemon.com/ru/")
+                .build());
+        cards.add(Card.builder()
+                .title("Pokemon: смотреть все серии")
+                .url("https://yandex.ru/video/search?text=покемоны&redircnt=1471710553.2")
+                .build());
+        cards.add(Card.builder()
+                .title("Покедекс")
+                .url("http://www.pokemon.com/ru/pokedex/")
+                .build());
+        return Observable.just(cards);
     }
 
     @Override
-    public List<Card> getFavouriteCards() {
-        return storIOSQLite
+    public Observable<List<Card>> getFavouriteCards() {
+        return Observable.just(storIOSQLite
                 .get()
                 .listOfObjects(Card.class)
                 .withQuery(Query.builder()
@@ -75,7 +108,7 @@ public class FakeDataRepository implements DataRepository {
                         .whereArgs("1")
                         .build())
                 .prepare()
-                .executeAsBlocking();
+                .executeAsBlocking());
     }
 
     @Override
@@ -206,5 +239,84 @@ public class FakeDataRepository implements DataRepository {
         schools.add("ГБОУ г. Москвы лицей «Вторая школа»");
         schools.add("ГБОУ г. Москвы «Школа-интернат «Интеллектуал»");
         return Observable.just(schools);
+    }
+
+    @Override
+    public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
+        // TODO rx
+        Thread thread = new Thread(() -> {
+            Card card = Card.builder()
+                    .title(title)
+                    .url(url)
+                    .cover(cover == null ? getCoverUrl(url) : cover)
+                    .like(like)
+                    .build();
+            saveCard(card);
+        });
+        thread.start();
+    }
+
+    @Override
+    public void saveCardToRepository(@NonNull Card card) {
+        // TODO rx
+        Thread thread = new Thread(() -> {
+            saveCard(card);
+        });
+        thread.start();
+    }
+
+    private void saveCard(@NonNull Card card) {
+        storIOSQLite
+                .put()
+                .object(card)
+                .prepare()
+                .executeAsBlocking();
+    }
+
+
+    private String getCoverUrl(@NonNull String url) {
+        try {
+            Document doc = Jsoup.connect(url).maxBodySize(0).get();
+            Elements images = doc.select("img[src]");
+            if (!images.isEmpty()) {
+                return images.get(0).attr("src");
+            }
+        } catch (IOException e) {
+            Timber.e(e, "Error");
+        }
+        return null;
+    }
+
+    @Override
+    public void changeLike(@NonNull String url) {
+        // TODO rx
+        Thread thread = new Thread(() -> {
+            storIOSQLite
+                    .executeSQL()
+                    .withQuery(RawQuery.builder()
+                            .query("UPDATE " + CardsTable.TABLE + " SET "
+                                    + CardsTable.COLUMN_LIKE + " = ~" + CardsTable.COLUMN_LIKE + "&1"
+                                    + " WHERE " + CardsTable.COLUMN_URL + " = ?")
+                            .args(url)
+                            .build())
+                    .prepare()
+                    .executeAsBlocking();
+        });
+        thread.start();
+    }
+
+    @Override
+    public boolean getLikeFromUrl(@NonNull String url) {
+        Card card = storIOSQLite
+                .get()
+                .object(Card.class)
+                .withQuery(Query.builder()
+                        .table(CardsTable.TABLE)
+                        .where(CardsTable.COLUMN_URL + " = ?")
+                        .whereArgs(url)
+                        .build())
+                .prepare()
+                .executeAsBlocking();
+        return card != null && card.getLike();
     }
 }

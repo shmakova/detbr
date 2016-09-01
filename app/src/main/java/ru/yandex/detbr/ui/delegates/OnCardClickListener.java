@@ -5,5 +5,7 @@ package ru.yandex.detbr.ui.delegates;
  */
 
 public interface OnCardClickListener {
-    void onCardItemClick(int position);
+    void onCardClick(int position);
+
+    void onLikeClick(int position);
 }

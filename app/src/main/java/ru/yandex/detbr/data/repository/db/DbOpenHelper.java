@@ -23,6 +23,8 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        // no impl
+        // // TODO: 01.09.16 удалить после отладки
+        sqLiteDatabase.execSQL("DROP TABLE " + CardsTable.TABLE);
+        onCreate(sqLiteDatabase);
     }
 }

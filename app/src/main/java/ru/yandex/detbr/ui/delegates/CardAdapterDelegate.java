@@ -47,7 +47,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         return item.getCover().isEmpty();
     }
 
-    static class CardViewHolder extends RecyclerView.ViewHolder {
+    class CardViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.title)
         TextView title;
         @BindView(R.id.url)
@@ -71,9 +71,9 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         }
 
         @OnClick(R.id.card)
-        void onCardItemClick() {
+        void onCardClick() {
             if (listener != null) {
-                listener.onCardItemClick(getAdapterPosition());
+                listener.onCardClick(getAdapterPosition());
             }
         }
 

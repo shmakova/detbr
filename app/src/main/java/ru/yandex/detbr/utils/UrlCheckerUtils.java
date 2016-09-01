@@ -41,8 +41,7 @@ public final class UrlCheckerUtils {
         return urlString;
     }
 
-    @Override
-    public String getSafeUrlFromQuery(String query) {
+    public static String getSafeUrlFromQuery(String query) {
         String safeUrl = getUrlFromQuery(query);
 
         if (query.contains(GOOGLE_URL) &&

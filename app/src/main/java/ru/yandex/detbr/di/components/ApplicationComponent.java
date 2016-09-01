@@ -14,13 +14,13 @@ import ru.yandex.detbr.di.modules.ApplicationModule;
 import ru.yandex.detbr.di.modules.BrowserModule;
 import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.di.modules.CategoriesModule;
+import ru.yandex.detbr.di.modules.DbModule;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.FavoritesModule;
 import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.SchoolsModule;
 import ru.yandex.detbr.di.modules.WotNetworkModule;
 import ru.yandex.detbr.ui.activities.MainActivity;
-import ru.yandex.detbr.db.DbModule;
 
 @Singleton
 @Component(modules = {

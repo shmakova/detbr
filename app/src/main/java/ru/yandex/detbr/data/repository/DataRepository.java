@@ -1,5 +1,8 @@
 package ru.yandex.detbr.data.repository;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 import ru.yandex.detbr.data.repository.models.Card;
@@ -22,4 +25,12 @@ public interface DataRepository {
     Observable<List<Card>> getCardsByCategory(Category category);
 
     Observable<List<String>> getSchoolsList();
+
+    void saveCardToRepository(String title, String url, @Nullable String cover, boolean like);
+
+    void saveCardToRepository(@NonNull Card card);
+
+    void changeLike(@NonNull String url);
+
+    boolean getLikeFromUrl(@NonNull String url);
 }

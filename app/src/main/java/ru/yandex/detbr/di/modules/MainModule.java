@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.yandex.detbr.data.repository.DataRepository;
 import ru.yandex.detbr.di.scopes.PerActivity;
 import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.managers.NavigationManager;
@@ -26,8 +27,9 @@ public class MainModule {
     @Provides
     @NonNull
     MainPresenter provideMainPresenter(@NonNull SharedPreferences sharedPreferences,
-                                       @NonNull NavigationManager navigationManager) {
-        return new MainPresenter(sharedPreferences, navigationManager);
+                                       @NonNull NavigationManager navigationManager,
+                                       @NonNull DataRepository dataRepository) {
+        return new MainPresenter(sharedPreferences, navigationManager, dataRepository);
     }
 
     @Provides

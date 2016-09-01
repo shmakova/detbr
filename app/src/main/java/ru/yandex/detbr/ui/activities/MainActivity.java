@@ -31,18 +31,18 @@ import ru.yandex.detbr.data.repository.models.Category;
 import ru.yandex.detbr.di.components.MainComponent;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.MainModule;
-import ru.yandex.detbr.ui.fragments.CardFragment;
 import ru.yandex.detbr.ui.fragments.CategoriesFragment;
-import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
+import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
+import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 import ru.yandex.detbr.ui.other.ViewModifier;
 import ru.yandex.detbr.ui.presenters.MainPresenter;
 import ru.yandex.detbr.ui.views.MainView;
 
 public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> implements
         SchoolsFragment.OnSchoolClickListener,
-        CardFragment.OnCardsItemClickListener,
-        FavoritesFragment.OnCardsItemClickListener,
+        OnCardsItemClickListener,
+        OnLikeClickListener,
         OnTabSelectListener,
         CategoriesFragment.OnCategoriesItemClickListener,
         FloatingSearchView.OnMenuItemClickListener,
@@ -113,6 +113,11 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Override
     public void onCardsItemClick(Card card) {
         presenter.onCardsItemClick(card);
+    }
+
+    @Override
+    public void onLikeClick(Card card) {
+        presenter.onLikeClick(card);
     }
 
     @Override

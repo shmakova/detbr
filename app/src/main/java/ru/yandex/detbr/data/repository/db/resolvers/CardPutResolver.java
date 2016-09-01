@@ -7,8 +7,8 @@ import com.pushtorefresh.storio.sqlite.operations.put.DefaultPutResolver;
 import com.pushtorefresh.storio.sqlite.queries.InsertQuery;
 import com.pushtorefresh.storio.sqlite.queries.UpdateQuery;
 
-import ru.yandex.detbr.cards.Card;
 import ru.yandex.detbr.data.repository.db.tables.CardsTable;
+import ru.yandex.detbr.data.repository.models.Card;
 
 
 public class CardPutResolver extends DefaultPutResolver<Card> {
