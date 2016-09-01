@@ -24,6 +24,7 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * A presenter for RxJava, that assumes that only one Observable is subscribed by this presenter.
@@ -72,16 +73,19 @@ public abstract class BaseRxPresenter<V extends MvpLceView<M>, M>
 
             @Override
             public void onCompleted() {
+                Timber.d("Completed");
                 BaseRxPresenter.this.onCompleted();
             }
 
             @Override
             public void onError(Throwable e) {
+                Timber.e(e.getMessage());
                 BaseRxPresenter.this.onError(e, ptr);
             }
 
             @Override
             public void onNext(M m) {
+                Timber.d(String.valueOf(m));
                 BaseRxPresenter.this.onNext(m);
             }
         };

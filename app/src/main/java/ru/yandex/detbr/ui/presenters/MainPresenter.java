@@ -23,14 +23,19 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private final SharedPreferences sharedPreferences;
     @NonNull
     private final NavigationManager navigationManager;
+    @NonNull
+    private final DataRepository dataRepository;
     @Nullable
     private String school;
 
 
     public MainPresenter(@NonNull SharedPreferences sharedPreferences,
-                         @NonNull NavigationManager navigationManager) {
+                         @NonNull NavigationManager navigationManager,
+                         @NonNull DataRepository dataRepository
+    ) {
         this.sharedPreferences = sharedPreferences;
         this.navigationManager = navigationManager;
+        this.dataRepository = dataRepository;
     }
 
     public void onFirstLoad() {
@@ -125,6 +130,10 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     public void onCardsItemClick(Card card) {
         navigationManager.openBrowser(card.getUrl());
+    }
+
+    public void onLikeClick(Card card) {
+        dataRepository.changeLike(card.getUrl());
     }
 
     public void onBackPressed() {

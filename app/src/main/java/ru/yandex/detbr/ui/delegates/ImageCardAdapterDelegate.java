@@ -28,10 +28,10 @@ import ru.yandex.detbr.data.repository.models.Card;
 
 public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, ImageCardAdapterDelegate.ImageCardViewHolder> {
 
-    private final OnCardItemClickListener onCardItemClickListener;
+    private final OnCardClickListener onCardClickListener;
 
-    public ImageCardAdapterDelegate(OnCardItemClickListener onCardItemClickListener) {
-        this.onCardItemClickListener = onCardItemClickListener;
+    public ImageCardAdapterDelegate(OnCardClickListener onCardClickListener) {
+        this.onCardClickListener = onCardClickListener;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
     @NonNull
     @Override
     public ImageCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        return new ImageCardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_card, parent, false), onCardItemClickListener);
+        return new ImageCardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_card, parent, false), onCardClickListener);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
     }
 
     static class ImageCardViewHolder extends RecyclerView.ViewHolder {
-        private final OnCardItemClickListener listener;
+        private final OnCardClickListener listener;
 
         @BindView(R.id.cover)
         ImageView cover;
@@ -62,10 +62,10 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
         @BindView(R.id.like_btn)
         CheckBox likeButton;
 
-        ImageCardViewHolder(View itemView, OnCardItemClickListener onCardItemClickListener) {
+        ImageCardViewHolder(View itemView, OnCardClickListener onCardClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            listener = onCardItemClickListener;
+            listener = onCardClickListener;
 
         }
 
@@ -84,9 +84,16 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
         }
 
         @OnClick(R.id.card)
-        void onCardItemClick() {
+        void onCardClick() {
             if (listener != null) {
-                listener.onCardItemClick(getAdapterPosition());
+                listener.onCardClick(getAdapterPosition());
+            }
+        }
+
+        @OnClick(R.id.like_btn)
+        void onLikeClick() {
+            if (listener != null) {
+                listener.onLikeClick(getAdapterPosition());
             }
         }
     }

@@ -1,7 +1,7 @@
 package ru.yandex.detbr.data.repository.models;
 
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 
@@ -16,7 +16,7 @@ public abstract class Card implements Parcelable {
 
     public abstract String getUrl();
 
-    @NonNull
+    @Nullable
     public abstract String getCover();
 
     public abstract boolean getLike();
@@ -33,7 +33,7 @@ public abstract class Card implements Parcelable {
 
         public abstract Builder url(String url);
 
-        public abstract Builder cover(@NonNull String cover);
+        public abstract Builder cover(@Nullable String cover);
 
         public abstract Builder like(boolean like);
 

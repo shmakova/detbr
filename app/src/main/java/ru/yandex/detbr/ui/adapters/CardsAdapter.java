@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.ui.delegates.CardAdapterDelegate;
 import ru.yandex.detbr.ui.delegates.ImageCardAdapterDelegate;
-import ru.yandex.detbr.ui.delegates.OnCardItemClickListener;
+import ru.yandex.detbr.ui.delegates.OnCardClickListener;
 
 /**
  * Created by shmakova on 21.08.16.
@@ -17,7 +17,7 @@ import ru.yandex.detbr.ui.delegates.OnCardItemClickListener;
 
 public class CardsAdapter extends ListDelegationAdapter<List<Card>> {
     @Inject
-    public CardsAdapter(OnCardItemClickListener onCardItemClickListener) {
+    public CardsAdapter(OnCardClickListener onCardItemClickListener) {
         delegatesManager.addDelegate(new CardAdapterDelegate(onCardItemClickListener));
         delegatesManager.addDelegate(new ImageCardAdapterDelegate(onCardItemClickListener));
     }

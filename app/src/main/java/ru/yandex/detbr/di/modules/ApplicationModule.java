@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -43,8 +44,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    DataRepository providesDataRepository() {
-        return new FakeDataRepository();
+    DataRepository providesDataRepository(StorIOSQLite storIOSQLite) {
+        return new FakeDataRepository(storIOSQLite);
     }
 
     @Provides

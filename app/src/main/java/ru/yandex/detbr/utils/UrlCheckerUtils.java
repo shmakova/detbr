@@ -35,25 +35,26 @@ public final class UrlCheckerUtils {
             }
         } else {
             urlString = YANDEX_SEARCH_URL + urlString;
+            urlString = urlString.replace(' ', '+');
         }
 
         return urlString;
     }
 
     public static String getSafeUrlFromQuery(String query) {
-        String url = getUrlFromQuery(query);
+        String safeUrl = getUrlFromQuery(query);
 
-        if (url.contains(GOOGLE_URL) &&
-                !url.contains(GOOGLE_SAFE_PARAMETER) &&
-                url.contains(GOOGLE_QUERY_PARAMETER)) {
-            url += "&" + GOOGLE_SAFE_PARAMETER;
-        } else if (url.contains(YANDEX_URL) &&
-                !url.contains(YANDEX_SAFE_PARAMETER) &&
-                url.contains(YANDEX_QUERY_PARAMETER)) {
-            url += "&" + YANDEX_SAFE_PARAMETER;
+        if (query.contains(GOOGLE_URL) &&
+                !query.contains(GOOGLE_SAFE_PARAMETER) &&
+                query.contains(GOOGLE_QUERY_PARAMETER)) {
+            safeUrl += "&" + GOOGLE_SAFE_PARAMETER;
+        } else if (query.contains(YANDEX_URL) &&
+                !query.contains(YANDEX_SAFE_PARAMETER) &&
+                query.contains(YANDEX_QUERY_PARAMETER)) {
+            safeUrl += "&" + YANDEX_SAFE_PARAMETER;
         }
 
-        return url;
+        return safeUrl;
     }
 
     public static boolean isHttpLink(String url) {

@@ -175,9 +175,14 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
-    public void resetLike() {
-        fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                R.drawable.ic_favorite_border_24dp, null));
+    public void setLike(boolean like) {
+        if (like) {
+            fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.ic_favorite_24dp, null));
+        } else {
+            fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                    R.drawable.ic_favorite_border_24dp, null));
+        }
     }
 
     @Override
@@ -205,7 +210,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @OnClick(R.id.like_fab)
     public void onFabLikeClick() {
-        fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_favorite_24dp, null));
+        presenter.onLikeClick(webView.getTitle(), webView.getUrl());
     }
 
     @Override

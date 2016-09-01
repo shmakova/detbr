@@ -1,5 +1,6 @@
 package ru.yandex.detbr.ui.delegates;
 
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,10 +25,10 @@ import ru.yandex.detbr.data.repository.models.Card;
 
 
 public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, CardAdapterDelegate.CardViewHolder> {
-    private final OnCardItemClickListener listener;
+    private final OnCardClickListener listener;
 
-    public CardAdapterDelegate(OnCardItemClickListener onCardItemClickListener) {
-        listener = onCardItemClickListener;
+    public CardAdapterDelegate(OnCardClickListener onCardClickListener) {
+        listener = onCardClickListener;
     }
 
     @NonNull
@@ -46,7 +47,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         return item.getCover().isEmpty();
     }
 
-    static class CardViewHolder extends RecyclerView.ViewHolder {
+    class CardViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.title)
         TextView title;
         @BindView(R.id.url)
@@ -54,24 +55,32 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         @BindView(R.id.like_btn)
         CheckBox likeButton;
 
-        private final OnCardItemClickListener listener;
+        private final OnCardClickListener listener;
 
-        CardViewHolder(View itemView, OnCardItemClickListener onCardItemClickListener) {
+        CardViewHolder(View itemView, OnCardClickListener onCardClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            listener = onCardItemClickListener;
+            listener = onCardClickListener;
         }
 
         void bind(Card card) {
             title.setText(card.getTitle());
-            url.setText(card.getUrl());
+            Uri uri = Uri.parse(card.getUrl());
+            url.setText(uri.getHost());
             likeButton.setChecked(card.getLike());
         }
 
         @OnClick(R.id.card)
-        void onCardItemClick() {
+        void onCardClick() {
             if (listener != null) {
-                listener.onCardItemClick(getAdapterPosition());
+                listener.onCardClick(getAdapterPosition());
+            }
+        }
+
+        @OnClick(R.id.like_btn)
+        void onLikeClick() {
+            if (listener != null) {
+                listener.onLikeClick(getAdapterPosition());
             }
         }
     }

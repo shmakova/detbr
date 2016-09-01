@@ -27,7 +27,7 @@ public interface BrowserView extends MvpView {
 
     void hideProgress();
 
-    void resetLike();
+    void setLike(boolean like);
 
     void loadPageByUrl(String url);
 

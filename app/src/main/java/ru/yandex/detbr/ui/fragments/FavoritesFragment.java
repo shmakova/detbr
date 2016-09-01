@@ -25,6 +25,9 @@ import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.FavoritesComponent;
 import ru.yandex.detbr.di.modules.FavoritesModule;
 import ru.yandex.detbr.ui.adapters.CardsAdapter;
+import ru.yandex.detbr.ui.delegates.OnCardClickListener;
+import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
+import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 import ru.yandex.detbr.ui.presenters.FavoritesPresenter;
 import ru.yandex.detbr.ui.views.FavoritesView;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
@@ -43,10 +46,7 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
     private FavoritesComponent favoritesComponent;
     private CardsAdapter adapter;
     private OnCardsItemClickListener onCardsItemClickListener;
-
-    public interface OnCardsItemClickListener {
-        void onCardsItemClick(Card card);
-    }
+    private OnLikeClickListener onLikeClickListener;
 
     @NonNull
     @Override
@@ -74,9 +74,8 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
-    @Override
     protected String getErrorMessage(Throwable e, boolean pullToRefresh) {
-        return null;
+        return errorMessageDeterminer.getErrorMessage(e, pullToRefresh);
     }
 
     @Override
@@ -88,13 +87,20 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
                     OnCardsItemClickListener.class.getName());
         }
 
+        if (!(getActivity() instanceof OnLikeClickListener)) {
+            throw new ClassCastException(getActivity().toString() + " must implement " +
+                    OnLikeClickListener.class.getName());
+        }
+
         onCardsItemClickListener = (OnCardsItemClickListener) getActivity();
+        onLikeClickListener = (OnLikeClickListener) getActivity();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
         onCardsItemClickListener = null;
+        onLikeClickListener = null;
     }
 
     @NonNull
@@ -109,15 +115,27 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
     }
 
     @Override
-    public void setData(List<Card> data) {
-        adapter = new CardsAdapter((position) -> {
-            Card card = data.get(position);
+    public void setData(List<Card> cards) {
+        adapter = new CardsAdapter(new OnCardClickListener() {
+            @Override
+            public void onCardClick(int position) {
+                Card card = cards.get(position);
 
-            if (onCardsItemClickListener != null) {
-                onCardsItemClickListener.onCardsItemClick(card);
+                if (onCardsItemClickListener != null) {
+                    onCardsItemClickListener.onCardsItemClick(card);
+                }
+            }
+
+            @Override
+            public void onLikeClick(int position) {
+                Card card = cards.get(position);
+
+                if (onLikeClickListener != null) {
+                    onLikeClickListener.onLikeClick(card);
+                }
             }
         });
-        adapter.setItems(data);
+        adapter.setItems(cards);
         recyclerView.setAdapter(adapter);
     }
 
