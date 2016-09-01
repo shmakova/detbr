@@ -63,43 +63,19 @@ public class FakeDataRepository implements DataRepository {
 
     @Override
     public Observable<List<Card>> getCardsListBySchool() {
-        List<Card> cards = new ArrayList<>();
-        cards.add(Card.builder()
-                .title("Играем в Pokémon Go на велосипеде")
-                .url("http://www.veloturist.org.ua/igraem-v-pokemon-go-na-velosipede/")
-                .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
-                .build());
-        cards.add(Card.builder()
-                .title("КАК ИГРАТЬ В POKEMON GO")
-                .url("https://www.youtube.com/watch?v=tV9EErN3x-k")
-                .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
-                .build());
-        cards.add(Card.builder()
-                .title("5 МИРОВЫХ РЕКОРДОВ POKEMON GO")
-                .url("http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html")
-                .build());
-        cards.add(Card.builder()
-                .title("О ЧИТАХ В POKEMON GO")
-                .url("http://gopokemongo.ru/o-chitah-v-pokemon-go.html")
-                .build());
-        cards.add(Card.builder()
-                .title("Официальный сайт Pokemon")
-                .url("http://www.pokemon.com/ru/")
-                .build());
-        cards.add(Card.builder()
-                .title("Pokemon: смотреть все серии")
-                .url("https://yandex.ru/video/search?text=покемоны&redircnt=1471710553.2")
-                .build());
-        cards.add(Card.builder()
-                .title("Покедекс")
-                .url("http://www.pokemon.com/ru/pokedex/")
-                .build());
-        return Observable.just(cards);
+        return storIOSQLite
+                .get()
+                .listOfObjects(Card.class)
+                .withQuery(Query.builder()
+                        .table(CardsTable.TABLE)
+                        .build())
+                .prepare()
+                .asRxObservable();
     }
 
     @Override
     public Observable<List<Card>> getFavouriteCards() {
-        return Observable.just(storIOSQLite
+        return storIOSQLite
                 .get()
                 .listOfObjects(Card.class)
                 .withQuery(Query.builder()
@@ -108,7 +84,7 @@ public class FakeDataRepository implements DataRepository {
                         .whereArgs("1")
                         .build())
                 .prepare()
-                .executeAsBlocking());
+                .asRxObservable();
     }
 
     @Override
