@@ -139,6 +139,8 @@ dependencies {
     compile libraries.mosby
     compile libraries.mosbyViewstate
 
+    compile libraries.viewPagerIndicator
+
     // Developer tools (Developer Settings)
     compile libraries.stetho
     compile libraries.leakCanary
