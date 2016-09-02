@@ -12,4 +12,6 @@
     <color name="inactive_grey">#bdbdbd</color>
     <color name="bar_grey">#212121</color>
     <color name="tab_background">#363636</color>
+    <color name="intro_background">#ffd740</color>
+    <color name="intro_text_color">#8a000000</color>
 </resources>

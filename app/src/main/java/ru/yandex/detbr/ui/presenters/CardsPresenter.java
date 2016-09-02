@@ -9,7 +9,6 @@ import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.data.repository.models.Category;
 import ru.yandex.detbr.ui.views.CardsView;
 import rx.Observable;
-import timber.log.Timber;
 
 /**
  * Created by shmakova on 21.08.16.
@@ -24,9 +23,7 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
     }
 
     public void loadCards(boolean pullToRefresh) {
-        Observable<List<Card>> observable = dataRepository.getCardsListBySchool().doOnNext(cards -> {
-            Timber.e("OBSERVABLE");
-        });
+        Observable<List<Card>> observable = dataRepository.getCardsListBySchool();
         subscribe(observable, pullToRefresh);
     }
 

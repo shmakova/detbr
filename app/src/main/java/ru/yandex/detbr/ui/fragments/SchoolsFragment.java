@@ -90,7 +90,7 @@ public class SchoolsFragment
         super.onViewCreated(view, savedInstanceState);
 
         schoolsAdapter = new SchoolsAdapter(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+                R.layout.dropdown_item, R.id.item, new ArrayList<>());
         autoCompleteTextView.setAdapter(schoolsAdapter);
 
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {

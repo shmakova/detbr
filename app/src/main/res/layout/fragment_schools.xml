@@ -1,21 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/contentView"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_weight="10"
+              android:background="@color/intro_background"
+              android:orientation="vertical"
+              tools:ignore="InconsistentLayout">
 
-    <include layout="@layout/loading_view"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="2"
+        android:contentDescription="@string/yandex_logo"
+        android:src="@drawable/yandex_logo"/>
 
-    <include layout="@layout/error_view"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="5">
 
-    <AutoCompleteTextView
-        android:id="@+id/schools_autocomplete"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:contentDescription="@string/intro"
+            android:src="@drawable/third_intro_pic"
+            tools:ignore="UnusedAttribute"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <FrameLayout
+                android:id="@+id/contentView"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_weight="1">
+
+                <include layout="@layout/loading_view"/>
+
+                <include layout="@layout/error_view"/>
+
+                <AutoCompleteTextView
+                    android:id="@+id/schools_autocomplete"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:completionThreshold="1"
+                    android:ellipsize="end"
+                    android:hint="@string/choose_your_school"
+                    android:imeOptions="actionDone"
+                    android:maxLines="1"
+                    android:textAlignment="center"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="@string/third_intro_text"
+        android:textColor="@color/intro_text_color"
+        android:textSize="16sp"/>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:completionThreshold="1"
-        android:hint="@string/choose_your_school"
-        android:imeOptions="actionDone"/>
-</FrameLayout>
+        android:layout_height="64dp"/>
+</LinearLayout>
+
+

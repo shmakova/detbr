@@ -42,17 +42,12 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         loadDataFromSharedPreference();
 
         if (school == null || school.isEmpty()) {
-            openSchools();
+            Thread thread = new Thread(() -> {
+                navigationManager.openOnBoarding();
+            });
+            thread.start();
         } else {
             openCards();
-        }
-    }
-
-    private void openSchools() {
-        if (isViewAttached()) {
-            navigationManager.openSchools();
-            getView().hideNavigationBars();
-            getView().showToolbar();
         }
     }
 
@@ -107,11 +102,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
                 return;
             default:
         }
-    }
-
-    public void onSchoolClick() {
-        loadDataFromSharedPreference();
-        openCards();
     }
 
     public void onCategoriesItemClick(Category category) {

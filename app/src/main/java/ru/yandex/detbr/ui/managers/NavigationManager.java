@@ -10,10 +10,10 @@ import android.support.v4.app.FragmentTransaction;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Category;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
+import ru.yandex.detbr.ui.activities.IntroActivity;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.CategoryCardsPagerFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
-import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 import ru.yandex.detbr.ui.fragments.TabsFragment;
 
 /**
@@ -78,8 +78,9 @@ public class NavigationManager {
         activity.startActivity(intent);
     }
 
-    public void openSchools() {
-        openAsRoot(new SchoolsFragment());
+    public void openOnBoarding() {
+        Intent intent = new Intent(activity, IntroActivity.class);
+        activity.startActivity(intent);
     }
 
     public void openCards() {
