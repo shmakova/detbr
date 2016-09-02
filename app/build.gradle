@@ -134,7 +134,6 @@ dependencies {
     compile libraries.floatingSearchView
 
     compile libraries.adapterDelegates
-    compile libraries.appintro
 
     compile libraries.mosby
     compile libraries.mosbyViewstate
