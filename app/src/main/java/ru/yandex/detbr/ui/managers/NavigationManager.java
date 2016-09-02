@@ -80,7 +80,9 @@ public class NavigationManager {
 
     public void openOnBoarding() {
         Intent intent = new Intent(activity, IntroActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         activity.startActivity(intent);
+        activity.finish();
     }
 
     public void openCards() {
