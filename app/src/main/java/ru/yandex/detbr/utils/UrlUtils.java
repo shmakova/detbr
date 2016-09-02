@@ -67,6 +67,12 @@ public final class UrlUtils {
         try {
             URI uri = new URI(url);
             host = uri.getHost();
+            if (host.startsWith("www.")) {
+                host = host.substring(4);
+            }
+            if (host.startsWith("m.")) {
+                host = host.substring(2);
+            }
         } catch (URISyntaxException e) {
             Timber.e(e, "Error while parsing url");
         }
