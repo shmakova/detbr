@@ -11,6 +11,7 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://clojars.org/repo/" }
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         // See dependencies.gradle for declaration of plugins.
@@ -57,6 +58,7 @@ allprojects {
         jcenter()
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://clojars.org/repo/" }
+        maven { url "https://jitpack.io" }
     }
 
     // Workaround to prevent Gradle from stealing focus from other apps during tests run/etc.

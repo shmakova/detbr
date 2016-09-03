@@ -134,6 +134,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             if (isViewAttached()) {
                 if (UrlUtils.isHttpLink(url)) {
                     getView().showSearchText(webView.getTitle(), url);
+                    getView().showLike();
                 }
                 getView().hideProgress();
                 webView.postInvalidate();
@@ -149,7 +150,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         public void onPageStarted(WebView webView, String url, Bitmap favicon) {
             if (isViewAttached()) {
                 getView().showProgress();
-                // TODO rx
+                getView().hideLike();
                 isPageInCard = isCardAlreadyExist(url);
                 isPageLiked = isPageInCard && getLikeFromUrl(url);
                 getView().setLike(isPageLiked);

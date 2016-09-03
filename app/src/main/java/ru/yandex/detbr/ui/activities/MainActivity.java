@@ -1,8 +1,6 @@
 package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -25,6 +23,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import ru.yandex.detbr.App;
+import ru.yandex.detbr.BuildConfig;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.data.repository.models.Category;
@@ -33,7 +32,6 @@ import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.ui.fragments.CategoriesFragment;
-import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
 import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 import ru.yandex.detbr.ui.other.ViewModifier;
@@ -41,7 +39,6 @@ import ru.yandex.detbr.ui.presenters.MainPresenter;
 import ru.yandex.detbr.ui.views.MainView;
 
 public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> implements
-        SchoolsFragment.OnSchoolClickListener,
         OnCardsItemClickListener,
         OnLikeClickListener,
         OnTabSelectListener,
@@ -57,8 +54,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
-    @Inject
-    SharedPreferences sharedPreferences;
 
     private ActionBar actionBar;
     private MainComponent mainComponent;
@@ -69,8 +64,12 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         injectDependencies();
         super.onCreate(savedInstanceState);
 
-        showIntro();
-        setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
+        if (BuildConfig.DEBUG) {
+            setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
+        } else {
+            setContentView(R.layout.activity_main);
+        }
+
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         bottomBar.setOnTabSelectListener(this);
@@ -91,24 +90,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     private void injectDependencies() {
         mainComponent = App.get(this).applicationComponent().plus(new MainModule(), new NavigationModule(this));
         mainComponent.inject(this);
-    }
-
-    private void showIntro() {
-        Thread thread = new Thread(() -> {
-            boolean isFirstStart = sharedPreferences.getBoolean("firstStart", true);
-
-            if (isFirstStart) {
-                Intent intent = new Intent(this, IntroActivity.class);
-                startActivity(intent);
-
-                sharedPreferences
-                        .edit()
-                        .putBoolean("firstStart", false)
-                        .apply();
-            }
-        });
-
-        thread.start();
     }
 
     @Override
@@ -157,11 +138,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     public void hideToolbar() {
         resetToolbar();
         actionBar.hide();
-    }
-
-    @Override
-    public void onSchoolClick() {
-        presenter.onSchoolClick();
     }
 
     @Override
