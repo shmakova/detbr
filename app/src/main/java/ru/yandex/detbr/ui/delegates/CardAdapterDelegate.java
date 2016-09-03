@@ -44,7 +44,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
 
     @Override
     protected boolean isForViewType(@NonNull Card item, List<Card> items, int position) {
-        return item.getCover().isEmpty();
+        return item.getCover() == null || item.getCover().isEmpty();
     }
 
     class CardViewHolder extends RecyclerView.ViewHolder {

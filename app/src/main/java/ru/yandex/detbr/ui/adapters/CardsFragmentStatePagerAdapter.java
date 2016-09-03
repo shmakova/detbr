@@ -26,10 +26,10 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Card card = cards.get(position);
 
-        if (card.getCover().isEmpty()) {
-            return new CardFragmentBuilder(card).build();
-        } else {
+        if (card.getCover() != null && !card.getCover().isEmpty()) {
             return new ImageCardFragmentBuilder(card).build();
+        } else {
+            return new CardFragmentBuilder(card).build();
         }
     }
 
