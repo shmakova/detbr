@@ -1,7 +1,6 @@
 package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -55,8 +54,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
-    @Inject
-    SharedPreferences sharedPreferences;
 
     private ActionBar actionBar;
     private MainComponent mainComponent;

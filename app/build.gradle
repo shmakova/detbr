@@ -42,9 +42,6 @@ android {
         debug {
             signingConfig signingConfigs.yamblz
             applicationIdSuffix '.debug'
-
-            // Enables code coverage with Jacoco only for instrumentation tests.
-            // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
             testCoverageEnabled true
         }
 
@@ -52,10 +49,6 @@ android {
             signingConfig signingConfigs.yamblz
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
-
-            // Enables code coverage with Jacoco only for instrumentation tests.
-            // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
-            testCoverageEnabled true
         }
     }
 
