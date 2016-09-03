@@ -24,6 +24,7 @@ import javax.inject.Named;
 
 import butterknife.BindView;
 import ru.yandex.detbr.App;
+import ru.yandex.detbr.BuildConfig;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.data.repository.models.Category;
@@ -66,7 +67,12 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         injectDependencies();
         super.onCreate(savedInstanceState);
 
-        setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
+        if (BuildConfig.DEBUG) {
+            setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
+        } else {
+            setContentView(R.layout.activity_main);
+        }
+
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         bottomBar.setOnTabSelectListener(this);
