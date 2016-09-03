@@ -13,13 +13,13 @@ import timber.log.Timber;
  */
 
 public final class UrlUtils {
-    private static final String YANDEX_SEARCH_URL = "https://yandex.ru/yandsearch?family=yes&lr=213&text=";
-    private static final String YANDEX_URL = "yandex.";
-    private static final String YANDEX_SAFE_PARAMETER = "family=yes";
-    private static final String YANDEX_QUERY_PARAMETER = "text=";
-    private static final String GOOGLE_URL = "google.";
-    private static final String GOOGLE_SAFE_PARAMETER = "safe=high";
-    private static final String GOOGLE_QUERY_PARAMETER = "q=";
+    public static final String YANDEX_SEARCH_URL = "https://yandex.ru/yandsearch?family=yes&lr=213&text=";
+    public static final String YANDEX_URL = "yandex.";
+    public static final String YANDEX_SAFE_PARAMETER = "family=yes";
+    public static final String YANDEX_QUERY_PARAMETER = "text=";
+    public static final String GOOGLE_URL = "google.";
+    public static final String GOOGLE_SAFE_PARAMETER = "safe=high";
+    public static final String GOOGLE_QUERY_PARAMETER = "q=";
     private static final String HTTP_PREFIX = "http://";
     private static final String HTTPS_PREFIX = "https://";
 
@@ -30,7 +30,7 @@ public final class UrlUtils {
         return Patterns.WEB_URL.matcher(query).matches();
     }
 
-    private static String getUrlFromQuery(String query) {
+    public static String getUrlFromQuery(String query) {
         String urlString = query.toLowerCase(Locale.getDefault());
 
         if (isValidUrl(urlString)) {
@@ -43,22 +43,6 @@ public final class UrlUtils {
         }
 
         return urlString;
-    }
-
-    public static String getSafeUrlFromQuery(String query) {
-        String safeUrl = getUrlFromQuery(query);
-
-        if (query.contains(GOOGLE_URL) &&
-                !query.contains(GOOGLE_SAFE_PARAMETER) &&
-                query.contains(GOOGLE_QUERY_PARAMETER)) {
-            safeUrl += "&" + GOOGLE_SAFE_PARAMETER;
-        } else if (query.contains(YANDEX_URL) &&
-                !query.contains(YANDEX_SAFE_PARAMETER) &&
-                query.contains(YANDEX_QUERY_PARAMETER)) {
-            safeUrl += "&" + YANDEX_SAFE_PARAMETER;
-        }
-
-        return safeUrl;
     }
 
     public static String getHost(String url) {

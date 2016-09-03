@@ -20,6 +20,7 @@ import ru.yandex.detbr.utils.UrlUtils;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by shmakova on 19.08.16.
@@ -55,7 +56,8 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @Override
     public void attachView(BrowserView view) {
         super.attachView(view);
-        view.setOnUrlListener(url -> {
+        view.setOnUrlListener(query -> {
+            String url = UrlUtils.getUrlFromQuery(query);
             tabsManager.addTab(Tab.builder().url(url).build());
             loadUrl(url);
         });
@@ -67,12 +69,11 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         }
     }
 
-    private void loadUrl(String query) {
-        String safeUrl = UrlUtils.getSafeUrlFromQuery(query);
-        checkUrlBeforeLoad(safeUrl, valid -> {
+    private void loadUrl(String url) {
+        checkUrlBeforeLoad(url, valid -> {
             if (isViewAttached()) {
                 if (valid) {
-                    getView().loadPageByUrl(safeUrl);
+                    getView().loadPageByUrl(url);
                 } else {
                     getView().showError();
                 }
@@ -86,7 +87,9 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         subscription = wotService.getLinkReputation(domain)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(wotResponse -> listener.urlChecked(wotResponse.isSafe()));
+                .subscribe(
+                        wotResponse -> listener.urlChecked(wotResponse.isSafe()),
+                        throwable -> Timber.e(throwable.getMessage(), "wotService.getLinkReputation error"));
     }
 
     private boolean getLikeFromUrl(@NonNull String url) {
@@ -160,6 +163,16 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (url.contains(UrlUtils.GOOGLE_URL) &&
+                    !url.contains(UrlUtils.GOOGLE_SAFE_PARAMETER) &&
+                    url.contains(UrlUtils.GOOGLE_QUERY_PARAMETER)) {
+                url += "&" + UrlUtils.GOOGLE_SAFE_PARAMETER;
+            } else if (url.contains(UrlUtils.YANDEX_URL) &&
+                    !url.contains(UrlUtils.YANDEX_SAFE_PARAMETER) &&
+                    url.contains(UrlUtils.YANDEX_QUERY_PARAMETER)) {
+                url += "&" + UrlUtils.YANDEX_SAFE_PARAMETER;
+            }
+
             loadUrl(url);
             return true;
         }
