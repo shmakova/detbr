@@ -1,6 +1,7 @@
 package ru.yandex.detbr.ui.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,14 +9,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import butterknife.OnLongClick;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
@@ -29,6 +33,8 @@ import ru.yandex.detbr.utils.UrlUtils;
 @FragmentWithArgs
 public class CardFragment extends BaseFragment {
     @Arg
+    int layoutResId;
+    @Arg
     Card card;
 
     @BindView(R.id.title)
@@ -37,12 +43,15 @@ public class CardFragment extends BaseFragment {
     TextView url;
     @BindView(R.id.like_btn)
     CheckBox likeButton;
+    @Nullable
+    @BindView(R.id.cover)
+    ImageView cover;
 
     private OnCardsItemClickListener onCardsItemClickListener;
     private OnLikeClickListener onLikeClickListener;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FragmentArgs.inject(this);
     }
@@ -52,8 +61,9 @@ public class CardFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.item_card, container, false);
+        return inflater.inflate(layoutResId, container, false);
     }
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -63,6 +73,14 @@ public class CardFragment extends BaseFragment {
             title.setText(card.getTitle());
             url.setText(UrlUtils.getHost(card.getUrl()));
             likeButton.setChecked(card.getLike());
+
+            if (card.getCover() != null && !card.getCover().isEmpty()) {
+                Glide.with(getActivity())
+                        .load(card.getCover())
+                        .centerCrop()
+                        .crossFade()
+                        .into(cover);
+            }
         }
     }
 
@@ -96,6 +114,16 @@ public class CardFragment extends BaseFragment {
         if (onCardsItemClickListener != null) {
             onCardsItemClickListener.onCardsItemClick(card);
         }
+    }
+
+    @OnLongClick(R.id.card)
+    public boolean onLongCardClick() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, card.getUrl());
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share)));
+        return true;
     }
 
     @OnClick(R.id.like_btn)
