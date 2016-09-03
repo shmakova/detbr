@@ -163,17 +163,19 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            String safeUrl = url;
+
             if (url.contains(UrlUtils.GOOGLE_URL) &&
                     !url.contains(UrlUtils.GOOGLE_SAFE_PARAMETER) &&
                     url.contains(UrlUtils.GOOGLE_QUERY_PARAMETER)) {
-                url += "&" + UrlUtils.GOOGLE_SAFE_PARAMETER;
+                safeUrl += "&" + UrlUtils.GOOGLE_SAFE_PARAMETER;
             } else if (url.contains(UrlUtils.YANDEX_URL) &&
                     !url.contains(UrlUtils.YANDEX_SAFE_PARAMETER) &&
                     url.contains(UrlUtils.YANDEX_QUERY_PARAMETER)) {
-                url += "&" + UrlUtils.YANDEX_SAFE_PARAMETER;
+                safeUrl += "&" + UrlUtils.YANDEX_SAFE_PARAMETER;
             }
 
-            loadUrl(url);
+            loadUrl(safeUrl);
             return true;
         }
 
