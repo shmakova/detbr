@@ -100,7 +100,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     public boolean isCardAlreadyExist(@NonNull String url) {
-        return dataRepository.isCardAlreadyExist(url);
+        return dataRepository.isCardExist(url);
     }
 
     private void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {

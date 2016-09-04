@@ -93,6 +93,8 @@ dependencies {
     provided libraries.autoValue
     apt libraries.autoValue
     apt libraries.autoValueParcel
+    apt libraries.autoValueFirebase
+    provided libraries.autoValueFirebaseAnnotation
 
     compile libraries.storIO
 
@@ -117,10 +119,6 @@ dependencies {
     compile libraries.okhttp
     compile libraries.glide
     compile libraries.okhttpLogging
-
-    apt 'me.mattlogan.auto.value:auto-value-firebase:0.2.1'
-    provided 'me.mattlogan.auto.value:auto-value-firebase-annotation:0.2.1'
-    provided 'com.jakewharton.auto.value:auto-value-annotations:1.2-update1'
 
     compile libraries.fragmentArgs
     apt libraries.fragmentArgsProcessor

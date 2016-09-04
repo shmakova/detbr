@@ -119,11 +119,11 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onCardsItemClick(Card card) {
-        navigationManager.openBrowser(card.getUrl());
+        navigationManager.openBrowser(card.url());
     }
 
     public void onLikeClick(Card card) {
-        dataRepository.changeLike(card.getUrl());
+        dataRepository.changeLike(card.url());
     }
 
     public void onBackPressed() {

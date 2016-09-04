@@ -26,7 +26,7 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Card card = cards.get(position);
 
-        if (card.getCover() == null || card.getCover().isEmpty()) {
+        if (card.image() == null || card.image().isEmpty()) {
             return new CardFragmentBuilder(card, R.layout.item_card).build();
         } else {
             return new CardFragmentBuilder(card, R.layout.item_image_card).build();

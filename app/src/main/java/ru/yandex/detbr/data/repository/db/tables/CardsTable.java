@@ -8,7 +8,7 @@ public final class CardsTable {
     public static final String TABLE = "cards_table";
 
     @NonNull
-    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_ID = "rowid";
 
     @NonNull
     public static final String COLUMN_TITLE = "title";
@@ -17,7 +17,7 @@ public final class CardsTable {
     public static final String COLUMN_URL = "url";
 
     @NonNull
-    public static final String COLUMN_COVER = "cover";
+    public static final String COLUMN_IMAGE = "image";
 
     @NonNull
     public static final String COLUMN_LIKE = "like";
@@ -28,10 +28,9 @@ public final class CardsTable {
     @NonNull
     public static String getCreateTableQuery() {
         return "CREATE TABLE " + TABLE + "("
-                + COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY, "
                 + COLUMN_TITLE + " TEXT NOT NULL, "
                 + COLUMN_URL + " TEXT NOT NULL UNIQUE, "
-                + COLUMN_COVER + " TEXT, "
+                + COLUMN_IMAGE + " TEXT, "
                 + COLUMN_LIKE + " INTEGER NOT NULL"
                 + ");";
     }
@@ -40,31 +39,31 @@ public final class CardsTable {
     @NonNull
     public static String fillDatabaseWithDefaultCards() {
         return "INSERT INTO " + TABLE +
-                " (" + COLUMN_TITLE + ", " + COLUMN_URL + ", " + COLUMN_COVER + ", " + COLUMN_LIKE + ") VALUES "
+                " (" + COLUMN_TITLE + ", " + COLUMN_URL + ", " + COLUMN_IMAGE + ", " + COLUMN_LIKE + ") VALUES "
                 + "(" + "\"LEGO Angry Birds\", " + "\"http://www.lego.com/ru-ru/angrybirdsmovie?icmp=CORUFRAngryBirds\", "
-                + "\"http://cache.lego.com/r/www/-/media/catalogs/themes/franchises/theme%20cards%202016/angrybirds.jpg\", " + "0" + "), "
+                + "\"http://cache.lego.com/r/www/-/media/catalogs/themes/franchises/theme%20cards%202016/angrybirds.jpg\", " + "1" + "), "
                 + "(" + "\"Тайная жизнь домашних животных\", " + "\"https://www.kinopoisk.ru/film/743088\", "
-                + "\"https://www.kinopoisk.ru/images/film_big/743088.jpg\", " + "0" + "), "
+                + "\"https://www.kinopoisk.ru/images/film_big/743088.jpg\", " + "1" + "), "
                 + "(" + "\"Лонгборд Penny Original 22\", " + "\"https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls\", "
-                + "\"https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg\", " + "0" + "), "
+                + "\"https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg\", " + "1" + "), "
                 + "(" + "\"Ледниковый период: Столкновение неизбежно\", " + "\"https://www.kinopoisk.ru/film/818145\", "
-                + "\"https://www.kinopoisk.ru/images/film_big/818145.jpg\", " + "0" + "), "
+                + "\"https://www.kinopoisk.ru/images/film_big/818145.jpg\", " + "1" + "), "
                 + "(" + "\"Выбираем велосипед для подростка\", " + "\"https://market.yandex.ru/articles/" +
                 "vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet\", "
-                + "\"https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg\", " + "0" + "), "
+                + "\"https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg\", " + "1" + "), "
                 + "(" + "\"5 МИРОВЫХ РЕКОРДОВ POKEMON GO\", " + "\"http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html\", "
-                + "\"http://img.youtube.com/vi/tV9EErN3x-k/0.jpg\", " + "0" + "), "
+                + "\"http://img.youtube.com/vi/tV9EErN3x-k/0.jpg\", " + "1" + "), "
                 + "(" + "\"Варкрафт\", " + "\"https://www.kinopoisk.ru/film/277328\", "
-                + "\"https://www.kinopoisk.ru/images/film_big/277328.jpg\", " + "0" + "), "
+                + "\"https://www.kinopoisk.ru/images/film_big/277328.jpg\", " + "1" + "), "
                 + "(" + "\"Тест: Правильно ли вы произносите названия известных брендов?\", "
                 + "\"https://www.adme.ru/tvorchestvo-dizajn/test-pravilno-li-vy-proiznosite-nazvaniya-izvestnyh-brendov-1081510/\", "
-                + "\"https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg\", " + "0" + "), "
+                + "\"https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg\", " + "1" + "), "
                 + "(" + "\"Люди Икс: Апокалипсис\", " + "\"https://www.kinopoisk.ru/film/814016\", "
-                + "\"https://www.kinopoisk.ru/images/film_big/814016.jpg\", " + "0" + "), "
+                + "\"https://www.kinopoisk.ru/images/film_big/814016.jpg\", " + "1" + "), "
                 + "(" + "\"11 комиксов о том, как изменилась наша жизнь с появлением интернета\", "
                 + "\"https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/\", "
-                + "\"https://files3.adme.ru/files/news/part_129/1299765/10455565-810-1000-53c212670e-1470661968.jpg\", " + "0" + "), "
+                + "\"https://files3.adme.ru/files/news/part_129/1299765/10455565-810-1000-53c212670e-1470661968.jpg\", " + "1" + "), "
                 + "(" + "\"Смотреть Гравити Фолз\", " + "\"https://yandex.ru/video/search?text=гравити%20фолз\", "
-                + "\"http://theheroes.ru/wp-content/uploads/2016/02/gravityfalls.jpg\", " + "0" + ");";
+                + "\"http://theheroes.ru/wp-content/uploads/2016/02/gravityfalls.jpg\", " + "1" + ");";
     }
 }

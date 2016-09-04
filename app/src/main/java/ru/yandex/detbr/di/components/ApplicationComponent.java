@@ -12,6 +12,7 @@ import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
 import ru.yandex.detbr.developer_settings.LeakCanaryProxy;
 import ru.yandex.detbr.di.modules.ApplicationModule;
 import ru.yandex.detbr.di.modules.BrowserModule;
+import ru.yandex.detbr.di.modules.CardModule;
 import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.di.modules.DbModule;
@@ -50,6 +51,9 @@ public interface ApplicationComponent {
 
     @NonNull
     CardsComponent plus(CardsModule module);
+
+    @NonNull
+    CardComponent plus(CardModule module);
 
     @NonNull
     FavoritesComponent plus(FavoritesModule module);

@@ -44,7 +44,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
 
     @Override
     protected boolean isForViewType(@NonNull Card item, List<Card> items, int position) {
-        return item.getCover() == null || item.getCover().isEmpty();
+        return item.image() == null || item.image().isEmpty();
     }
 
     class CardViewHolder extends RecyclerView.ViewHolder {
@@ -64,9 +64,9 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         }
 
         void bind(Card card) {
-            title.setText(card.getTitle());
-            url.setText(UrlUtils.getHost(card.getUrl()));
-            likeButton.setChecked(card.getLike());
+            title.setText(card.title());
+            url.setText(UrlUtils.getHost(card.url()));
+            likeButton.setChecked(card.like());
         }
 
         @OnClick(R.id.card)

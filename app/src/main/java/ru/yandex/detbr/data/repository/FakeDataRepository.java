@@ -16,6 +16,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ru.yandex.detbr.data.repository.db.tables.CardsTable;
@@ -44,21 +45,25 @@ public class FakeDataRepository implements DataRepository {
                 .observeValueEvent(databaseReference.child("categories"))
                 .map(DataSnapshot::getChildren)
                 .flatMap(dataSnapshots -> Observable.from(dataSnapshots)
-                        .map(Category::create).toList())
+                        .map(Category::create)
+                        .toList())
                 .first();
 
     }
 
     @Override
-    public Observable<List<Card>> getCardsListBySchool() {
-        return storIOSQLite
-                .get()
-                .listOfObjects(Card.class)
-                .withQuery(Query.builder()
-                        .table(CardsTable.TABLE)
-                        .build())
-                .prepare()
-                .asRxObservable()
+    public Observable<List<Card>> getCardsList() {
+        return RxFirebaseDatabase
+                .observeValueEvent(databaseReference.child("cards").limitToLast(100))
+                .map(DataSnapshot::getChildren)
+                .flatMap(dataSnapshots -> Observable.from(dataSnapshots)
+                        .map(Card::create)
+                        .toList()
+                        .map(cards -> {
+                            Collections.reverse(cards);
+                            return cards;
+                        })
+                )
                 .first();
     }
 
@@ -79,152 +84,23 @@ public class FakeDataRepository implements DataRepository {
 
     @Override
     public Observable<List<Card>> getCardsByCategory(Category category) {
-        List<Card> cards = new ArrayList<>();
-
-        switch (category.title()) {
-            case "Покемоны":
-                cards.add(Card.builder()
-                        .title("5 МИРОВЫХ РЕКОРДОВ POKEMON GO")
-                        .cover("http://img.youtube.com/vi/tV9EErN3x-k/0.jpg")
-                        .url("http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html")
-                        .build());
-                cards.add(Card.builder()
-                        .title("О ЧИТАХ В POKEMON GO")
-                        .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
-                        .url("http://gopokemongo.ru/o-chitah-v-pokemon-go.html")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Официальный сайт Pokemon")
-                        .url("http://www.pokemon.com/ru/")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Pokemon: смотреть все серии")
-                        .url("https://yandex.ru/video/search?text=покемоны&redircnt=1471710553.2")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Покедекс")
-                        .url("http://www.pokemon.com/ru/pokedex/")
-                        .build());
-                break;
-            case "Фильмы":
-                cards.add(Card.builder()
-                        .title("Бэтмен против Супермена: На заре справедливости")
-                        .url("https://www.kinopoisk.ru/film/770631")
-                        .cover("https://www.kinopoisk.ru/images/film_big/770631.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Варкрафт")
-                        .url("https://www.kinopoisk.ru/film/277328")
-                        .cover("https://www.kinopoisk.ru/images/film_big/277328.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Люди Икс: Апокалипсис")
-                        .url("https://www.kinopoisk.ru/film/814016")
-                        .cover("https://www.kinopoisk.ru/images/film_big/814016.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Алиса в Зазеркалье")
-                        .url("https://www.kinopoisk.ru/film/723988")
-                        .cover("https://www.kinopoisk.ru/images/film_big/723988.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Большой и добрый великан")
-                        .url("https://www.kinopoisk.ru/film/840885")
-                        .cover("https://www.kinopoisk.ru/images/film_big/840885.jpg")
-                        .build());
-                break;
-            case "Велосипеды":
-                cards.add(Card.builder()
-                        .title("Как велогонщики Тур де Франс побеждают ветер")
-                        .url("http://www.veloturist.org.ua/kak-velogonshhiki-tur-de-frans-pobezhdayut-veter/")
-                        .build());
-                cards.add(Card.builder()
-                        .title("10 велосипедов для подростков")
-                        .url("https://market.yandex.ru/collections/10-velosipedov-dlja-podrostkov?track=fr_325422_snippet")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Выбираем велосипед для подростка")
-                        .url("https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet")
-                        .cover("https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Такие разные горные велосипеды")
-                        .url("https://market.yandex.ru/articles/takie-raznye-gornye-velosipedy?track=fr_325422_snippet")
-                        .build());
-                break;
-            case "Мультфильмы":
-                cards.add(Card.builder()
-                        .title("Смотреть Гравити Фолз")
-                        .url("https://yandex.ru/video/search?text=гравити%20фолз")
-                        .cover("http://theheroes.ru/wp-content/uploads/2016/02/gravityfalls.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Смотреть Смешарики Пин Код")
-                        .url("https://yandex.ru/video/search?text=смешарики%20пин%20код")
-                        .cover("http://www.tvzavr.ru/common/tvzstatic/cache/644x363/16662.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Ледниковый период: Столкновение неизбежно")
-                        .url("https://www.kinopoisk.ru/film/818145")
-                        .cover("https://www.kinopoisk.ru/images/film_big/818145.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("В поисках Дори")
-                        .url("https://www.kinopoisk.ru/film/692957")
-                        .cover("https://www.kinopoisk.ru/images/film_big/692957.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Тайная жизнь домашних животных")
-                        .url("https://www.kinopoisk.ru/film/743088")
-                        .cover("https://www.kinopoisk.ru/images/film_big/743088.jpg")
-                        .build());
-                break;
-            case "Вещи":
-                cards.add(Card.builder()
-                        .title("15 крутых дизайнерских вещиц, с которыми жизнь станет приятнее")
-                        .url("https://www.adme.ru/tvorchestvo-dizajn/15-krutyh-dizajnerskih-veschic-s-kotorymi-zhizn-stanet-priyatnee-1152260/")
-                        .cover("https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("25 безумно милых штуковин, которые каждый захочет иметь в своем доме")
-                        .url("https://files4.adme.ru/files/news/part_94/945860/preview-25651565-650x341-98-1471442066.jpg")
-                        .cover("http://www.veloturist.org.ua/wp-content/uploads/2016/08/mari-senn-igraet-v-pokemon-go-na-563x353.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Тест: Сможете ли вы узнать логотипы известных брендов?")
-                        .url("https://www.adme.ru/tvorchestvo-reklama/test-smozhete-li-vy-uznat-logotipy-izvestnyh-brendov-1302515/")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Тест: Правильно ли вы произносите названия известных брендов?")
-                        .url("https://www.adme.ru/tvorchestvo-dizajn/test-pravilno-li-vy-proiznosite-nazvaniya-izvestnyh-brendov-1081510/")
-                        .cover("https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Лонгборд Penny Original 22\"")
-                        .url("https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls")
-                        .cover("https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg")
-                        .build());
-                break;
-            default:
-                cards.add(Card.builder()
-                        .title("10 иллюстраций о том, каким видят мир творческие люди")
-                        .url("https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet")
-                        .cover("https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("11 комиксов о том, как изменилась наша жизнь с появлением интернета")
-                        .url("https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/")
-                        .cover("https://files3.adme.ru/files/news/part_129/1299765/10455565-810-1000-53c212670e-1470661968.jpg")
-                        .build());
-                cards.add(Card.builder()
-                        .title("Смотреть Гравити Фолз")
-                        .url("https://yandex.ru/video/search?text=гравити%20фолз")
-                        .cover("http://theheroes.ru/wp-content/uploads/2016/02/gravityfalls.jpg")
-                        .build());
-                break;
-        }
-
-        return Observable.just(cards);
+        return RxFirebaseDatabase
+                .observeValueEvent(databaseReference
+                        .child("cards")
+                        .orderByChild("category")
+                        .equalTo(category.alias())
+                        .limitToLast(100)
+                )
+                .map(DataSnapshot::getChildren)
+                .flatMap(dataSnapshots -> Observable.from(dataSnapshots)
+                        .map(Card::create)
+                        .toList()
+                        .map(cards -> {
+                            Collections.reverse(cards);
+                            return cards;
+                        })
+                )
+                .first();
     }
 
     @Override
@@ -245,7 +121,7 @@ public class FakeDataRepository implements DataRepository {
             Card card = Card.builder()
                     .title(title)
                     .url(url)
-                    .cover(cover == null ? getCoverUrl(url) : cover)
+                    .image(cover == null ? getCoverUrl(url) : cover)
                     .like(like)
                     .build();
             saveCard(card);
@@ -271,14 +147,29 @@ public class FakeDataRepository implements DataRepository {
     }
 
     @Override
-    public boolean isCardAlreadyExist(@NonNull String url) {
+    public boolean isCardExist(@NonNull String url) {
         Card card = storIOSQLite
                 .get()
                 .object(Card.class)
                 .withQuery(Query.builder()
                         .table(CardsTable.TABLE)
-                        .where(CardsTable.COLUMN_URL + " LIKE ?")
+                        .where(CardsTable.COLUMN_URL + " LIKE ? ")
                         .whereArgs(url)
+                        .build())
+                .prepare()
+                .executeAsBlocking();
+        return card != null;
+    }
+
+    @Override
+    public boolean isCardLiked(@NonNull String url) {
+        Card card = storIOSQLite
+                .get()
+                .object(Card.class)
+                .withQuery(Query.builder()
+                        .table(CardsTable.TABLE)
+                        .where(CardsTable.COLUMN_URL + " LIKE ? AND " + CardsTable.COLUMN_LIKE + " = ?")
+                        .whereArgs(url, "1")
                         .build())
                 .prepare()
                 .executeAsBlocking();
@@ -328,6 +219,6 @@ public class FakeDataRepository implements DataRepository {
                         .build())
                 .prepare()
                 .executeAsBlocking();
-        return card != null && card.getLike();
+        return card != null && card.like();
     }
 }
