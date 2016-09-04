@@ -78,7 +78,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     private void openCategoryCards(Category category) {
         if (isViewAttached()) {
-            getView().updateToolbar(category.getTitle(), true, category.getBackgroundColor());
+            getView().updateToolbar(category.title(), true, category.color());
             getView().hideNavigationBars();
             getView().showToolbar();
             navigationManager.openCategoryCards(category);

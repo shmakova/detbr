@@ -17,6 +17,7 @@ import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.di.modules.DbModule;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.FavoritesModule;
+import ru.yandex.detbr.di.modules.FirebaseModule;
 import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.SchoolsModule;
@@ -29,6 +30,7 @@ import ru.yandex.detbr.ui.activities.MainActivity;
         ApplicationModule.class,
         DeveloperSettingsModule.class,
         WotNetworkModule.class,
+        FirebaseModule.class,
         DbModule.class
 })
 public interface ApplicationComponent {

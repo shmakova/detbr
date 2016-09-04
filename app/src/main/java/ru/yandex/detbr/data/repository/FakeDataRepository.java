@@ -3,6 +3,9 @@ package ru.yandex.detbr.data.repository;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.kelvinapps.rxfirebase.RxFirebaseDatabase;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.queries.Query;
 import com.pushtorefresh.storio.sqlite.queries.RawQuery;
@@ -28,38 +31,22 @@ import timber.log.Timber;
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class FakeDataRepository implements DataRepository {
     private final StorIOSQLite storIOSQLite;
+    private final DatabaseReference databaseReference;
 
-    public FakeDataRepository(StorIOSQLite storIOSQLite) {
+    public FakeDataRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
         this.storIOSQLite = storIOSQLite;
+        this.databaseReference = databaseReference;
     }
 
     @Override
     public Observable<List<Category>> getCategories() {
-        List<Category> categories = new ArrayList<>();
-        categories.add(Category.builder()
-                .title("Покемоны")
-                .backgroundColor("#f2dd50")
-                .build());
-        categories.add(Category.builder()
-                .title("Фильмы")
-                .backgroundColor("#4aa3fd")
-                .build());
-        categories.add(Category.builder().title("Вещи")
-                .backgroundColor("#e86302")
-                .build());
-        categories.add(Category.builder().title("Мультфильмы")
-                .backgroundColor("#cc79ff")
-                .build());
-        categories.add(Category.builder()
-                .title("Велосипеды")
-                .backgroundColor("#FFB940")
-                .build());
-        categories.add(Category.builder().title("Статьи").build());
-        categories.add(Category.builder().title("Образование").build());
-        categories.add(Category.builder().title("Спорт").build());
-        categories.add(Category.builder().title("Игры").build());
-        categories.add(Category.builder().title("Животные").build());
-        return Observable.just(categories);
+        return RxFirebaseDatabase
+                .observeValueEvent(databaseReference.child("categories"))
+                .map(DataSnapshot::getChildren)
+                .flatMap(dataSnapshots -> Observable.from(dataSnapshots)
+                        .map(Category::create).toList())
+                .first();
+
     }
 
     @Override
@@ -94,7 +81,7 @@ public class FakeDataRepository implements DataRepository {
     public Observable<List<Card>> getCardsByCategory(Category category) {
         List<Card> cards = new ArrayList<>();
 
-        switch (category.getTitle()) {
+        switch (category.title()) {
             case "Покемоны":
                 cards.add(Card.builder()
                         .title("5 МИРОВЫХ РЕКОРДОВ POKEMON GO")

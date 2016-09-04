@@ -2,7 +2,6 @@ package ru.yandex.detbr.ui.presenters;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Picture;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.webkit.WebChromeClient;
@@ -182,23 +181,15 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         private Bitmap getSnapshot(WebView webView) {
             final int width = 320;
             int height = 480;
-            Picture picture = webView.capturePicture();
-            Bitmap thumbnail = null;
-
-            if (picture.getWidth() > 0 && picture.getHeight() > 0) {
-                Bitmap bitmap = Bitmap.createBitmap(picture.getWidth(),
-                        picture.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-
-                picture.draw(canvas);
-                float factor = width / (float) bitmap.getWidth();
-                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
-                height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
-                thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
-
-                bitmap.recycle();
-                scaledBitmap.recycle();
-            }
+            Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            webView.draw(canvas);
+            float factor = width / (float) webView.getWidth();
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
+            height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
+            Bitmap thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
+            bitmap.recycle();
+            scaledBitmap.recycle();
 
             return thumbnail;
         }
