@@ -26,9 +26,11 @@ public interface DataRepository {
 
     Observable<List<String>> getSchoolsList();
 
-    void saveCardToRepository(String title, String url, @Nullable String cover, boolean like);
+    void saveFavouriteCard(String title, String url, @Nullable String cover, boolean like);
 
-    void saveCardToRepository(@NonNull Card card);
+    void saveFavouriteCard(@NonNull Card card);
+
+    void saveCard(Card card);
 
     void changeLike(@NonNull String url);
 

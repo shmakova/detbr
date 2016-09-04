@@ -3,7 +3,6 @@ package ru.yandex.detbr.ui.presenters;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -11,8 +10,10 @@ import android.webkit.WebViewClient;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.data.tabs.models.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
+import ru.yandex.detbr.ui.managers.LikeManager;
 import ru.yandex.detbr.ui.managers.TabsManager;
 import ru.yandex.detbr.ui.views.BrowserView;
 import ru.yandex.detbr.utils.UrlUtils;
@@ -32,20 +33,22 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final TabsManager tabsManager;
     @NonNull
+    private final LikeManager likeManager;
+    @NonNull
     private final DataRepository dataRepository;
     private Subscription subscription;
 
     private String currentUrl;
-    private boolean isPageInCard;
-    private boolean isPageLiked;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
-                            @NonNull DataRepository dataRepository) {
+                            @NonNull DataRepository dataRepository,
+                            @NonNull LikeManager likeManager) {
 
         this.wotService = wotService;
         this.dataRepository = dataRepository;
         this.tabsManager = tabsManager;
+        this.likeManager = likeManager;
     }
 
     private interface UrlCheckListener {
@@ -91,34 +94,18 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                         throwable -> Timber.e(throwable.getMessage(), "wotService.getLinkReputation error"));
     }
 
-    private boolean getLikeFromUrl(@NonNull String url) {
-        return dataRepository.getLikeFromUrl(url);
-    }
-
-    private void changeLike(@NonNull String url) {
-        dataRepository.changeLike(url);
-    }
-
-    public boolean isCardAlreadyExist(@NonNull String url) {
-        return dataRepository.isCardExist(url);
-    }
-
-    private void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
-        dataRepository.saveCardToRepository(title, url, cover, like);
-    }
-
     public void onLikeClick(String title, String url) {
-        if (isPageInCard) {
-            changeLike(currentUrl);
-        } else {
-            saveCardToRepository(title, url, null, true);
-            isPageInCard = true;
+        if (!likeManager.isUrlLiked(url)) {
+            Card card = Card.builder()
+                    .title(title)
+                    .url(url)
+                    .build();
+            likeManager.setLike(card);
+            dataRepository.saveCard(card);
         }
 
-        isPageLiked = !isPageLiked;
-
         if (isViewAttached()) {
-            getView().setLike(isPageLiked);
+            getView().setLike(true);
         }
     }
 
@@ -139,6 +126,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                     getView().showLike();
                 }
                 getView().hideProgress();
+                getView().setLike(likeManager.isUrlLiked(url));
                 webView.postInvalidate();
                 tabsManager.updateTab(Tab.builder()
                         .preview(getSnapshot(webView))
@@ -153,9 +141,6 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             if (isViewAttached()) {
                 getView().showProgress();
                 getView().hideLike();
-                isPageInCard = isCardAlreadyExist(url);
-                isPageLiked = isPageInCard && getLikeFromUrl(url);
-                getView().setLike(isPageLiked);
                 currentUrl = url;
             }
         }

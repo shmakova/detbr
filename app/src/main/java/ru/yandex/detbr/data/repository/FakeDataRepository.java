@@ -4,7 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 import com.kelvinapps.rxfirebase.RxFirebaseDatabase;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.queries.Query;
@@ -17,7 +19,9 @@ import org.jsoup.select.Elements;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ru.yandex.detbr.data.repository.db.tables.CardsTable;
 import ru.yandex.detbr.data.repository.models.Card;
@@ -115,30 +119,30 @@ public class FakeDataRepository implements DataRepository {
     }
 
     @Override
-    public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
+    public void saveFavouriteCard(String title, String url, @Nullable String cover, boolean like) {
         // TODO rx
         Thread thread = new Thread(() -> {
             Card card = Card.builder()
                     .title(title)
                     .url(url)
-                    .image(cover == null ? getCoverUrl(url) : cover)
+                    .image(cover == null ? getImageUrl(url) : cover)
                     .like(like)
                     .build();
-            saveCard(card);
+            saveLocalCard(card);
         });
         thread.start();
     }
 
     @Override
-    public void saveCardToRepository(@NonNull Card card) {
+    public void saveFavouriteCard(@NonNull Card card) {
         // TODO rx
         Thread thread = new Thread(() -> {
-            saveCard(card);
+            saveLocalCard(card);
         });
         thread.start();
     }
 
-    private void saveCard(@NonNull Card card) {
+    private void saveLocalCard(@NonNull Card card) {
         storIOSQLite
                 .put()
                 .object(card)
@@ -176,7 +180,7 @@ public class FakeDataRepository implements DataRepository {
         return card != null;
     }
 
-    private String getCoverUrl(@NonNull String url) {
+    private String getImageUrl(@NonNull String url) {
         try {
             Document doc = Jsoup.connect(url).maxBodySize(0).get();
             Elements images = doc.select("img[src]");
@@ -220,5 +224,41 @@ public class FakeDataRepository implements DataRepository {
                 .prepare()
                 .executeAsBlocking();
         return card != null && card.like();
+    }
+
+    @Override
+    public void saveCard(Card card) {
+        databaseReference.child("cards")
+                .orderByChild("url")
+                .equalTo(card.url())
+                .limitToLast(1)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot snapshot) {
+                        if (!snapshot.exists()) {
+                            pushCardToFirebase(card);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Timber.e(databaseError.getMessage(), "saveCard error");
+                    }
+                });
+    }
+
+    private void pushCardToFirebase(Card card) {
+        String key = databaseReference.child("cards").push().getKey();
+        databaseReference.child("cards")
+                .orderByChild("url")
+                .equalTo(card.url());
+        Map<String, Object> cardValues = new HashMap<>();
+        cardValues.put("url", card.url());
+        cardValues.put("title", card.title());
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/cards/" + key, cardValues);
+
+        databaseReference.updateChildren(childUpdates);
     }
 }

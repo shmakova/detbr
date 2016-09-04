@@ -21,7 +21,7 @@ public class LikeManager {
 
     public void setLike(Card card) {
         if (!dataRepository.isCardExist(card.url())) {
-            dataRepository.saveCardToRepository(card);
+            dataRepository.saveFavouriteCard(card);
         }
 
         dataRepository.changeLike(card.url());
