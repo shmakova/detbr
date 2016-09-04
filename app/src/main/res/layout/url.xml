@@ -13,7 +13,8 @@
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_margin="16dp"
-        android:visibility="gone"/>
+        android:visibility="gone"
+        android:contentDescription="@string/favicon"/>
 
     <TextView
         android:id="@+id/url"

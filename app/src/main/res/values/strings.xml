@@ -28,4 +28,5 @@
     <string name="second_intro_text">Отмечай понравившиеся карточки и сайты, так больше школьников увидит их</string>
     <string name="third_intro_text">Мы подготовили много интересного. Осталось узнать, где ты учишься</string>
     <string name="share">Поделись ссылкой с друзьями</string>
+    <string name="favicon">favicon</string>
 </resources>
