@@ -119,13 +119,13 @@ public class FakeDataRepository implements DataRepository {
     }
 
     @Override
-    public void saveFavouriteCard(String title, String url, @Nullable String cover, boolean like) {
+    public void saveFavouriteCard(String title, String url, @Nullable String image, boolean like) {
         // TODO rx
         Thread thread = new Thread(() -> {
             Card card = Card.builder()
                     .title(title)
                     .url(url)
-                    .image(cover == null ? getImageUrl(url) : cover)
+                    .image(image == null ? getImageUrl(url) : image)
                     .like(like)
                     .build();
             saveLocalCard(card);
@@ -183,12 +183,13 @@ public class FakeDataRepository implements DataRepository {
     private String getImageUrl(@NonNull String url) {
         try {
             Document doc = Jsoup.connect(url).maxBodySize(0).get();
-            Elements images = doc.select("img[src]");
+            Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+
             if (!images.isEmpty()) {
                 return images.get(0).attr("src");
             }
         } catch (IOException e) {
-            Timber.e(e, "Error");
+            Timber.e(e, "Error receiving image from page");
         }
         return null;
     }
@@ -255,6 +256,11 @@ public class FakeDataRepository implements DataRepository {
         Map<String, Object> cardValues = new HashMap<>();
         cardValues.put("url", card.url());
         cardValues.put("title", card.title());
+        String image = getImageUrl(card.url());
+
+        if (image != null && !image.isEmpty()) {
+            cardValues.put("image", image);
+        }
 
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/cards/" + key, cardValues);

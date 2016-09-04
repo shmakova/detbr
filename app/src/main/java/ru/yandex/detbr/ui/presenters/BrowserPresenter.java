@@ -38,8 +38,6 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     private final DataRepository dataRepository;
     private Subscription subscription;
 
-    private String currentUrl;
-
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
                             @NonNull DataRepository dataRepository,
@@ -141,7 +139,6 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             if (isViewAttached()) {
                 getView().showProgress();
                 getView().hideLike();
-                currentUrl = url;
             }
         }
 
