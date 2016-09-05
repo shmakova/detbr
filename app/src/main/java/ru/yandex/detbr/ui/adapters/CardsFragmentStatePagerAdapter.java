@@ -31,7 +31,6 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             case "yandex_text":
                 return new CardFragmentBuilder(card, R.layout.item_yandex_card).build();
             case "plain_image":
-                return new CardFragmentBuilder(card, R.layout.item_half_image_card).build();
             case "kinopoisk":
                 return new CardFragmentBuilder(card, R.layout.item_half_image_card).build();
             default:

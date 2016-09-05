@@ -20,6 +20,7 @@ public abstract class Card implements Parcelable {
     public static final String TEXT_TYPE = "plain_text";
     public static final String IMAGE_TYPE = "plain_image";
     public static final String YANDEX_TEXT_TYPE = "yandex_text";
+
     public abstract String title();
 
     public abstract String url();
@@ -55,7 +56,8 @@ public abstract class Card implements Parcelable {
     }
 
     public static Builder builder() {
-        return new AutoValue_Card.Builder();
+        return new AutoValue_Card.Builder()
+                .like(false);
     }
 
     @AutoValue.Builder
