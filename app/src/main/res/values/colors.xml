@@ -23,4 +23,6 @@
 
     <color name="yandex_description_color">#26000000</color>
 
+    <color name="category_background_color">#1f000000</color>
+
 </resources>

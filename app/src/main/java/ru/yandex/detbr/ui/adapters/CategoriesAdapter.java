@@ -25,7 +25,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
 
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.categories_item, parent, false);
+        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_categories, parent, false);
         return new CategoryViewHolder(convertView);
     }
 
