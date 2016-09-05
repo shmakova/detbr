@@ -80,8 +80,7 @@ public abstract class BaseRxPresenter<V extends MvpLceView<M>, M>
             @Override
             public void onError(Throwable e) {
                 Timber.e(e.getMessage());
-                throw new RuntimeException(e);
-                //BaseRxPresenter.this.onError(e, ptr);
+                BaseRxPresenter.this.onError(e, ptr);
             }
 
             @Override
