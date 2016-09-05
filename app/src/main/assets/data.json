@@ -106,6 +106,14 @@
       "type": "plain_image"
     },
     {
+      "title": "Смотреть Смешарики Пин Код",
+      "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
+      "site": "ПОИСК В ЯНДЕКСЕ",
+      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "category": "cartoons",
+      "type": "yandex_text"
+    },
+    {
       "title": "Неуловимый барханный кот появился на публике впервые за 10 лет",
       "url": "https://www.adme.ru/zhizn-zhivotnye/neulovimyj-barhannyj-kot-poyavilsya-na-publike-vpervye-za-10-let-1339765/",
       "site": "ADME",
@@ -136,6 +144,13 @@
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "sport",
       "type": "plain_text"
+    },
+    {
+      "title": "БОЕВЫЕ ИСКУССТВА ВОСТОКА",
+      "url": "http://karate.ru/boevie_iskusstva_vostoka/",
+      "image": "http://karate.ru/media/images/2014/7/18/img20979_14.jpg",
+      "category": "sport",
+      "type": "plain_image"
     },
     {
       "title": "25 безумно милых штуковин, которые каждый захочет иметь в своем доме",
@@ -171,6 +186,12 @@
       "type": "plain_text"
     },
     {
+      "title": "Современные танцы",
+      "url": "http://welovedance.ru/site/styles/sovremennye-tantsy",
+      "category": "sport",
+      "type": "plain_text"
+    },
+    {
       "title": "10 иллюстраций о том, каким видят мир творческие люди",
       "url": "https://www.adme.ru/tvorchestvo-hudozhniki/10-illyustracij-o-tom-kakim-vidyat-mir-tvorcheskie-lyudi-1316415/",
       "site": "ADME",
@@ -194,6 +215,12 @@
       "image": "http://cache.lego.com/r/www/-/media/catalogs/themes/franchises/theme%20cards%202016/angrybirds.jpg",
       "category": "games",
       "type": "plain_image"
+    },
+    {
+      "title": "Правила игры Казаки-разбойники",
+      "url": "https://bosichkom.com/игры-для-детей/казаки-разбойники",
+      "category": "games",
+      "type": "plain_text"
     },
     {
       "title": "11 комиксов о том, как изменилась наша жизнь с появлением интернета",
@@ -227,6 +254,12 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "bikes",
+      "type": "plain_text"
+    },
+    {
+      "title": "Правила игры «Мафия»",
+      "url": "https://bosichkom.com/игры-для-детей/мафия",
+      "category": "games",
       "type": "plain_text"
     },
     {
@@ -328,6 +361,14 @@
       "type": "kinopoisk"
     },
     {
+      "title": "Смотреть Гравити Фолз",
+      "url": "https://yandex.ru/video/search?text=гравити%20фолз&family=yes",
+      "site": "ПОИСК В ЯНДЕКСЕ",
+      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "category": "cartoons",
+      "type": "yandex_text"
+    },
+    {
       "title": "Почему люди не видели синий цвет до недавнего времени",
       "url": "https://lifehacker.ru/2015/06/13/blue/",
       "site": "ЛАЙФХАКЕР",
@@ -339,7 +380,7 @@
       "title": "В поисках Дори",
       "url": "https://www.kinopoisk.ru/film/692957",
       "site": "КИНОПОИСК",
-      "image": "https://www.kinopoisk.ru/images/film_big/818145.jpg",
+      "image": "https://www.kinopoisk.ru/images/film_big/692957.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "cartoons",
       "type": "kinopoisk"
@@ -389,14 +430,19 @@
   ],
   "categories": [
     {
-      "alias": "games",
-      "title": "Игры",
-      "color": "#cc79ff"
-    },
-    {
       "alias": "films",
       "title": "Фильмы",
       "color": "#4aa3fd"
+    },
+    {
+      "alias": "cartoons",
+      "title": "Мультики",
+      "color": "#e85958"
+    },
+    {
+      "alias": "games",
+      "title": "Игры",
+      "color": "#cc79ff"
     },
     {
       "alias": "pokemon",
@@ -432,11 +478,6 @@
       "alias": "goods",
       "title": "Предметы",
       "color": "#01f5a8"
-    },
-    {
-      "alias": "cartoons",
-      "title": "Мультики",
-      "color": "#e85958"
     }
   ]
 }
