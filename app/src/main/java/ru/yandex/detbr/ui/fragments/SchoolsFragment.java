@@ -93,6 +93,10 @@ public class SchoolsFragment
                 R.layout.dropdown_item, R.id.item, new ArrayList<>());
         autoCompleteTextView.setAdapter(schoolsAdapter);
 
+        int width = autoCompleteTextView.getLayoutParams().width;
+        autoCompleteTextView.setDropDownWidth((int) (width * 1.5));
+        autoCompleteTextView.setDropDownHorizontalOffset(-width / 4);
+
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();
             presenter.saveSchool(adapterView.getItemAtPosition(i).toString());
