@@ -253,7 +253,6 @@ public class FakeDataRepository implements DataRepository {
 
     @Override
     public void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
-        // TODO rx
         Thread thread = new Thread(() -> {
             Card card = Card.builder()
                     .title(title)
@@ -268,7 +267,6 @@ public class FakeDataRepository implements DataRepository {
 
     @Override
     public void saveCardToRepository(@NonNull Card card) {
-        // TODO rx
         Thread thread = new Thread(() -> {
             saveCard(card);
         });
@@ -313,7 +311,6 @@ public class FakeDataRepository implements DataRepository {
 
     @Override
     public void changeLike(@NonNull String url) {
-        // TODO rx
         Thread thread = new Thread(() -> {
             storIOSQLite
                     .executeSQL()

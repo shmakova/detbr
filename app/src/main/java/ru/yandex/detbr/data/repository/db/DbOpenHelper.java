@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import ru.yandex.detbr.data.repository.db.tables.CardsTable;
+import ru.yandex.detbr.data.repository.db.tables.TabsTable;
 
 
 public class DbOpenHelper extends SQLiteOpenHelper {
@@ -19,12 +20,15 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CardsTable.getCreateTableQuery());
         sqLiteDatabase.execSQL(CardsTable.fillDatabaseWithDefaultCards());
+        sqLiteDatabase.execSQL(TabsTable.getCreateTableQuery());
+        sqLiteDatabase.execSQL(TabsTable.fillDatabaseWithDefaultTabs());
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         // // TODO: 01.09.16 удалить после отладки
         sqLiteDatabase.execSQL("DROP TABLE " + CardsTable.TABLE);
+        sqLiteDatabase.execSQL("DROP TABLE " + TabsTable.TABLE);
         onCreate(sqLiteDatabase);
     }
 }
