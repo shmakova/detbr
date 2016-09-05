@@ -42,7 +42,7 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
     @NonNull
     @Override
     public ImageCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        return new ImageCardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_card, parent, false), onCardClickListener);
+        return new ImageCardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_half_image_card, parent, false), onCardClickListener);
     }
 
     @Override

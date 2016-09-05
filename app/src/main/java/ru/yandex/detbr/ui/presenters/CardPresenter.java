@@ -27,10 +27,10 @@ public class CardPresenter extends MvpBasePresenter<CardView> {
         if (card != null && isViewAttached()) {
             getView().setTitle(card.title());
 
-            if (card.site() != null && !card.site().isEmpty()) {
-                getView().setSite(card.site());
-            } else {
+            if (card.site() == null || card.site().isEmpty()) {
                 getView().setSite(UrlUtils.getHost(card.url()));
+            } else {
+                getView().setSite(card.site());
             }
 
             getView().setLike(likeManager.isUrlLiked(card.url()));
@@ -41,6 +41,10 @@ public class CardPresenter extends MvpBasePresenter<CardView> {
 
             if (card.favicon() != null && !card.favicon().isEmpty()) {
                 getView().setFavicon(card.favicon());
+            }
+
+            if (card.description() != null && !card.description().isEmpty()) {
+                getView().setDescription(card.description());
             }
         }
     }

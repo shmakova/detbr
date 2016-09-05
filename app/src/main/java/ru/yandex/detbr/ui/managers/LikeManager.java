@@ -24,6 +24,6 @@ public class LikeManager {
             dataRepository.saveFavouriteCard(card);
         }
 
-        dataRepository.changeLike(card.url());
+        dataRepository.toggleLike(card.url());
     }
 }

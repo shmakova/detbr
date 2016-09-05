@@ -93,17 +93,23 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     public void onLikeClick(String title, String url) {
-        if (!likeManager.isUrlLiked(url)) {
-            Card card = Card.builder()
-                    .title(title)
-                    .url(url)
-                    .build();
-            likeManager.setLike(card);
+        boolean isUrlLiked = likeManager.isUrlLiked(url);
+        Card card = Card.builder()
+                .title(title)
+                .url(url)
+                .build();
+
+        if (isUrlLiked) {
+            isUrlLiked = false;
+        } else {
             dataRepository.saveCard(card);
+            isUrlLiked = true;
         }
 
+        likeManager.setLike(card);
+
         if (isViewAttached()) {
-            getView().setLike(true);
+            getView().setLike(isUrlLiked);
         }
     }
 

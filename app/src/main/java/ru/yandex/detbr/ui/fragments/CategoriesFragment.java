@@ -154,6 +154,6 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
 
     @Override
     protected void animateLoadingViewIn() {
-        CustomLceAnimator.showLoading(loadingView, contentView, errorView);
+        CustomLceAnimator.hideLoading(loadingView, contentView, errorView);
     }
 }

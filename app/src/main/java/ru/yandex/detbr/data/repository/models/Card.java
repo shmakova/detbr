@@ -17,6 +17,9 @@ import me.mattlogan.auto.value.firebase.annotation.FirebaseValue;
 @AutoValue
 @FirebaseValue
 public abstract class Card implements Parcelable {
+    public static final String TEXT_TYPE = "plain_text";
+    public static final String IMAGE_TYPE = "plain_image";
+    public static final String YANDEX_TEXT_TYPE = "yandex_text";
     public abstract String title();
 
     public abstract String url();
@@ -52,13 +55,7 @@ public abstract class Card implements Parcelable {
     }
 
     public static Builder builder() {
-        return new AutoValue_Card.Builder()
-                .image("")
-                .site("")
-                .favicon("")
-                .description("")
-                .like(false)
-                .type("plain");
+        return new AutoValue_Card.Builder();
     }
 
     @AutoValue.Builder

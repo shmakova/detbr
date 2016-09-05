@@ -32,7 +32,7 @@ public interface DataRepository {
 
     void saveCard(Card card);
 
-    void changeLike(@NonNull String url);
+    void toggleLike(@NonNull String url);
 
     boolean getLikeFromUrl(@NonNull String url);
 

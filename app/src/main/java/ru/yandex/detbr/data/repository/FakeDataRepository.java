@@ -80,6 +80,7 @@ public class FakeDataRepository implements DataRepository {
                         .table(CardsTable.TABLE)
                         .where(CardsTable.COLUMN_LIKE + " = ?")
                         .whereArgs("1")
+                        .orderBy(CardsTable.COLUMN_ID + " DESC")
                         .build())
                 .prepare()
                 .asRxObservable()
@@ -109,6 +110,7 @@ public class FakeDataRepository implements DataRepository {
 
     @Override
     public Observable<List<String>> getSchoolsList() {
+        // TODO: 05.09.16 to firebase
         List<String> schools = new ArrayList<>();
         schools.add("ГБОУ г. Москвы лицей №1535");
         schools.add("ГБОУ г. Москвы центр образования №57 «Пятьдесят седьмая школа»");
@@ -195,7 +197,7 @@ public class FakeDataRepository implements DataRepository {
     }
 
     @Override
-    public void changeLike(@NonNull String url) {
+    public void toggleLike(@NonNull String url) {
         // TODO rx
         Thread thread = new Thread(() -> {
             storIOSQLite
@@ -258,8 +260,11 @@ public class FakeDataRepository implements DataRepository {
         cardValues.put("title", card.title());
         String image = getImageUrl(card.url());
 
-        if (image != null && !image.isEmpty()) {
+        if (image == null || image.isEmpty()) {
+            cardValues.put("type", "plain_text");
+        } else {
             cardValues.put("image", image);
+            cardValues.put("type", "plain_image");
         }
 
         Map<String, Object> childUpdates = new HashMap<>();

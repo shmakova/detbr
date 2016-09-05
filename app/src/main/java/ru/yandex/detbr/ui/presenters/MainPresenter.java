@@ -123,7 +123,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onLikeClick(Card card) {
-        dataRepository.changeLike(card.url());
+        dataRepository.toggleLike(card.url());
     }
 
     public void onBackPressed() {

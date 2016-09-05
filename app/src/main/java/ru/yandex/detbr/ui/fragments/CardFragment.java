@@ -52,6 +52,8 @@ public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> imple
     @BindView(R.id.favicon)
     ImageView favicon;
     @Nullable
+    @BindView(R.id.description)
+    TextView description;
 
     private OnCardsItemClickListener onCardsItemClickListener;
     private CardComponent cardComponent;
@@ -140,7 +142,7 @@ public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> imple
 
     @Override
     public void setDescription(String description) {
-        // TODO: 04.09.16  add field
+        this.description.setText(description);
     }
 
     @Override
@@ -160,10 +162,12 @@ public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> imple
 
     @Override
     public void setImage(String url) {
-        Glide.with(getActivity())
-                .load(card.image())
-                .centerCrop()
-                .crossFade()
-                .into(image);
+        if (image != null) {
+            Glide.with(getActivity())
+                    .load(card.image())
+                    .centerCrop()
+                    .crossFade()
+                    .into(image);
+        }
     }
 }
