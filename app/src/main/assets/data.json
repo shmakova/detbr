@@ -48,6 +48,15 @@
       "type": "plain_text"
     },
     {
+      "title": "Если бы у котов были цари, то только мейн-куны",
+      "url": "https://www.adme.ru/zhizn-zhivotnye/esli-by-u-kotov-byli-cari-to-tolko-mejn-kuny-1339165/",
+      "site": "ADME",
+      "image": "https://scontent-ams3-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13714059_311271969205288_1183699015_n.jpg",
+      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
+      "category": "animals",
+      "type": "plain_image"
+    },
+    {
       "title": "Как выбрать самокат",
       "url": "https://market.yandex.ru/articles/kak-vybrat-samokat?track=fr_ctlg_list",
       "site": "ЯНДЕКС.МАРКЕТ",
@@ -71,6 +80,13 @@
       "image": "https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg",
       "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "goods",
+      "type": "plain_image"
+    },
+    {
+      "title": "Породы собак с фото",
+      "url": "http://www.zoopicture.ru/porody-sobak/",
+      "image": "http://www.zoopicture.ru/assets/2011/08/4709599221_d1b4bba298.jpg",
+      "category": "animals",
       "type": "plain_image"
     },
     {
@@ -101,9 +117,7 @@
     {
       "title": "Породы собак с фото",
       "url": "http://www.zoopicture.ru/porody-sobak/",
-      "site": "ADME",
-      "image": "https://files6.adme.ru/files/news/part_134/1342865/preview-16588565-650x341-98-1471705379.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
+      "image": "http://www.zoopicture.ru/assets/2011/08/4709599221_d1b4bba298.jpg",
       "category": "animals",
       "type": "plain_image"
     },
@@ -317,10 +331,18 @@
       "title": "Почему люди не видели синий цвет до недавнего времени",
       "url": "https://lifehacker.ru/2015/06/13/blue/",
       "site": "ЛАЙФХАКЕР",
-      "image": "https://lifehacker.ru/wp-content/uploads/2015/06/shutterstock_62013421_1434208726.jpg",
       "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
       "category": "education",
-      "type": "plain_image"
+      "type": "plain_text"
+    },
+    {
+      "title": "В поисках Дори",
+      "url": "https://www.kinopoisk.ru/film/692957",
+      "site": "КИНОПОИСК",
+      "image": "https://www.kinopoisk.ru/images/film_big/818145.jpg",
+      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
+      "category": "cartoons",
+      "type": "kinopoisk"
     },
     {
       "title": "Блоги Minecraft",
