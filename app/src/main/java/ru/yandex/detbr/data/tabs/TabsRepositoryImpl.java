@@ -29,7 +29,7 @@ public class TabsRepositoryImpl implements TabsRepository {
                 .listOfObjects(Tab.class)
                 .withQuery(Query.builder()
                         .table(TabsTable.TABLE)
-                        .groupBy(TabsTable.COLUMN_ID + "DESC")
+                        .orderBy(TabsTable.COLUMN_ID + " DESC")
                         .build())
                 .prepare()
                 .asRxObservable()
