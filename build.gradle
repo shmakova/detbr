@@ -27,9 +27,6 @@ buildscript {
         // Needed for Lint + Retrolambda.
         classpath gradlePlugins.lombok
 
-        // Code coverage.
-        classpath gradlePlugins.jacoco
-
         // Performance metrics library for Android development.
         classpath gradlePlugins.androidDevMetrics
 

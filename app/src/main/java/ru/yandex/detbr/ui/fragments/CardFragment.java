@@ -20,18 +20,21 @@ import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnLongClick;
+import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.di.components.CardComponent;
+import ru.yandex.detbr.di.modules.CardModule;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
-import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
-import ru.yandex.detbr.utils.UrlUtils;
+import ru.yandex.detbr.ui.presenters.CardPresenter;
+import ru.yandex.detbr.ui.views.CardView;
 
 /**
  * Created by shmakova on 22.08.16.
  */
 
 @FragmentWithArgs
-public class CardFragment extends BaseFragment {
+public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> implements CardView {
     @Arg
     int layoutResId;
     @Arg
@@ -44,11 +47,16 @@ public class CardFragment extends BaseFragment {
     @BindView(R.id.like_btn)
     CheckBox likeButton;
     @Nullable
-    @BindView(R.id.cover)
-    ImageView cover;
+    @BindView(R.id.image)
+    ImageView image;
+    @BindView(R.id.favicon)
+    ImageView favicon;
+    @Nullable
+    @BindView(R.id.description)
+    TextView description;
 
     private OnCardsItemClickListener onCardsItemClickListener;
-    private OnLikeClickListener onLikeClickListener;
+    private CardComponent cardComponent;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,27 +69,24 @@ public class CardFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        injectDependencies();
         return inflater.inflate(layoutResId, container, false);
     }
 
+    private void injectDependencies() {
+        cardComponent = App.get(getContext()).applicationComponent().plus(new CardModule());
+        cardComponent.inject(this);
+    }
+
+    @Override
+    public CardPresenter createPresenter() {
+        return cardComponent.presenter();
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        if (card != null) {
-            title.setText(card.getTitle());
-            url.setText(UrlUtils.getHost(card.getUrl()));
-            likeButton.setChecked(card.getLike());
-
-            if (card.getCover() != null && !card.getCover().isEmpty()) {
-                Glide.with(getActivity())
-                        .load(card.getCover())
-                        .centerCrop()
-                        .crossFade()
-                        .into(cover);
-            }
-        }
+        presenter.loadCard(card);
     }
 
     @Override
@@ -93,13 +98,7 @@ public class CardFragment extends BaseFragment {
                     OnCardsItemClickListener.class.getName());
         }
 
-        if (!(getActivity() instanceof OnLikeClickListener)) {
-            throw new ClassCastException(getActivity().toString() + " must implement " +
-                    OnLikeClickListener.class.getName());
-        }
-
         onCardsItemClickListener = (OnCardsItemClickListener) getActivity();
-        onLikeClickListener = (OnLikeClickListener) getActivity();
     }
 
     @Override
@@ -120,7 +119,7 @@ public class CardFragment extends BaseFragment {
     public boolean onLongCardClick() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, card.getUrl());
+        sendIntent.putExtra(Intent.EXTRA_TEXT, card.url());
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share)));
         return true;
@@ -128,8 +127,47 @@ public class CardFragment extends BaseFragment {
 
     @OnClick(R.id.like_btn)
     public void onLikeButtonClick() {
-        if (onLikeClickListener != null) {
-            onLikeClickListener.onLikeClick(card);
+        presenter.onLikeClick(card);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        this.title.setText(title);
+    }
+
+    @Override
+    public void setLike(boolean like) {
+        likeButton.setChecked(like);
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description.setText(description);
+    }
+
+    @Override
+    public void setFavicon(String favicon) {
+        this.favicon.setVisibility(View.VISIBLE);
+        Glide.with(getActivity())
+                .load(card.favicon())
+                .centerCrop()
+                .crossFade()
+                .into(this.favicon);
+    }
+
+    @Override
+    public void setSite(String site) {
+        url.setText(site);
+    }
+
+    @Override
+    public void setImage(String url) {
+        if (image != null) {
+            Glide.with(getActivity())
+                    .load(card.image())
+                    .centerCrop()
+                    .crossFade()
+                    .into(image);
         }
     }
 }

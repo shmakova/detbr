@@ -11,7 +11,7 @@
     <string name="cards">Карточки</string>
     <string name="tabs">Вкладки</string>
     <string name="favorites">Любимое</string>
-    <string name="cards_title">Популярные темы</string>
+    <string name="cards_title">Популярное в школе</string>
     <string name="like_content_description">Лайк</string>
     <string name="favourite_cards_title">Любимые карточки</string>
     <string name="category_cover">category cover</string>
@@ -28,4 +28,5 @@
     <string name="second_intro_text">Отмечай понравившиеся карточки и сайты, так больше школьников увидит их</string>
     <string name="third_intro_text">Мы подготовили много интересного. Осталось узнать, где ты учишься</string>
     <string name="share">Поделись ссылкой с друзьями</string>
+    <string name="favicon">favicon</string>
 </resources>

@@ -78,7 +78,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     private void openCategoryCards(Category category) {
         if (isViewAttached()) {
-            getView().updateToolbar(category.getTitle(), true, category.getBackgroundColor());
+            getView().updateToolbar(category.title(), true, category.color());
             getView().hideNavigationBars();
             getView().showToolbar();
             navigationManager.openCategoryCards(category);
@@ -119,11 +119,11 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onCardsItemClick(Card card) {
-        navigationManager.openBrowser(card.getUrl());
+        navigationManager.openBrowser(card.url());
     }
 
     public void onLikeClick(Card card) {
-        dataRepository.changeLike(card.getUrl());
+        dataRepository.toggleLike(card.url());
     }
 
     public void onBackPressed() {

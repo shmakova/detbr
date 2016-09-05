@@ -15,13 +15,13 @@ public class CardGetResolver extends DefaultGetResolver<Card> {
     public Card mapFromCursor(@NonNull Cursor cursor) {
         String title = cursor.getString(cursor.getColumnIndex(CardsTable.COLUMN_TITLE));
         String url = cursor.getString(cursor.getColumnIndex(CardsTable.COLUMN_URL));
-        String cover = cursor.getString(cursor.getColumnIndex(CardsTable.COLUMN_COVER));
+        String image = cursor.getString(cursor.getColumnIndex(CardsTable.COLUMN_IMAGE));
         boolean like = cursor.getInt(cursor.getColumnIndex(CardsTable.COLUMN_LIKE)) == 1;
 
         return Card.builder()
                 .title(title)
                 .url(url)
-                .cover(cover)
+                .image(image)
                 .like(like)
                 .build();
     }

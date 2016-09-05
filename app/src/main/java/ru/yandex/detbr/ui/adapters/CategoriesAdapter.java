@@ -63,7 +63,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         }
 
         public void bind(Category category) {
-            this.category.setText(category.getTitle());
+            this.category.setText(category.title());
         }
     }
 }

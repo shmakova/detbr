@@ -23,7 +23,7 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
     }
 
     public void loadCards(boolean pullToRefresh) {
-        Observable<List<Card>> observable = dataRepository.getCardsListBySchool();
+        Observable<List<Card>> observable = dataRepository.getCardsList();
         subscribe(observable, pullToRefresh);
     }
 

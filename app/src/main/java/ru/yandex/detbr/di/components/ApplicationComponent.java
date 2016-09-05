@@ -12,11 +12,13 @@ import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
 import ru.yandex.detbr.developer_settings.LeakCanaryProxy;
 import ru.yandex.detbr.di.modules.ApplicationModule;
 import ru.yandex.detbr.di.modules.BrowserModule;
+import ru.yandex.detbr.di.modules.CardModule;
 import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.di.modules.DbModule;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.FavoritesModule;
+import ru.yandex.detbr.di.modules.FirebaseModule;
 import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.SchoolsModule;
@@ -29,6 +31,7 @@ import ru.yandex.detbr.ui.activities.MainActivity;
         ApplicationModule.class,
         DeveloperSettingsModule.class,
         WotNetworkModule.class,
+        FirebaseModule.class,
         DbModule.class
 })
 public interface ApplicationComponent {
@@ -48,6 +51,9 @@ public interface ApplicationComponent {
 
     @NonNull
     CardsComponent plus(CardsModule module);
+
+    @NonNull
+    CardComponent plus(CardModule module);
 
     @NonNull
     FavoritesComponent plus(FavoritesModule module);
