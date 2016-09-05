@@ -42,7 +42,6 @@ android {
         debug {
             signingConfig signingConfigs.yamblz
             applicationIdSuffix '.debug'
-            testCoverageEnabled true
         }
 
         release {
