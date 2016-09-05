@@ -46,7 +46,7 @@
       "image": "https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg",
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
-      "category": "articles",
+      "category": "goods",
       "type": "plain_image"
     },
     {
@@ -64,15 +64,6 @@
       "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "articles",
       "type": "plain_image"
-    },
-    {
-      "title": "Тайная жизнь домашних животных",
-      "url": "https://www.kinopoisk.ru/film/743088",
-      "site": "КИНОПОИСК",
-      "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
-      "category": "cartoons",
-      "type": "kinopoisk"
     },
     {
       "title": "10 велосипедов для подростков",
@@ -129,8 +120,9 @@
     {
       "title": "Блоги Minecraft",
       "url": "http://www.playground.ru/blogs/minecraft/",
+      "image": "http://i.playground.ru/i/91/30/12/00/blog/content/eutr074m.700xauto.jpg",
       "category": "games",
-      "type": "plain_text"
+      "type": "plain_image"
     },
     {
       "title": "Люди Икс: Апокалипсис",
@@ -148,13 +140,32 @@
       "favicon": "https://translate.yandex.net/main/v2.111.1472810626/i/favicon.png",
       "category": "education",
       "type": "yandex_text"
+    },
+    {
+      "title": "Тайная жизнь домашних животных",
+      "url": "https://www.kinopoisk.ru/film/743088",
+      "site": "КИНОПОИСК",
+      "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
+      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
+      "category": "cartoons",
+      "type": "kinopoisk"
     }
   ],
   "categories": [
     {
       "alias": "pokemon",
       "title": "Покемоны",
-      "color": "#f2dd50"
+      "color": "#f7d652"
+    },
+    {
+      "alias": "animals",
+      "title": "Животные",
+      "color": "#e68904"
+    },
+    {
+      "alias": "games",
+      "title": "Игры",
+      "color": "#cc79ff"
     },
     {
       "alias": "films",
@@ -162,19 +173,9 @@
       "color": "#4aa3fd"
     },
     {
-      "alias": "goods",
-      "title": "Вещи",
-      "color": "#e86302"
-    },
-    {
-      "alias": "cartoons",
-      "title": "Мультфильмы",
-      "color": "#cc79ff"
-    },
-    {
       "alias": "bikes",
       "title": "Велосипеды",
-      "color": "#FFB940"
+      "color": "#72c6e7"
     },
     {
       "alias": "articles",
@@ -184,22 +185,22 @@
     {
       "alias": "education",
       "title": "Образование",
-      "color": "#AB47BC"
+      "color": "#8840f2"
     },
     {
       "alias": "sport",
       "title": "Спорт",
-      "color": "#EC407A"
+      "color": "#aadb48"
     },
     {
-      "alias": "games",
-      "title": "Игры",
-      "color": "#ef5350"
+      "alias": "goods",
+      "title": "Предметы",
+      "color": "#01f5a8"
     },
     {
-      "alias": "animals",
-      "title": "Животные",
-      "color": "#00BCD4"
+      "alias": "cartoons",
+      "title": "Мультики",
+      "color": "#e85958"
     }
   ]
 }

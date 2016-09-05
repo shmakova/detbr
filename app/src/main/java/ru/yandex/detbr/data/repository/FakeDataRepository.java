@@ -27,6 +27,8 @@ import ru.yandex.detbr.data.repository.db.tables.CardsTable;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.data.repository.models.Category;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -185,13 +187,13 @@ public class FakeDataRepository implements DataRepository {
     private String getImageUrl(@NonNull String url) {
         try {
             Document doc = Jsoup.connect(url).maxBodySize(0).get();
-            Elements images = doc.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+            Elements images = doc.select("img[src~=(https?:\\/\\/.*\\.(?:png|jpe?g))]");
 
             if (!images.isEmpty()) {
                 return images.get(0).attr("src");
             }
         } catch (IOException e) {
-            Timber.e(e, "Error receiving image from page");
+            Timber.e(e, "Error retrieving image from page");
         }
         return null;
     }
@@ -245,7 +247,7 @@ public class FakeDataRepository implements DataRepository {
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        Timber.e(databaseError.getMessage(), "saveCard error");
+                        Timber.e(databaseError.getMessage(), "Save card error");
                     }
                 });
     }
@@ -255,21 +257,32 @@ public class FakeDataRepository implements DataRepository {
         databaseReference.child("cards")
                 .orderByChild("url")
                 .equalTo(card.url());
-        Map<String, Object> cardValues = new HashMap<>();
-        cardValues.put("url", card.url());
-        cardValues.put("title", card.title());
-        String image = getImageUrl(card.url());
 
-        if (image == null || image.isEmpty()) {
-            cardValues.put("type", "plain_text");
-        } else {
-            cardValues.put("image", image);
-            cardValues.put("type", "plain_image");
-        }
+        Observable.just(card)
+                .subscribeOn(Schedulers.io())
+                .map(it -> {
+                    Map<String, Object> cardValues = new HashMap<>();
+                    cardValues.put("url", it.url());
+                    cardValues.put("title", it.title());
+                    String image = getImageUrl(it.url());
 
-        Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/cards/" + key, cardValues);
+                    if (image == null || image.isEmpty()) {
+                        cardValues.put("type", "plain_text");
+                    } else {
+                        cardValues.put("image", image);
+                        cardValues.put("type", "plain_image");
+                    }
 
-        databaseReference.updateChildren(childUpdates);
+                    Map<String, Object> childUpdates = new HashMap<>();
+                    childUpdates.put("/cards/" + key, cardValues);
+
+                    databaseReference.updateChildren(childUpdates);
+
+                    return it;
+                })
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(it -> Timber.d(card.toString()),
+                        throwable -> Timber.e(throwable.getMessage(), "Push card to firebase"),
+                        () -> Timber.d("Completed: Card was sent"));
     }
 }
