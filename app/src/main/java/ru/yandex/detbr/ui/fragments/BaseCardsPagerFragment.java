@@ -20,10 +20,10 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.CardsComponent;
 import ru.yandex.detbr.di.modules.CardsModule;
+import ru.yandex.detbr.presentation.presenters.CardsPresenter;
+import ru.yandex.detbr.presentation.views.CardsView;
 import ru.yandex.detbr.ui.adapters.CardsFragmentStatePagerAdapter;
 import ru.yandex.detbr.ui.animators.CustomLceAnimator;
-import ru.yandex.detbr.ui.presenters.CardsPresenter;
-import ru.yandex.detbr.ui.views.CardsView;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 /**

@@ -6,8 +6,8 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.ui.managers.NavigationManager;
-import ru.yandex.detbr.ui.presenters.MainPresenter;
+import ru.yandex.detbr.managers.NavigationManager;
+import ru.yandex.detbr.presentation.presenters.MainPresenter;
 
 /**
  * Created by shmakova on 20.08.16.

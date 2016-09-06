@@ -22,8 +22,8 @@ import ru.yandex.detbr.data.repository.DataRepository;
 import ru.yandex.detbr.data.repository.FakeDataRepository;
 import ru.yandex.detbr.data.tabs.FakeTabsRepository;
 import ru.yandex.detbr.data.tabs.TabsRepository;
-import ru.yandex.detbr.ui.managers.LikeManager;
-import ru.yandex.detbr.ui.managers.TabsManager;
+import ru.yandex.detbr.managers.LikeManager;
+import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 @Module

@@ -24,12 +24,12 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.FavoritesComponent;
 import ru.yandex.detbr.di.modules.FavoritesModule;
+import ru.yandex.detbr.presentation.presenters.FavoritesPresenter;
+import ru.yandex.detbr.presentation.views.FavoritesView;
 import ru.yandex.detbr.ui.adapters.CardsAdapter;
 import ru.yandex.detbr.ui.delegates.OnCardClickListener;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
 import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
-import ru.yandex.detbr.ui.presenters.FavoritesPresenter;
-import ru.yandex.detbr.ui.views.FavoritesView;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 /**

@@ -23,4 +23,9 @@
 
     <color name="yandex_description_color">#26000000</color>
 
+
+    <!-- Categories bubbles -->
+    <color name="bubble_background">#1f000000</color>
+    <color name="bubble_text">#757575</color>
+
 </resources>

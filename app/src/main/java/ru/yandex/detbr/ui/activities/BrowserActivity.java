@@ -24,8 +24,8 @@ import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.di.components.BrowserComponent;
 import ru.yandex.detbr.di.modules.BrowserModule;
-import ru.yandex.detbr.ui.presenters.BrowserPresenter;
-import ru.yandex.detbr.ui.views.BrowserView;
+import ru.yandex.detbr.presentation.presenters.BrowserPresenter;
+import ru.yandex.detbr.presentation.views.BrowserView;
 
 public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresenter> implements
         BrowserView,

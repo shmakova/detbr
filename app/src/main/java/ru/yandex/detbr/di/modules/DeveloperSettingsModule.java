@@ -10,16 +10,16 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.developer_settings.DevMetricsProxy;
-import ru.yandex.detbr.developer_settings.DevMetricsProxyImpl;
-import ru.yandex.detbr.developer_settings.DeveloperSettings;
-import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
-import ru.yandex.detbr.developer_settings.DeveloperSettingsModelImpl;
-import ru.yandex.detbr.developer_settings.LeakCanaryProxy;
-import ru.yandex.detbr.developer_settings.LeakCanaryProxyImpl;
-import ru.yandex.detbr.developer_settings.MainActivityViewModifier;
+import ru.yandex.detbr.data.developer_settings.DevMetricsProxy;
+import ru.yandex.detbr.data.developer_settings.DevMetricsProxyImpl;
+import ru.yandex.detbr.data.developer_settings.DeveloperSettings;
+import ru.yandex.detbr.data.developer_settings.DeveloperSettingsModel;
+import ru.yandex.detbr.data.developer_settings.DeveloperSettingsModelImpl;
+import ru.yandex.detbr.data.developer_settings.LeakCanaryProxy;
+import ru.yandex.detbr.data.developer_settings.LeakCanaryProxyImpl;
+import ru.yandex.detbr.data.developer_settings.MainActivityViewModifier;
+import ru.yandex.detbr.presentation.presenters.DeveloperSettingsPresenter;
 import ru.yandex.detbr.ui.other.ViewModifier;
-import ru.yandex.detbr.ui.presenters.DeveloperSettingsPresenter;
 
 import static android.content.Context.MODE_PRIVATE;
 

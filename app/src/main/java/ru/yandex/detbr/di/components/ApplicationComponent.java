@@ -7,9 +7,9 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import ru.yandex.detbr.developer_settings.DevMetricsProxy;
-import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
-import ru.yandex.detbr.developer_settings.LeakCanaryProxy;
+import ru.yandex.detbr.data.developer_settings.DevMetricsProxy;
+import ru.yandex.detbr.data.developer_settings.DeveloperSettingsModel;
+import ru.yandex.detbr.data.developer_settings.LeakCanaryProxy;
 import ru.yandex.detbr.di.modules.ApplicationModule;
 import ru.yandex.detbr.di.modules.BrowserModule;
 import ru.yandex.detbr.di.modules.CardModule;

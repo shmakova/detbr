@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import dagger.Subcomponent;
 import ru.yandex.detbr.di.modules.FavoritesModule;
 import ru.yandex.detbr.di.scopes.PerFragment;
+import ru.yandex.detbr.presentation.presenters.FavoritesPresenter;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
-import ru.yandex.detbr.ui.presenters.FavoritesPresenter;
 
 /**
  * Created by shmakova on 28.08.16.
