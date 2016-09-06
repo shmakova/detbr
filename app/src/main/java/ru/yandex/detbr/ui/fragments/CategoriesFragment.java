@@ -27,10 +27,10 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Category;
 import ru.yandex.detbr.di.components.CategoriesComponent;
 import ru.yandex.detbr.di.modules.CategoriesModule;
+import ru.yandex.detbr.presentation.presenters.CategoriesPresenter;
+import ru.yandex.detbr.presentation.views.CategoriesView;
 import ru.yandex.detbr.ui.adapters.CategoriesAdapter;
 import ru.yandex.detbr.ui.animators.CustomLceAnimator;
-import ru.yandex.detbr.ui.presenters.CategoriesPresenter;
-import ru.yandex.detbr.ui.views.CategoriesView;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 /**
@@ -73,7 +73,13 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = categoriesComponent.adapter();
+
+        if (category != null) {
+            adapter = new CategoriesAdapter(true);
+        } else {
+            adapter = new CategoriesAdapter(false);
+        }
+
         categories.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false);

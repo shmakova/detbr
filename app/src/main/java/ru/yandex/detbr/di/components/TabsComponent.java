@@ -6,9 +6,9 @@ import dagger.Subcomponent;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.TabsModule;
 import ru.yandex.detbr.di.scopes.PerFragment;
+import ru.yandex.detbr.presentation.presenters.TabsPresenter;
 import ru.yandex.detbr.ui.adapters.TabsAdapter;
 import ru.yandex.detbr.ui.fragments.TabsFragment;
-import ru.yandex.detbr.ui.presenters.TabsPresenter;
 
 /**
  * Created by shmakova on 29.08.16.

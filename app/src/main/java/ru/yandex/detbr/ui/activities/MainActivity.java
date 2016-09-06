@@ -31,12 +31,12 @@ import ru.yandex.detbr.di.components.MainComponent;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.NavigationModule;
+import ru.yandex.detbr.presentation.presenters.MainPresenter;
+import ru.yandex.detbr.presentation.views.MainView;
 import ru.yandex.detbr.ui.fragments.CategoriesFragment;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
 import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 import ru.yandex.detbr.ui.other.ViewModifier;
-import ru.yandex.detbr.ui.presenters.MainPresenter;
-import ru.yandex.detbr.ui.views.MainView;
 
 public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> implements
         OnCardsItemClickListener,

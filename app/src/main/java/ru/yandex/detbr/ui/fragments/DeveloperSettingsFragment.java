@@ -28,9 +28,9 @@ import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.di.components.DeveloperSettingsComponent;
-import ru.yandex.detbr.performance.AnyThread;
-import ru.yandex.detbr.ui.presenters.DeveloperSettingsPresenter;
-import ru.yandex.detbr.ui.views.DeveloperSettingsView;
+import ru.yandex.detbr.presentation.presenters.DeveloperSettingsPresenter;
+import ru.yandex.detbr.presentation.views.DeveloperSettingsView;
+import ru.yandex.detbr.ui.other.AnyThread;
 
 public class DeveloperSettingsFragment extends BaseMvpFragment<DeveloperSettingsView, DeveloperSettingsPresenter> implements DeveloperSettingsView {
     @Inject

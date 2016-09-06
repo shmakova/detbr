@@ -7,8 +7,8 @@ import android.support.annotation.NonNull;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
-import ru.yandex.detbr.developer_settings.DevMetricsProxy;
-import ru.yandex.detbr.developer_settings.DeveloperSettingsModel;
+import ru.yandex.detbr.data.developer_settings.DevMetricsProxy;
+import ru.yandex.detbr.data.developer_settings.DeveloperSettingsModel;
 import ru.yandex.detbr.di.components.ApplicationComponent;
 import ru.yandex.detbr.di.components.DaggerApplicationComponent;
 import ru.yandex.detbr.di.modules.ApplicationModule;

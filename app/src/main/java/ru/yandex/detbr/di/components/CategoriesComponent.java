@@ -5,9 +5,8 @@ import android.support.annotation.NonNull;
 import dagger.Subcomponent;
 import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.di.scopes.PerFragment;
-import ru.yandex.detbr.ui.adapters.CategoriesAdapter;
+import ru.yandex.detbr.presentation.presenters.CategoriesPresenter;
 import ru.yandex.detbr.ui.fragments.CategoriesFragment;
-import ru.yandex.detbr.ui.presenters.CategoriesPresenter;
 
 /**
  * Created by shmakova on 24.08.16.
@@ -20,7 +19,4 @@ public interface CategoriesComponent {
 
     @NonNull
     CategoriesPresenter presenter();
-
-    @NonNull
-    CategoriesAdapter adapter();
 }

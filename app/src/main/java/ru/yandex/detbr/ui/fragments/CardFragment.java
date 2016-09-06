@@ -25,9 +25,9 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.CardComponent;
 import ru.yandex.detbr.di.modules.CardModule;
+import ru.yandex.detbr.presentation.presenters.CardPresenter;
+import ru.yandex.detbr.presentation.views.CardView;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
-import ru.yandex.detbr.ui.presenters.CardPresenter;
-import ru.yandex.detbr.ui.views.CardView;
 
 /**
  * Created by shmakova on 22.08.16.

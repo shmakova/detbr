@@ -3,12 +3,7 @@
                                     xmlns:app="http://schemas.android.com/apk/res-auto"
                                     xmlns:tools="http://schemas.android.com/tools"
                                     android:id="@+id/card"
-                                    android:layout_width="@dimen/card_size"
-                                    android:layout_height="@dimen/card_size"
-                                    android:layout_gravity="center"
-                                    android:clickable="true"
-                                    android:elevation="2dp"
-                                    android:foreground="?android:attr/selectableItemBackground"
+                                    style="@style/Card"
                                     app:cardCornerRadius="15dp"
                                     app:cardUseCompatPadding="true"
                                     tools:ignore="UnusedAttribute">

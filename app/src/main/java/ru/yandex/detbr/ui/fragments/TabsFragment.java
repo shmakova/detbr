@@ -25,11 +25,11 @@ import ru.yandex.detbr.data.tabs.models.Tab;
 import ru.yandex.detbr.di.components.TabsComponent;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.TabsModule;
+import ru.yandex.detbr.presentation.presenters.TabsPresenter;
+import ru.yandex.detbr.presentation.views.TabsView;
 import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.adapters.TabsAdapter;
 import ru.yandex.detbr.ui.other.DividerItemDecoration;
-import ru.yandex.detbr.ui.presenters.TabsPresenter;
-import ru.yandex.detbr.ui.views.TabsView;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 /**
