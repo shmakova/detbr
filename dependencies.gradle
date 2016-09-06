@@ -1,13 +1,13 @@
 ext.versions = [
-        code                         : 2,
+        code                         : 3,
         name                         : '1.0',
 
         minSdk                       : 16,
-        targetSdk                    : 23,
-        compileSdk                   : 23,
+        targetSdk                    : 24,
+        compileSdk                   : 24,
         buildTools                   : '24.0.1',
 
-        androidGradlePlugin          : '2.2.0-beta3',
+        androidGradlePlugin          : '2.2.0-rc1',
         aptGradlePlugin              : '1.8',
         retrolambdaGradlePlugin      : '3.2.5',
         lombokGradlePlugin           : '0.2.3.a2',
@@ -22,11 +22,13 @@ ext.versions = [
 
         rxJava                       : '1.1.8',
         rxAndroid                    : '1.2.1',
+        rxFirebase                   : '0.0.12',
 
         dagger                       : '2.6',
 
         autoValue                    : '1.2',
-        autoValueParcel              : '1.0.3',
+        autoValueParcel              : '0.2.4-rc2',
+        autoValueFirebase            : '0.2.1',
 
         storIO                       : '1.10.0',
 
@@ -45,7 +47,7 @@ ext.versions = [
         bottomBar                    : '2.+',
         floatingSearchView           : '2.0.3',
         adapterDelegates             : '2.0.1',
-        appintro                     : '4.0.0',
+        viewPagerIndicator           : '2.4.1',
 
         mosby                        : '2.0.1',
 
@@ -82,69 +84,74 @@ ext.gradlePlugins = [
 ]
 
 ext.libraries = [
-        dagger               : "com.google.dagger:dagger:$versions.dagger",
-        daggerCompiler       : "com.google.dagger:dagger-compiler:$versions.dagger",
+        dagger                     : "com.google.dagger:dagger:$versions.dagger",
+        daggerCompiler             : "com.google.dagger:dagger-compiler:$versions.dagger",
 
-        autoValue            : "com.google.auto.value:auto-value:$versions.autoValue",
-        autoValueParcel      : "frankiesardo:auto-parcel:$versions.autoValueParcel",
+        autoValue                  : "com.google.auto.value:auto-value:$versions.autoValue",
+        autoValueParcel            : "com.ryanharter.auto.value:auto-value-parcel:$versions.autoValueParcel",
+        autoValueFirebase          : "me.mattlogan.auto.value:auto-value-firebase:$versions.autoValueFirebase",
+        autoValueFirebaseAnnotation: "me.mattlogan.auto.value:auto-value-firebase-annotation:$versions.autoValueFirebase",
 
-        storIO               : "com.pushtorefresh.storio:sqlite:$versions.storIO",
 
-        supportAnnotations   : "com.android.support:support-annotations:$versions.supportLibs",
-        supportAppCompat     : "com.android.support:appcompat-v7:$versions.supportLibs",
-        supportDesign        : "com.android.support:design:$versions.supportLibs",
-        supportRecyclerView  : "com.android.support:recyclerview-v7:$versions.supportLibs",
-        supportCardView      : "com.android.support:cardview-v7:$versions.supportLibs",
+        storIO                     : "com.pushtorefresh.storio:sqlite:$versions.storIO",
 
-        butterKnife          : "com.jakewharton:butterknife:$versions.butterKnife",
-        butterKnifeCompiler  : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
-        timber               : "com.jakewharton.timber:timber:$versions.timber",
+        supportAnnotations         : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat           : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign              : "com.android.support:design:$versions.supportLibs",
+        supportRecyclerView        : "com.android.support:recyclerview-v7:$versions.supportLibs",
+        supportCardView            : "com.android.support:cardview-v7:$versions.supportLibs",
 
-        jsoup                : "org.jsoup:jsoup:$versions.jsoup",
+        butterKnife                : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler        : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        timber                     : "com.jakewharton.timber:timber:$versions.timber",
 
-        rxJava               : "io.reactivex:rxjava:$versions.rxJava",
-        rxAndroid            : "io.reactivex:rxandroid:$versions.rxAndroid",
+        jsoup                      : "org.jsoup:jsoup:$versions.jsoup",
 
-        retrofit             : "com.squareup.retrofit2:retrofit:$versions.retrofit",
-        converterGson        : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
-        retrofitRx           : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
+        rxJava                     : "io.reactivex:rxjava:$versions.rxJava",
+        rxAndroid                  : "io.reactivex:rxandroid:$versions.rxAndroid",
+        rxFirebase                 : "com.kelvinapps:rxfirebase:$versions.rxFirebase",
 
-        gson                 : "com.google.code.gson:gson:$versions.gson",
-        okhttp               : "com.squareup.okhttp3:okhttp:$versions.okhttp",
-        okhttpLogging        : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
-        glide                : "com.github.bumptech.glide:glide:$versions.glide",
-        fragmentArgs         : "com.hannesdorfmann.fragmentargs:annotation:$versions.fragmentArgs",
-        fragmentArgsProcessor: "com.hannesdorfmann.fragmentargs:processor:$versions.fragmentArgs",
-        icepick              : "frankiesardo:icepick:$versions.icepick",
-        icepickProcessor     : "frankiesardo:icepick-processor:$versions.icepick",
-        bottomBar            : "com.roughike:bottom-bar:$versions.bottomBar",
-        floatingSearchView   : "com.github.arimorty:floatingsearchview:$versions.floatingSearchView",
-        adapterDelegates     : "com.hannesdorfmann:adapterdelegates2:$versions.adapterDelegates",
-        appintro             : "com.github.paolorotolo:appintro:$versions.appintro",
+        retrofit                   : "com.squareup.retrofit2:retrofit:$versions.retrofit",
+        converterGson              : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
+        retrofitRx                 : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
 
-        mosby                : "com.hannesdorfmann.mosby:mvp:$versions.mosby",
-        mosbyViewstate       : "com.hannesdorfmann.mosby:viewstate:$versions.mosby",
+        gson                       : "com.google.code.gson:gson:$versions.gson",
+        okhttp                     : "com.squareup.okhttp3:okhttp:$versions.okhttp",
+        okhttpLogging              : "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
+        glide                      : "com.github.bumptech.glide:glide:$versions.glide",
+        fragmentArgs               : "com.hannesdorfmann.fragmentargs:annotation:$versions.fragmentArgs",
+        fragmentArgsProcessor      : "com.hannesdorfmann.fragmentargs:processor:$versions.fragmentArgs",
+        icepick                    : "frankiesardo:icepick:$versions.icepick",
+        icepickProcessor           : "frankiesardo:icepick-processor:$versions.icepick",
+        bottomBar                  : "com.roughike:bottom-bar:$versions.bottomBar",
+        floatingSearchView         : "com.github.arimorty:floatingsearchview:$versions.floatingSearchView",
+        adapterDelegates           : "com.hannesdorfmann:adapterdelegates2:$versions.adapterDelegates",
+        viewPagerIndicator         : "com.github.JakeWharton:ViewPagerIndicator:$versions.viewPagerIndicator",
+
+        mosby                      : "com.hannesdorfmann.mosby:mvp:$versions.mosby",
+        mosbyViewstate             : "com.hannesdorfmann.mosby:viewstate:$versions.mosby",
 
         // Developer Tools
-        stetho               : "com.facebook.stetho:stetho:$versions.stetho",
-        leakCanary           : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
-        tinyDancer           : "com.github.brianPlummer:tinydancer:$versions.tinyDancer",
-        lynx                 : "com.github.pedrovgs:lynx:$versions.lynx",
-        devMetricsNoOp       : "com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:$versions.androidDevMetricsGradlePlugin",
-        processPhoenix       : "com.jakewharton:process-phoenix:$versions.processPhoenix",
+        stetho                     : "com.facebook.stetho:stetho:$versions.stetho",
+        leakCanary                 : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
+        tinyDancer                 : "com.github.brianPlummer:tinydancer:$versions.tinyDancer",
+        lynx                       : "com.github.pedrovgs:lynx:$versions.lynx",
+        devMetricsNoOp             : "com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:$versions.androidDevMetricsGradlePlugin",
+        processPhoenix             : "com.jakewharton:process-phoenix:$versions.processPhoenix",
 
         // Test dependencies
-        junit                : "junit:junit:$versions.junit",
-        robolectric          : "org.robolectric:robolectric:$versions.robolectric",
-        assertJ              : "org.assertj:assertj-core:$versions.assertJ",
-        equalsVerifier       : "nl.jqno.equalsverifier:equalsverifier:$versions.equalsVerifier",
-        mockitoCore          : "org.mockito:mockito-core:$versions.mockito",
-        supportTestRunner    : "com.android.support.test:runner:$versions.supportTestRunner",
-        supportTestRules     : "com.android.support.test:rules:$versions.supportTestRunner",
-        espressoCore         : "com.android.support.test.espresso:espresso-core:$versions.espresso",
-        espressoContrib      : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
+        junit                      : "junit:junit:$versions.junit",
+        robolectric                : "org.robolectric:robolectric:$versions.robolectric",
+        assertJ                    : "org.assertj:assertj-core:$versions.assertJ",
+        equalsVerifier             : "nl.jqno.equalsverifier:equalsverifier:$versions.equalsVerifier",
+        mockitoCore                : "org.mockito:mockito-core:$versions.mockito",
+        supportTestRunner          : "com.android.support.test:runner:$versions.supportTestRunner",
+        supportTestRules           : "com.android.support.test:rules:$versions.supportTestRunner",
+        espressoCore               : "com.android.support.test.espresso:espresso-core:$versions.espresso",
+        espressoContrib            : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
 
         // Analytics
-        crashlytics          : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
-        playServicesAnalytics: "com.google.android.gms:play-services-analytics:$versions.playServices",
+        crashlytics                : "com.crashlytics.sdk.android:crashlytics:$versions.crashlytics",
+        playServicesAnalytics      : "com.google.android.gms:play-services-analytics:$versions.playServices",
+        firebaseDatabase           : "com.google.firebase:firebase-database:$versions.playServices",
 ]

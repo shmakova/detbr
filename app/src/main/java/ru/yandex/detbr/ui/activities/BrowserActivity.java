@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
@@ -118,6 +119,16 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     @Override
     public void showError() {
         webView.loadUrl(CHILD_SAFETY_HTML);
+    }
+
+    @Override
+    public void showLike() {
+        fabLike.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLike() {
+        fabLike.setVisibility(View.GONE);
     }
 
     @Override

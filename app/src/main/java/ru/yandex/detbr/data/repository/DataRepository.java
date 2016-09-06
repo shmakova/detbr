@@ -18,7 +18,7 @@ public interface DataRepository {
 
     Observable<List<Category>> getCategories();
 
-    Observable<List<Card>> getCardsListBySchool();
+    Observable<List<Card>> getCardsList();
 
     Observable<List<Card>> getFavouriteCards();
 
@@ -26,13 +26,17 @@ public interface DataRepository {
 
     Observable<List<String>> getSchoolsList();
 
-    void saveCardToRepository(String title, String url, @Nullable String cover, boolean like);
+    void saveFavouriteCard(String title, String url, @Nullable String cover, boolean like);
 
-    void saveCardToRepository(@NonNull Card card);
+    void saveFavouriteCard(@NonNull Card card);
 
-    void changeLike(@NonNull String url);
+    void saveCard(Card card);
+
+    void toggleLike(@NonNull String url);
 
     boolean getLikeFromUrl(@NonNull String url);
 
-    boolean isCardAlreadyExist(@NonNull String url);
+    boolean isCardExist(@NonNull String url);
+
+    boolean isCardLiked(@NonNull String url);
 }

@@ -63,8 +63,8 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
     }
 
     private void setCover() {
-        if (category.getBackgroundColor() != null) {
-            categoryCardsWrapper.setBackgroundColor(Color.parseColor(category.getBackgroundColor()));
+        if (category.color() != null) {
+            categoryCardsWrapper.setBackgroundColor(Color.parseColor(category.color()));
         }
     }
 }

@@ -19,9 +19,9 @@ public class SchoolsAdapter extends ArrayAdapter<String> implements Filterable {
     private List<String> mOriginalValues;
     private ArrayFilter mFilter;
 
-    public SchoolsAdapter(Context context, int resource, List<String> objects) {
+    public SchoolsAdapter(Context context, int resource, int id, List<String> objects) {
 
-        super(context, resource, objects);
+        super(context, resource, id, objects);
         fullList = objects;
         mOriginalValues = new ArrayList<>(fullList);
 

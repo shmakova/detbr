@@ -90,8 +90,12 @@ public class SchoolsFragment
         super.onViewCreated(view, savedInstanceState);
 
         schoolsAdapter = new SchoolsAdapter(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+                R.layout.dropdown_item, R.id.item, new ArrayList<>());
         autoCompleteTextView.setAdapter(schoolsAdapter);
+
+        int width = autoCompleteTextView.getLayoutParams().width;
+        autoCompleteTextView.setDropDownWidth((int) (width * 1.5));
+        autoCompleteTextView.setDropDownHorizontalOffset(-width / 4);
 
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();

@@ -2,9 +2,7 @@ package ru.yandex.detbr.ui.presenters;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Picture;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -12,14 +10,17 @@ import android.webkit.WebViewClient;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.data.tabs.models.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
+import ru.yandex.detbr.ui.managers.LikeManager;
 import ru.yandex.detbr.ui.managers.TabsManager;
 import ru.yandex.detbr.ui.views.BrowserView;
 import ru.yandex.detbr.utils.UrlUtils;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Created by shmakova on 19.08.16.
@@ -32,20 +33,20 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final TabsManager tabsManager;
     @NonNull
+    private final LikeManager likeManager;
+    @NonNull
     private final DataRepository dataRepository;
     private Subscription subscription;
 
-    private String currentUrl;
-    private boolean isPageInCard;
-    private boolean isPageLiked;
-
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
-                            @NonNull DataRepository dataRepository) {
+                            @NonNull DataRepository dataRepository,
+                            @NonNull LikeManager likeManager) {
 
         this.wotService = wotService;
         this.dataRepository = dataRepository;
         this.tabsManager = tabsManager;
+        this.likeManager = likeManager;
     }
 
     private interface UrlCheckListener {
@@ -55,7 +56,8 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @Override
     public void attachView(BrowserView view) {
         super.attachView(view);
-        view.setOnUrlListener(url -> {
+        view.setOnUrlListener(query -> {
+            String url = UrlUtils.getUrlFromQuery(query);
             tabsManager.addTab(Tab.builder().url(url).build());
             loadUrl(url);
         });
@@ -67,12 +69,11 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         }
     }
 
-    private void loadUrl(String query) {
-        String safeUrl = UrlUtils.getSafeUrlFromQuery(query);
-        checkUrlBeforeLoad(safeUrl, valid -> {
+    private void loadUrl(String url) {
+        checkUrlBeforeLoad(url, valid -> {
             if (isViewAttached()) {
                 if (valid) {
-                    getView().loadPageByUrl(safeUrl);
+                    getView().loadPageByUrl(url);
                 } else {
                     getView().showError();
                 }
@@ -86,37 +87,29 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         subscription = wotService.getLinkReputation(domain)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(wotResponse -> listener.urlChecked(wotResponse.isSafe()));
-    }
-
-    private boolean getLikeFromUrl(@NonNull String url) {
-        return dataRepository.getLikeFromUrl(url);
-    }
-
-    private void changeLike(@NonNull String url) {
-        dataRepository.changeLike(url);
-    }
-
-    public boolean isCardAlreadyExist(@NonNull String url) {
-        return dataRepository.isCardAlreadyExist(url);
-    }
-
-    private void saveCardToRepository(String title, String url, @Nullable String cover, boolean like) {
-        dataRepository.saveCardToRepository(title, url, cover, like);
+                .subscribe(
+                        wotResponse -> listener.urlChecked(wotResponse.isSafe()),
+                        throwable -> Timber.e(throwable.getMessage(), "wotService.getLinkReputation error"));
     }
 
     public void onLikeClick(String title, String url) {
-        if (isPageInCard) {
-            changeLike(currentUrl);
+        boolean isUrlLiked = likeManager.isUrlLiked(url);
+        Card card = Card.builder()
+                .title(title)
+                .url(url)
+                .build();
+
+        if (isUrlLiked) {
+            isUrlLiked = false;
         } else {
-            saveCardToRepository(title, url, null, true);
-            isPageInCard = true;
+            dataRepository.saveCard(card);
+            isUrlLiked = true;
         }
 
-        isPageLiked = !isPageLiked;
+        likeManager.setLike(card);
 
         if (isViewAttached()) {
-            getView().setLike(isPageLiked);
+            getView().setLike(isUrlLiked);
         }
     }
 
@@ -134,8 +127,10 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             if (isViewAttached()) {
                 if (UrlUtils.isHttpLink(url)) {
                     getView().showSearchText(webView.getTitle(), url);
+                    getView().showLike();
                 }
                 getView().hideProgress();
+                getView().setLike(likeManager.isUrlLiked(url));
                 webView.postInvalidate();
                 tabsManager.updateTab(Tab.builder()
                         .preview(getSnapshot(webView))
@@ -149,40 +144,40 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         public void onPageStarted(WebView webView, String url, Bitmap favicon) {
             if (isViewAttached()) {
                 getView().showProgress();
-                // TODO rx
-                isPageInCard = isCardAlreadyExist(url);
-                isPageLiked = isPageInCard && getLikeFromUrl(url);
-                getView().setLike(isPageLiked);
-                currentUrl = url;
+                getView().hideLike();
             }
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            loadUrl(url);
+            String safeUrl = url;
+
+            if (url.contains(UrlUtils.GOOGLE_URL) &&
+                    !url.contains(UrlUtils.GOOGLE_SAFE_PARAMETER) &&
+                    url.contains(UrlUtils.GOOGLE_QUERY_PARAMETER)) {
+                safeUrl += "&" + UrlUtils.GOOGLE_SAFE_PARAMETER;
+            } else if (url.contains(UrlUtils.YANDEX_URL) &&
+                    !url.contains(UrlUtils.YANDEX_SAFE_PARAMETER) &&
+                    url.contains(UrlUtils.YANDEX_QUERY_PARAMETER)) {
+                safeUrl += "&" + UrlUtils.YANDEX_SAFE_PARAMETER;
+            }
+
+            loadUrl(safeUrl);
             return true;
         }
 
         private Bitmap getSnapshot(WebView webView) {
             final int width = 320;
             int height = 480;
-            Picture picture = webView.capturePicture();
-            Bitmap thumbnail = null;
-
-            if (picture.getWidth() > 0 && picture.getHeight() > 0) {
-                Bitmap bitmap = Bitmap.createBitmap(picture.getWidth(),
-                        picture.getHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-
-                picture.draw(canvas);
-                float factor = width / (float) bitmap.getWidth();
-                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
-                height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
-                thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
-
-                bitmap.recycle();
-                scaledBitmap.recycle();
-            }
+            Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            webView.draw(canvas);
+            float factor = width / (float) webView.getWidth();
+            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
+            height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
+            Bitmap thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
+            bitmap.recycle();
+            scaledBitmap.recycle();
 
             return thumbnail;
         }

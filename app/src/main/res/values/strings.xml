@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Детский Браузер</string>
     <string name="content">Hello</string>
-    <string name="choose_your_school">Выбери свою школу</string>
+    <string name="choose_your_school">Выбрать школу</string>
     <string name="search_title">Поиск</string>
     <string name="search_hint">Поиск в интернете&#8230;</string>
     <string name="url_key">url</string>
@@ -11,16 +11,22 @@
     <string name="cards">Карточки</string>
     <string name="tabs">Вкладки</string>
     <string name="favorites">Любимое</string>
-    <string name="cards_title">Популярные темы</string>
+    <string name="cards_title">Популярное в школе</string>
     <string name="like_content_description">Лайк</string>
     <string name="favourite_cards_title">Любимые карточки</string>
     <string name="category_cover">category cover</string>
     <string name="action_voice_rec">Голосовой набор</string>
     <string name="unsafe_page">Небезопасная страница</string>
     <string name="app_intro">Привет!</string>
-    <string name="intro_text">Чтобы начать пользоваться браузером, выбери школу</string>
+    <string name="first_intro_text">Узнай новое среди своей школы</string>
     <string name="choose_school">Выбрать школу</string>
     <string name="error_text">Ошибка! Нажмите здесь, чтобы повторить загрузку</string>
     <string name="remove_tab">Удалить вкладку</string>
     <string name="preview">Превью страницы</string>
+    <string name="yandex_logo">Yandex Logo</string>
+    <string name="intro">first intro</string>
+    <string name="second_intro_text">Отмечай понравившиеся карточки и сайты, так больше школьников увидит их</string>
+    <string name="third_intro_text">Мы подготовили много интересного. Осталось узнать, где ты учишься</string>
+    <string name="share">Поделись ссылкой с друзьями</string>
+    <string name="favicon">favicon</string>
 </resources>

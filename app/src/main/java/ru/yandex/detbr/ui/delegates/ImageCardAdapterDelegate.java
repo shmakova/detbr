@@ -36,13 +36,13 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
 
     @Override
     protected boolean isForViewType(@NonNull Card item, List<Card> items, int position) {
-        return !item.getCover().isEmpty();
+        return item.image() != null && !item.image().isEmpty();
     }
 
     @NonNull
     @Override
     public ImageCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        return new ImageCardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image_card, parent, false), onCardClickListener);
+        return new ImageCardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_half_image_card, parent, false), onCardClickListener);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
     static class ImageCardViewHolder extends RecyclerView.ViewHolder {
         private final OnCardClickListener listener;
 
-        @BindView(R.id.cover)
+        @BindView(R.id.image)
         ImageView cover;
         @BindView(R.id.title)
         TextView title;
@@ -70,14 +70,14 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
         }
 
         void bind(Card card) {
-            title.setText(card.getTitle());
-            url.setText(card.getUrl());
-            likeButton.setChecked(card.getLike());
+            title.setText(card.title());
+            url.setText(card.url());
+            likeButton.setChecked(card.like());
 
             Context context = cover.getContext();
 
             Glide.with(context)
-                    .load(card.getCover())
+                    .load(card.image())
                     .centerCrop()
                     .crossFade()
                     .into(cover);

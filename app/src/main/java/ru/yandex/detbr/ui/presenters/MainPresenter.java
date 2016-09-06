@@ -42,17 +42,12 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         loadDataFromSharedPreference();
 
         if (school == null || school.isEmpty()) {
-            openSchools();
+            Thread thread = new Thread(() -> {
+                navigationManager.openOnBoarding();
+            });
+            thread.start();
         } else {
             openCards();
-        }
-    }
-
-    private void openSchools() {
-        if (isViewAttached()) {
-            navigationManager.openSchools();
-            getView().hideNavigationBars();
-            getView().showToolbar();
         }
     }
 
@@ -83,7 +78,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     private void openCategoryCards(Category category) {
         if (isViewAttached()) {
-            getView().updateToolbar(category.getTitle(), true, category.getBackgroundColor());
+            getView().updateToolbar(category.title(), true, category.color());
             getView().hideNavigationBars();
             getView().showToolbar();
             navigationManager.openCategoryCards(category);
@@ -109,11 +104,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         }
     }
 
-    public void onSchoolClick() {
-        loadDataFromSharedPreference();
-        openCards();
-    }
-
     public void onCategoriesItemClick(Category category) {
         openCategoryCards(category);
     }
@@ -129,11 +119,11 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onCardsItemClick(Card card) {
-        navigationManager.openBrowser(card.getUrl());
+        navigationManager.openBrowser(card.url());
     }
 
     public void onLikeClick(Card card) {
-        dataRepository.changeLike(card.getUrl());
+        dataRepository.toggleLike(card.url());
     }
 
     public void onBackPressed() {
