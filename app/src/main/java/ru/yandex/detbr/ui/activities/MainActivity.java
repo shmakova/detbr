@@ -198,4 +198,9 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
             actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.color_primary)));
         }
     }
+
+    @Override
+    public void selectTabAtPosition(int position) {
+        bottomBar.selectTabAtPosition(position);
+    }
 }

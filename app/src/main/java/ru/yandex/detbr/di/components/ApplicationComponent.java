@@ -56,13 +56,13 @@ public interface ApplicationComponent {
     CardComponent plus(CardModule module);
 
     @NonNull
-    FavoritesComponent plus(FavoritesModule module);
+    FavoritesComponent plus(FavoritesModule module, NavigationModule navigationModule);
 
     @NonNull
     CategoriesComponent plus(CategoriesModule module);
 
     @NonNull
-    TabsComponent plus(TabsModule module, NavigationModule navigationModule);
+    TabsComponent plus(TabsModule tabsModule, NavigationModule navigationModule);
 
     @NonNull
     MainComponent plus(MainModule mainModule, NavigationModule navigationModule);

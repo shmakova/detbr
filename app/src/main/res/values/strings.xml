@@ -30,4 +30,6 @@
     <string name="share">Поделись ссылкой с друзьями</string>
     <string name="favicon">favicon</string>
     <string name="icon">icon</string>
+    <string name="favorite_cards">Здесь будут храниться любимые карточки</string>
+    <string name="find_interesting">Найти интересное</string>
 </resources>
