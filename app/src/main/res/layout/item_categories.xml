@@ -42,7 +42,6 @@
         android:layout_marginRight="16dp"
         android:gravity="center"
         android:maxLines="1"
-        android:text="Слоны"
         android:textColor="@color/bubble_text"
         tools:ignore="RtlHardcoded"/>
 
