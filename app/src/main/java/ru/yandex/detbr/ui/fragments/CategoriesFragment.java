@@ -74,10 +74,10 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if (category != null) {
-            adapter = new CategoriesAdapter(true);
-        } else {
+        if (category == null) {
             adapter = new CategoriesAdapter(false);
+        } else {
+            adapter = new CategoriesAdapter(true);
         }
 
         categories.setAdapter(adapter);
