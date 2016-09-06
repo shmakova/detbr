@@ -74,6 +74,11 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         CategoryViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(v -> onClickSubject.onNext(categories.get(getAdapterPosition())));
+        }
+
+        public void bind(Category category) {
+            categoryText.setText(category.title());
 
             if (darkBackground) {
                 categoryText.setTextColor(ContextCompat.getColor(categoryText.getContext(), R.color.white));
@@ -81,11 +86,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
                 categoryText.setTextColor(ContextCompat.getColor(categoryText.getContext(), R.color.bubble_text));
             }
 
-            itemView.setOnClickListener(v -> onClickSubject.onNext(categories.get(getAdapterPosition())));
-        }
-
-        public void bind(Category category) {
-            categoryText.setText(category.title());
             icon.setImageDrawable(ContextCompat.getDrawable(icon.getContext(), category.getDrawableIcon()));
             Drawable background = iconBackground.getBackground();
             GradientDrawable gradientDrawable = (GradientDrawable) background;
