@@ -15,31 +15,22 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="@android:color/transparent"
-            android:visibility="invisible">
-
-            <android.support.design.widget.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:contentScrim="?attr/colorPrimary"
-                app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"/>
-
-        </android.support.design.widget.AppBarLayout>
-
-
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-8dp"
-            android:layout_marginTop="56dp"
-            android:indeterminate="false"
-            android:max="100"
-            android:progress="20"/>
+            android:theme="@style/ThemeOverlay.AppCompat.Light">
 
+            <include layout="@layout/toolbar"/>
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-8dp"
+                android:layout_marginTop="-4dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="20"/>
+        </android.support.design.widget.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/webview_wrapper"
@@ -58,32 +49,13 @@
             android:id="@+id/like_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:src="@drawable/ic_favorite_border_24dp"
+            android:visibility="gone"
             app:layout_anchor="@id/webview_wrapper"
             app:layout_anchorGravity="bottom|right|end"
             tools:ignore="RtlHardcoded"/>
-
-        <com.arlib.floatingsearchview.FloatingSearchView
-            android:id="@+id/floating_search_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:floatingSearch_close_search_on_keyboard_dismiss="false"
-            app:floatingSearch_dimBackground="false"
-            app:floatingSearch_dismissOnOutsideTouch="true"
-            app:floatingSearch_leftActionMode="showHome"
-            app:floatingSearch_menu="@menu/search_menu"
-            app:floatingSearch_backgroundColor="@color/white"
-            app:floatingSearch_dividerColor="@color/white"
-            app:floatingSearch_showOverFlowMenu="false"
-            app:floatingSearch_searchBarMarginLeft="5dp"
-            app:floatingSearch_searchBarMarginRight="5dp"
-            app:floatingSearch_searchBarMarginTop="5dp"
-            app:floatingSearch_searchHint="@string/search_hint"
-            app:floatingSearch_showSearchKey="true"
-            app:floatingSearch_suggestionsListAnimDuration="250"/>
 
     </android.support.design.widget.CoordinatorLayout>
 

@@ -1,9 +1,11 @@
 package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +19,8 @@ import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -46,10 +50,14 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         FloatingSearchView.OnMenuItemClickListener,
         FloatingSearchView.OnSearchListener,
         MainView {
+    private static final int SPEECH_REQUEST_CODE = 1;
+
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.floating_search_view)
+    protected FloatingSearchView floatingSearchView;
 
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
@@ -79,6 +87,18 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         if (savedInstanceState == null) {
             presenter.onFirstLoad();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
+            List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+            String spokenText = results.get(0);
+
+            floatingSearchView.setSearchText(spokenText);
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @NonNull
@@ -202,5 +222,12 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Override
     public void selectTabAtPosition(int position) {
         bottomBar.selectTabAtPosition(position);
+    }
+
+    public void showSpeechRecognizer() {
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        startActivityForResult(intent, SPEECH_REQUEST_CODE);
     }
 }

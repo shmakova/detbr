@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#ffdd3c</color>
+    <color name="color_primary">#ffdd55</color>
     <color name="color_primary_dark">#000000</color>
-    <color name="color_accent">#ffc400</color>
+    <color name="color_accent">#ffdd55</color>
+
+    <color name="browser_color_primary">#f5f4f2</color>
+    <color name="browser_color_primary_dark">#000000</color>
+    <color name="browser_color_accent">#ffdd55</color>
+    <color name="browser_text_color_primary">#706f6f</color>
 
     <color name="dark_grey">#222222</color>
+    <color name="tab_background">#363636</color>
+    <color name="toolbar_grey">#706f6f</color>
     <color name="grey">#777777</color>
-    <color name="light_grey">#dddddd</color>
-    <color name="background_grey">#F8F8F8</color>
     <color name="active_grey">#424242</color>
-    <color name="inactive_grey">#bdbdbd</color>
     <color name="bar_grey">#212121</color>
+    <color name="inactive_grey">#bdbdbd</color>
+    <color name="light_grey">#dddddd</color>
     <color name="face_grey">#eeeeee</color>
+    <color name="background_grey">#F8F8F8</color>
+
     <color name="favorite_grey">#de000000</color>
 
     <color name="yellow">#ffc400</color>
     <color name="light_yellow">#ffdd55</color>
     <color name="favorite_yellow">#ffdd3c</color>
-
-    <color name="tab_background">#363636</color>
 
     <color name="intro_background">#ffd740</color>
     <color name="intro_text_color">#8a000000</color>

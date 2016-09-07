@@ -26,7 +26,7 @@
         <activity
             android:name=".ui.activities.BrowserActivity"
             android:launchMode="singleTop"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/BrowserTheme">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
 

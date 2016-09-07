@@ -13,6 +13,20 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="BrowserTheme" parent="AppTheme.NoActionBar">
+        <item name="colorPrimary">@color/browser_color_primary</item>
+        <item name="colorPrimaryDark">@color/browser_color_primary_dark</item>
+        <item name="colorAccent">@color/browser_color_accent</item>
+        <item name="android:textColorPrimary">@color/browser_text_color_primary</item>
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="closeIcon">@drawable/ic_clear</item>
+        <item name="searchHintIcon">@null</item>
+        <item name="android:maxWidth">1000dp</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
