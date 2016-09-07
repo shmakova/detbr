@@ -11,4 +11,5 @@ import ru.yandex.detbr.data.repository.models.Card;
  */
 
 public interface FavoritesView extends MvpLceView<List<Card>> {
+    void showEmptyView();
 }

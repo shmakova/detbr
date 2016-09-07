@@ -19,13 +19,16 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.FavoritesComponent;
 import ru.yandex.detbr.di.modules.FavoritesModule;
+import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.presentation.presenters.FavoritesPresenter;
 import ru.yandex.detbr.presentation.views.FavoritesView;
+import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.adapters.CardsAdapter;
 import ru.yandex.detbr.ui.delegates.OnCardClickListener;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
@@ -42,6 +45,8 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
 
     @BindView(R.id.cards_list)
     RecyclerView recyclerView;
+    @BindView(R.id.empty_favorites)
+    View emptyView;
 
     private FavoritesComponent favoritesComponent;
     private CardsAdapter adapter;
@@ -56,7 +61,9 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
     }
 
     private void injectDependencies() {
-        favoritesComponent = App.get(getContext()).applicationComponent().plus(new FavoritesModule());
+        favoritesComponent = App.get(getContext()).applicationComponent().plus(
+                new FavoritesModule(),
+                new NavigationModule((MainActivity) getActivity()));
         favoritesComponent.inject(this);
     }
 
@@ -142,5 +149,16 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
     @Override
     public void loadData(boolean pullToRefresh) {
         presenter.loadCards(pullToRefresh);
+    }
+
+    @Override
+    public void showEmptyView() {
+        contentView.setVisibility(View.GONE);
+        emptyView.setVisibility(View.VISIBLE);
+    }
+
+    @OnClick(R.id.find_interesting_btn)
+    public void onFindInterestingButtonClick() {
+        presenter.onFindInterestingButtonClick();
     }
 }

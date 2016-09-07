@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Subcomponent;
 import ru.yandex.detbr.di.modules.FavoritesModule;
+import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.scopes.PerFragment;
 import ru.yandex.detbr.presentation.presenters.FavoritesPresenter;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
@@ -13,7 +14,10 @@ import ru.yandex.detbr.ui.fragments.FavoritesFragment;
  */
 
 @PerFragment
-@Subcomponent(modules = FavoritesModule.class)
+@Subcomponent(modules = {
+        FavoritesModule.class,
+        NavigationModule.class
+})
 public interface FavoritesComponent {
     void inject(@NonNull FavoritesFragment favoritesFragment);
 
