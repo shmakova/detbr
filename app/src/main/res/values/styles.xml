@@ -30,8 +30,8 @@
     </style>
 
     <style name="Card" parent="CardView">
-        <item name="android:layout_width">@dimen/card_size</item>
-        <item name="android:layout_height">@dimen/card_size</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:elevation" tools:ignore="NewApi">8dp</item>
         <item name="android:clickable">true</item>

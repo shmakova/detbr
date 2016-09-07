@@ -33,11 +33,14 @@ public class CardPutResolver extends DefaultPutResolver<Card> {
     @Override
     @NonNull
     public ContentValues mapToContentValues(@NonNull Card card) {
-        ContentValues contentValues = new ContentValues(4);
+        ContentValues contentValues = new ContentValues(7);
 
         contentValues.put(CardsTable.COLUMN_IMAGE, card.image());
         contentValues.put(CardsTable.COLUMN_LIKE, card.like());
         contentValues.put(CardsTable.COLUMN_TITLE, card.title());
+        contentValues.put(CardsTable.COLUMN_FAVICON, card.favicon());
+        contentValues.put(CardsTable.COLUMN_SITE, card.site());
+        contentValues.put(CardsTable.COLUMN_COLOR, card.color());
         contentValues.put(CardsTable.COLUMN_URL, card.url());
 
         return contentValues;

@@ -30,6 +30,7 @@
       "site": "ПОИСК В ЯНДЕКСЕ",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
       "category": "pokemon",
+      "color": "#ffdd55",
       "type": "yandex_text"
     },
     {
@@ -111,6 +112,7 @@
       "site": "ПОИСК В ЯНДЕКСЕ",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
       "category": "cartoons",
+      "color": "#ffdd55",
       "type": "yandex_text"
     },
     {
@@ -135,6 +137,7 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "bikes",
+      "color": "#ffdd55",
       "type": "plain_text"
     },
     {
@@ -143,6 +146,7 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "sport",
+      "color": "#ffdd55",
       "type": "plain_text"
     },
     {
@@ -349,6 +353,7 @@
       "site": "ЯНДЕКС.РЕФЕРАТЫ",
       "favicon": "https://yandex.ru/referats/",
       "category": "education",
+      "color": "#ffdd55",
       "type": "yandex_text"
     },
     {
@@ -366,6 +371,7 @@
       "site": "ПОИСК В ЯНДЕКСЕ",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
       "category": "cartoons",
+      "color": "#ffdd55",
       "type": "yandex_text"
     },
     {
@@ -416,6 +422,7 @@
       "site": "ЯНДЕКС.ПЕРЕВОДЧИК",
       "favicon": "https://translate.yandex.net/main/v2.111.1472810626/i/favicon.png",
       "category": "education",
+      "color": "#ffdd55",
       "type": "yandex_text"
     },
     {

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#ffdd3c</color>
+    <color name="color_primary">#ffdd55</color>
     <color name="color_primary_dark">#000000</color>
-    <color name="color_accent">#ffc400</color>
+    <color name="color_accent">#ffdd55</color>
 
     <color name="dark_grey">#222222</color>
-    <color name="grey">#777777</color>
+    <color name="grey">#757575</color>
     <color name="light_grey">#dddddd</color>
     <color name="background_grey">#F8F8F8</color>
     <color name="active_grey">#424242</color>
@@ -21,9 +21,10 @@
     <color name="tab_background">#363636</color>
 
     <color name="intro_background">#ffd740</color>
-    <color name="intro_text_color">#8a000000</color>
+    <color name="transparent_text_color">#8a000000</color>
+    <color name="transparent_card_title">#deffffff</color>
 
-    <color name="yandex_description_color">#26000000</color>
+    <color name="description_color">#61000000</color>
     <color name="favorite_text_color">#9e9e9e</color>
 
     <!-- Categories bubbles -->

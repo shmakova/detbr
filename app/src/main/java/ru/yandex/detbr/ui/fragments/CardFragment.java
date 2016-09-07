@@ -2,9 +2,11 @@ package ru.yandex.detbr.ui.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,7 @@ import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.CardComponent;
 import ru.yandex.detbr.di.modules.CardModule;
 import ru.yandex.detbr.presentation.presenters.CardPresenter;
-import ru.yandex.detbr.presentation.views.CardView;
+import ru.yandex.detbr.presentation.views.CardItemView;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
 
 /**
@@ -34,7 +36,7 @@ import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
  */
 
 @FragmentWithArgs
-public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> implements CardView {
+public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> implements CardItemView {
     @Arg
     int layoutResId;
     @Arg
@@ -54,6 +56,8 @@ public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> imple
     @Nullable
     @BindView(R.id.description)
     TextView description;
+    @BindView(R.id.card)
+    CardView cardView;
 
     private OnCardsItemClickListener onCardsItemClickListener;
     private CardComponent cardComponent;
@@ -169,5 +173,10 @@ public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> imple
                     .crossFade()
                     .into(image);
         }
+    }
+
+    @Override
+    public void setBackgroundColor(String color) {
+        cardView.setCardBackgroundColor(Color.parseColor(color));
     }
 }

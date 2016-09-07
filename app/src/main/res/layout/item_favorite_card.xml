@@ -19,25 +19,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_margin="16dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
             android:ellipsize="end"
-            android:maxLines="3"
-            android:textColor="@color/black"
-            android:textSize="28sp"
+            android:maxLines="2"
+            android:textColor="@color/grey"
+            android:textSize="18sp"
             android:textStyle="bold"/>
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/url"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
-            android:layout_margin="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:ellipsize="end"
-            android:maxLines="3"
-            android:textColor="@color/description_color"
-            android:textSize="18sp"/>
+            android:maxLines="1"
+            android:textColor="@color/transparent_text_color"
+            android:textSize="12sp"/>
 
-        <include layout="@layout/card_bottom_view"/>
+        <include layout="@layout/favorite_bottom_view"/>
 
     </RelativeLayout>
 </ru.yandex.detbr.ui.android_views.SquareCardView>

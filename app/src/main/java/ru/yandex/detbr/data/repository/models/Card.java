@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Exclude;
 
 import me.mattlogan.auto.value.firebase.annotation.FirebaseValue;
+import ru.yandex.detbr.utils.UrlUtils;
 
 
 /**
@@ -17,10 +18,6 @@ import me.mattlogan.auto.value.firebase.annotation.FirebaseValue;
 @AutoValue
 @FirebaseValue
 public abstract class Card implements Parcelable {
-    public static final String TEXT_TYPE = "plain_text";
-    public static final String IMAGE_TYPE = "plain_image";
-    public static final String YANDEX_TEXT_TYPE = "yandex_text";
-
     public abstract String title();
 
     public abstract String url();
@@ -46,6 +43,18 @@ public abstract class Card implements Parcelable {
     @Nullable
     public abstract String type();
 
+    @Nullable
+    public abstract String color();
+
+    public abstract boolean dark();
+
+    public String getSiteName() {
+        if (site() == null || site().isEmpty()) {
+            return UrlUtils.getHost(url());
+        } else {
+            return site();
+        }
+    }
 
     public static Card create(DataSnapshot dataSnapshot) {
         return dataSnapshot.getValue(AutoValue_Card.FirebaseValue.class).toAutoValue();
@@ -57,7 +66,8 @@ public abstract class Card implements Parcelable {
 
     public static Builder builder() {
         return new AutoValue_Card.Builder()
-                .like(false);
+                .like(false)
+                .dark(false);
     }
 
     @AutoValue.Builder
@@ -79,6 +89,10 @@ public abstract class Card implements Parcelable {
         public abstract Builder category(@Nullable String category);
 
         public abstract Builder type(@Nullable String type);
+
+        public abstract Builder color(@Nullable String color);
+
+        public abstract Builder dark(boolean dark);
 
         public abstract Card build();
     }

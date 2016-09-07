@@ -2,6 +2,7 @@ package ru.yandex.detbr.data.repository.db.tables;
 
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 public final class CardsTable {
     @NonNull
@@ -22,6 +23,15 @@ public final class CardsTable {
     @NonNull
     public static final String COLUMN_LIKE = "like";
 
+    @Nullable
+    public static final String COLUMN_SITE = "site";
+
+    @Nullable
+    public static final String COLUMN_FAVICON = "favicon";
+
+    @Nullable
+    public static final String COLUMN_COLOR = "color";
+
     private CardsTable() {
     }
 
@@ -31,6 +41,9 @@ public final class CardsTable {
                 + COLUMN_TITLE + " TEXT NOT NULL, "
                 + COLUMN_URL + " TEXT NOT NULL UNIQUE, "
                 + COLUMN_IMAGE + " TEXT, "
+                + COLUMN_SITE + " TEXT, "
+                + COLUMN_FAVICON + " TEXT, "
+                + COLUMN_COLOR + " TEXT, "
                 + COLUMN_LIKE + " INTEGER NOT NULL"
                 + ");";
     }
