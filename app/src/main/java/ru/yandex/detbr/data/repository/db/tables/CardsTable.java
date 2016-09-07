@@ -39,6 +39,7 @@ public final class CardsTable {
     }
 
     @NonNull
+    @SuppressWarnings("PMD.AvoidDuplicateLiterals")
     public static String getCreateTableQuery() {
         return "CREATE TABLE " + TABLE + "("
                 + COLUMN_TITLE + " TEXT NOT NULL, "
