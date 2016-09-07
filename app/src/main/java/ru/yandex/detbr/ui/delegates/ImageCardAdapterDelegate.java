@@ -1,7 +1,7 @@
 package ru.yandex.detbr.ui.delegates;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +42,9 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
     @NonNull
     @Override
     public ImageCardViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        return new ImageCardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_half_image_card, parent, false), onCardClickListener);
+        return new ImageCardViewHolder(LayoutInflater
+                .from(parent.getContext())
+                .inflate(R.layout.item_favorite_image_card, parent, false), onCardClickListener);
     }
 
     @Override
@@ -71,16 +73,20 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
 
         void bind(Card card) {
             title.setText(card.title());
-            url.setText(card.url());
+            url.setText(card.getSiteName());
             likeButton.setChecked(card.like());
 
-            Context context = cover.getContext();
-
-            Glide.with(context)
+            Glide.with(cover.getContext())
                     .load(card.image())
                     .centerCrop()
                     .crossFade()
                     .into(cover);
+
+            if (card.dark()) {
+                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_white));
+            } else {
+                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_black));
+            }
         }
 
         @OnClick(R.id.card)

@@ -267,10 +267,10 @@ public class FakeDataRepository implements DataRepository {
                     String image = getImageUrl(it.url());
 
                     if (image == null || image.isEmpty()) {
-                        cardValues.put("type", "plain_text");
+                        cardValues.put("type", Card.TEXT_TYPE);
                     } else {
                         cardValues.put("image", image);
-                        cardValues.put("type", "plain_image");
+                        cardValues.put("type", Card.PLAIN_IMAGE_TYPE);
                     }
 
                     Map<String, Object> childUpdates = new HashMap<>();

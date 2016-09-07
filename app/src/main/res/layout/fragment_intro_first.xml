@@ -8,10 +8,10 @@
               android:orientation="vertical"
               tools:ignore="InconsistentLayout">
 
-    <android.support.v7.widget.CardView
+    <ru.yandex.detbr.ui.android_views.SquareCardView
         android:id="@+id/card"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/card_size"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/first_intro_pic"
         android:clickable="true"
@@ -29,7 +29,7 @@
             android:contentDescription="@string/intro"
             android:src="@drawable/first_intro_pic"/>
 
-    </android.support.v7.widget.CardView>
+    </ru.yandex.detbr.ui.android_views.SquareCardView>
 
     <TextView
         android:layout_width="250dp"
@@ -38,7 +38,7 @@
         android:layout_weight="3"
         android:gravity="center"
         android:text="@string/first_intro_text"
-        android:textColor="@color/intro_text_color"
+        android:textColor="@color/transparent_text_color"
         android:textSize="16sp"/>
 
 </LinearLayout>
