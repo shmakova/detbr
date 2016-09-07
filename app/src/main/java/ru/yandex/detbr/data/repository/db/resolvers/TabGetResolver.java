@@ -25,9 +25,8 @@ public class TabGetResolver extends DefaultGetResolver<Tab> {
         byte[] preview = cursor.getBlob(cursor.getColumnIndex(TabsTable.COLUMN_PREVIEW));
         String title = cursor.getString(cursor.getColumnIndex(TabsTable.COLUMN_TITLE));
         String url = cursor.getString(cursor.getColumnIndex(TabsTable.COLUMN_URL));
-
         return Tab.builder()
-                .preview(getBitmapFromByteArray(preview))
+                .preview(preview == null? null : getBitmapFromByteArray(preview))
                 .title(title)
                 .url(url)
                 .build();

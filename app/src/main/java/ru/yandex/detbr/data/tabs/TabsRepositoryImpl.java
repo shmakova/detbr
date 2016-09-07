@@ -23,7 +23,6 @@ public class TabsRepositoryImpl implements TabsRepository {
 
     @Override
     public Observable<List<Tab>> getSavedTabs() {
-//        return Observable.just(new ArrayList<>());
         return storIOSQLite
                 .get()
                 .listOfObjects(Tab.class)
