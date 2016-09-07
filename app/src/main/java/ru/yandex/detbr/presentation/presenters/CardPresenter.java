@@ -44,6 +44,10 @@ public class CardPresenter extends MvpBasePresenter<CardItemView> {
             if (card.description() != null && !card.description().isEmpty()) {
                 getView().setDescription(card.description());
             }
+
+            if (card.dark()) {
+                getView().setWhiteText();
+            }
         }
     }
 }

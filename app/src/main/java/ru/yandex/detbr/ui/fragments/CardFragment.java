@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,6 +57,9 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
     @Nullable
     @BindView(R.id.description)
     TextView description;
+    @Nullable
+    @BindView(R.id.text_wrapper)
+    View textWrapper;
     @BindView(R.id.card)
     CardView cardView;
 
@@ -146,6 +150,7 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
 
     @Override
     public void setDescription(String description) {
+        this.description.setVisibility(View.VISIBLE);
         this.description.setText(description);
     }
 
@@ -178,5 +183,20 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
     @Override
     public void setBackgroundColor(String color) {
         cardView.setCardBackgroundColor(Color.parseColor(color));
+    }
+
+    @Override
+    public void setWhiteText() {
+        title.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_card_title));
+        url.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_url_color));
+        likeButton.setButtonDrawable(ContextCompat.getDrawable(getContext(), R.drawable.like_white));
+
+        if (textWrapper != null) {
+            textWrapper.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.gradient_black));
+        }
+
+        if (description != null) {
+            description.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
+        }
     }
 }

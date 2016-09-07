@@ -20,6 +20,7 @@ public class CardGetResolver extends DefaultGetResolver<Card> {
         String favicon = cursor.getString(cursor.getColumnIndex(CardsTable.COLUMN_FAVICON));
         String color = cursor.getString(cursor.getColumnIndex(CardsTable.COLUMN_COLOR));
         boolean like = cursor.getInt(cursor.getColumnIndex(CardsTable.COLUMN_LIKE)) == 1;
+        boolean dark = cursor.getInt(cursor.getColumnIndex(CardsTable.COLUMN_DARK)) == 1;
 
         return Card.builder()
                 .title(title)
@@ -29,6 +30,7 @@ public class CardGetResolver extends DefaultGetResolver<Card> {
                 .favicon(favicon)
                 .color(color)
                 .like(like)
+                .dark(dark)
                 .build();
     }
 }

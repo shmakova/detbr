@@ -10,8 +10,8 @@
     tools:ignore="UnusedAttribute">
 
     <RelativeLayout
-        android:layout_width="@dimen/card_size"
-        android:layout_height="@dimen/card_size">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/image"
@@ -22,19 +22,23 @@
             android:scaleType="centerCrop"/>
 
         <LinearLayout
+            android:id="@+id/text_wrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:background="@drawable/gradient_white"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
 
@@ -42,11 +46,14 @@
                 android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
                 android:ellipsize="end"
                 android:maxLines="3"
-                android:textColor="@color/white"
-                android:textSize="14sp"/>
+                android:textColor="@color/transparent_text_color"
+                android:textSize="14sp"
+                android:visibility="gone"/>
 
             <include layout="@layout/card_bottom_view"/>
 

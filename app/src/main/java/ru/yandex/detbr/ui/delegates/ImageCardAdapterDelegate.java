@@ -1,6 +1,7 @@
 package ru.yandex.detbr.ui.delegates;
 
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,6 +81,12 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
                     .centerCrop()
                     .crossFade()
                     .into(cover);
+
+            if (card.dark()) {
+                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_white));
+            } else {
+                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_black));
+            }
         }
 
         @OnClick(R.id.card)

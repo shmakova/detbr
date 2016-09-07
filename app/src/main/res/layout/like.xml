@@ -5,7 +5,7 @@
     android:id="@+id/like_btn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:button="@drawable/like"
+    android:button="@drawable/like_black"
     android:gravity="center"
     android:paddingBottom="16dp"
     android:paddingRight="16dp"

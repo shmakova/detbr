@@ -18,6 +18,10 @@ import ru.yandex.detbr.utils.UrlUtils;
 @AutoValue
 @FirebaseValue
 public abstract class Card implements Parcelable {
+    public static final String TEXT_TYPE = "text";
+    public static final String PLAIN_IMAGE_TYPE = "plain_image";
+    public static final String FULL_IMAGE_TYPE = "full_image";
+
     public abstract String title();
 
     public abstract String url();

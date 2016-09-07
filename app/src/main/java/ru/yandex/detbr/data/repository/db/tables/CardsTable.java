@@ -32,6 +32,9 @@ public final class CardsTable {
     @Nullable
     public static final String COLUMN_COLOR = "color";
 
+    @NonNull
+    public static final String COLUMN_DARK = "dark";
+
     private CardsTable() {
     }
 
@@ -44,6 +47,7 @@ public final class CardsTable {
                 + COLUMN_SITE + " TEXT, "
                 + COLUMN_FAVICON + " TEXT, "
                 + COLUMN_COLOR + " TEXT, "
+                + COLUMN_DARK + " INTEGER NOT NULL, "
                 + COLUMN_LIKE + " INTEGER NOT NULL"
                 + ");";
     }

@@ -20,4 +20,6 @@ public interface CardItemView extends MvpView {
     void setImage(String url);
 
     void setBackgroundColor(String color);
+
+    void setWhiteText();
 }
