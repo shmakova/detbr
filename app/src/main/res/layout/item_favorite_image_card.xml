@@ -55,6 +55,7 @@
         android:layout_marginRight="16dp"
         android:ellipsize="end"
         android:maxLines="1"
+        android:textAllCaps="true"
         android:textColor="@color/transparent_text_color"
         android:textSize="12sp"/>
 </LinearLayout>

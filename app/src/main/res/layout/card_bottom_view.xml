@@ -17,6 +17,7 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:padding="16dp"
+        android:textAllCaps="true"
         android:textColor="@color/grey"/>
 
     <include layout="@layout/like"/>
