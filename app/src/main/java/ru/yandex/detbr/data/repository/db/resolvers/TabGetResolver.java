@@ -26,13 +26,16 @@ public class TabGetResolver extends DefaultGetResolver<Tab> {
         String title = cursor.getString(cursor.getColumnIndex(TabsTable.COLUMN_TITLE));
         String url = cursor.getString(cursor.getColumnIndex(TabsTable.COLUMN_URL));
         return Tab.builder()
-                .preview(preview == null? null : getBitmapFromByteArray(preview))
+                .preview(getBitmapFromByteArray(preview))
                 .title(title)
                 .url(url)
                 .build();
     }
 
     private Bitmap getBitmapFromByteArray(byte[] array) {
+        if (array == null) {
+            return null;
+        }
         ByteArrayInputStream stream = new ByteArrayInputStream(array);
         Bitmap bitmapPreview = BitmapFactory.decodeStream(stream);
         try {

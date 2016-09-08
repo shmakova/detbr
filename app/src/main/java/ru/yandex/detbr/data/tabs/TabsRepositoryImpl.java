@@ -49,14 +49,12 @@ public class TabsRepositoryImpl implements TabsRepository {
 
     @Override
     public void removeTab(Tab tab) {
-        Thread thread = new Thread(() -> {
-            storIOSQLite
-                    .delete()
-                    .object(tab)
-                    .prepare()
-                    .executeAsBlocking();
-        });
-        thread.start();
+        // TODO make not on main thread
+        storIOSQLite
+                .delete()
+                .object(tab)
+                .prepare()
+                .executeAsBlocking();
     }
 
     @Override

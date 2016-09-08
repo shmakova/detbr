@@ -41,7 +41,8 @@ public class TabPutResolver extends DefaultPutResolver<Tab> {
     public ContentValues mapToContentValues(@NonNull Tab tab) {
         ContentValues contentValues = new ContentValues(3);
 
-        contentValues.put(TabsTable.COLUMN_PREVIEW, getByteArrayFromBitmap(tab.getPreview()));
+        Bitmap bitmap = tab.getPreview();
+        contentValues.put(TabsTable.COLUMN_PREVIEW, bitmap == null? null : getByteArrayFromBitmap(bitmap));
         contentValues.put(TabsTable.COLUMN_TITLE, tab.getTitle());
         contentValues.put(TabsTable.COLUMN_URL, tab.getUrl());
 
@@ -49,9 +50,6 @@ public class TabPutResolver extends DefaultPutResolver<Tab> {
     }
 
     private byte[] getByteArrayFromBitmap(Bitmap bitmap) {
-        if (bitmap == null) {
-            return null;
-        }
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         byte[] array = null;
         if (bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)) {

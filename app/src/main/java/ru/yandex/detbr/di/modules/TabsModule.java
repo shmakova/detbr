@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.di.scopes.PerFragment;
-import ru.yandex.detbr.ui.adapters.TabsAdapter;
 import ru.yandex.detbr.ui.managers.NavigationManager;
 import ru.yandex.detbr.ui.managers.TabsManager;
 import ru.yandex.detbr.ui.presenters.TabsPresenter;

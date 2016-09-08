@@ -13,7 +13,6 @@ import android.widget.FrameLayout;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.data.RetainingLceViewState;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -28,7 +27,6 @@ import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.TabsModule;
 import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.adapters.TabsAdapter;
-import ru.yandex.detbr.ui.listeners.OnRemoveTabButtonClickListener;
 import ru.yandex.detbr.ui.other.DividerItemDecoration;
 import ru.yandex.detbr.ui.presenters.TabsPresenter;
 import ru.yandex.detbr.ui.views.TabsView;
@@ -99,7 +97,7 @@ public class TabsFragment extends BaseLceFragment<FrameLayout, List<Tab>, TabsVi
     @Override
     public void setData(List<Tab> data) {
         if (adapter != null) {
-            adapter.setTabs(new ArrayList<>(data));
+            adapter.setTabs(data);
             adapter.notifyDataSetChanged();
             presenter.onTabClick(adapter.getPositionClicks());
         }
