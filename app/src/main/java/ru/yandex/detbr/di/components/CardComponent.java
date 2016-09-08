@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import dagger.Subcomponent;
 import ru.yandex.detbr.di.modules.CardModule;
 import ru.yandex.detbr.di.scopes.PerFragment;
+import ru.yandex.detbr.presentation.presenters.CardPresenter;
 import ru.yandex.detbr.ui.fragments.CardFragment;
-import ru.yandex.detbr.ui.presenters.CardPresenter;
 
 /**
  * Created by shmakova on 04.09.16.

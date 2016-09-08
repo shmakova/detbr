@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:floatingSearch_close_search_on_keyboard_dismiss="false"
-    app:floatingSearch_dimBackground="false"
+    app:floatingSearch_dimBackground="true"
     app:floatingSearch_dismissOnOutsideTouch="true"
     app:floatingSearch_leftActionMode="showSearch"
     app:floatingSearch_menu="@menu/search_menu_main"

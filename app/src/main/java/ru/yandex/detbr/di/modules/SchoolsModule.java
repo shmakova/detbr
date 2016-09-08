@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.ui.presenters.SchoolsPresenter;
+import ru.yandex.detbr.presentation.presenters.SchoolsPresenter;
 
 @Module
 public class SchoolsModule {

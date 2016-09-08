@@ -25,9 +25,9 @@ import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.di.components.SchoolsComponent;
 import ru.yandex.detbr.di.modules.SchoolsModule;
+import ru.yandex.detbr.presentation.presenters.SchoolsPresenter;
+import ru.yandex.detbr.presentation.views.SchoolsView;
 import ru.yandex.detbr.ui.adapters.SchoolsAdapter;
-import ru.yandex.detbr.ui.presenters.SchoolsPresenter;
-import ru.yandex.detbr.ui.views.SchoolsView;
 
 public class SchoolsFragment
         extends BaseLceFragment<FrameLayout, List<String>, SchoolsView, SchoolsPresenter>

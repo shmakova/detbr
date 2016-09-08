@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import dagger.Module;
 import dagger.Provides;
 import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.ui.presenters.CardsPresenter;
+import ru.yandex.detbr.presentation.presenters.CardsPresenter;
 
 /**
  * Created by shmakova on 21.08.16.

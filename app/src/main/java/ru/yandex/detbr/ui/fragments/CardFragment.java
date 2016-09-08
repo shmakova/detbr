@@ -2,9 +2,12 @@ package ru.yandex.detbr.ui.fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,16 +28,16 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.di.components.CardComponent;
 import ru.yandex.detbr.di.modules.CardModule;
+import ru.yandex.detbr.presentation.presenters.CardPresenter;
+import ru.yandex.detbr.presentation.views.CardItemView;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
-import ru.yandex.detbr.ui.presenters.CardPresenter;
-import ru.yandex.detbr.ui.views.CardView;
 
 /**
  * Created by shmakova on 22.08.16.
  */
 
 @FragmentWithArgs
-public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> implements CardView {
+public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> implements CardItemView {
     @Arg
     int layoutResId;
     @Arg
@@ -54,6 +57,11 @@ public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> imple
     @Nullable
     @BindView(R.id.description)
     TextView description;
+    @Nullable
+    @BindView(R.id.text_wrapper)
+    View textWrapper;
+    @BindView(R.id.card)
+    CardView cardView;
 
     private OnCardsItemClickListener onCardsItemClickListener;
     private CardComponent cardComponent;
@@ -142,6 +150,7 @@ public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> imple
 
     @Override
     public void setDescription(String description) {
+        this.description.setVisibility(View.VISIBLE);
         this.description.setText(description);
     }
 
@@ -168,6 +177,26 @@ public class CardFragment extends BaseMvpFragment<CardView, CardPresenter> imple
                     .centerCrop()
                     .crossFade()
                     .into(image);
+        }
+    }
+
+    @Override
+    public void setBackgroundColor(String color) {
+        cardView.setCardBackgroundColor(Color.parseColor(color));
+    }
+
+    @Override
+    public void setWhiteText() {
+        title.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_card_title));
+        url.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_url_color));
+        likeButton.setButtonDrawable(ContextCompat.getDrawable(getContext(), R.drawable.like_white));
+
+        if (textWrapper != null) {
+            textWrapper.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.gradient_black));
+        }
+
+        if (description != null) {
+            description.setTextColor(ContextCompat.getColor(getContext(), R.color.white));
         }
     }
 }

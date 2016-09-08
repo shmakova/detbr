@@ -29,4 +29,9 @@
     <string name="third_intro_text">Мы подготовили много интересного. Осталось узнать, где ты учишься</string>
     <string name="share">Поделись ссылкой с друзьями</string>
     <string name="favicon">favicon</string>
+    <string name="icon">icon</string>
+    <string name="favorite_cards">Здесь будут храниться любимые карточки</string>
+    <string name="find_interesting">Найти интересное</string>
+    <string name="empty_favorites">Empty favorites</string>
+    <string name="separator">›</string>
 </resources>

@@ -11,7 +11,7 @@ import java.util.List;
  */
 
 public class WotResponse {
-    private static final int GOOD_REPUTATION = 55;
+    private static final int GOOD_REPUTATION = 50;
 
     @SerializedName("0")
     @Expose
