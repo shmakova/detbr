@@ -38,6 +38,4 @@
             android:overScrollMode="never"
             android:padding="@dimen/card_padding"/>
     </FrameLayout>
-
-
 </LinearLayout>
