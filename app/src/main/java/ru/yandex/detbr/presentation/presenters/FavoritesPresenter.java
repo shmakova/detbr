@@ -43,6 +43,5 @@ public class FavoritesPresenter extends BaseRxPresenter<FavoritesView, List<Card
 
     public void onFindInterestingButtonClick() {
         navigationManager.openCards();
-        navigationManager.selectTabAtPosition(0);
     }
 }

@@ -219,11 +219,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         }
     }
 
-    @Override
-    public void selectTabAtPosition(int position) {
-        bottomBar.selectTabAtPosition(position);
-    }
-
     public void showSpeechRecognizer() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,

@@ -11,7 +11,6 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
 import ru.yandex.detbr.ui.activities.IntroActivity;
-import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.CategoryCardsPagerFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
@@ -124,9 +123,5 @@ public class NavigationManager {
 
     public void setNavigationListener(NavigationListener listener) {
         this.listener = listener;
-    }
-
-    public void selectTabAtPosition(int position) {
-        ((MainActivity) activity).selectTabAtPosition(position);
     }
 }

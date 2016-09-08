@@ -19,7 +19,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
@@ -155,10 +154,5 @@ public class FavoritesFragment extends BaseLceFragment<FrameLayout, List<Card>, 
     public void showEmptyView() {
         contentView.setVisibility(View.GONE);
         emptyView.setVisibility(View.VISIBLE);
-    }
-
-    @OnClick(R.id.find_interesting_btn)
-    public void onFindInterestingButtonClick() {
-        presenter.onFindInterestingButtonClick();
     }
 }
