@@ -126,7 +126,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         public void onPageFinished(@NonNull WebView webView, String url) {
             if (isViewAttached()) {
                 if (UrlUtils.isHttpLink(url)) {
-                    getView().showSearchText(webView.getTitle(), url);
+                    getView().showSearchText(webView.getTitle(), UrlUtils.getHost(url));
                     getView().showLike();
                 }
                 getView().hideProgress();
@@ -143,8 +143,13 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         @Override
         public void onPageStarted(WebView webView, String url, Bitmap favicon) {
             if (isViewAttached()) {
+                getView().showSearchText(webView.getTitle(), UrlUtils.getHost(url));
                 getView().showProgress();
                 getView().hideLike();
+                tabsManager.updateTab(Tab.builder()
+                        .url(webView.getUrl())
+                        .title(webView.getTitle())
+                        .build());
             }
         }
 
@@ -169,15 +174,19 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         private Bitmap getSnapshot(WebView webView) {
             final int width = 320;
             int height = 480;
-            Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
-            Canvas canvas = new Canvas(bitmap);
-            webView.draw(canvas);
-            float factor = width / (float) webView.getWidth();
-            Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
-            height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
-            Bitmap thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
-            bitmap.recycle();
-            scaledBitmap.recycle();
+            Bitmap thumbnail = null;
+
+            if (webView.getWidth() > 0 && webView.getHeight() > 0) {
+                Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                webView.draw(canvas);
+                float factor = width / (float) webView.getWidth();
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
+                height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
+                thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
+                bitmap.recycle();
+                scaledBitmap.recycle();
+            }
 
             return thumbnail;
         }

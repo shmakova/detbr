@@ -33,4 +33,5 @@
     <string name="favorite_cards">Здесь будут храниться любимые карточки</string>
     <string name="find_interesting">Найти интересное</string>
     <string name="empty_favorites">Empty favorites</string>
+    <string name="separator">›</string>
 </resources>

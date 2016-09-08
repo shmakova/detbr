@@ -21,7 +21,7 @@ public interface BrowserView extends MvpView {
 
     void setOnUrlListener(UrlListener listener);
 
-    void showSearchText(@Nullable String title, @NonNull String url);
+    void showSearchText(@Nullable String title, @NonNull String host);
 
     void showProgress();
 
