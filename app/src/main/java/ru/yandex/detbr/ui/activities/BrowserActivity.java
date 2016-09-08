@@ -256,6 +256,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
                 return true;
             case R.id.share:
                 share();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
