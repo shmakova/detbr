@@ -16,7 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.categories.Category;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 

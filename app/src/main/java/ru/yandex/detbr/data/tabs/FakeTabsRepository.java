@@ -3,7 +3,6 @@ package ru.yandex.detbr.data.tabs;
 import java.util.ArrayList;
 import java.util.List;
 
-import ru.yandex.detbr.data.tabs.models.Tab;
 import rx.Observable;
 
 /**

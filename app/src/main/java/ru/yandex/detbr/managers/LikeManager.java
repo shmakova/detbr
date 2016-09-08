@@ -1,7 +1,7 @@
 package ru.yandex.detbr.managers;
 
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.CardsRepository;
 
 /**
  * Created by shmakova on 04.09.16.
@@ -9,21 +9,21 @@ import ru.yandex.detbr.data.repository.models.Card;
 
 public class LikeManager {
 
-    private final DataRepository dataRepository;
+    private final CardsRepository cardsRepository;
 
-    public LikeManager(DataRepository dataRepository) {
-        this.dataRepository = dataRepository;
+    public LikeManager(CardsRepository cardsRepository) {
+        this.cardsRepository = cardsRepository;
     }
 
     public boolean isUrlLiked(String url) {
-        return dataRepository.isCardLiked(url);
+        return cardsRepository.isCardLiked(url);
     }
 
     public void setLike(Card card) {
-        if (!dataRepository.isCardExist(card.url())) {
-            dataRepository.saveFavouriteCard(card);
+        if (!cardsRepository.isCardExist(card.url())) {
+            cardsRepository.saveFavouriteCard(card);
         }
 
-        dataRepository.toggleLike(card.url());
+        cardsRepository.toggleLike(card.url());
     }
 }

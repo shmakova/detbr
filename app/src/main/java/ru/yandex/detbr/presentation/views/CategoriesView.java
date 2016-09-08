@@ -4,7 +4,7 @@ import com.hannesdorfmann.mosby.mvp.lce.MvpLceView;
 
 import java.util.List;
 
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.categories.Category;
 
 /**
  * Created by shmakova on 24.08.16.

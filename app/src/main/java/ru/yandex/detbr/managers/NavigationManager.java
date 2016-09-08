@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
 import ru.yandex.detbr.ui.activities.IntroActivity;
 import ru.yandex.detbr.ui.activities.MainActivity;

@@ -22,7 +22,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.di.components.FavoritesComponent;
 import ru.yandex.detbr.di.modules.FavoritesModule;
 import ru.yandex.detbr.di.modules.NavigationModule;

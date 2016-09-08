@@ -1,4 +1,4 @@
-package ru.yandex.detbr.data.repository.db.resolvers;
+package ru.yandex.detbr.data.cards.resolvers;
 
 import android.content.ContentValues;
 import android.support.annotation.NonNull;
@@ -7,8 +7,8 @@ import com.pushtorefresh.storio.sqlite.operations.put.DefaultPutResolver;
 import com.pushtorefresh.storio.sqlite.queries.InsertQuery;
 import com.pushtorefresh.storio.sqlite.queries.UpdateQuery;
 
-import ru.yandex.detbr.data.repository.db.tables.CardsTable;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.tables.CardsTable;
 
 
 public class CardPutResolver extends DefaultPutResolver<Card> {

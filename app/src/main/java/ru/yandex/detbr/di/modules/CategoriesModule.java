@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.categories.CategoriesRepository;
 import ru.yandex.detbr.presentation.presenters.CategoriesPresenter;
 
 /**
@@ -15,7 +15,7 @@ import ru.yandex.detbr.presentation.presenters.CategoriesPresenter;
 public class CategoriesModule {
     @Provides
     @NonNull
-    public CategoriesPresenter provideCategoriesPresenter(@NonNull DataRepository dataRepository) {
-        return new CategoriesPresenter(dataRepository);
+    public CategoriesPresenter provideCategoriesPresenter(@NonNull CategoriesRepository categoriesRepository) {
+        return new CategoriesPresenter(categoriesRepository);
     }
 }

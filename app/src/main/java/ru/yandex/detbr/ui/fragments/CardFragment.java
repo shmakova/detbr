@@ -25,7 +25,7 @@ import butterknife.OnClick;
 import butterknife.OnLongClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.di.components.CardComponent;
 import ru.yandex.detbr.di.modules.CardModule;
 import ru.yandex.detbr.presentation.presenters.CardPresenter;

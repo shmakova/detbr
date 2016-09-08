@@ -9,9 +9,9 @@ import android.webkit.WebViewClient;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.CardsRepository;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
@@ -35,16 +35,16 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final LikeManager likeManager;
     @NonNull
-    private final DataRepository dataRepository;
+    private final CardsRepository cardsRepository;
     private Subscription subscription;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
-                            @NonNull DataRepository dataRepository,
+                            @NonNull CardsRepository cardsRepository,
                             @NonNull LikeManager likeManager) {
 
         this.wotService = wotService;
-        this.dataRepository = dataRepository;
+        this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
         this.likeManager = likeManager;
     }
@@ -102,7 +102,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         if (isUrlLiked) {
             isUrlLiked = false;
         } else {
-            dataRepository.saveCard(card);
+            cardsRepository.saveCard(card);
             isUrlLiked = true;
         }
 

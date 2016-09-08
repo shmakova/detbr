@@ -1,4 +1,4 @@
-package ru.yandex.detbr.data.repository;
+package ru.yandex.detbr.data.cards;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,44 +17,30 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ru.yandex.detbr.data.repository.db.tables.CardsTable;
-import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.cards.tables.CardsTable;
+import ru.yandex.detbr.data.categories.Category;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
- * Created by shmakova on 28.08.16.
+ * Created by shmakova on 08.09.16.
  */
 
-@SuppressWarnings("PMD.AvoidDuplicateLiterals")
-public class FakeDataRepository implements DataRepository {
+public class CardsRepositoryImpl implements CardsRepository {
+
     private final StorIOSQLite storIOSQLite;
     private final DatabaseReference databaseReference;
 
-    public FakeDataRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
+    public CardsRepositoryImpl(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
         this.storIOSQLite = storIOSQLite;
         this.databaseReference = databaseReference;
-    }
-
-    @Override
-    public Observable<List<Category>> getCategories() {
-        return RxFirebaseDatabase
-                .observeValueEvent(databaseReference.child("categories"))
-                .map(DataSnapshot::getChildren)
-                .flatMap(dataSnapshots -> Observable.from(dataSnapshots)
-                        .map(Category::create)
-                        .toList())
-                .first();
-
     }
 
     @Override
@@ -111,18 +97,6 @@ public class FakeDataRepository implements DataRepository {
     }
 
     @Override
-    public Observable<List<String>> getSchoolsList() {
-        // TODO: 05.09.16 to firebase
-        List<String> schools = new ArrayList<>();
-        schools.add("ГБОУ г. Москвы лицей №1535");
-        schools.add("ГБОУ г. Москвы центр образования №57 «Пятьдесят седьмая школа»");
-        schools.add("ГБОУ г. Москвы «Многопрофильный лицей №1501»");
-        schools.add("ГБОУ г. Москвы лицей «Вторая школа»");
-        schools.add("ГБОУ г. Москвы «Школа-интернат «Интеллектуал»");
-        return Observable.just(schools);
-    }
-
-    @Override
     public void saveFavouriteCard(String title, String url, @Nullable String image, boolean like) {
         // TODO rx
         Thread thread = new Thread(() -> {
@@ -132,7 +106,7 @@ public class FakeDataRepository implements DataRepository {
                     .image(image == null ? getImageUrl(url) : image)
                     .like(like)
                     .build();
-            saveLocalCard(card);
+            saveCardToDb(card);
         });
         thread.start();
     }
@@ -141,12 +115,12 @@ public class FakeDataRepository implements DataRepository {
     public void saveFavouriteCard(@NonNull Card card) {
         // TODO rx
         Thread thread = new Thread(() -> {
-            saveLocalCard(card);
+            saveCardToDb(card);
         });
         thread.start();
     }
 
-    private void saveLocalCard(@NonNull Card card) {
+    private void saveCardToDb(@NonNull Card card) {
         storIOSQLite
                 .put()
                 .object(card)

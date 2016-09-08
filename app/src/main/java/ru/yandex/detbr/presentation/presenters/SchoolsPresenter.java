@@ -1,11 +1,10 @@
 package ru.yandex.detbr.presentation.presenters;
 
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.presentation.views.SchoolsView;
 import rx.Observable;
 
@@ -15,25 +14,18 @@ import rx.Observable;
 
 public class SchoolsPresenter extends BaseRxPresenter<SchoolsView, List<String>> {
     @NonNull
-    private final DataRepository dataRepository;
-    @NonNull
-    private final SharedPreferences sharedPreferences;
+    private final SchoolsRepository schoolsRepository;
 
-    public SchoolsPresenter(@NonNull DataRepository dataRepository,
-                            @NonNull SharedPreferences sharedPreferences) {
-        this.dataRepository = dataRepository;
-        this.sharedPreferences = sharedPreferences;
+    public SchoolsPresenter(@NonNull SchoolsRepository schoolsRepository) {
+        this.schoolsRepository = schoolsRepository;
     }
 
     public void loadSchools(boolean pullToRefresh) {
-        Observable<List<String>> observable = dataRepository.getSchoolsList();
+        Observable<List<String>> observable = schoolsRepository.getSchoolsList();
         subscribe(observable, pullToRefresh);
     }
 
     public void saveSchool(String school) {
-        sharedPreferences
-                .edit()
-                .putString(DataRepository.SCHOOL_TAG, school)
-                .apply();
+        schoolsRepository.saveSchool(school);
     }
 }

@@ -4,8 +4,8 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.views.FavoritesView;
 import rx.Observable;
@@ -16,18 +16,18 @@ import rx.Observable;
 
 public class FavoritesPresenter extends BaseRxPresenter<FavoritesView, List<Card>> {
     @NonNull
-    private final DataRepository dataRepository;
+    private final CardsRepository cardsRepository;
     @NonNull
     private final NavigationManager navigationManager;
 
-    public FavoritesPresenter(@NonNull DataRepository dataRepository,
+    public FavoritesPresenter(@NonNull CardsRepository cardsRepository,
                               @NonNull NavigationManager navigationManager) {
-        this.dataRepository = dataRepository;
+        this.cardsRepository = cardsRepository;
         this.navigationManager = navigationManager;
     }
 
     public void loadCards(boolean pullToRefresh) {
-        Observable<List<Card>> observable = dataRepository.getFavouriteCards();
+        Observable<List<Card>> observable = cardsRepository.getFavouriteCards();
         subscribe(observable, pullToRefresh);
     }
 

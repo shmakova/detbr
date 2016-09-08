@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.ui.delegates.CardAdapterDelegate;
 import ru.yandex.detbr.ui.delegates.ImageCardAdapterDelegate;
 import ru.yandex.detbr.ui.delegates.OnCardClickListener;

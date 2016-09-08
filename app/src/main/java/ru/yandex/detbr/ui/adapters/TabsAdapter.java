@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.utils.UrlUtils;
 import rx.Observable;
 import rx.subjects.PublishSubject;

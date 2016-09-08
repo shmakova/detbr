@@ -17,7 +17,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.di.components.CardsComponent;
 import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.presentation.presenters.CardsPresenter;

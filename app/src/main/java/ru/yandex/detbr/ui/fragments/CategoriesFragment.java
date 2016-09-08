@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.di.components.CategoriesComponent;
 import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.presentation.presenters.CategoriesPresenter;
