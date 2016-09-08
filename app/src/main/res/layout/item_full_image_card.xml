@@ -37,7 +37,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:ellipsize="end"
-                android:maxLines="1"
+                android:maxLines="2"
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 android:textStyle="bold"/>
