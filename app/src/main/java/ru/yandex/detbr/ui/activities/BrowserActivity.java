@@ -56,7 +56,6 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     private BrowserComponent browserComponent;
     private SearchView searchView;
     private MenuItem searchItem;
-    private ActionBar actionBar;
 
     @SuppressLint("InflateParams")
     @Override
@@ -77,7 +76,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     private void initActionBar() {
         setSupportActionBar(toolbar);
-        actionBar = getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
