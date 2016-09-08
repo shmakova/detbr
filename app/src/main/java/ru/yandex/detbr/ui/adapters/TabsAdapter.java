@@ -29,7 +29,7 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
 
     @Override
     public TabViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.tabs_item, parent, false);
+        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tabs, parent, false);
         return new TabViewHolder(convertView);
     }
 

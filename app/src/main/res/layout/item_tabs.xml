@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
+            android:textAllCaps="true"
             android:textColor="@color/grey"
             android:textSize="12sp"/>
     </LinearLayout>
