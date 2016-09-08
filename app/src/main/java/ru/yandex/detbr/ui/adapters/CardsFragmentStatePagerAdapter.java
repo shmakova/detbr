@@ -25,14 +25,15 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Card card = cards.get(position);
-        String type = card.type() == null || card.type().isEmpty() ? "plain_text" : card.type();
+        String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
 
         switch (type) {
-            case "yandex_text":
-                return new CardFragmentBuilder(card, R.layout.item_yandex_card).build();
+            case "text":
+                return new CardFragmentBuilder(card, R.layout.item_card).build();
             case "plain_image":
-            case "kinopoisk":
-                return new CardFragmentBuilder(card, R.layout.item_half_image_card).build();
+                return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
+            case "full_image":
+                return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
             default:
                 return new CardFragmentBuilder(card, R.layout.item_card).build();
         }

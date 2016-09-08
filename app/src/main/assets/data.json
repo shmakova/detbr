@@ -14,7 +14,8 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "bikes",
-      "type": "plain_image"
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "На чем кататься летом",
@@ -22,7 +23,7 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "sport",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Pokemon: смотреть все серии",
@@ -30,7 +31,8 @@
       "site": "ПОИСК В ЯНДЕКСЕ",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
       "category": "pokemon",
-      "type": "yandex_text"
+      "color": "#ffdd55",
+      "type": "text"
     },
     {
       "title": "Покедекс",
@@ -45,7 +47,7 @@
       "site": "ADME",
       "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "articles",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Если бы у котов были цари, то только мейн-куны",
@@ -62,7 +64,7 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "sport",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Большой и добрый великан",
@@ -71,7 +73,9 @@
       "image": "https://www.kinopoisk.ru/images/film_big/840885.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
-      "type": "kinopoisk"
+      "type": "full_image",
+      "dark": true
+
     },
     {
       "title": "15 крутых дизайнерских вещиц, с которыми жизнь станет приятнее",
@@ -111,7 +115,8 @@
       "site": "ПОИСК В ЯНДЕКСЕ",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
       "category": "cartoons",
-      "type": "yandex_text"
+      "color": "#ffdd55",
+      "type": "text"
     },
     {
       "title": "Неуловимый барханный кот появился на публике впервые за 10 лет",
@@ -135,7 +140,8 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "bikes",
-      "type": "plain_text"
+      "color": "#ffdd55",
+      "type": "text"
     },
     {
       "title": "Поймай волну. Советы серфингиста",
@@ -143,7 +149,8 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "sport",
-      "type": "plain_text"
+      "color": "#ffdd55",
+      "type": "text"
     },
     {
       "title": "БОЕВЫЕ ИСКУССТВА ВОСТОКА",
@@ -183,13 +190,13 @@
       "site": "ADME",
       "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "goods",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Современные танцы",
       "url": "http://welovedance.ru/site/styles/sovremennye-tantsy",
       "category": "sport",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "10 иллюстраций о том, каким видят мир творческие люди",
@@ -198,15 +205,6 @@
       "image": "https://files8.adme.ru/files/news/part_131/1316415/12235715-6-1469455007-650-1ccd54f71a-1-1469456115.jpg",
       "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "articles",
-      "type": "plain_image"
-    },
-    {
-      "title": "Лонгборд Penny Original 22\"",
-      "url": "https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls",
-      "image": "https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg",
-      "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
-      "category": "goods",
       "type": "plain_image"
     },
     {
@@ -220,7 +218,7 @@
       "title": "Правила игры Казаки-разбойники",
       "url": "https://bosichkom.com/игры-для-детей/казаки-разбойники",
       "category": "games",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "11 комиксов о том, как изменилась наша жизнь с появлением интернета",
@@ -238,7 +236,8 @@
       "image": "https://www.kinopoisk.ru/images/film_big/723988.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
-      "type": "kinopoisk"
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "Тест: Сможете ли вы узнать логотипы известных брендов?",
@@ -246,7 +245,7 @@
       "site": "ADME",
       "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "goods",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "10 велосипедов для подростков",
@@ -254,13 +253,13 @@
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "bikes",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Правила игры «Мафия»",
       "url": "https://bosichkom.com/игры-для-детей/мафия",
       "category": "games",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Посмотрите, как живут настоящие принцессы ХХI века",
@@ -275,7 +274,7 @@
       "title": "Логические задачи",
       "url": "http://lprobs.ru/section136.p0.html",
       "category": "education",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Ледниковый период: Столкновение неизбежно",
@@ -284,7 +283,8 @@
       "image": "https://www.kinopoisk.ru/images/film_big/818145.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "cartoons",
-      "type": "kinopoisk"
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "15 котов, которых жизнь завела в тупик",
@@ -317,7 +317,7 @@
       "site": "ЛАЙФХАКЕР",
       "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
       "category": "education",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Мини-игры Pokemon",
@@ -333,7 +333,8 @@
       "image": "https://www.kinopoisk.ru/images/film_big/770631.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
-      "type": "kinopoisk"
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "Невероятные оптические иллюзии от профессора математики",
@@ -341,7 +342,7 @@
       "site": "ЛАЙФХАКЕР",
       "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
       "category": "education",
-      "type": "plain_text"
+      "type": "text"
     },
     {
       "title": "Яндекс.Рефераты",
@@ -349,7 +350,8 @@
       "site": "ЯНДЕКС.РЕФЕРАТЫ",
       "favicon": "https://yandex.ru/referats/",
       "category": "education",
-      "type": "yandex_text"
+      "color": "#ffdd55",
+      "type": "text"
     },
     {
       "title": "Варкрафт",
@@ -358,7 +360,8 @@
       "image": "https://www.kinopoisk.ru/images/film_big/277328.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
-      "type": "kinopoisk"
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "Смотреть Гравити Фолз",
@@ -366,7 +369,19 @@
       "site": "ПОИСК В ЯНДЕКСЕ",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
       "category": "cartoons",
-      "type": "yandex_text"
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
+      "title": "Наполеон I",
+      "url": "https://ru.m.wikipedia.org/wiki/%D0%9D%D0%B0%D0%BF%D0%BE%D0%BB%D0%B5%D0%BE%D0%BD_I",
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Napoleon_Paul_Delaroche.jpg/280px-Napoleon_Paul_Delaroche.jpg",
+      "description": "Великий полководец и государственный деятель, заложивший основы современного французского государства.",
+      "site": "ВИКИПЕДИЯ",
+      "favicon": "https://ru.m.wikipedia.org/static/apple-touch/wikipedia.png",
+      "category": "education",
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "Почему люди не видели синий цвет до недавнего времени",
@@ -374,7 +389,16 @@
       "site": "ЛАЙФХАКЕР",
       "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
       "category": "education",
-      "type": "plain_text"
+      "type": "text"
+    },
+    {
+      "title": "Лонгборд Penny Original 22\"",
+      "url": "https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls",
+      "image": "https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg",
+      "site": "ЯНДЕКС.МАРКЕТ",
+      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "category": "goods",
+      "type": "full_image"
     },
     {
       "title": "В поисках Дори",
@@ -383,7 +407,8 @@
       "image": "https://www.kinopoisk.ru/images/film_big/692957.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "cartoons",
-      "type": "kinopoisk"
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "Блоги Minecraft",
@@ -391,6 +416,16 @@
       "image": "http://i.playground.ru/i/91/30/12/00/blog/content/eutr074m.700xauto.jpg",
       "category": "games",
       "type": "plain_image"
+    },
+    {
+      "title": "честный",
+      "description": "1. Отличающийся неспособностью врать, открытостью, прямотой (о человеке); свойственный такому человеку; искренний, правдивый (о человеке, его характере, мыслях, поступках)",
+      "url": "http://www.gramota.ru/slovari/dic/?all=x&word=%D1%87%D0%B5%D1%81%D1%82%D0%BD%D1%8B%D0%B9",
+      "site": "ГРАМОТА.РУ",
+      "category": "education",
+      "color": "#1bb561",
+      "type": "text",
+      "dark": true
     },
     {
       "title": "15 необычных школ, круче которых только Хогвартс",
@@ -408,7 +443,8 @@
       "image": "https://www.kinopoisk.ru/images/film_big/814016.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
-      "type": "kinopoisk"
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "hello перевод на русский (с англ.) алло!, привет!",
@@ -416,7 +452,8 @@
       "site": "ЯНДЕКС.ПЕРЕВОДЧИК",
       "favicon": "https://translate.yandex.net/main/v2.111.1472810626/i/favicon.png",
       "category": "education",
-      "type": "yandex_text"
+      "color": "#ffdd55",
+      "type": "text"
     },
     {
       "title": "Тайная жизнь домашних животных",
@@ -425,7 +462,8 @@
       "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "cartoons",
-      "type": "kinopoisk"
+      "type": "full_image",
+      "dark": true
     }
   ],
   "categories": [

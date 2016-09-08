@@ -6,7 +6,7 @@ import com.hannesdorfmann.mosby.mvp.MvpView;
  * Created by shmakova on 04.09.16.
  */
 
-public interface CardView extends MvpView {
+public interface CardItemView extends MvpView {
     void setTitle(String title);
 
     void setLike(boolean like);
@@ -18,4 +18,8 @@ public interface CardView extends MvpView {
     void setSite(String site);
 
     void setImage(String url);
+
+    void setBackgroundColor(String color);
+
+    void setWhiteText();
 }

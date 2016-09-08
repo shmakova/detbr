@@ -9,7 +9,7 @@ import ru.yandex.detbr.data.repository.db.tables.CardsTable;
 
 public class DbOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 1;
+    private static final int DB_VERSION = 2;
 
     public DbOpenHelper(Context context) {
         super(context, "detbr_db", null, DB_VERSION);

@@ -138,6 +138,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void loadPageByUrl(String url) {
+        webView.stopLoading();
         webView.loadUrl(url);
     }
 

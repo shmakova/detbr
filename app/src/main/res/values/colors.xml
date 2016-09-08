@@ -12,7 +12,7 @@
     <color name="dark_grey">#222222</color>
     <color name="tab_background">#363636</color>
     <color name="toolbar_grey">#706f6f</color>
-    <color name="grey">#777777</color>
+    <color name="grey">#757575</color>
     <color name="active_grey">#424242</color>
     <color name="bar_grey">#212121</color>
     <color name="inactive_grey">#bdbdbd</color>
@@ -27,9 +27,11 @@
     <color name="favorite_yellow">#ffdd3c</color>
 
     <color name="intro_background">#ffd740</color>
-    <color name="intro_text_color">#8a000000</color>
+    <color name="transparent_text_color">#8a000000</color>
+    <color name="transparent_card_title">#deffffff</color>
+    <color name="transparent_url_color">#b2ffffff</color>
 
-    <color name="yandex_description_color">#26000000</color>
+    <color name="description_color">#61000000</color>
     <color name="favorite_text_color">#9e9e9e</color>
 
     <!-- Categories bubbles -->
