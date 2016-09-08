@@ -24,6 +24,7 @@
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
         <item name="closeIcon">@drawable/ic_clear</item>
         <item name="searchHintIcon">@null</item>
+        <item name="searchIcon">@null</item>
         <item name="android:maxWidth">1000dp</item>
     </style>
 

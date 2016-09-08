@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -43,12 +45,17 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     ProgressBar progressBar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.browser_host)
+    TextView browserHost;
+    @BindView(R.id.browser_title)
+    TextView browserTitle;
 
     @Nullable
     private UrlListener listener;
     @Nullable
     private BrowserComponent browserComponent;
     private SearchView searchView;
+    private MenuItem searchItem;
     private ActionBar actionBar;
 
     @SuppressLint("InflateParams")
@@ -133,6 +140,9 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
 
+        searchItem = menu.findItem(R.id.search);
+        searchItem.setVisible(false);
+
         return true;
     }
 
@@ -200,10 +210,9 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
-    public void showSearchText(@Nullable String title, @NonNull String url) {
-        if (actionBar != null) {
-            actionBar.setTitle(url);
-        }
+    public void showSearchText(@Nullable String title, @NonNull String host) {
+        browserTitle.setText(title);
+        browserHost.setText(host);
     }
 
     @Override
@@ -245,13 +254,28 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
             case R.id.tabs_page:
                 presenter.onHomeClicked();
                 return true;
+            case R.id.share:
+                share();
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void share() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share)));
+    }
+
     @OnClick(R.id.like_fab)
     public void onFabLikeClick() {
         presenter.onLikeClick(webView.getTitle(), webView.getUrl());
+    }
+
+    @OnClick(R.id.toolbar)
+    public void onToolbarClick() {
+        MenuItemCompat.expandActionView(searchItem);
     }
 }

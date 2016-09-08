@@ -464,6 +464,118 @@
       "category": "cartoons",
       "type": "full_image",
       "dark": true
+    },
+    {
+      "title": "Марс — загадочная красная планета",
+      "url": "http://saitzemli.ru/article/planeta-mars",
+      "image": "http://saitzemli.ru/imagesforsite/articles/Mars/mars.jpg",
+      "site": "САЙТ ЗЕМЛИ",
+      "category": "education",
+      "type": "plain_image"
+    },
+    {
+      "title": "Венера — мир невыносимой жары и вулканов",
+      "url": "http://saitzemli.ru/article/planeta-venera",
+      "image": "http://saitzemli.ru/imagesforsite/articles/venera/venera-planeta.jpg",
+      "site": "САЙТ ЗЕМЛИ",
+      "category": "education",
+      "type": "plain_image"
+    },
+    {
+      "title": "Семь чудес Древнего мира",
+      "url": "http://www.putidorogi-nn.ru/7-chudes-sveta/501-sem-chudes-drevnego-mira",
+      "image": "http://www.putidorogi-nn.ru/images/stories/afrika/piramida_heopsa_2.jpg",
+      "site": "САЙТ ЗЕМЛИ",
+      "category": "education",
+      "type": "plain_image"
+    },
+    {
+      "title": "Плетем косы: 3 классных и несложных варианта",
+      "url": "http://www.devchat.ru/my-style/fashion-and-accessories/article/how-to-weave-braids",
+      "image": "http://cdn.multibrand2.pgsitecore.com/ru-RU/-/media/BeingGirl/BeingGirl-RU/Images/Articles/Primary/pletem--kosi-prim.jpg?h=360&w=650&v=1-201606211352&crop=1&sc=1",
+      "site": "ДЕВЧАТ",
+      "category": "goods",
+      "type": "plain_image"
+    },
+    {
+      "title": "Мода 2016",
+      "url": "http://yavmode.ru/moda-2016-65-foto/",
+      "image": "http://yavmode.ru/wp-content/uploads/2016/03/fash-n-chips.jpg",
+      "site": "Я В МОДЕ",
+      "category": "goods",
+      "type": "plain_image"
+    },
+    {
+      "title": "Ассортимент LEGO Star Wars",
+      "url": "http://www.lego.com/ru-ru/starwars/products?icmp=CORU36HomeWNStarWarsRogueOne#/episode-i-vi",
+      "image": "http://cache.lego.com/r/www/r/starwars/-/media/franchises/starwars2015/banners%20for%20all%20sections/2016%202hy/rogue_1_banner_products.jpg?l.r2=-548408727",
+      "site": "LEGO.COM",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "LEGO Star Wars Истребитель Повстанцев",
+      "url": "http://www.lego.com/ru-ru/starwars/products/resistance-xwing-fighter-75125",
+      "image": "https://mi-od-live-s.legocdn.com/r/www/r/catalogs/-/media/catalogs/products/star%20wars/primary/lego_75125_prod_pri_1488.jpg?l.r2=-795200374",
+      "site": "LEGO.COM",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "Исследуй LEGO Nexo Knights",
+      "url": "http://www.lego.com/ru-ru/nexoknights/explorepage/explore-entertainment-room",
+      "image": "http://cache.lego.com/r/www/r/nexoknights/-/media/franchises/nexoknights/explorerpages/explorerpage01/invention%20lab/robin_presenting__720x720.png?l.r2=-659267782",
+      "site": "LEGO.COM",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "Турнир Стихий - Видео LEGO Ninjago",
+      "url": "http://www.lego.com/ru-ru/ninjago/videos/tournament-of-elements-980cc199eab24fdabd13d40840c40d70",
+      "image": "http://cache.lego.com/r/www/r/ninjago/-/media/franchises/ninjago%202014/branding/ninjago-logo-new.png?l.r2=-142545377",
+      "site": "LEGO.COM",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "Универсум - Телеканал Карусель",
+      "url": "http://www.karusel-tv.ru/video/16704",
+      "image": "http://im.karusel-tv.ru/logo/autumn-6.png",
+      "site": "Карусель-ТВ",
+      "category": "films",
+      "type": "plain_image"
+    },
+    {
+      "title": "Abracadabra - Song",
+      "url": "http://learnenglishkids.britishcouncil.org/en/songs/abracadabra",
+      "image": "http://learnenglishkids.britishcouncil.org/sites/kids/files/styles/grid_140x106/public/image/abracadabra.jpg?itok=WnBi9MsM",
+      "site": "LearnEnglish Kids",
+      "category": "education",
+      "type": "plain_image"
+    },
+    {
+      "title": "Old Macdonald had a farm - Song",
+      "url": "http://learnenglishkids.britishcouncil.org/en/songs/old-macdonald-had-farm",
+      "image": "http://learnenglishkids.britishcouncil.org/sites/kids/files/styles/grid_140x106/public/image/old-macdonald-had-a-farm-30-05-2012.jpg?itok=7bK-BKwD",
+      "site": "LearnEnglish Kids",
+      "category": "education",
+      "type": "plain_image"
+    },
+    {
+      "title": "People Work - Song",
+      "url": "http://learnenglishkids.britishcouncil.org/en/songs/people-work",
+      "image": "http://learnenglishkids.britishcouncil.org/sites/kids/files/styles/grid_140x106/public/image/people-work-30-05-2012.jpg?itok=R3IfbG9E",
+      "site": "LearnEnglish Kids",
+      "category": "education",
+      "type": "plain_image"
+    },
+    {
+      "title": "Антистресс игрушка своими руками",
+      "url": "http://www.rukikryki.ru/podelki/igrushki/3584-antistress-igrushka-svoimi-rukami.html",
+      "image": "http://www.rukikryki.ru/uploads/posts/2015-01/thumbs/1420444953_antistress-igrushka-svoimi-rukami-1.jpg",
+      "site": "RukiKryki.ru",
+      "category": "goods",
+      "type": "plain_image"
     }
   ],
   "categories": [
