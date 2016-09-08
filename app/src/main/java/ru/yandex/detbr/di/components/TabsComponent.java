@@ -24,7 +24,4 @@ public interface TabsComponent {
 
     @NonNull
     TabsPresenter presenter();
-
-    @NonNull
-    TabsAdapter adapter();
 }

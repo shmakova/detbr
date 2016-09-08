@@ -11,7 +11,7 @@ public final class TabsTable {
     public static final String TABLE = "tabs_table";
 
     @NonNull
-    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_ID = "rowid";
 
     @NonNull
     public static final String COLUMN_TITLE = "title";
@@ -33,11 +33,5 @@ public final class TabsTable {
                 + COLUMN_URL + " TEXT UNIQUE, "
                 + COLUMN_PREVIEW + " BLOB"
                 + ");";
-    }
-
-    public static String fillDatabaseWithDefaultTabs() {
-        return "INSERT INTO " + TABLE +
-                " (" + COLUMN_TITLE + ", " + COLUMN_URL + ", " + COLUMN_PREVIEW + ") VALUES "
-                + "(" + "\"Title\", " + "\"Url\", " + "null" + ");";
     }
 }

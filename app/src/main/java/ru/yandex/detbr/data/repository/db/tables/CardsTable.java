@@ -8,7 +8,7 @@ public final class CardsTable {
     public static final String TABLE = "cards_table";
 
     @NonNull
-    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_ID = "rowid";
 
     @NonNull
     public static final String COLUMN_TITLE = "title";

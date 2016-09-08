@@ -22,11 +22,4 @@ public class TabsModule {
                                               @NonNull TabsManager tabsManager) {
         return new TabsPresenter(navigationManager, tabsManager);
     }
-
-    @Provides
-    @NonNull
-    @PerFragment
-    public TabsAdapter provideTabsAdapter() {
-        return new TabsAdapter();
-    }
 }
