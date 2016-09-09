@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ru.yandex.detbr.R;
@@ -15,11 +16,11 @@ import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
  */
 
 public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
-    private final List<Card> cards;
+    private List<Card> cards;
 
-    public CardsFragmentStatePagerAdapter(FragmentManager fm, List<Card> cards) {
+    public CardsFragmentStatePagerAdapter(FragmentManager fm) {
         super(fm);
-        this.cards = cards;
+        cards = new ArrayList<>();
     }
 
     @Override
@@ -41,6 +42,11 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     public List<Card> getCards() {
         return cards;
+    }
+
+    public void setCards(List<Card> cards) {
+        this.cards = cards;
+        notifyDataSetChanged();
     }
 
     @Override
