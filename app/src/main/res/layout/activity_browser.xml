@@ -108,7 +108,7 @@
             app:layout_anchor="@id/webview_wrapper"
             app:layout_anchorGravity="bottom|right|end"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-            app:layout_behavior="ru.yandex.detbr.ui.behaviors.ScrollAwareBehavior"
+            app:layout_behavior="ru.yandex.detbr.ui.behaviors.ScrollAwareFabBehavior"
             tools:ignore="RtlHardcoded"/>
 
     </android.support.design.widget.CoordinatorLayout>
