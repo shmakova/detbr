@@ -174,10 +174,13 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         private Bitmap getSnapshot(WebView webView) {
             final int width = 320;
             int height = 480;
+            float ratio = (float) height / (float) width;
             Bitmap thumbnail = null;
 
             if (webView.getWidth() > 0 && webView.getHeight() > 0) {
-                Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
+                int webViewHeight = (int) (webView.getWidth() * ratio);
+                int shapshotHeight = webViewHeight > webView.getHeight() ? webView.getHeight() : webViewHeight;
+                Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), shapshotHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
                 float factor = width / (float) webView.getWidth();
