@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    xmlns:tools="http://schemas.android.com/tools"
-                                    android:id="@+id/loadingView"
-                                    android:layout_width="@dimen/card_size"
-                                    android:layout_height="@dimen/card_size"
-                                    android:layout_gravity="center"
-                                    android:clickable="true"
-                                    android:elevation="2dp"
-                                    android:foreground="?android:attr/selectableItemBackground"
-                                    app:cardBackgroundColor="@color/face_grey"
-                                    app:cardCornerRadius="15dp"
-                                    app:cardUseCompatPadding="true"
-                                    tools:ignore="UnusedAttribute">
+<ru.yandex.detbr.ui.android_views.SquareCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loadingView"
+    android:layout_width="@dimen/card_size"
+    android:layout_height="@dimen/card_size"
+    android:layout_gravity="center"
+    android:clickable="true"
+    android:elevation="2dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardCornerRadius="15dp"
+    app:cardUseCompatPadding="true"
+    tools:ignore="UnusedAttribute">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,22 +41,22 @@
                 android:layout_width="220dp"
                 android:layout_height="14dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/face_grey"/>
+                android:background="@color/lightest_grey"/>
 
             <View
                 android:layout_width="160dp"
                 android:layout_height="14dp"
                 android:layout_below="@+id/first_stroke"
                 android:layout_marginTop="10dp"
-                android:background="@color/face_grey"/>
+                android:background="@color/lightest_grey"/>
 
             <View
                 android:layout_width="96dp"
                 android:layout_height="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="20dp"
-                android:background="@color/face_grey"/>
+                android:background="@color/lightest_grey"/>
 
         </RelativeLayout>
     </LinearLayout>
-</android.support.v7.widget.CardView>
+</ru.yandex.detbr.ui.android_views.SquareCardView>

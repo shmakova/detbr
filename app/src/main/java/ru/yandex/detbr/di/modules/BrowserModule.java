@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.data.wot_network.WotService;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
@@ -20,8 +20,8 @@ public class BrowserModule {
     @NonNull
     public BrowserPresenter provideBrowserPresenter(@NonNull WotService wotService,
                                                     @NonNull TabsManager tabsManager,
-                                                    @NonNull DataRepository dataRepository,
+                                                    @NonNull CardsRepository cardsRepository,
                                                     @NonNull LikeManager likeManager) {
-        return new BrowserPresenter(wotService, tabsManager, dataRepository, likeManager);
+        return new BrowserPresenter(wotService, tabsManager, cardsRepository, likeManager);
     }
 }

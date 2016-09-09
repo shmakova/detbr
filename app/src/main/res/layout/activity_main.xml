@@ -17,7 +17,7 @@
             android:id="@+id/content_wrapper"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/background_grey">
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,10 +41,10 @@
                 android:layout_height="56dp"
                 android:layout_alignParentBottom="true"
                 android:background="@color/white"
-                app:bb_activeTabColor="@color/active_grey"
+                app:bb_activeTabColor="@color/dark_grey"
                 app:bb_behavior="shifting"
-                app:bb_inActiveTabColor="@color/inactive_grey"
-                app:bb_showShadow="false"
+                app:bb_inActiveTabColor="@color/grey"
+                app:bb_showShadow="true"
                 app:bb_tabXmlResource="@xml/bottombar_tabs"/>
 
             <include layout="@layout/floating_search_view"/>

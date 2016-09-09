@@ -1,4 +1,4 @@
-package ru.yandex.detbr.data.repository.models;
+package ru.yandex.detbr.data.categories;
 
 import android.os.Parcelable;
 import android.support.annotation.Nullable;

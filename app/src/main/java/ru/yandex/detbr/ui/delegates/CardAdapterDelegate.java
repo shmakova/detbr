@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
 
 /**
  * Created by shmakova on 25.08.16.
@@ -78,11 +78,11 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
 
             if (card.dark()) {
                 title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.white));
-                url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_url_color));
+                url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_white));
                 likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_white));
             } else {
-                title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.transparent_text_color));
-                url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_text_color));
+                title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.dark_transparent));
+                url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.dark_transparent));
                 likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_black));
             }
 

@@ -1,12 +1,12 @@
-package ru.yandex.detbr.data.repository.db.resolvers;
+package ru.yandex.detbr.data.cards.resolvers;
 
 import android.support.annotation.NonNull;
 
 import com.pushtorefresh.storio.sqlite.operations.delete.DefaultDeleteResolver;
 import com.pushtorefresh.storio.sqlite.queries.DeleteQuery;
 
-import ru.yandex.detbr.data.repository.db.tables.CardsTable;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.tables.CardsTable;
 
 /**
  * Created by user on 28.08.16.

@@ -1,11 +1,11 @@
 package ru.yandex.detbr.di.modules;
 
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.data.repository.DataRepository;
+import ru.yandex.detbr.data.schools.SchoolsRepository;
+import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.presenters.MainPresenter;
 
@@ -17,9 +17,9 @@ import ru.yandex.detbr.presentation.presenters.MainPresenter;
 public class MainModule {
     @Provides
     @NonNull
-    MainPresenter provideMainPresenter(@NonNull SharedPreferences sharedPreferences,
-                                       @NonNull NavigationManager navigationManager,
-                                       @NonNull DataRepository dataRepository) {
-        return new MainPresenter(sharedPreferences, navigationManager, dataRepository);
+    MainPresenter provideMainPresenter(@NonNull NavigationManager navigationManager,
+                                       @NonNull LikeManager likeManager,
+                                       @NonNull SchoolsRepository schoolsRepository) {
+        return new MainPresenter(navigationManager, likeManager, schoolsRepository);
     }
 }

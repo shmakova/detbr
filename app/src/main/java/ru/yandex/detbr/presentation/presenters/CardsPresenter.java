@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.CardsRepository;
+import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.presentation.views.CardsView;
 import rx.Observable;
 
@@ -16,19 +16,19 @@ import rx.Observable;
 
 public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
     @NonNull
-    private final DataRepository dataRepository;
+    private final CardsRepository cardsRepository;
 
-    public CardsPresenter(@NonNull DataRepository dataRepository) {
-        this.dataRepository = dataRepository;
+    public CardsPresenter(@NonNull CardsRepository cardsRepository) {
+        this.cardsRepository = cardsRepository;
     }
 
     public void loadCards(boolean pullToRefresh) {
-        Observable<List<Card>> observable = dataRepository.getCardsList();
+        Observable<List<Card>> observable = cardsRepository.getCardsList();
         subscribe(observable, pullToRefresh);
     }
 
     public void loadCardsByCategory(Category category, boolean pullToRefresh) {
-        Observable<List<Card>> observable = dataRepository.getCardsByCategory(category);
+        Observable<List<Card>> observable = cardsRepository.getCardsByCategory(category);
         subscribe(observable, pullToRefresh);
     }
 }
