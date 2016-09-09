@@ -99,7 +99,7 @@ public class SchoolsFragment
 
         autoCompleteTextView.setOnFocusChangeListener((view1, b) -> {
             if (b) {
-                autoCompleteTextView.showDropDown();
+                onSchoolsAutocompleteTextViewClick();
             }
         });
 
