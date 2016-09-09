@@ -97,6 +97,12 @@ public class SchoolsFragment
         autoCompleteTextView.setDropDownWidth((int) (width * 1.5));
         autoCompleteTextView.setDropDownHorizontalOffset(-width / 4);
 
+        autoCompleteTextView.setOnFocusChangeListener((view1, b) -> {
+            if (b) {
+                autoCompleteTextView.showDropDown();
+            }
+        });
+
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();
             presenter.saveSchool(adapterView.getItemAtPosition(i).toString());
