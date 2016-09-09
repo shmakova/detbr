@@ -12,7 +12,7 @@ import rx.Observable;
  */
 
 public class SchoolsRepositoryImpl implements SchoolsRepository {
-    String SCHOOL_TAG = "SCHOOL_TAG";
+    private final String SCHOOL_TAG = "SCHOOL_TAG";
 
     private final SharedPreferences sharedPreferences;
 
