@@ -25,9 +25,9 @@ import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.di.components.SchoolsComponent;
 import ru.yandex.detbr.di.modules.SchoolsModule;
+import ru.yandex.detbr.presentation.presenters.SchoolsPresenter;
+import ru.yandex.detbr.presentation.views.SchoolsView;
 import ru.yandex.detbr.ui.adapters.SchoolsAdapter;
-import ru.yandex.detbr.ui.presenters.SchoolsPresenter;
-import ru.yandex.detbr.ui.views.SchoolsView;
 
 public class SchoolsFragment
         extends BaseLceFragment<FrameLayout, List<String>, SchoolsView, SchoolsPresenter>
@@ -90,8 +90,12 @@ public class SchoolsFragment
         super.onViewCreated(view, savedInstanceState);
 
         schoolsAdapter = new SchoolsAdapter(getActivity(),
-                android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+                R.layout.dropdown_item, R.id.item, new ArrayList<>());
         autoCompleteTextView.setAdapter(schoolsAdapter);
+
+        int width = autoCompleteTextView.getLayoutParams().width;
+        autoCompleteTextView.setDropDownWidth((int) (width * 1.5));
+        autoCompleteTextView.setDropDownHorizontalOffset(-width / 4);
 
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();

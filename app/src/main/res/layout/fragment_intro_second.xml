@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/main"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:ignore="InconsistentLayout">
+
+    <ru.yandex.detbr.ui.android_views.SquareCardView
+        android:id="@+id/card"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/card_size"
+        android:layout_gravity="center"
+        android:background="@drawable/second_intro_pic"
+        android:clickable="true"
+        android:elevation="2dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardCornerRadius="15dp"
+        app:cardUseCompatPadding="true"
+        tools:ignore="UnusedAttribute">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="5"
+            android:contentDescription="@string/intro"
+            android:src="@drawable/second_intro_pic"/>
+
+    </ru.yandex.detbr.ui.android_views.SquareCardView>
+
+    <TextView
+        android:layout_width="250dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:text="@string/second_intro_text"
+        android:textColor="@color/transparent_text_color"
+        android:textSize="16sp"/>
+
+</LinearLayout>

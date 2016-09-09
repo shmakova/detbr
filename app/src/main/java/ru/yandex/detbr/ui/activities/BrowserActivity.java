@@ -1,6 +1,8 @@
 package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -9,13 +11,18 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.SearchView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
-
-import com.arlib.floatingsearchview.FloatingSearchView;
-import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,14 +30,11 @@ import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.di.components.BrowserComponent;
 import ru.yandex.detbr.di.modules.BrowserModule;
-import ru.yandex.detbr.ui.presenters.BrowserPresenter;
-import ru.yandex.detbr.ui.views.BrowserView;
+import ru.yandex.detbr.presentation.presenters.BrowserPresenter;
+import ru.yandex.detbr.presentation.views.BrowserView;
 
 public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresenter> implements
-        BrowserView,
-        FloatingSearchView.OnMenuItemClickListener,
-        FloatingSearchView.OnSearchListener,
-        FloatingSearchView.OnHomeActionClickListener {
+        BrowserView {
     private static final String CHILD_SAFETY_HTML = "file:///android_asset/child_safety.html";
 
     @BindView(R.id.webview)
@@ -39,11 +43,19 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     FloatingActionButton fabLike;
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.browser_host)
+    TextView browserHost;
+    @BindView(R.id.browser_title)
+    TextView browserTitle;
 
     @Nullable
     private UrlListener listener;
     @Nullable
     private BrowserComponent browserComponent;
+    private SearchView searchView;
+    private MenuItem searchItem;
 
     @SuppressLint("InflateParams")
     @Override
@@ -52,16 +64,22 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browser);
 
-        floatingSearchView.setOnMenuItemClickListener(this);
-        floatingSearchView.setOnSearchListener(this);
-        floatingSearchView.setOnHomeActionClickListener(this);
-
+        initActionBar();
         initWebView();
 
         if (savedInstanceState == null) {
             handleIntent(getIntent());
         } else {
             webView.restoreState(savedInstanceState);
+        }
+    }
+
+    private void initActionBar() {
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -111,13 +129,41 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu, menu);
+
+        SearchManager searchManager =
+                (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(
+                searchManager.getSearchableInfo(getComponentName()));
+
+        searchItem = menu.findItem(R.id.search);
+        searchItem.setVisible(false);
+
+        return true;
+    }
+
+    @Override
     public void loadPageByUrl(String url) {
+        webView.stopLoading();
         webView.loadUrl(url);
     }
 
     @Override
     public void showError() {
         webView.loadUrl(CHILD_SAFETY_HTML);
+    }
+
+    @Override
+    public void showLike() {
+        fabLike.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideLike() {
+        fabLike.setVisibility(View.GONE);
     }
 
     @Override
@@ -134,6 +180,9 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
             if (uri != null) {
                 query = uri.toString();
             }
+        } else if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            query = intent.getStringExtra(SearchManager.QUERY);
+            searchView.setQuery(query, false);
         }
 
         if (listener != null) {
@@ -160,8 +209,9 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
-    public void showSearchText(@Nullable String title, @NonNull String url) {
-        floatingSearchView.setSearchText(url);
+    public void showSearchText(@Nullable String title, @NonNull String host) {
+        browserTitle.setText(title);
+        browserHost.setText(host);
     }
 
     @Override
@@ -200,12 +250,23 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.home_page:
+            case R.id.tabs_page:
                 presenter.onHomeClicked();
+                return true;
+            case R.id.share:
+                share();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void share() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share)));
     }
 
     @OnClick(R.id.like_fab)
@@ -213,36 +274,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         presenter.onLikeClick(webView.getTitle(), webView.getUrl());
     }
 
-    @Override
-    public void onActionMenuItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        switch (id) {
-            case R.id.action_voice_rec:
-                showSpeechRecognizer();
-                break;
-            case R.id.home_page:
-                presenter.onHomeClicked();
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
-    public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
-        // no suggestions yet
-    }
-
-    @Override
-    public void onSearchAction(String currentQuery) {
-        if (listener != null) {
-            listener.onUrl(currentQuery);
-        }
-    }
-
-    @Override
-    public void onHomeClicked() {
-        onBackPressed();
+    @OnClick(R.id.toolbar)
+    public void onToolbarClick() {
+        MenuItemCompat.expandActionView(searchItem);
     }
 }

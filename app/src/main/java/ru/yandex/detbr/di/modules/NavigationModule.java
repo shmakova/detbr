@@ -4,8 +4,8 @@ import android.support.v4.app.FragmentManager;
 
 import dagger.Module;
 import dagger.Provides;
+import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.ui.activities.MainActivity;
-import ru.yandex.detbr.ui.managers.NavigationManager;
 
 /**
  * Created by shmakova on 29.08.16.

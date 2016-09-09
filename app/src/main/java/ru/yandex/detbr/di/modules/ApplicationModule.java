@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.database.DatabaseReference;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 
 import javax.inject.Named;
@@ -21,7 +22,8 @@ import ru.yandex.detbr.data.repository.DataRepository;
 import ru.yandex.detbr.data.repository.FakeDataRepository;
 import ru.yandex.detbr.data.tabs.TabsRepository;
 import ru.yandex.detbr.data.tabs.TabsRepositoryImpl;
-import ru.yandex.detbr.ui.managers.TabsManager;
+import ru.yandex.detbr.managers.LikeManager;
+import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 @Module
@@ -44,8 +46,8 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    DataRepository providesDataRepository(StorIOSQLite storIOSQLite) {
-        return new FakeDataRepository(storIOSQLite);
+    DataRepository providesDataRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
+        return new FakeDataRepository(storIOSQLite, databaseReference);
     }
 
     @Provides
@@ -73,6 +75,12 @@ public class ApplicationModule {
     @Singleton
     public TabsRepository provideTabsRepository(StorIOSQLite storIOSQLite) {
         return new TabsRepositoryImpl(storIOSQLite);
+    }
+
+    @Provides
+    @Singleton
+    public LikeManager providesLikeManager(DataRepository dataRepository) {
+        return new LikeManager(dataRepository);
     }
 
     @Provides

@@ -46,14 +46,17 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setCover();
-        CategoriesFragment categoriesFragment = new CategoriesFragmentBuilder()
-                .category(category)
-                .build();
-        if (fragmentManager != null) {
-            fragmentManager
-                    .beginTransaction()
-                    .replace(R.id.categories_frame_layout, categoriesFragment)
-                    .commit();
+
+        if (savedInstanceState == null) {
+            CategoriesFragment categoriesFragment = new CategoriesFragmentBuilder()
+                    .category(category)
+                    .build();
+            if (fragmentManager != null) {
+                fragmentManager
+                        .beginTransaction()
+                        .replace(R.id.categories_frame_layout, categoriesFragment)
+                        .commit();
+            }
         }
     }
 
@@ -63,8 +66,8 @@ public class CategoryCardsPagerFragment extends BaseCardsPagerFragment {
     }
 
     private void setCover() {
-        if (category.getBackgroundColor() != null) {
-            categoryCardsWrapper.setBackgroundColor(Color.parseColor(category.getBackgroundColor()));
+        if (category.color() != null) {
+            categoryCardsWrapper.setBackgroundColor(Color.parseColor(category.color()));
         }
     }
 }

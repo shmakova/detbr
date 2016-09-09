@@ -26,19 +26,23 @@ public class CardPutResolver extends DefaultPutResolver<Card> {
         return UpdateQuery.builder()
                 .table(CardsTable.TABLE)
                 .where(CardsTable.COLUMN_URL + " LIKE ?")
-                .whereArgs(card.getUrl())
+                .whereArgs(card.url())
                 .build();
     }
 
     @Override
     @NonNull
     public ContentValues mapToContentValues(@NonNull Card card) {
-        ContentValues contentValues = new ContentValues(4);
+        ContentValues contentValues = new ContentValues(8);
 
-        contentValues.put(CardsTable.COLUMN_COVER, card.getCover());
-        contentValues.put(CardsTable.COLUMN_LIKE, card.getLike());
-        contentValues.put(CardsTable.COLUMN_TITLE, card.getTitle());
-        contentValues.put(CardsTable.COLUMN_URL, card.getUrl());
+        contentValues.put(CardsTable.COLUMN_IMAGE, card.image());
+        contentValues.put(CardsTable.COLUMN_LIKE, card.like());
+        contentValues.put(CardsTable.COLUMN_DARK, card.dark());
+        contentValues.put(CardsTable.COLUMN_TITLE, card.title());
+        contentValues.put(CardsTable.COLUMN_FAVICON, card.favicon());
+        contentValues.put(CardsTable.COLUMN_SITE, card.site());
+        contentValues.put(CardsTable.COLUMN_COLOR, card.color());
+        contentValues.put(CardsTable.COLUMN_URL, card.url());
 
         return contentValues;
     }

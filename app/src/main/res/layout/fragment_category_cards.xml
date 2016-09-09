@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <include layout="@layout/loading_view"/>
+        <include layout="@layout/card_loading_view"/>
 
         <include layout="@layout/error_view"/>
 

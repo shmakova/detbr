@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply from: '../code_quality_tools/jacoco.gradle'
 apply plugin: 'com.frogermcs.androiddevmetrics'
 apply from: '../code_quality_tools/quality.gradle'
 apply plugin: 'com.github.ben-manes.versions'
@@ -42,20 +41,12 @@ android {
         debug {
             signingConfig signingConfigs.yamblz
             applicationIdSuffix '.debug'
-
-            // Enables code coverage with Jacoco only for instrumentation tests.
-            // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
-            testCoverageEnabled true
         }
 
         release {
             signingConfig signingConfigs.yamblz
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
-
-            // Enables code coverage with Jacoco only for instrumentation tests.
-            // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
-            testCoverageEnabled true
         }
     }
 
@@ -100,6 +91,8 @@ dependencies {
     provided libraries.autoValue
     apt libraries.autoValue
     apt libraries.autoValueParcel
+    apt libraries.autoValueFirebase
+    provided libraries.autoValueFirebaseAnnotation
 
     compile libraries.storIO
 
@@ -112,6 +105,7 @@ dependencies {
 
     compile libraries.rxJava
     compile libraries.rxAndroid
+    compile libraries.rxFirebase
 
     compile(libraries.retrofit) {
         exclude module: 'okhttp'
@@ -134,10 +128,11 @@ dependencies {
     compile libraries.floatingSearchView
 
     compile libraries.adapterDelegates
-    compile libraries.appintro
 
     compile libraries.mosby
     compile libraries.mosbyViewstate
+
+    compile libraries.viewPagerIndicator
 
     // Developer tools (Developer Settings)
     compile libraries.stetho
@@ -167,6 +162,7 @@ dependencies {
         transitive = true;
     }
     compile libraries.playServicesAnalytics
+    compile libraries.firebaseDatabase
 }
 
 configurations.all {

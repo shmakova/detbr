@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import dagger.Subcomponent;
 import ru.yandex.detbr.di.modules.BrowserModule;
 import ru.yandex.detbr.di.scopes.PerActivity;
+import ru.yandex.detbr.presentation.presenters.BrowserPresenter;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
-import ru.yandex.detbr.ui.presenters.BrowserPresenter;
 
 /**
  * Created by shmakova on 20.08.16.

@@ -1,5 +1,6 @@
 package ru.yandex.detbr.ui.adapters;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,6 +88,10 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
                 title.setVisibility(View.VISIBLE);
                 title.setText(tab.getTitle());
             }
+
+            preview.setImageDrawable(ContextCompat.getDrawable(
+                    preview.getContext(),
+                    R.drawable.ic_broken_image_black_24dp));
 
             if (tab.getPreview() != null) {
                 preview.setImageBitmap(tab.getPreview());

@@ -28,7 +28,6 @@ public final class TabsTable {
     @NonNull
     public static String getCreateTableQuery() {
         return "CREATE TABLE " + TABLE + "("
-                + COLUMN_ID + " INTEGER NOT NULL PRIMARY KEY, "
                 + COLUMN_TITLE + " TEXT, "
                 + COLUMN_URL + " TEXT UNIQUE, "
                 + COLUMN_PREVIEW + " BLOB"

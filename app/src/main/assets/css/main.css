@@ -1,0 +1,11 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    padding-top: 40px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+img {
+    width: 200px;
+}

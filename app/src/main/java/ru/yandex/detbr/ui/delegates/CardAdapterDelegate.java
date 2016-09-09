@@ -1,13 +1,18 @@
 package ru.yandex.detbr.ui.delegates;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.hannesdorfmann.adapterdelegates2.AbsListItemAdapterDelegate;
 
 import java.util.List;
@@ -17,7 +22,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.utils.UrlUtils;
 
 /**
  * Created by shmakova on 25.08.16.
@@ -34,7 +38,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent) {
-        return new CardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_card, parent, false), listener);
+        return new CardViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorite_card, parent, false), listener);
     }
 
     @Override
@@ -44,7 +48,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
 
     @Override
     protected boolean isForViewType(@NonNull Card item, List<Card> items, int position) {
-        return item.getCover().isEmpty();
+        return item.image() == null || item.image().isEmpty();
     }
 
     class CardViewHolder extends RecyclerView.ViewHolder {
@@ -54,6 +58,10 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         TextView url;
         @BindView(R.id.like_btn)
         CheckBox likeButton;
+        @BindView(R.id.card)
+        CardView cardView;
+        @BindView(R.id.favicon)
+        ImageView favicon;
 
         private final OnCardClickListener listener;
 
@@ -64,9 +72,29 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         }
 
         void bind(Card card) {
-            title.setText(card.getTitle());
-            url.setText(UrlUtils.getHost(card.getUrl()));
-            likeButton.setChecked(card.getLike());
+            title.setText(card.title());
+            url.setText(card.getSiteName());
+            likeButton.setChecked(card.like());
+
+            if (card.dark()) {
+                title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.white));
+                url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_url_color));
+                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_white));
+            } else {
+                title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.transparent_text_color));
+                url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_text_color));
+                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_black));
+            }
+
+            if (card.color() != null) {
+                cardView.setCardBackgroundColor(Color.parseColor(card.color()));
+            }
+
+            Glide.with(favicon.getContext())
+                    .load(card.favicon())
+                    .centerCrop()
+                    .crossFade()
+                    .into(favicon);
         }
 
         @OnClick(R.id.card)

@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.ui.managers.NavigationManager;
-import ru.yandex.detbr.ui.managers.TabsManager;
-import ru.yandex.detbr.ui.presenters.TabsPresenter;
+import ru.yandex.detbr.managers.NavigationManager;
+import ru.yandex.detbr.managers.TabsManager;
+import ru.yandex.detbr.presentation.presenters.TabsPresenter;
 
 /**
  * Created by shmakova on 29.08.16.

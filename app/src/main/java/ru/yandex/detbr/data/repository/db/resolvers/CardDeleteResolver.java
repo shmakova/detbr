@@ -19,7 +19,7 @@ public class CardDeleteResolver extends DefaultDeleteResolver<Card> {
         return DeleteQuery.builder()
                 .table(CardsTable.TABLE)
                 .where(CardsTable.COLUMN_URL + " LIKE ?")
-                .whereArgs(card.getUrl())
+                .whereArgs(card.url())
                 .build();
     }
 }

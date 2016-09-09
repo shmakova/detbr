@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.List;
 
+import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.repository.models.Card;
 import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
-import ru.yandex.detbr.ui.fragments.ImageCardFragmentBuilder;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -25,11 +25,17 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Card card = cards.get(position);
+        String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
 
-        if (card.getCover().isEmpty()) {
-            return new CardFragmentBuilder(card).build();
-        } else {
-            return new ImageCardFragmentBuilder(card).build();
+        switch (type) {
+            case "text":
+                return new CardFragmentBuilder(card, R.layout.item_card).build();
+            case "plain_image":
+                return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
+            case "full_image":
+                return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
+            default:
+                return new CardFragmentBuilder(card, R.layout.item_card).build();
         }
     }
 
