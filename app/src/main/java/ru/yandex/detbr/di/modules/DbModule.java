@@ -17,10 +17,10 @@ import ru.yandex.detbr.data.cards.resolvers.CardDeleteResolver;
 import ru.yandex.detbr.data.cards.resolvers.CardGetResolver;
 import ru.yandex.detbr.data.cards.resolvers.CardPutResolver;
 import ru.yandex.detbr.data.db.DbOpenHelper;
-import ru.yandex.detbr.data.repository.db.resolvers.TabDeleteResolver;
-import ru.yandex.detbr.data.repository.db.resolvers.TabGetResolver;
-import ru.yandex.detbr.data.repository.db.resolvers.TabPutResolver;
 import ru.yandex.detbr.data.tabs.Tab;
+import ru.yandex.detbr.data.tabs.resolvers.TabDeleteResolver;
+import ru.yandex.detbr.data.tabs.resolvers.TabGetResolver;
+import ru.yandex.detbr.data.tabs.resolvers.TabPutResolver;
 
 
 @Module

@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 import com.pushtorefresh.storio.sqlite.operations.delete.DefaultDeleteResolver;
 import com.pushtorefresh.storio.sqlite.queries.DeleteQuery;
 
-import ru.yandex.detbr.data.repository.db.tables.TabsTable;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
+import ru.yandex.detbr.data.tabs.tables.TabsTable;
 
 /**
  * Created by user on 04.09.16.

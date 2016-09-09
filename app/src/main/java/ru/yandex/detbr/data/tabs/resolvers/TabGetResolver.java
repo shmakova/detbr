@@ -10,8 +10,8 @@ import com.pushtorefresh.storio.sqlite.operations.get.DefaultGetResolver;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
-import ru.yandex.detbr.data.repository.db.tables.TabsTable;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
+import ru.yandex.detbr.data.tabs.tables.TabsTable;
 import timber.log.Timber;
 
 /**

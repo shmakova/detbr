@@ -6,8 +6,7 @@ import com.pushtorefresh.storio.sqlite.queries.RawQuery;
 
 import java.util.List;
 
-import ru.yandex.detbr.data.repository.db.tables.TabsTable;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.tables.TabsTable;
 import rx.Observable;
 
 /**

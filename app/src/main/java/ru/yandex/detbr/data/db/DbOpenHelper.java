@@ -10,7 +10,7 @@ import ru.yandex.detbr.data.tabs.tables.TabsTable;
 
 public class DbOpenHelper extends SQLiteOpenHelper {
 
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     public DbOpenHelper(Context context) {
         super(context, "detbr_db", null, DB_VERSION);
