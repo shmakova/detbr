@@ -51,5 +51,5 @@
         android:contentDescription="@string/remove_tab"
         android:padding="16dp"
         android:src="@drawable/ic_close_black_24dp"
-        android:tint="@color/dark_grey"/>
+        android:tint="@color/transparent_white"/>
 </RelativeLayout>
