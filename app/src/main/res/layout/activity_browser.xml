@@ -42,8 +42,8 @@
                             android:id="@+id/browser_host"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:ellipsize="end"
+                            android:maxLines="1"
                             android:textColor="@color/light_transparent"
                             android:textSize="16sp"/>
 
@@ -61,8 +61,8 @@
                             android:id="@+id/browser_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLines="1"
                             android:ellipsize="end"
+                            android:maxLines="1"
                             android:textColor="@color/darkest_transparent"
                             android:textSize="16sp"/>
                     </LinearLayout>
@@ -107,6 +107,8 @@
             android:visibility="gone"
             app:layout_anchor="@id/webview_wrapper"
             app:layout_anchorGravity="bottom|right|end"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            app:layout_behavior="ru.yandex.detbr.ui.behaviors.ScrollAwareFabBehavior"
             tools:ignore="RtlHardcoded"/>
 
     </android.support.design.widget.CoordinatorLayout>
