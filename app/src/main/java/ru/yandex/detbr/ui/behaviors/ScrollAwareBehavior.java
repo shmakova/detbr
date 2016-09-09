@@ -11,8 +11,8 @@ import android.view.View;
  * Created by shmakova on 09.09.16.
  */
 
-public class ScrollAwareFabBehavior extends FloatingActionButton.Behavior {
-    public ScrollAwareFabBehavior(Context context, AttributeSet attrs) {
+public class ScrollAwareBehavior extends FloatingActionButton.Behavior {
+    public ScrollAwareBehavior(Context context, AttributeSet attrs) {
         super();
     }
 
