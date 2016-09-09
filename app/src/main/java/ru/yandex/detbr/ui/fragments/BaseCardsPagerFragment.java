@@ -79,7 +79,9 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
 
     @Override
     public void setData(List<Card> cards) {
-        adapter.setCards(cards);
+        if (adapter != null) {
+            adapter.setCards(cards);
+        }
     }
 
     @Override
