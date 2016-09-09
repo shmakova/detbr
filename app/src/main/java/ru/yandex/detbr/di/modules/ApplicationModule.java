@@ -18,8 +18,12 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.FakeDataRepository;
+import ru.yandex.detbr.data.cards.CardsRepository;
+import ru.yandex.detbr.data.cards.CardsRepositoryImpl;
+import ru.yandex.detbr.data.categories.CategoriesRepository;
+import ru.yandex.detbr.data.categories.CategoriesRepositoryImpl;
+import ru.yandex.detbr.data.schools.SchoolsRepository;
+import ru.yandex.detbr.data.schools.SchoolsRepositoryImpl;
 import ru.yandex.detbr.data.tabs.TabsRepository;
 import ru.yandex.detbr.data.tabs.TabsRepositoryImpl;
 import ru.yandex.detbr.managers.LikeManager;
@@ -46,12 +50,6 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    DataRepository providesDataRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
-        return new FakeDataRepository(storIOSQLite, databaseReference);
-    }
-
-    @Provides
-    @Singleton
     Tracker providesTracker(Application application) {
         synchronized (this) {
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(application);
@@ -73,14 +71,32 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
+    public LikeManager providesLikeManager(CardsRepository cardsRepository) {
+        return new LikeManager(cardsRepository);
+    }
+
+    @Provides
+    @Singleton
     public TabsRepository provideTabsRepository(StorIOSQLite storIOSQLite) {
         return new TabsRepositoryImpl(storIOSQLite);
     }
 
     @Provides
     @Singleton
-    public LikeManager providesLikeManager(DataRepository dataRepository) {
-        return new LikeManager(dataRepository);
+    public CardsRepository provideCardsRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
+        return new CardsRepositoryImpl(storIOSQLite, databaseReference);
+    }
+
+    @Provides
+    @Singleton
+    public SchoolsRepository provideSchoolsRepository(SharedPreferences sharedPreferences) {
+        return new SchoolsRepositoryImpl(sharedPreferences);
+    }
+
+    @Provides
+    @Singleton
+    public CategoriesRepository provideCategoriesRepository(DatabaseReference databaseReference) {
+        return new CategoriesRepositoryImpl(databaseReference);
     }
 
     @Provides

@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.di.components.TabsComponent;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.TabsModule;

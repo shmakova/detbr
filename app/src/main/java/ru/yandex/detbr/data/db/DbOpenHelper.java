@@ -1,11 +1,11 @@
-package ru.yandex.detbr.data.repository.db;
+package ru.yandex.detbr.data.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import ru.yandex.detbr.data.repository.db.tables.CardsTable;
-import ru.yandex.detbr.data.repository.db.tables.TabsTable;
+import ru.yandex.detbr.data.cards.tables.CardsTable;
+import ru.yandex.detbr.data.tabs.tables.TabsTable;
 
 
 public class DbOpenHelper extends SQLiteOpenHelper {

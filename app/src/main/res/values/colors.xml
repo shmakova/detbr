@@ -9,36 +9,23 @@
     <color name="browser_color_accent">#ffdd55</color>
     <color name="browser_text_color_primary">#706f6f</color>
 
-    <color name="bar_grey">#212121</color>
-    <color name="dark_grey">#222222</color>
-    <color name="tab_background">#363636</color>
-    <color name="active_grey">#424242</color>
-    <color name="toolbar_grey">#706f6f</color>
-    <color name="grey">#757575</color>
-    <color name="separator_grey">#979797</color>
-    <color name="inactive_grey">#bdbdbd</color>
-    <color name="light_grey">#dddddd</color>
-    <color name="face_grey">#eeeeee</color>
-    <color name="background_grey">#F8F8F8</color>
+    <color name="darkest_grey">#212121</color>
+    <color name="dark_grey">#757575</color>
+    <color name="grey">#bdbdbd</color>
+    <color name="light_grey">#e0e0e0</color>
+    <color name="lightest_grey">#eeeeee</color>
 
-    <color name="favorite_grey">#de000000</color>
+    <color name="dark_transparent">#8a000000</color>
+    <color name="light_transparent">#61000000</color>
+    <color name="lightest_transparent">#1f000000</color>
+    <color name="darkest_transparent">#de000000</color>
 
-    <color name="yellow">#ffc400</color>
+    <color name="light_transparent_white">#deffffff</color>
+    <color name="transparent_white">#b2ffffff</color>
+    <color name="dark_transparent_white">#1fffffff</color>
+
     <color name="light_yellow">#ffdd55</color>
-    <color name="favorite_yellow">#ffdd3c</color>
+    <color name="dark_yellow">#f7d652</color>
 
-    <color name="intro_background">#ffd740</color>
-    <color name="transparent_text_color">#8a000000</color>
-    <color name="transparent_card_title">#deffffff</color>
-    <color name="transparent_url_color">#b2ffffff</color>
-    <color name="transparent_browser_url_color">#61000000</color>
-    <color name="transparent_browser_title_color">#de000000</color>
-
-    <color name="description_color">#61000000</color>
-    <color name="favorite_text_color">#9e9e9e</color>
-
-    <!-- Categories bubbles -->
-    <color name="bubble_background">#1f000000</color>
-    <color name="bubble_text">#757575</color>
-
+    <color name="dark_background">#363636</color>
 </resources>

@@ -1,9 +1,10 @@
-package ru.yandex.detbr.data.tabs.models;
+package ru.yandex.detbr.data.tabs;
 
 import android.graphics.Bitmap;
 import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
+
 
 /**
  * Created by shmakova on 29.08.16.

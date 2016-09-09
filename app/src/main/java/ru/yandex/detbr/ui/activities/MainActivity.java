@@ -29,8 +29,8 @@ import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.BuildConfig;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.di.components.MainComponent;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.MainModule;
@@ -56,8 +56,10 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     BottomBar bottomBar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.content_wrapper)
+    View contentWrapper;
     @BindView(R.id.floating_search_view)
-    protected FloatingSearchView floatingSearchView;
+    FloatingSearchView floatingSearchView;
 
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
@@ -219,15 +221,15 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         }
     }
 
-    @Override
-    public void selectTabAtPosition(int position) {
-        bottomBar.selectTabAtPosition(position);
-    }
-
     public void showSpeechRecognizer() {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    }
+
+    @Override
+    public void changeBackgroundColor(@IdRes int color) {
+        contentWrapper.setBackgroundColor(ContextCompat.getColor(this, color));
     }
 }

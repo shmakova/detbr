@@ -1,4 +1,4 @@
-package ru.yandex.detbr.data.repository.db.tables;
+package ru.yandex.detbr.data.tabs.tables;
 
 import android.support.annotation.NonNull;
 

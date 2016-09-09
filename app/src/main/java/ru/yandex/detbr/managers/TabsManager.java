@@ -2,8 +2,8 @@ package ru.yandex.detbr.managers;
 
 import java.util.List;
 
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.data.tabs.TabsRepository;
-import ru.yandex.detbr.data.tabs.models.Tab;
 import rx.Observable;
 
 /**

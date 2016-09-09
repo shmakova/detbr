@@ -28,33 +28,27 @@
                 android:contentDescription="@string/cover"
                 android:scaleType="centerCrop"/>
 
-            <include layout="@layout/favorite_bottom_view"/>
+            <include layout="@layout/bottom_view_favorite_card"/>
 
         </RelativeLayout>
     </ru.yandex.detbr.ui.android_views.SquareCardView>
 
     <TextView
         android:id="@+id/title"
+        style="@style/FavoriteCardTitleStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
-        android:ellipsize="end"
-        android:maxLines="3"
-        android:textColor="@color/transparent_text_color"
-        android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textColor="@color/dark_grey"/>
 
     <TextView
         android:id="@+id/url"
+        style="@style/UrlStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:textColor="@color/transparent_text_color"
-        android:textSize="12sp"/>
+        android:layout_marginRight="16dp"/>
 </LinearLayout>

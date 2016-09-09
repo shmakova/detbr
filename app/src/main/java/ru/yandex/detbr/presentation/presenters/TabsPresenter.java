@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.views.TabsView;

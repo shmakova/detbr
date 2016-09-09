@@ -1,4 +1,4 @@
-package ru.yandex.detbr.data.repository.db.resolvers;
+package ru.yandex.detbr.data.tabs.resolvers;
 
 import android.content.ContentValues;
 import android.graphics.Bitmap;

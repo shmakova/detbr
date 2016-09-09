@@ -14,6 +14,6 @@
         id="@+id/tab_tabs"
         icon="@drawable/ic_view_carousel_24dp"
         title="@string/tabs"
-        barColorWhenSelected="@color/bar_grey"
+        barColorWhenSelected="@color/darkest_grey"
         activeColor="@color/white"/>
 </tabs>

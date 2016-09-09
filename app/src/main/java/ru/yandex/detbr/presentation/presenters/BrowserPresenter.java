@@ -9,9 +9,9 @@ import android.webkit.WebViewClient;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.CardsRepository;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
@@ -35,16 +35,16 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final LikeManager likeManager;
     @NonNull
-    private final DataRepository dataRepository;
+    private final CardsRepository cardsRepository;
     private Subscription subscription;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
-                            @NonNull DataRepository dataRepository,
+                            @NonNull CardsRepository cardsRepository,
                             @NonNull LikeManager likeManager) {
 
         this.wotService = wotService;
-        this.dataRepository = dataRepository;
+        this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
         this.likeManager = likeManager;
     }
@@ -102,7 +102,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         if (isUrlLiked) {
             isUrlLiked = false;
         } else {
-            dataRepository.saveCard(card);
+            cardsRepository.saveCard(card);
             isUrlLiked = true;
         }
 
@@ -174,10 +174,13 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         private Bitmap getSnapshot(WebView webView) {
             final int width = 320;
             int height = 480;
+            float ratio = (float) height / (float) width;
             Bitmap thumbnail = null;
 
             if (webView.getWidth() > 0 && webView.getHeight() > 0) {
-                Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
+                int webViewHeight = (int) (webView.getWidth() * ratio);
+                int shapshotHeight = webViewHeight > webView.getHeight() ? webView.getHeight() : webViewHeight;
+                Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), shapshotHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
                 float factor = width / (float) webView.getWidth();

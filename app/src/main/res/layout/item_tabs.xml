@@ -27,18 +27,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:letterSpacing="0.019"
+            android:maxLines="5"
             android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:textSize="20sp"
+            tools:ignore="UnusedAttribute"/>
 
         <TextView
             android:id="@+id/url"
+            style="@style/UrlStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/grey"
-            android:textSize="12sp"/>
+            android:layout_marginTop="16dp"
+            android:textColor="@color/transparent_white"/>
     </LinearLayout>
 
     <ImageView
@@ -50,5 +51,5 @@
         android:contentDescription="@string/remove_tab"
         android:padding="16dp"
         android:src="@drawable/ic_close_black_24dp"
-        android:tint="@color/grey"/>
+        android:tint="@color/transparent_white"/>
 </RelativeLayout>
