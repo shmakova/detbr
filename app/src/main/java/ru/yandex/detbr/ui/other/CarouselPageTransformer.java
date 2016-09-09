@@ -24,7 +24,7 @@ public class CarouselPageTransformer implements ViewPager.PageTransformer {
         if (position < -1) { // [-Infinity,-1)
             view.setScaleX(0.75f);
             view.setScaleY(0.75f);
-            cardView.setCardElevation(Util.dpToPx(1));
+            cardView.setCardElevation(Util.dpToPx(2));
         } else if (position <= 0) { // [-1,0]
             float scaleFactor = MIN_SCALE + (1 - MIN_SCALE) * (1 - Math.abs(position));
             float elevationFactor = MAX_ELEVATION + (1 - MAX_ELEVATION) * (1 - Math.abs(position));
@@ -40,7 +40,7 @@ public class CarouselPageTransformer implements ViewPager.PageTransformer {
         } else { // (1,+Infinity]
             view.setScaleX(0.75f);
             view.setScaleY(0.75f);
-            cardView.setCardElevation(Util.dpToPx(1));
+            cardView.setCardElevation(Util.dpToPx(2));
         }
 
     }
