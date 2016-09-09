@@ -45,6 +45,10 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>>
         }
     }
 
+    public void removeTab(Tab tab) {
+        tabsManager.removeTab(tab);
+    }
+
     @Override
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);

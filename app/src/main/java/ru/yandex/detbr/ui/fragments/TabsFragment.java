@@ -69,7 +69,7 @@ public class TabsFragment extends BaseLceFragment<FrameLayout, List<Tab>, TabsVi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = tabsComponent.adapter();
+        adapter = new TabsAdapter(tab -> presenter.removeTab(tab));
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);

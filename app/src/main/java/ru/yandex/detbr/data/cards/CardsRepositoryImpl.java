@@ -99,7 +99,6 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     @Override
     public void saveFavouriteCard(String title, String url, @Nullable String image, boolean like) {
-        // TODO rx
         Thread thread = new Thread(() -> {
             Card card = Card.builder()
                     .title(title)
@@ -114,7 +113,6 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     @Override
     public void saveFavouriteCard(@NonNull Card card) {
-        // TODO rx
         Thread thread = new Thread(() -> {
             saveCardToDb(card);
         });
@@ -175,7 +173,6 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     @Override
     public void toggleLike(@NonNull String url) {
-        // TODO rx
         Thread thread = new Thread(() -> {
             storIOSQLite
                     .executeSQL()

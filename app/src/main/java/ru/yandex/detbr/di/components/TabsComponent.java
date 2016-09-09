@@ -7,7 +7,6 @@ import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.TabsModule;
 import ru.yandex.detbr.di.scopes.PerFragment;
 import ru.yandex.detbr.presentation.presenters.TabsPresenter;
-import ru.yandex.detbr.ui.adapters.TabsAdapter;
 import ru.yandex.detbr.ui.fragments.TabsFragment;
 
 /**
@@ -24,7 +23,4 @@ public interface TabsComponent {
 
     @NonNull
     TabsPresenter presenter();
-
-    @NonNull
-    TabsAdapter adapter();
 }
