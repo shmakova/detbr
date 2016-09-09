@@ -187,8 +187,8 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
 
     @Override
     public void setWhiteText() {
-        title.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_card_title));
-        url.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_url_color));
+        title.setTextColor(ContextCompat.getColor(getContext(), R.color.light_transparent_white));
+        url.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_white));
         likeButton.setButtonDrawable(ContextCompat.getDrawable(getContext(), R.drawable.like_white));
 
         if (textWrapper != null) {

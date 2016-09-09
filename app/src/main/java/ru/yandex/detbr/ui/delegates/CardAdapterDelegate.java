@@ -78,7 +78,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
 
             if (card.dark()) {
                 title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.white));
-                url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_url_color));
+                url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_white));
                 likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_white));
             } else {
                 title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.dark_transparent));

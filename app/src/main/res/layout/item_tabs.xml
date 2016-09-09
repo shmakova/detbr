@@ -27,19 +27,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="2"
+            android:letterSpacing="0.019"
+            android:maxLines="5"
             android:textColor="@color/white"
-            android:textSize="18sp"/>
+            android:textSize="20sp"
+            tools:ignore="UnusedAttribute"/>
 
         <TextView
             android:id="@+id/url"
+            style="@style/UrlStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textAllCaps="true"
-            android:textColor="@color/dark_grey"
-            android:textSize="12sp"/>
+            android:layout_marginTop="16dp"
+            android:textColor="@color/transparent_white"/>
     </LinearLayout>
 
     <ImageView

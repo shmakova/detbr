@@ -56,8 +56,10 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     BottomBar bottomBar;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.content_wrapper)
+    View contentWrapper;
     @BindView(R.id.floating_search_view)
-    protected FloatingSearchView floatingSearchView;
+    FloatingSearchView floatingSearchView;
 
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
@@ -224,5 +226,10 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    }
+
+    @Override
+    public void changeBackgroundColor(@IdRes int color) {
+        contentWrapper.setBackgroundColor(ContextCompat.getColor(this, color));
     }
 }

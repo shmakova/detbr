@@ -44,7 +44,7 @@
                             android:layout_height="wrap_content"
                             android:maxLines="1"
                             android:ellipsize="end"
-                            android:textColor="@color/transparent_browser_url_color"
+                            android:textColor="@color/light_transparent"
                             android:textSize="16sp"/>
 
                         <TextView
@@ -54,7 +54,7 @@
                             android:layout_marginLeft="4dp"
                             android:layout_marginRight="4dp"
                             android:text="@string/separator"
-                            android:textColor="@color/separator_grey"
+                            android:textColor="@color/dark_transparent_white"
                             android:textSize="16sp"/>
 
                         <TextView

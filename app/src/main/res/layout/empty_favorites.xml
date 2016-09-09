@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/empty_favorites"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -11,16 +12,20 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="2"
-        android:src="@drawable/fav_empty"
-        android:contentDescription="@string/empty_favorites"/>
+        android:contentDescription="@string/empty_favorites"
+        android:src="@drawable/fav_empty"/>
 
     <TextView
         android:layout_width="188dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
+        android:letterSpacing="0.012"
+        android:lineSpacingMultiplier="1.2"
         android:text="@string/favorite_cards"
         android:textAlignment="center"
-        android:textColor="@color/favorite_text_color"/>
+        android:textColor="@color/dark_grey"
+        android:textSize="14sp"
+        tools:ignore="UnusedAttribute"/>
 
 </LinearLayout>

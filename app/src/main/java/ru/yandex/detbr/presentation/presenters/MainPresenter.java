@@ -39,7 +39,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onFirstLoad() {
-        loadDataFromSharedPreference();
+        loadSchoolFromRepository();
 
         if (school == null || school.isEmpty()) {
             Thread thread = new Thread(() -> {
@@ -56,6 +56,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
             navigationManager.openCards();
             getView().showNavigationBars();
             getView().hideToolbar();
+            getView().changeBackgroundColor(R.color.white);
         }
     }
 
@@ -64,6 +65,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
             navigationManager.openFavorites();
             getView().showNavigationBars();
             getView().hideToolbar();
+            getView().changeBackgroundColor(R.color.white);
         }
     }
 
@@ -73,6 +75,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
             getView().showNavigationBars();
             getView().hideSearchView();
             getView().hideToolbar();
+            getView().changeBackgroundColor(R.color.dark_background);
         }
     }
 
@@ -85,7 +88,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         }
     }
 
-    private void loadDataFromSharedPreference() {
+    private void loadSchoolFromRepository() {
         school = schoolsRepository.loadSchool();
     }
 
