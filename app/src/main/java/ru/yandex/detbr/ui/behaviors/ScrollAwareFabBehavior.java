@@ -12,8 +12,9 @@ import android.view.View;
  */
 
 public class ScrollAwareFabBehavior extends FloatingActionButton.Behavior {
+
     public ScrollAwareFabBehavior(Context context, AttributeSet attrs) {
-        super();
+        super(context, attrs);
     }
 
     @Override

@@ -34,6 +34,7 @@ import timber.log.Timber;
  */
 
 public class CardsRepositoryImpl implements CardsRepository {
+    private final static String CARDS = "cards";
 
     private final StorIOSQLite storIOSQLite;
     private final DatabaseReference databaseReference;
@@ -46,7 +47,7 @@ public class CardsRepositoryImpl implements CardsRepository {
     @Override
     public Observable<List<Card>> getCardsList() {
         return RxFirebaseDatabase
-                .observeValueEvent(databaseReference.child("cards").limitToLast(100))
+                .observeValueEvent(databaseReference.child(CARDS).limitToLast(100))
                 .map(DataSnapshot::getChildren)
                 .flatMap(dataSnapshots -> Observable.from(dataSnapshots)
                         .map(Card::create)
@@ -79,7 +80,7 @@ public class CardsRepositoryImpl implements CardsRepository {
     public Observable<List<Card>> getCardsByCategory(Category category) {
         return RxFirebaseDatabase
                 .observeValueEvent(databaseReference
-                        .child("cards")
+                        .child(CARDS)
                         .orderByChild("category")
                         .equalTo(category.alias())
                         .limitToLast(100)
@@ -207,7 +208,7 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     @Override
     public void saveCard(Card card) {
-        databaseReference.child("cards")
+        databaseReference.child(CARDS)
                 .orderByChild("url")
                 .equalTo(card.url())
                 .limitToLast(1)
@@ -227,8 +228,9 @@ public class CardsRepositoryImpl implements CardsRepository {
     }
 
     private void pushCardToFirebase(Card card) {
-        String key = databaseReference.child("cards").push().getKey();
-        databaseReference.child("cards")
+        String key = databaseReference.child(CARDS).push().getKey();
+
+        databaseReference.child(CARDS)
                 .orderByChild("url")
                 .equalTo(card.url());
 
