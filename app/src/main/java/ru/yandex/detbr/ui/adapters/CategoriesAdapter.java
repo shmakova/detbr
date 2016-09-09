@@ -69,7 +69,8 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         ImageView icon;
         @BindView(R.id.icon_background)
         ImageView iconBackground;
-
+        @BindView(R.id.category)
+        View categoryView;
 
         CategoryViewHolder(View itemView) {
             super(itemView);
@@ -81,12 +82,19 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             categoryText.setText(category.title());
 
             if (darkBackground) {
-                categoryText.setTextColor(ContextCompat.getColor(categoryText.getContext(), R.color.white));
+                categoryText.setTextColor(
+                        ContextCompat.getColor(categoryText.getContext(), R.color.white));
+                categoryView.setBackground(
+                        ContextCompat.getDrawable(categoryView.getContext(), R.drawable.bubble_transparent));
             } else {
-                categoryText.setTextColor(ContextCompat.getColor(categoryText.getContext(), R.color.bubble_text));
+                categoryText.setTextColor(
+                        ContextCompat.getColor(categoryText.getContext(), R.color.dark_grey));
+                categoryView.setBackground(
+                        ContextCompat.getDrawable(categoryView.getContext(), R.drawable.bubble_grey));
             }
 
-            icon.setImageDrawable(ContextCompat.getDrawable(icon.getContext(), category.getDrawableIcon()));
+            icon.setImageDrawable(
+                    ContextCompat.getDrawable(icon.getContext(), category.getDrawableIcon()));
             Drawable background = iconBackground.getBackground();
             GradientDrawable gradientDrawable = (GradientDrawable) background;
             gradientDrawable.setColor(Color.parseColor(category.color()));

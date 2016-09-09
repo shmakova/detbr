@@ -41,21 +41,21 @@
                 android:layout_width="220dp"
                 android:layout_height="14dp"
                 android:layout_marginTop="20dp"
-                android:background="@color/face_grey"/>
+                android:background="@color/lightest_grey"/>
 
             <View
                 android:layout_width="160dp"
                 android:layout_height="14dp"
                 android:layout_below="@+id/first_stroke"
                 android:layout_marginTop="10dp"
-                android:background="@color/face_grey"/>
+                android:background="@color/lightest_grey"/>
 
             <View
                 android:layout_width="96dp"
                 android:layout_height="10dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="20dp"
-                android:background="@color/face_grey"/>
+                android:background="@color/lightest_grey"/>
 
         </RelativeLayout>
     </LinearLayout>

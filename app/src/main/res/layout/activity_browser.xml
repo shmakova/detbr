@@ -63,7 +63,7 @@
                             android:layout_height="wrap_content"
                             android:maxLines="1"
                             android:ellipsize="end"
-                            android:textColor="@color/transparent_browser_title_color"
+                            android:textColor="@color/darkest_transparent"
                             android:textSize="16sp"/>
                     </LinearLayout>
 

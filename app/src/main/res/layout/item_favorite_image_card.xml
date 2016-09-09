@@ -43,7 +43,7 @@
         android:layout_marginTop="8dp"
         android:ellipsize="end"
         android:maxLines="3"
-        android:textColor="@color/transparent_text_color"
+        android:textColor="@color/dark_transparent"
         android:textSize="18sp"
         android:textStyle="bold"/>
 
@@ -56,6 +56,6 @@
         android:ellipsize="end"
         android:maxLines="1"
         android:textAllCaps="true"
-        android:textColor="@color/transparent_text_color"
+        android:textColor="@color/dark_transparent"
         android:textSize="12sp"/>
 </LinearLayout>

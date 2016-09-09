@@ -43,7 +43,7 @@
                 android:background="@color/white"
                 app:bb_activeTabColor="@color/active_grey"
                 app:bb_behavior="shifting"
-                app:bb_inActiveTabColor="@color/inactive_grey"
+                app:bb_inActiveTabColor="@color/grey"
                 app:bb_showShadow="true"
                 app:bb_tabXmlResource="@xml/bottombar_tabs"/>
 

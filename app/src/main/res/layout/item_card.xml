@@ -34,7 +34,7 @@
             android:layout_margin="16dp"
             android:ellipsize="end"
             android:maxLines="3"
-            android:textColor="@color/description_color"
+            android:textColor="@color/light_transparent"
             android:textSize="18sp"/>
 
         <include layout="@layout/card_bottom_view"/>
