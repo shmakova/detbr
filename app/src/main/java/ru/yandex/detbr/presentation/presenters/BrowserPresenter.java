@@ -22,6 +22,7 @@ import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
+
 /**
  * Created by shmakova on 19.08.16.
  */
@@ -106,6 +107,41 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     public void onLikeClick(String title, String url) {
+        Card newCard = Card.builder()
+                .title(title)
+                .url(url)
+                .build();
+
+        cardsRepository
+                .saveCard(newCard)
+                .map(card -> {
+
+                })
+
+        compositeSubscription.add(
+
+                .map(card -> {
+                    if (card == null) {
+
+                        cardsRepository.saveCard(newCard);
+
+                        return newCard;
+                    } else {
+                        return card;
+                    }
+                })
+                .
+                .subscribeOn(Schedulers.io())
+                .observeOn(mainThread())
+                .subscribe(
+                        card -> {
+                            boolean isUrlLiked = (card != null);
+
+                            if (isUrlLiked) {
+
+                            }
+                        }
+                ));
         boolean isUrlLiked = likeManager.isUrlLiked(url);
         Card card = Card.builder()
                 .title(title)
@@ -215,7 +251,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
 
-        if (compositeSubscription.hasSubscriptions()) {
+        if (!retainInstance && compositeSubscription.hasSubscriptions()) {
             compositeSubscription.unsubscribe();
         }
     }
