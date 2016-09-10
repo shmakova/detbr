@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import com.hannesdorfmann.mosby.mvp.viewstate.lce.LceViewState;
@@ -24,6 +25,7 @@ import ru.yandex.detbr.presentation.presenters.CardsPresenter;
 import ru.yandex.detbr.presentation.views.CardsView;
 import ru.yandex.detbr.ui.adapters.CardsFragmentStatePagerAdapter;
 import ru.yandex.detbr.ui.animators.CustomLceAnimator;
+import ru.yandex.detbr.ui.other.CarouselPageTransformer;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 /**
@@ -42,6 +44,7 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
     protected FragmentManager fragmentManager;
     @NonNull
     private CardsComponent cardsComponent;
+    private CardsFragmentStatePagerAdapter adapter;
 
     @NonNull
     @Override
@@ -56,6 +59,16 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
         fragmentManager = getChildFragmentManager();
     }
 
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        adapter = new CardsFragmentStatePagerAdapter(fragmentManager);
+        cardsPager.setAdapter(adapter);
+        cardsPager.setOffscreenPageLimit(PAGE_LIMIT);
+        cardsPager.setPageMargin(-getResources().getDimensionPixelOffset(R.dimen.card_padding));
+        cardsPager.setPageTransformer(false, new CarouselPageTransformer());
+    }
+
     private void injectDependencies() {
         cardsComponent = App.get(getContext()).applicationComponent().plus(new CardsModule());
         cardsComponent.inject(this);
@@ -63,8 +76,9 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
 
     @Override
     public void setData(List<Card> cards) {
-        cardsPager.setAdapter(new CardsFragmentStatePagerAdapter(fragmentManager, cards));
-        cardsPager.setOffscreenPageLimit(PAGE_LIMIT);
+        if (adapter != null) {
+            adapter.setCards(cards);
+        }
     }
 
     @Override

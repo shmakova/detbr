@@ -53,10 +53,11 @@ public final class UrlUtils {
         try {
             URI uri = new URI(url);
             host = uri.getHost();
+
             if (host == null) {
                 host = "";
             } else {
-                host = removeWwwOrM(host);
+                host = removeSubdomains(host);
             }
         } catch (URISyntaxException e) {
             Timber.e(e, "Error while parsing url");
@@ -69,11 +70,12 @@ public final class UrlUtils {
         return url.startsWith(HTTP_PREFIX) || url.startsWith(HTTPS_PREFIX);
     }
 
-    private static String removeWwwOrM(String link) {
-        Pattern p = Pattern.compile("^(www\\.|m\\.)(.+)");
-        Matcher m = p.matcher(link);
-        if (m.matches()) {
-            return m.group(2);
+    private static String removeSubdomains(String link) {
+        Pattern pattern = Pattern.compile("^(www\\.|m\\.)(.+)");
+        Matcher matcher = pattern.matcher(link);
+
+        if (matcher.matches()) {
+            return matcher.group(2);
         } else {
             return link;
         }
