@@ -66,10 +66,7 @@ public class BaseCardsPagerFragment extends BaseLceFragment<FrameLayout, List<Ca
         cardsPager.setAdapter(adapter);
         cardsPager.setOffscreenPageLimit(PAGE_LIMIT);
         cardsPager.setPageMargin(-getResources().getDimensionPixelOffset(R.dimen.card_padding));
-        cardsPager.setClipChildren(false);
-
-        CarouselPageTransformer carouselPageTransformer = new CarouselPageTransformer();
-        cardsPager.setPageTransformer(false, carouselPageTransformer);
+        cardsPager.setPageTransformer(false, new CarouselPageTransformer());
     }
 
     private void injectDependencies() {
