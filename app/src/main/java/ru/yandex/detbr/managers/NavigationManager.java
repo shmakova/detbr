@@ -8,11 +8,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
 import ru.yandex.detbr.ui.activities.IntroActivity;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
-import ru.yandex.detbr.ui.fragments.CategoryCardsPagerFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.TabsFragment;
 
@@ -95,12 +93,6 @@ public class NavigationManager {
 
     public void openFavorites() {
         openAsRoot(new FavoritesFragment());
-    }
-
-    public void openCategoryCards(Category category) {
-        clearBackStack();
-        Fragment fragment = new CategoryCardsPagerFragmentBuilder(category).build();
-        open(fragment);
     }
 
     public void onBackPressed() {

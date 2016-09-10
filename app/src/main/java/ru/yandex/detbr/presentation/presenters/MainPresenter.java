@@ -8,7 +8,6 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
-import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.NavigationManager;
@@ -54,8 +53,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private void openCards() {
         if (isViewAttached()) {
             navigationManager.openCards();
-            getView().showNavigationBars();
-            getView().hideToolbar();
+            getView().showSearchView();
             getView().changeBackgroundColor(R.color.white);
         }
     }
@@ -63,8 +61,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private void openFavorites() {
         if (isViewAttached()) {
             navigationManager.openFavorites();
-            getView().showNavigationBars();
-            getView().hideToolbar();
+            getView().showSearchView();
             getView().changeBackgroundColor(R.color.white);
         }
     }
@@ -72,19 +69,8 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private void openTabs() {
         if (isViewAttached()) {
             navigationManager.openTabs();
-            getView().showNavigationBars();
             getView().hideSearchView();
-            getView().hideToolbar();
             getView().changeBackgroundColor(R.color.dark_background);
-        }
-    }
-
-    private void openCategoryCards(Category category) {
-        if (isViewAttached()) {
-            getView().updateToolbar(category.title(), true, category.color());
-            getView().hideNavigationBars();
-            getView().showToolbar();
-            navigationManager.openCategoryCards(category);
         }
     }
 
@@ -105,10 +91,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
                 return;
             default:
         }
-    }
-
-    public void onCategoriesItemClick(Category category) {
-        openCategoryCards(category);
     }
 
     public void onActionMenuItemSelected(@IdRes int id) {
@@ -132,7 +114,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     public void onBackPressed() {
         if (isViewAttached()) {
             getView().showNavigationBars();
-            getView().hideToolbar();
         }
     }
 }

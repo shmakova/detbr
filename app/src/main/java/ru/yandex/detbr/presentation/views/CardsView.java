@@ -11,4 +11,5 @@ import ru.yandex.detbr.data.cards.Card;
  */
 
 public interface CardsView extends MvpLceView<List<Card>> {
+    void setBackgroundColor(int color);
 }

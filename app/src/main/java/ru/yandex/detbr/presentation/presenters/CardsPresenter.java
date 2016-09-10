@@ -1,5 +1,6 @@
 package ru.yandex.detbr.presentation.presenters;
 
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 
 import java.util.List;
@@ -30,5 +31,9 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
     public void loadCardsByCategory(Category category, boolean pullToRefresh) {
         Observable<List<Card>> observable = cardsRepository.getCardsByCategory(category);
         subscribe(observable, pullToRefresh);
+
+        if (isViewAttached() && category.color() != null) {
+            getView().setBackgroundColor(Color.parseColor(category.color()));
+        }
     }
 }
