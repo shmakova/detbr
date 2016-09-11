@@ -17,40 +17,33 @@
         android:src="@drawable/schools_pic"
         tools:ignore="UnusedAttribute"/>
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/contentView"
         android:layout_width="250dp"
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="24dp"
-        android:orientation="vertical">
+        android:layout_marginTop="24dp">
 
-        <FrameLayout
-            android:id="@+id/contentView"
-            android:layout_width="wrap_content"
+        <include layout="@layout/loading_view"/>
+
+        <include layout="@layout/error_view"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/schools_autocomplete"
+            android:layout_width="220dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
-
-            <include layout="@layout/loading_view"/>
-
-            <include layout="@layout/error_view"/>
-
-            <AutoCompleteTextView
-                android:id="@+id/schools_autocomplete"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:completionThreshold="1"
-                android:ellipsize="end"
-                android:hint="@string/choose_your_school"
-                android:imeOptions="actionDone"
-                android:maxLines="1"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:textAlignment="center"
-                android:textColor="@color/darkest_transparent"
-                android:textSize="22sp"/>
-        </FrameLayout>
-    </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:completionThreshold="1"
+            android:ellipsize="end"
+            android:hint="@string/choose_your_school"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/darkest_transparent"
+            android:textSize="22sp"/>
+    </FrameLayout>
 </ru.yandex.detbr.ui.android_views.SquareCardView>
 
 
