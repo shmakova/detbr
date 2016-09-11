@@ -4,6 +4,8 @@ package ru.yandex.detbr.ui.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import clojure.lang.IFn;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.di.components.SchoolsComponent;
@@ -97,9 +100,9 @@ public class SchoolsFragment
         autoCompleteTextView.setDropDownWidth((int) (width * 1.5));
         autoCompleteTextView.setDropDownHorizontalOffset(-width / 4);
 
-        autoCompleteTextView.setOnFocusChangeListener((view1, b) -> {
+        autoCompleteTextView.setOnFocusChangeListener((v, b) -> {
             if (b) {
-                onSchoolsAutocompleteTextViewClick();
+                new Handler(Looper.getMainLooper()).postDelayed(this::onSchoolsAutocompleteTextViewClick, 200);
             }
         });
 
