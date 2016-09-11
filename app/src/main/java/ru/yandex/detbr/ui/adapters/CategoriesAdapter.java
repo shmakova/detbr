@@ -89,10 +89,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             };
 
             itemView.setOnClickListener(onClickListener);
-
-            if (radioButton != null) {
-                radioButton.setOnClickListener(onClickListener);
-            }
+            radioButton.setOnClickListener(onClickListener);
         }
 
         public void bind(Category category, int position) {
