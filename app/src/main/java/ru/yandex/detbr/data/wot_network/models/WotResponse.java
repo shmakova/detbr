@@ -21,8 +21,8 @@ public class WotResponse {
     private final List<Integer> childSafety = new ArrayList<>();
 
     public boolean isSafe() {
-        return (!childSafety.isEmpty() && childSafety.get(0) >= GOOD_REPUTATION &&
-                !trustworthiness.isEmpty() && trustworthiness.get(0) >= GOOD_REPUTATION) ||
-                (trustworthiness.isEmpty() && childSafety.isEmpty());
+        return !childSafety.isEmpty() && childSafety.get(0) >= GOOD_REPUTATION &&
+                !trustworthiness.isEmpty() && trustworthiness.get(0) >= GOOD_REPUTATION ||
+                trustworthiness.isEmpty() && childSafety.isEmpty();
     }
 }

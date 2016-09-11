@@ -1,5 +1,6 @@
 package ru.yandex.detbr.di.modules;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import dagger.Module;
@@ -17,7 +18,8 @@ public class MainModule {
     @Provides
     @NonNull
     MainPresenter provideMainPresenter(@NonNull NavigationManager navigationManager,
-                                       @NonNull LikeManager likeManager) {
-        return new MainPresenter(navigationManager, likeManager);
+                                       @NonNull LikeManager likeManager,
+                                       @NonNull SharedPreferences sharedPreferences) {
+        return new MainPresenter(navigationManager, likeManager, sharedPreferences);
     }
 }

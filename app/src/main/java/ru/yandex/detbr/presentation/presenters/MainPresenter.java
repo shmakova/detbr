@@ -1,5 +1,6 @@
 package ru.yandex.detbr.presentation.presenters;
 
+import android.content.SharedPreferences;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 
@@ -16,30 +17,41 @@ import ru.yandex.detbr.presentation.views.MainView;
  */
 
 public class MainPresenter extends MvpBasePresenter<MainView> {
+    private final static String FIRST_START = "FIRST_START";
+
     @NonNull
     private final NavigationManager navigationManager;
     @NonNull
     private final LikeManager likeManager;
+    @NonNull
+    private final SharedPreferences sharedPreferences;
 
 
     public MainPresenter(@NonNull NavigationManager navigationManager,
-                         @NonNull LikeManager likeManager
+                         @NonNull LikeManager likeManager,
+                         @NonNull SharedPreferences sharedPreferences
     ) {
         this.navigationManager = navigationManager;
         this.likeManager = likeManager;
+        this.sharedPreferences = sharedPreferences;
     }
 
     public void onFirstLoad() {
         openCards();
+        boolean isFirstStart = sharedPreferences.getBoolean(FIRST_START, true);
 
-        /*if (school == null || school.isEmpty()) {
-            Thread thread = new Thread(() -> {
-                navigationManager.openOnBoarding();
-            });
-            thread.start();
+        if (isFirstStart) {
+            openIntro();
         } else {
             openCards();
-        }*/
+        }
+    }
+
+    private void openIntro() {
+        if (isViewAttached()) {
+            navigationManager.openIntro();
+            getView().hideNavigationBars();
+        }
     }
 
     private void openCards() {
@@ -103,5 +115,14 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         if (isViewAttached()) {
             getView().showNavigationBars();
         }
+    }
+
+    public void onStartClick() {
+        sharedPreferences
+                .edit()
+                .putBoolean(FIRST_START, false)
+                .apply();
+
+        openCards();
     }
 }

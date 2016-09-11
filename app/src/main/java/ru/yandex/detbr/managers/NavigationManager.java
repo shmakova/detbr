@@ -9,9 +9,9 @@ import android.support.v4.app.FragmentTransaction;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
-import ru.yandex.detbr.ui.activities.IntroActivity;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
+import ru.yandex.detbr.ui.fragments.IntroFragment;
 import ru.yandex.detbr.ui.fragments.TabsFragment;
 
 /**
@@ -66,13 +66,6 @@ public class NavigationManager {
         activity.startActivity(intent);
     }
 
-    public void openOnBoarding() {
-        Intent intent = new Intent(activity, IntroActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        activity.startActivity(intent);
-        activity.finish();
-    }
-
     public void openCards() {
         openAsRoot(new CardsPagerFragment());
     }
@@ -83,6 +76,10 @@ public class NavigationManager {
 
     public void openFavorites() {
         openAsRoot(new FavoritesFragment());
+    }
+
+    public void openIntro() {
+        openAsRoot(new IntroFragment());
     }
 
     public void onBackPressed() {

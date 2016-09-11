@@ -34,4 +34,7 @@
     <string name="find_interesting">Найти интересное</string>
     <string name="empty_favorites">Empty favorites</string>
     <string name="separator">›</string>
+    <string name="background">background</string>
+    <string name="intro_text">Браузер найдёт интересное</string>
+    <string name="start">Начать</string>
 </resources>
