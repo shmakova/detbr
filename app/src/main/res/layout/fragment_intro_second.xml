@@ -48,7 +48,8 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="56dp"
             android:src="@drawable/hand_second"
-            android:contentDescription="@string/hand"/>
+            android:contentDescription="@string/hand"
+            tools:ignore="RtlHardcoded"/>
 
 
         <include layout="@layout/bottom_view_card"/>
