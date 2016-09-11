@@ -2,9 +2,9 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/ic_cancel" android:state_checked="true"
           android:state_focused="true"/>
-    <item android:drawable="@drawable/ic_category_icon" android:state_checked="false"
+    <item android:drawable="@drawable/ic_category" android:state_checked="false"
           android:state_focused="true"/>
-    <item android:drawable="@drawable/ic_category_icon"
+    <item android:drawable="@drawable/ic_category"
           android:state_checked="false"/>
     <item android:drawable="@drawable/ic_cancel"
           android:state_checked="true"/>
