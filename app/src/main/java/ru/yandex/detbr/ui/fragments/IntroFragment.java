@@ -50,6 +50,8 @@ public class IntroFragment extends BaseFragment {
 
     @OnClick(R.id.start_btn)
     public void onStartButtonClick() {
-        onStartClickListener.onStartClick();
+        if (onStartClickListener != null) {
+            onStartClickListener.onStartClick();
+        }
     }
 }
