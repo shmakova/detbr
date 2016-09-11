@@ -60,4 +60,8 @@ public abstract class Category implements Parcelable {
                 return R.drawable.ic_star;
         }
     }
+
+    public boolean isSchoolCategory() {
+        return alias().equals("school");
+    }
 }

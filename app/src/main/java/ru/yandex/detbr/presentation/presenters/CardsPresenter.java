@@ -8,6 +8,7 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.data.categories.Category;
+import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.presentation.views.CardsView;
 import rx.Observable;
 
@@ -18,11 +19,17 @@ import rx.Observable;
 public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
     @NonNull
     private final CardsRepository cardsRepository;
+    @NonNull
+    private final SchoolsRepository schoolsRepository;
     private Category category;
+    private String school;
 
 
-    public CardsPresenter(@NonNull CardsRepository cardsRepository) {
+    public CardsPresenter(
+            @NonNull CardsRepository cardsRepository,
+            @NonNull SchoolsRepository schoolsRepository) {
         this.cardsRepository = cardsRepository;
+        this.schoolsRepository = schoolsRepository;
     }
 
     public void loadCards(boolean pullToRefresh) {
@@ -35,6 +42,12 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
         subscribe(observable, pullToRefresh);
     }
 
+    private void showSchoolFragment() {
+        if (isViewAttached()) {
+            getView().showSchoolFragment();
+        }
+    }
+
     public void onCategorySelected(Category category) {
         if (category.equals(this.category)) {
             loadCards(false);
@@ -45,14 +58,23 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
                 getView().setDividerColor(R.color.light_grey);
             }
         } else {
-            loadCardsByCategory(category, false);
+            school = schoolsRepository.loadSchool();
             this.category = category;
+
+            if (category.isSchoolCategory() && school == null) {
+                showSchoolFragment();
+            } else {
+                loadCardsByCategory(category, false);
+            }
 
             if (isViewAttached() && category.color() != null) {
                 getView().setBackgroundColor(category.color());
                 getView().setDividerColor(R.color.dark_transparent_white);
             }
         }
+    }
 
+    public void refresh() {
+        loadCardsByCategory(category, false);
     }
 }

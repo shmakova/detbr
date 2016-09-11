@@ -139,7 +139,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         floatingSearchView.setVisibility(View.VISIBLE);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

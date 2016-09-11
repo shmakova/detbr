@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
-import com.viewpagerindicator.CirclePageIndicator;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.yandex.detbr.R;
@@ -20,8 +18,6 @@ import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 public class IntroActivity extends AppCompatActivity implements SchoolsFragment.OnSchoolClickListener {
     @BindView(R.id.view_pager)
     ViewPager viewPager;
-    @BindView(R.id.indicator)
-    CirclePageIndicator circlePageIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +25,6 @@ public class IntroActivity extends AppCompatActivity implements SchoolsFragment.
         setContentView(R.layout.activity_intro);
         ButterKnife.bind(this);
         viewPager.setAdapter(new IntroFragmentStatePagerAdapter(getSupportFragmentManager()));
-        circlePageIndicator.setViewPager(viewPager);
     }
 
     private void loadMainActivity() {

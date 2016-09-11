@@ -4,8 +4,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import ru.yandex.detbr.R;
-import ru.yandex.detbr.ui.fragments.IntroFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.SchoolsFragment;
 
 /**
@@ -22,10 +20,6 @@ public class IntroFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
-                return new IntroFragmentBuilder(R.layout.fragment_intro_first).build();
-            case 1:
-                return new IntroFragmentBuilder(R.layout.fragment_intro_second).build();
             case 2:
                 return new SchoolsFragment();
             default:

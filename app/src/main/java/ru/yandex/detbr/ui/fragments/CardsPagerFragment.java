@@ -31,6 +31,7 @@ import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.presentation.presenters.CardsPresenter;
 import ru.yandex.detbr.presentation.views.CardsView;
 import ru.yandex.detbr.ui.adapters.CardsFragmentStatePagerAdapter;
+import ru.yandex.detbr.ui.adapters.SchoolsFragmentStatePagerAdapter;
 import ru.yandex.detbr.ui.animators.CustomLceAnimator;
 import ru.yandex.detbr.ui.other.CarouselPageTransformer;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
@@ -40,7 +41,9 @@ import ru.yandex.detbr.utils.ErrorMessageDeterminer;
  */
 
 public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>, CardsView, CardsPresenter>
-        implements CardsView, CategoriesFragment.OnCategorySelectedListener {
+        implements CardsView,
+        CategoriesFragment.OnCategorySelectedListener,
+        SchoolsFragment.OnSchoolClickListener {
     private static final int PAGE_LIMIT = 7;
 
     @Inject
@@ -152,7 +155,17 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     }
 
     @Override
+    public void showSchoolFragment() {
+        cardsPager.setAdapter(new SchoolsFragmentStatePagerAdapter(fragmentManager));
+    }
+
+    @Override
     public void onCategorySelected(Category category) {
         presenter.onCategorySelected(category);
+    }
+
+    @Override
+    public void onSchoolClick() {
+        presenter.refresh();
     }
 }

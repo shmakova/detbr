@@ -39,15 +39,16 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     public void onFirstLoad() {
         loadSchoolFromRepository();
+        openCards();
 
-        if (school == null || school.isEmpty()) {
+        /*if (school == null || school.isEmpty()) {
             Thread thread = new Thread(() -> {
                 navigationManager.openOnBoarding();
             });
             thread.start();
         } else {
             openCards();
-        }
+        }*/
     }
 
     private void openCards() {

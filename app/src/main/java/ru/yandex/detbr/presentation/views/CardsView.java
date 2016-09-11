@@ -18,4 +18,6 @@ public interface CardsView extends MvpLceView<List<Card>> {
     void setBackgroundColor(String color);
 
     void setDividerColor(@ColorRes int color);
+
+    void showSchoolFragment();
 }
