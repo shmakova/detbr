@@ -1,5 +1,6 @@
 package ru.yandex.detbr.di.modules;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import dagger.Module;
@@ -17,7 +18,8 @@ public class CardsModule {
     @Provides
     @NonNull
     public CardsPresenter provideCardsPresenter(@NonNull CardsRepository cardsRepository,
-                                                @NonNull SchoolsRepository schoolsRepository) {
-        return new CardsPresenter(cardsRepository, schoolsRepository);
+                                                @NonNull SchoolsRepository schoolsRepository,
+                                                @NonNull SharedPreferences sharedPreferences) {
+        return new CardsPresenter(cardsRepository, schoolsRepository, sharedPreferences);
     }
 }

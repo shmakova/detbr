@@ -57,7 +57,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private void openCards() {
         if (isViewAttached()) {
             navigationManager.openCards();
-            getView().showSearchView();
+            getView().showNavigationBars();
             getView().changeBackgroundColor(R.color.light_background);
         }
     }

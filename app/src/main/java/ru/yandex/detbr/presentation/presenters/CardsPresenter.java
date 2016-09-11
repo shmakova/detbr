@@ -1,5 +1,6 @@
 package ru.yandex.detbr.presentation.presenters;
 
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import java.util.List;
@@ -17,19 +18,25 @@ import rx.Observable;
  */
 
 public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
+    private final static String FIRST_TIME_CARDS_LOAD = "FIRST_TIME_CARDS_LOAD";
+
     @NonNull
     private final CardsRepository cardsRepository;
     @NonNull
     private final SchoolsRepository schoolsRepository;
+    @NonNull
+    private final SharedPreferences sharedPreferences;
     private Category category;
     private String school;
 
 
     public CardsPresenter(
             @NonNull CardsRepository cardsRepository,
-            @NonNull SchoolsRepository schoolsRepository) {
+            @NonNull SchoolsRepository schoolsRepository,
+            @NonNull SharedPreferences sharedPreferences) {
         this.cardsRepository = cardsRepository;
         this.schoolsRepository = schoolsRepository;
+        this.sharedPreferences = sharedPreferences;
     }
 
     public void loadCards(boolean pullToRefresh) {
@@ -76,5 +83,20 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
 
     public void refresh() {
         loadCardsByCategory(category, false);
+    }
+
+    public boolean isFirstLoad() {
+        boolean isFirstLoad = sharedPreferences.getBoolean(FIRST_TIME_CARDS_LOAD, true);
+
+        if (isFirstLoad) {
+            sharedPreferences
+                    .edit()
+                    .putBoolean(FIRST_TIME_CARDS_LOAD, false)
+                    .apply();
+
+            return true;
+        }
+
+        return false;
     }
 }

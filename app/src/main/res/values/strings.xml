@@ -37,4 +37,9 @@
     <string name="background">background</string>
     <string name="intro_text">Браузер найдёт интересное</string>
     <string name="start">Начать</string>
+    <string name="intro_description_first">Потяни влево, попробуй</string>
+    <string name="intro_title_first">Что интересно твоим друзьям?</string>
+    <string name="intro_title_second">Отмечай, что понравится</string>
+    <string name="intro_description_second">Тогда здесь будет больше интересного</string>
+    <string name="hand">hand</string>
 </resources>

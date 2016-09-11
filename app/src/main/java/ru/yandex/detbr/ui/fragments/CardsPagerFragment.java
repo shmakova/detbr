@@ -105,7 +105,7 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
 
     @Override
     public void setData(List<Card> cards) {
-        cardsPager.setAdapter(new CardsFragmentStatePagerAdapter(fragmentManager, cards));
+        cardsPager.setAdapter(new CardsFragmentStatePagerAdapter(fragmentManager, cards, presenter.isFirstLoad()));
     }
 
     @Override
