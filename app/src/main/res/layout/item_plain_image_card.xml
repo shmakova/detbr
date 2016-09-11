@@ -6,7 +6,7 @@
     android:id="@+id/card"
     style="@style/Card"
     app:cardCornerRadius="15dp"
-    app:cardElevation="8dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
     tools:ignore="UnusedAttribute">
 

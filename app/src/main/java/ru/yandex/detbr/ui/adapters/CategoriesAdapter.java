@@ -3,12 +3,15 @@ package ru.yandex.detbr.ui.adapters;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.List;
@@ -27,11 +30,7 @@ import rx.subjects.PublishSubject;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
     private List<Category> categories;
     private final PublishSubject<Category> onClickSubject = PublishSubject.create();
-    private final boolean darkBackground;
-
-    public CategoriesAdapter(boolean darkBackground) {
-        this.darkBackground = darkBackground;
-    }
+    private int selectedItem = -1;
 
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -42,7 +41,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     @Override
     public void onBindViewHolder(CategoryViewHolder holder, int position) {
         Category category = categories.get(position);
-        holder.bind(category);
+        holder.bind(category, position);
     }
 
     public Observable<Category> getPositionClicks() {
@@ -65,39 +64,59 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.category_text)
         TextView categoryText;
-        @BindView(R.id.icon)
-        ImageView icon;
-        @BindView(R.id.icon_background)
-        ImageView iconBackground;
-        @BindView(R.id.category)
-        View categoryView;
+        @BindView(R.id.radio)
+        RadioButton radioButton;
 
         CategoryViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(v -> onClickSubject.onNext(categories.get(getAdapterPosition())));
+
+            View.OnClickListener onClickListener = view -> {
+                onClickSubject.onNext(categories.get(getAdapterPosition()));
+                if (selectedItem == getAdapterPosition()) {
+                    selectedItem = -1;
+                    categoryText.setTextColor(
+                            ContextCompat.getColor(categoryText.getContext(), R.color.dark_grey));
+                } else {
+                    selectedItem = getAdapterPosition();
+                    categoryText.setTextColor(
+                            ContextCompat.getColor(categoryText.getContext(), R.color.white));
+                }
+                notifyDataSetChanged();
+            };
+
+            itemView.setOnClickListener(onClickListener);
+            radioButton.setOnClickListener(onClickListener);
         }
 
-        public void bind(Category category) {
+        public void bind(Category category, int position) {
             categoryText.setText(category.title());
+            radioButton.setChecked(position == selectedItem);
 
-            if (darkBackground) {
-                categoryText.setTextColor(
-                        ContextCompat.getColor(categoryText.getContext(), R.color.white));
-                categoryView.setBackground(
-                        ContextCompat.getDrawable(categoryView.getContext(), R.drawable.bubble_transparent));
-            } else {
+
+            if (selectedItem == -1) {
                 categoryText.setTextColor(
                         ContextCompat.getColor(categoryText.getContext(), R.color.dark_grey));
-                categoryView.setBackground(
-                        ContextCompat.getDrawable(categoryView.getContext(), R.drawable.bubble_grey));
+            } else {
+                categoryText.setTextColor(
+                        ContextCompat.getColor(categoryText.getContext(), R.color.white));
             }
 
-            icon.setImageDrawable(
-                    ContextCompat.getDrawable(icon.getContext(), category.getDrawableIcon()));
-            Drawable background = iconBackground.getBackground();
-            GradientDrawable gradientDrawable = (GradientDrawable) background;
-            gradientDrawable.setColor(Color.parseColor(category.color()));
+            setRadioButtonIconAndColor(ContextCompat.getDrawable(radioButton.getContext(), category.getDrawableIcon()),
+                    Color.parseColor(category.color()));
+        }
+
+        private void setRadioButtonIconAndColor(Drawable drawable, int color) {
+            StateListDrawable stateListDrawable =
+                    (StateListDrawable) CompoundButtonCompat.getButtonDrawable(radioButton);
+
+            LayerDrawable layerDrawable = (LayerDrawable) stateListDrawable.getCurrent();
+
+            if (layerDrawable.getNumberOfLayers() < 3) {
+                GradientDrawable iconBackground = (GradientDrawable) layerDrawable.getDrawable(0);
+                iconBackground.setColor(color);
+                layerDrawable.setDrawableByLayerId(R.id.icon, drawable);
+            }
         }
     }
 }

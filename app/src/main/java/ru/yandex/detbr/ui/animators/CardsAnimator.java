@@ -13,9 +13,9 @@ import com.hannesdorfmann.mosby.mvp.lce.LceAnimator;
  * Created by shmakova on 31.08.16.
  */
 
-public final class CustomLceAnimator extends LceAnimator {
+public final class CardsAnimator extends LceAnimator {
 
-    private CustomLceAnimator() {
+    private CardsAnimator() {
     }
 
     public static void hideLoading(@NonNull View loadingView, @NonNull View contentView,
@@ -33,7 +33,8 @@ public final class CustomLceAnimator extends LceAnimator {
     }
 
     public static void showContent(@NonNull final View loadingView, @NonNull final View contentView,
-                                   @NonNull final View errorView) {
+                                   @NonNull final View errorView, @NonNull final View backwardView,
+                                   final int color) {
 
         if (contentView.getVisibility() == View.VISIBLE) {
             errorView.setVisibility(View.GONE);

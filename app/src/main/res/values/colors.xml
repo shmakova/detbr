@@ -28,4 +28,5 @@
     <color name="dark_yellow">#f7d652</color>
 
     <color name="dark_background">#363636</color>
+    <color name="light_background">#f7f7f5</color>
 </resources>
