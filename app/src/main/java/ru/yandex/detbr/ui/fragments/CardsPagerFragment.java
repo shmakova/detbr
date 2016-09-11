@@ -43,8 +43,6 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
         implements CardsView, CategoriesFragment.OnCategorySelectedListener {
     private static final int PAGE_LIMIT = 7;
 
-    private Category category;
-
     @Inject
     ErrorMessageDeterminer errorMessageDeterminer;
 
@@ -58,7 +56,6 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     protected FragmentManager fragmentManager;
     @NonNull
     private CardsComponent cardsComponent;
-    private CardsFragmentStatePagerAdapter adapter;
 
     @NonNull
     @Override

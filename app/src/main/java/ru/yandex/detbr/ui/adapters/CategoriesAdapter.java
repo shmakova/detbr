@@ -67,14 +67,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     public class CategoryViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.category_text)
         TextView categoryText;
-        @BindView(R.id.category)
-        View categoryView;
         @BindView(R.id.radio)
         RadioButton radioButton;
 
         CategoryViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+
             View.OnClickListener onClickListener = view -> {
                 onClickSubject.onNext(categories.get(getAdapterPosition()));
                 if (selectedItem == getAdapterPosition()) {
@@ -88,8 +87,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
                 }
                 notifyDataSetChanged();
             };
+
             itemView.setOnClickListener(onClickListener);
-            radioButton.setOnClickListener(onClickListener);
+
+            if (radioButton != null) {
+                radioButton.setOnClickListener(onClickListener);
+            }
         }
 
         public void bind(Category category, int position) {

@@ -33,16 +33,6 @@ public class NavigationManager {
         this.activity = activity;
     }
 
-    private void open(Fragment fragment) {
-        if (fragmentManager != null) {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.main_frame_layout, fragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .addToBackStack(null)
-                    .commit();
-        }
-    }
-
     private void openAsRoot(Fragment fragment) {
         clearBackStack();
         if (fragmentManager != null) {
