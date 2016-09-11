@@ -32,9 +32,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
     private final PublishSubject<Category> onClickSubject = PublishSubject.create();
     private int selectedItem = -1;
 
-    public CategoriesAdapter() {
-    }
-
     @Override
     public CategoryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_categories, parent, false);
