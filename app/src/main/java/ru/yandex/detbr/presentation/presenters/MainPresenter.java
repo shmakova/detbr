@@ -2,13 +2,11 @@ package ru.yandex.detbr.presentation.presenters;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
-import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.views.MainView;
@@ -22,23 +20,16 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     private final NavigationManager navigationManager;
     @NonNull
     private final LikeManager likeManager;
-    @NonNull
-    private final SchoolsRepository schoolsRepository;
-    @Nullable
-    private String school;
 
 
     public MainPresenter(@NonNull NavigationManager navigationManager,
-                         @NonNull LikeManager likeManager,
-                         @NonNull SchoolsRepository schoolsRepository
+                         @NonNull LikeManager likeManager
     ) {
         this.navigationManager = navigationManager;
         this.likeManager = likeManager;
-        this.schoolsRepository = schoolsRepository;
     }
 
     public void onFirstLoad() {
-        loadSchoolFromRepository();
         openCards();
 
         /*if (school == null || school.isEmpty()) {
@@ -73,10 +64,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
             getView().hideSearchView();
             getView().changeBackgroundColor(R.color.dark_background);
         }
-    }
-
-    private void loadSchoolFromRepository() {
-        school = schoolsRepository.loadSchool();
     }
 
     public void onTabSelected(@IdRes int tabId) {

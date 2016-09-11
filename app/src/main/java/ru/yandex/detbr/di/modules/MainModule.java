@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.presenters.MainPresenter;
@@ -18,8 +17,7 @@ public class MainModule {
     @Provides
     @NonNull
     MainPresenter provideMainPresenter(@NonNull NavigationManager navigationManager,
-                                       @NonNull LikeManager likeManager,
-                                       @NonNull SchoolsRepository schoolsRepository) {
-        return new MainPresenter(navigationManager, likeManager, schoolsRepository);
+                                       @NonNull LikeManager likeManager) {
+        return new MainPresenter(navigationManager, likeManager);
     }
 }
