@@ -83,7 +83,7 @@ public class NavigationManager {
             intent.setAction(Intent.ACTION_VIEW);
             activity.startActivity(intent);
         } else {
-            Toast.makeText(activity, "Проверьте интернет соединение", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, activity.getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
         }
     }
 

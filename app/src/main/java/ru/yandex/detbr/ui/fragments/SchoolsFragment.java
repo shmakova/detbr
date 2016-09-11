@@ -23,7 +23,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import clojure.lang.IFn;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.di.components.SchoolsComponent;
@@ -100,8 +99,8 @@ public class SchoolsFragment
         autoCompleteTextView.setDropDownWidth((int) (width * 1.5));
         autoCompleteTextView.setDropDownHorizontalOffset(-width / 4);
 
-        autoCompleteTextView.setOnFocusChangeListener((v, b) -> {
-            if (b) {
+        autoCompleteTextView.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
                 new Handler(Looper.getMainLooper()).postDelayed(this::onSchoolsAutocompleteTextViewClick, 200);
             }
         });

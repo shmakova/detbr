@@ -34,4 +34,6 @@
     <string name="find_interesting">Найти интересное</string>
     <string name="empty_favorites">Empty favorites</string>
     <string name="separator">›</string>
+    <string name="check_internet_connection">Проверьте интернет соединение</string>
+
 </resources>
