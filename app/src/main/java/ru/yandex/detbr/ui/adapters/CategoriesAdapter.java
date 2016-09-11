@@ -30,11 +30,9 @@ import rx.subjects.PublishSubject;
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
     private List<Category> categories;
     private final PublishSubject<Category> onClickSubject = PublishSubject.create();
-    private final boolean darkBackground;
     private int selectedItem = -1;
 
-    public CategoriesAdapter(boolean darkBackground) {
-        this.darkBackground = darkBackground;
+    public CategoriesAdapter() {
     }
 
     @Override
@@ -91,9 +89,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
                 notifyDataSetChanged();
             };
             itemView.setOnClickListener(onClickListener);
-            ;
             radioButton.setOnClickListener(onClickListener);
-            ;
         }
 
         public void bind(Category category, int position) {

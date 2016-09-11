@@ -73,13 +73,7 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        if (category == null) {
-            adapter = new CategoriesAdapter(false);
-        } else {
-            adapter = new CategoriesAdapter(true);
-        }
-
+        adapter = new CategoriesAdapter();
         categories.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false);
