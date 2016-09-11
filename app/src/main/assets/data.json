@@ -114,7 +114,7 @@
       "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
       "site": "ПОИСК В ЯНДЕКСЕ",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
-      "category": "cartoons",
+      "category": "films",
       "color": "#ffdd55",
       "type": "text"
     },
@@ -273,7 +273,7 @@
     {
       "title": "Логические задачи",
       "url": "http://lprobs.ru/section136.p0.html",
-      "category": "education",
+      "category": "science",
       "type": "text"
     },
     {
@@ -282,7 +282,7 @@
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/818145.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
-      "category": "cartoons",
+      "category": "films",
       "type": "full_image",
       "dark": true
     },
@@ -316,7 +316,7 @@
       "url": "https://lifehacker.ru/2014/04/22/20-oshibok-v-anglijskom-yazyke-kotorye-delaet-kazhdyj-iz-nas/",
       "site": "ЛАЙФХАКЕР",
       "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
-      "category": "education",
+      "category": "science",
       "type": "text"
     },
     {
@@ -341,7 +341,7 @@
       "url": "https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/",
       "site": "ЛАЙФХАКЕР",
       "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
-      "category": "education",
+      "category": "science",
       "type": "text"
     },
     {
@@ -349,7 +349,7 @@
       "url": "https://yandex.ru/referats/",
       "site": "ЯНДЕКС.РЕФЕРАТЫ",
       "favicon": "https://yandex.ru/referats/",
-      "category": "education",
+      "category": "science",
       "color": "#ffdd55",
       "type": "text"
     },
@@ -368,7 +368,7 @@
       "url": "https://yandex.ru/video/search?text=гравити%20фолз&family=yes",
       "site": "ПОИСК В ЯНДЕКСЕ",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
-      "category": "cartoons",
+      "category": "films",
       "color": "#ffdd55",
       "type": "text"
     },
@@ -379,7 +379,7 @@
       "description": "Великий полководец и государственный деятель, заложивший основы современного французского государства.",
       "site": "ВИКИПЕДИЯ",
       "favicon": "https://ru.m.wikipedia.org/static/apple-touch/wikipedia.png",
-      "category": "education",
+      "category": "science",
       "type": "full_image",
       "dark": true
     },
@@ -388,7 +388,7 @@
       "url": "https://lifehacker.ru/2015/06/13/blue/",
       "site": "ЛАЙФХАКЕР",
       "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
-      "category": "education",
+      "category": "science",
       "type": "text"
     },
     {
@@ -406,7 +406,7 @@
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/692957.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
-      "category": "cartoons",
+      "category": "films",
       "type": "full_image",
       "dark": true
     },
@@ -422,7 +422,7 @@
       "description": "1. Отличающийся неспособностью врать, открытостью, прямотой (о человеке); свойственный такому человеку; искренний, правдивый (о человеке, его характере, мыслях, поступках)",
       "url": "http://www.gramota.ru/slovari/dic/?all=x&word=%D1%87%D0%B5%D1%81%D1%82%D0%BD%D1%8B%D0%B9",
       "site": "ГРАМОТА.РУ",
-      "category": "education",
+      "category": "science",
       "color": "#1bb561",
       "type": "text",
       "dark": true
@@ -433,7 +433,7 @@
       "site": "ADME",
       "image": "https://files5.adme.ru/files/news/part_134/1340565/16480315-makoko-floating-school-1471412588-650-ebd53dd6a2-1471423910.jpg",
       "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
-      "category": "education",
+      "category": "science",
       "type": "plain_image"
     },
     {
@@ -451,7 +451,7 @@
       "url": "https://translate.yandex.ru/m/translate?lang=en-ru&text=hello&family=yes",
       "site": "ЯНДЕКС.ПЕРЕВОДЧИК",
       "favicon": "https://translate.yandex.net/main/v2.111.1472810626/i/favicon.png",
-      "category": "education",
+      "category": "school",
       "color": "#ffdd55",
       "type": "text"
     },
@@ -461,7 +461,7 @@
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
       "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
-      "category": "cartoons",
+      "category": "school",
       "type": "full_image",
       "dark": true
     },
@@ -470,7 +470,7 @@
       "url": "http://saitzemli.ru/article/planeta-mars",
       "image": "http://saitzemli.ru/imagesforsite/articles/Mars/mars.jpg",
       "site": "САЙТ ЗЕМЛИ",
-      "category": "education",
+      "category": "science",
       "type": "plain_image"
     },
     {
@@ -478,7 +478,7 @@
       "url": "http://saitzemli.ru/article/planeta-venera",
       "image": "http://saitzemli.ru/imagesforsite/articles/venera/venera-planeta.jpg",
       "site": "САЙТ ЗЕМЛИ",
-      "category": "education",
+      "category": "science",
       "type": "plain_image"
     },
     {
@@ -486,7 +486,7 @@
       "url": "http://www.putidorogi-nn.ru/7-chudes-sveta/501-sem-chudes-drevnego-mira",
       "image": "http://www.putidorogi-nn.ru/images/stories/afrika/piramida_heopsa_2.jpg",
       "site": "САЙТ ЗЕМЛИ",
-      "category": "education",
+      "category": "science",
       "type": "plain_image"
     },
     {
@@ -510,7 +510,7 @@
       "url": "http://www.lego.com/ru-ru/starwars/products?icmp=CORU36HomeWNStarWarsRogueOne#/episode-i-vi",
       "image": "http://cache.lego.com/r/www/r/starwars/-/media/franchises/starwars2015/banners%20for%20all%20sections/2016%202hy/rogue_1_banner_products.jpg?l.r2=-548408727",
       "site": "LEGO.COM",
-      "category": "games",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -532,7 +532,7 @@
     {
       "title": "Турнир Стихий - Видео LEGO Ninjago",
       "url": "http://www.lego.com/ru-ru/ninjago/videos/tournament-of-elements-980cc199eab24fdabd13d40840c40d70",
-      "image": "http://cache.lego.com/r/www/r/ninjago/-/media/franchises/ninjago%202014/branding/ninjago-logo-new.png?l.r2=-142545377",
+      "image": "https://i.ytimg.com/vi/4wMyOuqD-ts/maxresdefault.jpg",
       "site": "LEGO.COM",
       "category": "games",
       "type": "plain_image"
@@ -548,25 +548,25 @@
     {
       "title": "Abracadabra - Song",
       "url": "http://learnenglishkids.britishcouncil.org/en/songs/abracadabra",
-      "image": "http://learnenglishkids.britishcouncil.org/sites/kids/files/styles/grid_140x106/public/image/abracadabra.jpg?itok=WnBi9MsM",
+      "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_5f31e87f_v1.jpg",
       "site": "LearnEnglish Kids",
-      "category": "education",
+      "category": "science",
       "type": "plain_image"
     },
     {
       "title": "Old Macdonald had a farm - Song",
       "url": "http://learnenglishkids.britishcouncil.org/en/songs/old-macdonald-had-farm",
-      "image": "http://learnenglishkids.britishcouncil.org/sites/kids/files/styles/grid_140x106/public/image/old-macdonald-had-a-farm-30-05-2012.jpg?itok=7bK-BKwD",
+      "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_58069399_v4.jpg",
       "site": "LearnEnglish Kids",
-      "category": "education",
+      "category": "science",
       "type": "plain_image"
     },
     {
       "title": "People Work - Song",
       "url": "http://learnenglishkids.britishcouncil.org/en/songs/people-work",
-      "image": "http://learnenglishkids.britishcouncil.org/sites/kids/files/styles/grid_140x106/public/image/people-work-30-05-2012.jpg?itok=R3IfbG9E",
+      "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_efd626b1_v1.jpg",
       "site": "LearnEnglish Kids",
-      "category": "education",
+      "category": "science",
       "type": "plain_image"
     },
     {
@@ -580,14 +580,14 @@
   ],
   "categories": [
     {
+      "alias": "school",
+      "title": "Популярное в школе",
+      "color": "#eb352f"
+    },
+    {
       "alias": "films",
       "title": "Фильмы",
       "color": "#4aa3fd"
-    },
-    {
-      "alias": "cartoons",
-      "title": "Мультики",
-      "color": "#e85958"
     },
     {
       "alias": "games",
@@ -615,8 +615,8 @@
       "color": "#039BE5"
     },
     {
-      "alias": "education",
-      "title": "Образование",
+      "alias": "science",
+      "title": "Наука",
       "color": "#8840f2"
     },
     {

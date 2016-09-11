@@ -1,9 +1,12 @@
 package ru.yandex.detbr.ui.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +52,8 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     ViewPager cardsPager;
     @BindView(R.id.category_cards_backward)
     View categoryCardsBackward;
+    @BindView(R.id.divider)
+    View divider;
 
     protected FragmentManager fragmentManager;
     @NonNull
@@ -135,13 +140,22 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     }
 
     @Override
-    public void setBackgroundColor(int color) {
-        categoryCardsBackward.setBackgroundColor(color);
+    public void setBackgroundColor(String color) {
+        categoryCardsBackward.setBackgroundColor(Color.parseColor(color));
+    }
+
+    @Override
+    public void setBackgroundColor(@ColorRes int color) {
+        categoryCardsBackward.setBackgroundColor(ContextCompat.getColor(getContext(), color));
+    }
+
+    @Override
+    public void setDividerColor(@ColorRes int color) {
+        divider.setBackgroundColor(ContextCompat.getColor(getContext(), color));
     }
 
     @Override
     public void onCategorySelected(Category category) {
-        this.category = category;
-        presenter.loadCardsByCategory(category, false);
+        presenter.onCategorySelected(category);
     }
 }

@@ -54,7 +54,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         if (isViewAttached()) {
             navigationManager.openCards();
             getView().showSearchView();
-            getView().changeBackgroundColor(R.color.white);
+            getView().changeBackgroundColor(R.color.light_background);
         }
     }
 
@@ -62,7 +62,7 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         if (isViewAttached()) {
             navigationManager.openFavorites();
             getView().showSearchView();
-            getView().changeBackgroundColor(R.color.white);
+            getView().changeBackgroundColor(R.color.light_background);
         }
     }
 
