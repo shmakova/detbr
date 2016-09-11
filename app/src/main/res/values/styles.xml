@@ -85,5 +85,4 @@
         <item name="android:maxLines">3</item>
         <item name="android:textSize">14sp</item>
     </style>
-
 </resources>

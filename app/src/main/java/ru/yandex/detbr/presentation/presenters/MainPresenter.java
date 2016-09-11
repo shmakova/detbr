@@ -1,14 +1,13 @@
 package ru.yandex.detbr.presentation.presenters;
 
+import android.content.SharedPreferences;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
-import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.views.MainView;
@@ -18,42 +17,47 @@ import ru.yandex.detbr.presentation.views.MainView;
  */
 
 public class MainPresenter extends MvpBasePresenter<MainView> {
+    private final static String FIRST_START = "FIRST_START";
+
     @NonNull
     private final NavigationManager navigationManager;
     @NonNull
     private final LikeManager likeManager;
     @NonNull
-    private final SchoolsRepository schoolsRepository;
-    @Nullable
-    private String school;
+    private final SharedPreferences sharedPreferences;
 
 
     public MainPresenter(@NonNull NavigationManager navigationManager,
                          @NonNull LikeManager likeManager,
-                         @NonNull SchoolsRepository schoolsRepository
+                         @NonNull SharedPreferences sharedPreferences
     ) {
         this.navigationManager = navigationManager;
         this.likeManager = likeManager;
-        this.schoolsRepository = schoolsRepository;
+        this.sharedPreferences = sharedPreferences;
     }
 
     public void onFirstLoad() {
-        loadSchoolFromRepository();
+        openCards();
+        boolean isFirstStart = sharedPreferences.getBoolean(FIRST_START, true);
 
-        if (school == null || school.isEmpty()) {
-            Thread thread = new Thread(() -> {
-                navigationManager.openOnBoarding();
-            });
-            thread.start();
+        if (isFirstStart) {
+            openIntro();
         } else {
             openCards();
+        }
+    }
+
+    private void openIntro() {
+        if (isViewAttached()) {
+            navigationManager.openIntro();
+            getView().hideNavigationBars();
         }
     }
 
     private void openCards() {
         if (isViewAttached()) {
             navigationManager.openCards();
-            getView().showSearchView();
+            getView().showNavigationBars();
             getView().changeBackgroundColor(R.color.light_background);
         }
     }
@@ -72,10 +76,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
             getView().hideSearchView();
             getView().changeBackgroundColor(R.color.dark_background);
         }
-    }
-
-    private void loadSchoolFromRepository() {
-        school = schoolsRepository.loadSchool();
     }
 
     public void onTabSelected(@IdRes int tabId) {
@@ -115,5 +115,14 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         if (isViewAttached()) {
             getView().showNavigationBars();
         }
+    }
+
+    public void onStartClick() {
+        sharedPreferences
+                .edit()
+                .putBoolean(FIRST_START, false)
+                .apply();
+
+        openCards();
     }
 }

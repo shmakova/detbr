@@ -32,6 +32,7 @@ import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.presentation.presenters.MainPresenter;
 import ru.yandex.detbr.presentation.views.MainView;
+import ru.yandex.detbr.ui.fragments.IntroFragment;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
 import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 import ru.yandex.detbr.ui.other.ViewModifier;
@@ -40,6 +41,7 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         OnCardsItemClickListener,
         OnLikeClickListener,
         OnTabSelectListener,
+        IntroFragment.OnStartClickListener,
         FloatingSearchView.OnMenuItemClickListener,
         FloatingSearchView.OnSearchListener,
         MainView {
@@ -139,7 +141,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         floatingSearchView.setVisibility(View.VISIBLE);
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -183,5 +184,10 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Override
     public void changeBackgroundColor(@IdRes int color) {
         contentWrapper.setBackgroundColor(ContextCompat.getColor(this, color));
+    }
+
+    @Override
+    public void onStartClick() {
+        presenter.onStartClick();
     }
 }

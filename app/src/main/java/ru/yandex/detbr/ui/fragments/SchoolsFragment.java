@@ -59,12 +59,12 @@ public class SchoolsFragment
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (!(getActivity() instanceof OnSchoolClickListener)) {
-            throw new ClassCastException(getActivity().toString() + " must implement " +
+        if (!(getParentFragment() instanceof OnSchoolClickListener)) {
+            throw new ClassCastException(getParentFragment().toString() + " must implement " +
                     OnSchoolClickListener.class.getName());
         }
 
-        onSchoolClickListener = (OnSchoolClickListener) getActivity();
+        onSchoolClickListener = (OnSchoolClickListener) getParentFragment();
     }
 
     @Override
