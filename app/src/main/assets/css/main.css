@@ -9,3 +9,14 @@ html, body {
 img {
     width: 200px;
 }
+
+p.grey-text {
+    font-size: 18px;
+    letter-spacing: 0.037em;
+}
+
+.history-button {
+    font-size: 16px;
+    letter-spacing: 0.037em;
+    font-weight: bold;
+}
