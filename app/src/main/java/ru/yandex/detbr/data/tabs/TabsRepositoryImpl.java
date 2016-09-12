@@ -1,6 +1,7 @@
 package ru.yandex.detbr.data.tabs;
 
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
+import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
 import com.pushtorefresh.storio.sqlite.queries.Query;
 import com.pushtorefresh.storio.sqlite.queries.RawQuery;
 
@@ -35,15 +36,12 @@ public class TabsRepositoryImpl implements TabsRepository {
     }
 
     @Override
-    public void addTab(Tab tab) {
-        Thread thread = new Thread(() -> {
-            storIOSQLite
-                    .put()
-                    .object(tab)
-                    .prepare()
-                    .executeAsBlocking();
-        });
-        thread.start();
+    public Observable<PutResult> addTab(Tab tab) {
+        return storIOSQLite
+                .put()
+                .object(tab)
+                .prepare()
+                .asRxObservable();
     }
 
     @Override

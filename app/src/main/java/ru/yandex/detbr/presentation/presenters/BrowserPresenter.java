@@ -20,6 +20,7 @@ import ru.yandex.detbr.utils.UrlUtils;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
 /**
@@ -38,6 +39,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     private final CardsRepository cardsRepository;
     private Subscription subscription;
     private String currentUrl;
+    private CompositeSubscription compositeSubscription;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
@@ -48,6 +50,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
         this.likeManager = likeManager;
+        compositeSubscription = new CompositeSubscription();
     }
 
     public void onTabsClicked() {
@@ -63,7 +66,16 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         super.attachView(view);
         view.setOnUrlListener(query -> {
             String url = UrlUtils.getUrlFromQuery(query);
-            tabsManager.addTab(Tab.builder().url(url).build());
+            compositeSubscription.add(
+                    tabsManager.addTab(Tab.builder().url(url).build())
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(putResult -> {
+                                        tabsManager.updateTabs();
+                                        Timber.e("putResult ", putResult.toString());
+                                    },
+                                    throwable -> Timber.e("Error adding tab"),
+                                    () -> Timber.e("Completed adding tab")));
             loadUrl(url);
         });
     }
@@ -89,12 +101,13 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     private void checkUrlBeforeLoad(String url, UrlCheckListener listener) {
         String domain = UrlUtils.getHost(url) + "/";
 
-        subscription = wotService.getLinkReputation(domain)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        wotResponse -> listener.urlChecked(wotResponse.isSafe()),
-                        throwable -> Timber.e(throwable.getMessage(), "wotService.getLinkReputation error"));
+        compositeSubscription.add(
+                wotService.getLinkReputation(domain)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                wotResponse -> listener.urlChecked(wotResponse.isSafe()),
+                                throwable -> Timber.e(throwable.getMessage(), "wotService.getLinkReputation error")));
     }
 
     public void onLikeClick(String title, String url) {
@@ -209,8 +222,9 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @Override
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
-        if (!retainInstance && subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
+
+        if (compositeSubscription.hasSubscriptions()) {
+            compositeSubscription.unsubscribe();
         }
     }
 
