@@ -16,4 +16,6 @@ public interface MainView extends MvpView {
     void showSearchView();
 
     void changeBackgroundColor(int color);
+
+    void selectTabAtPosition(int position);
 }

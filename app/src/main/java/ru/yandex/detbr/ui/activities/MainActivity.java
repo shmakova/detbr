@@ -1,6 +1,7 @@
 package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -18,6 +19,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.BindView;
+import icepick.Icepick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.BuildConfig;
 import ru.yandex.detbr.R;
@@ -26,6 +28,7 @@ import ru.yandex.detbr.di.components.MainComponent;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.NavigationModule;
+import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.presenters.MainPresenter;
 import ru.yandex.detbr.presentation.views.MainView;
 import ru.yandex.detbr.ui.fragments.IntroFragment;
@@ -59,6 +62,9 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         injectDependencies();
         super.onCreate(savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
+        Intent intent = getIntent();
+        int tabId = intent.getIntExtra(NavigationManager.TAB_KEY, -1);
 
         if (BuildConfig.DEBUG) {
             setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
@@ -70,8 +76,14 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         floatingSearchView.setOnSearchListener(this);
 
         if (savedInstanceState == null) {
-            presenter.onFirstLoad();
+            presenter.onFirstLoad(tabId);
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 
     @NonNull
@@ -155,7 +167,14 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     }
 
     @Override
+    public void selectTabAtPosition(int position) {
+        bottomBar.selectTabAtPosition(position);
+    }
+
+    @Override
     public void onStartClick() {
         presenter.onStartClick();
     }
+
+
 }
