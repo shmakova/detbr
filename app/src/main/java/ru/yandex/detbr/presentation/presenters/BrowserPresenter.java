@@ -36,8 +36,8 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     private final LikeManager likeManager;
     @NonNull
     private final CardsRepository cardsRepository;
+    private final CompositeSubscription compositeSubscription;
     private String currentUrl;
-    private CompositeSubscription compositeSubscription;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
@@ -69,7 +69,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribe(putResult -> tabsManager.updateTabs(),
                                     throwable -> Timber.e("Error adding tab"),
-                                    () -> Timber.e("Completed adding tab")));
+                                    () -> Timber.d("Completed adding tab")));
             loadUrl(url);
         });
     }
@@ -240,9 +240,9 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                                             .observeOn(AndroidSchedulers.mainThread())
                                             .subscribe(putResult -> tabsManager.updateTabs(),
                                                     throwable -> Timber.e("Error adding tab"),
-                                                    () -> Timber.e("Completed adding tab"));
+                                                    () -> Timber.d("Completed adding tab"));
                                 },
                                 throwable -> Timber.e("Error removing tab"),
-                                () -> Timber.e("Completed removing tab")));
+                                () -> Timber.d("Completed removing tab")));
     }
 }
