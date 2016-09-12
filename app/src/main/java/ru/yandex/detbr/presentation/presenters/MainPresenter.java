@@ -93,11 +93,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         }
     }
 
-    public void onActionMenuItemSelected(@IdRes int id) {
-        if (id == R.id.action_voice_rec && isViewAttached()) {
-            getView().showSpeechRecognizer();
-        }
-    }
 
     public void onSearchAction(String currentQuery) {
         navigationManager.openBrowser(currentQuery);

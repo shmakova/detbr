@@ -62,8 +62,8 @@
                     android:layout_alignParentTop="true"
                     android:clipToPadding="false"
                     android:overScrollMode="never"
-                    android:paddingLeft="@dimen/card_padding"
-                    android:paddingRight="@dimen/card_padding"/>
+                    android:paddingLeft="35dp"
+                    android:paddingRight="35dp"/>
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

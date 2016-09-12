@@ -228,10 +228,10 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     public void setLike(boolean like) {
         if (like) {
             fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                    R.drawable.ic_favorite_red_24dp, null));
+                    R.drawable.ic_like_fill, null));
         } else {
             fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                    R.drawable.ic_favorite_border_24dp, null));
+                    R.drawable.ic_like_black_border, null));
         }
     }
 

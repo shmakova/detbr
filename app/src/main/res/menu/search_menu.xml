@@ -3,19 +3,19 @@
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/search"
-        android:icon="@drawable/ic_search_black_24dp"
+        android:icon="@drawable/ic_search"
         android:title="@string/search_title"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="collapseActionView|ifRoom"/>
     <item
         android:id="@+id/share"
-        android:icon="@drawable/ic_share_black_24dp"
+        android:icon="@drawable/ic_share"
         android:tint="@color/light_yellow"
         android:title="@string/share"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/tabs_page"
-        android:icon="@drawable/ic_view_carousel_24dp"
+        android:icon="@drawable/ic_tabs"
         android:title="@string/tabs"
         app:showAsAction="ifRoom"/>
 </menu>

@@ -1,9 +1,7 @@
 package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,8 +13,6 @@ import com.arlib.floatingsearchview.FloatingSearchView;
 import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
-
-import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -42,10 +38,8 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         OnLikeClickListener,
         OnTabSelectListener,
         IntroFragment.OnStartClickListener,
-        FloatingSearchView.OnMenuItemClickListener,
         FloatingSearchView.OnSearchListener,
         MainView {
-    private static final int SPEECH_REQUEST_CODE = 1;
 
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
@@ -73,24 +67,11 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         }
 
         bottomBar.setOnTabSelectListener(this);
-        floatingSearchView.setOnMenuItemClickListener(this);
         floatingSearchView.setOnSearchListener(this);
 
         if (savedInstanceState == null) {
             presenter.onFirstLoad();
         }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
-            List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            String spokenText = results.get(0);
-
-            floatingSearchView.setSearchText(spokenText);
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @NonNull
@@ -158,12 +139,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     }
 
     @Override
-    public void onActionMenuItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        presenter.onActionMenuItemSelected(id);
-    }
-
-    @Override
     public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
         // no suggestions yet
     }
@@ -173,13 +148,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         presenter.onSearchAction(currentQuery);
     }
 
-
-    public void showSpeechRecognizer() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        startActivityForResult(intent, SPEECH_REQUEST_CODE);
-    }
 
     @Override
     public void changeBackgroundColor(@IdRes int color) {

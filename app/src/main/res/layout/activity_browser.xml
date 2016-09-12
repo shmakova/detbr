@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_favorite_border_24dp"
+            android:src="@drawable/ic_like_black_border"
             android:visibility="gone"
             app:layout_anchor="@id/webview_wrapper"
             app:layout_anchorGravity="bottom|right|end"
