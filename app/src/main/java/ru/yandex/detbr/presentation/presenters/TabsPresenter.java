@@ -4,12 +4,14 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.views.TabsView;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
+import timber.log.Timber;
 
 /**
  * Created by shmakova on 29.08.16.
@@ -40,13 +42,13 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>>
             compositeSubscription.add(
                     positionClicks.subscribe(tab -> {
                         navigationManager.openBrowser(tab.getUrl());
-                        tabsManager.removeTab(tab);
+                        removeTabFromDb(tab);
                     }));
         }
     }
 
     public void removeTab(Tab tab) {
-        tabsManager.removeTab(tab);
+        removeTabFromDb(tab);
     }
 
     @Override
@@ -64,5 +66,14 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>>
     @Override
     public void onTabsChange() {
         loadTabs(true);
+    }
+
+    private void removeTabFromDb(Tab tab) {
+        tabsManager
+                .removeTab(tab)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(deleteResult -> tabsManager.updateTabs(),
+                        throwable -> Timber.e("Error removing tab"),
+                        () -> Timber.d("Completed removing tab"));
     }
 }

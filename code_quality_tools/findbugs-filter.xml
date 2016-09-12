@@ -35,5 +35,9 @@
     <Match>
         <Class name="~.*\$\$ViewBinder\$InnerUnbinder*"/>
     </Match>
+    <Match>
+        <Bug pattern="UR_UNINIT_READ"
+             type="UR_UNINIT_READ"/>
+    </Match>
     
 </FindBugsFilter>

@@ -36,7 +36,7 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
-        <item name="android:windowBackground">@color/intro_background</item>
+        <item name="android:windowBackground">@color/light_yellow</item>
     </style>
 
     <style name="CustomActionBar" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -51,5 +51,38 @@
         <item name="android:elevation" tools:ignore="NewApi">8dp</item>
         <item name="android:clickable">true</item>
         <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="UrlStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:letterSpacing" tools:ignore="NewApi">0.037</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/dark_transparent</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="FavoriteCardTitleStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:letterSpacing" tools:ignore="NewApi">0.012</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="CardTitleStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:letterSpacing" tools:ignore="NewApi">0.012</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CardDescriptionStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:letterSpacing" tools:ignore="NewApi">0.012</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:maxLines">3</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

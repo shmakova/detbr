@@ -14,7 +14,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.ui.listeners.OnRemoveTabButtonClickListener;
 import ru.yandex.detbr.utils.UrlUtils;
 import rx.Observable;
@@ -35,7 +35,7 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
 
     @Override
     public TabViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.tabs_item, parent, false);
+        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tabs, parent, false);
         return new TabViewHolder(convertView, listener);
     }
 
@@ -102,7 +102,6 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
         void onRemoveButtonClick() {
             final int position = getAdapterPosition();
             listener.onRemoveButtonClick(tabs.get(position));
-            // TODO call when onRemoveButtonClick ends
             notifyItemRemoved(position);
         }
     }

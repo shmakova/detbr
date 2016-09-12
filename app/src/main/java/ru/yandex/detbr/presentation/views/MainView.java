@@ -15,15 +15,7 @@ public interface MainView extends MvpView {
 
     void showSearchView();
 
-    void showToolbar();
-
-    void hideToolbar();
-
-    void resetToolbar();
+    void changeBackgroundColor(int color);
 
     void selectTabAtPosition(int position);
-
-    void updateToolbar(String title, Boolean isDisplayHomeAsUpEnabled, String color);
-
-    void showSpeechRecognizer();
 }

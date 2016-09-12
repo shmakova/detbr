@@ -2,16 +2,11 @@ package ru.yandex.detbr.ui.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.speech.RecognizerIntent;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBar;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,24 +15,23 @@ import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import butterknife.BindView;
+import icepick.Icepick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.BuildConfig;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.di.components.MainComponent;
 import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.NavigationModule;
+import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.presenters.MainPresenter;
 import ru.yandex.detbr.presentation.views.MainView;
-import ru.yandex.detbr.ui.fragments.CategoriesFragment;
+import ru.yandex.detbr.ui.fragments.IntroFragment;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
 import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 import ru.yandex.detbr.ui.other.ViewModifier;
@@ -46,24 +40,21 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         OnCardsItemClickListener,
         OnLikeClickListener,
         OnTabSelectListener,
-        CategoriesFragment.OnCategoriesItemClickListener,
-        FloatingSearchView.OnMenuItemClickListener,
+        IntroFragment.OnStartClickListener,
         FloatingSearchView.OnSearchListener,
         MainView {
-    private static final int SPEECH_REQUEST_CODE = 1;
 
     @BindView(R.id.bottom_bar)
     BottomBar bottomBar;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    @BindView(R.id.content_wrapper)
+    View contentWrapper;
     @BindView(R.id.floating_search_view)
-    protected FloatingSearchView floatingSearchView;
+    FloatingSearchView floatingSearchView;
 
     @Inject
     @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
     ViewModifier viewModifier;
 
-    private ActionBar actionBar;
     private MainComponent mainComponent;
 
     @SuppressLint("InflateParams")
@@ -71,6 +62,9 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         injectDependencies();
         super.onCreate(savedInstanceState);
+        Icepick.restoreInstanceState(this, savedInstanceState);
+        Intent intent = getIntent();
+        int tabId = intent.getIntExtra(NavigationManager.TAB_KEY, -1);
 
         if (BuildConfig.DEBUG) {
             setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
@@ -78,27 +72,18 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
             setContentView(R.layout.activity_main);
         }
 
-        setSupportActionBar(toolbar);
-        actionBar = getSupportActionBar();
         bottomBar.setOnTabSelectListener(this);
-        floatingSearchView.setOnMenuItemClickListener(this);
         floatingSearchView.setOnSearchListener(this);
 
         if (savedInstanceState == null) {
-            presenter.onFirstLoad();
+            presenter.onFirstLoad(tabId);
         }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SPEECH_REQUEST_CODE && resultCode == RESULT_OK) {
-            List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            String spokenText = results.get(0);
-
-            floatingSearchView.setSearchText(spokenText);
-        }
-
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 
     @NonNull
@@ -150,22 +135,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     }
 
     @Override
-    public void showToolbar() {
-        actionBar.show();
-    }
-
-    @Override
-    public void hideToolbar() {
-        resetToolbar();
-        actionBar.hide();
-    }
-
-    @Override
-    public void onCategoriesItemClick(Category category) {
-        presenter.onCategoriesItemClick(category);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             onBackPressed();
@@ -182,12 +151,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     }
 
     @Override
-    public void onActionMenuItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        presenter.onActionMenuItemSelected(id);
-    }
-
-    @Override
     public void onSuggestionClicked(SearchSuggestion searchSuggestion) {
         // no suggestions yet
     }
@@ -197,26 +160,10 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         presenter.onSearchAction(currentQuery);
     }
 
-    @Override
-    public void updateToolbar(String title, Boolean isDisplayHomeAsUpEnabled, String color) {
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(isDisplayHomeAsUpEnabled);
-            actionBar.setTitle(title);
-
-            if (color != null) {
-                actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(color)));
-            }
-            actionBar.show();
-        }
-    }
 
     @Override
-    public void resetToolbar() {
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-            actionBar.setTitle(getString(R.string.app_name));
-            actionBar.setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this, R.color.color_primary)));
-        }
+    public void changeBackgroundColor(@IdRes int color) {
+        contentWrapper.setBackgroundColor(ContextCompat.getColor(this, color));
     }
 
     @Override
@@ -224,10 +171,10 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         bottomBar.selectTabAtPosition(position);
     }
 
-    public void showSpeechRecognizer() {
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        startActivityForResult(intent, SPEECH_REQUEST_CODE);
+    @Override
+    public void onStartClick() {
+        presenter.onStartClick();
     }
+
+
 }

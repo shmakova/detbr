@@ -6,6 +6,7 @@
     android:id="@+id/card"
     style="@style/Card"
     app:cardCornerRadius="15dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
     tools:ignore="UnusedAttribute">
 
@@ -30,17 +31,14 @@
 
             <TextView
                 android:id="@+id/title"
+                style="@style/CardTitleStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_margin="16dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"/>
+                android:textColor="@color/black"/>
 
-            <include layout="@layout/card_bottom_view"/>
+            <include layout="@layout/bottom_view_card"/>
 
         </RelativeLayout>
     </LinearLayout>

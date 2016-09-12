@@ -25,7 +25,7 @@ import butterknife.OnClick;
 import butterknife.OnLongClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.di.components.CardComponent;
 import ru.yandex.detbr.di.modules.CardModule;
 import ru.yandex.detbr.presentation.presenters.CardPresenter;
@@ -187,8 +187,8 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
 
     @Override
     public void setWhiteText() {
-        title.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_card_title));
-        url.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_url_color));
+        title.setTextColor(ContextCompat.getColor(getContext(), R.color.light_transparent_white));
+        url.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_white));
         likeButton.setButtonDrawable(ContextCompat.getDrawable(getContext(), R.drawable.like_white));
 
         if (textWrapper != null) {

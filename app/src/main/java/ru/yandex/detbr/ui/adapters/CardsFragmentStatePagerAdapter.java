@@ -7,8 +7,9 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
+import ru.yandex.detbr.ui.fragments.IntroCardFragmentBuilder;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -16,16 +17,26 @@ import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
 
 public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     private final List<Card> cards;
+    private final boolean firstLoad;
 
-    public CardsFragmentStatePagerAdapter(FragmentManager fm, List<Card> cards) {
+    public CardsFragmentStatePagerAdapter(FragmentManager fm, List<Card> cards, boolean firstLoad) {
         super(fm);
         this.cards = cards;
+        this.firstLoad = firstLoad;
     }
 
     @Override
     public Fragment getItem(int position) {
         Card card = cards.get(position);
         String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
+
+        if (firstLoad) {
+            if (position == 0) {
+                return new IntroCardFragmentBuilder(R.layout.fragment_intro_first).build();
+            } else if (position == 1) {
+                return new IntroCardFragmentBuilder(R.layout.fragment_intro_second).build();
+            }
+        }
 
         switch (type) {
             case "text":
@@ -47,5 +58,4 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return cards.size();
     }
-
 }

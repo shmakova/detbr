@@ -3,7 +3,7 @@
     <string name="content">Hello</string>
     <string name="choose_your_school">Выбрать школу</string>
     <string name="search_title">Поиск</string>
-    <string name="search_hint">Поиск в интернете&#8230;</string>
+    <string name="search_hint">Поиск в интернете</string>
     <string name="url_key">url</string>
     <string name="go_to_yandex">Перейти на http://yandex.ru</string>
     <string name="home">Вернуться домой</string>
@@ -15,25 +15,25 @@
     <string name="like_content_description">Лайк</string>
     <string name="favourite_cards_title">Любимые карточки</string>
     <string name="category_cover">category cover</string>
-    <string name="action_voice_rec">Голосовой набор</string>
     <string name="unsafe_page">Небезопасная страница</string>
-    <string name="app_intro">Привет!</string>
-    <string name="first_intro_text">Узнай новое среди своей школы</string>
     <string name="choose_school">Выбрать школу</string>
     <string name="error_text">Ошибка! Нажмите здесь, чтобы повторить загрузку</string>
     <string name="remove_tab">Удалить вкладку</string>
     <string name="preview">Превью страницы</string>
     <string name="yandex_logo">Yandex Logo</string>
-    <string name="intro">first intro</string>
-    <string name="second_intro_text">Отмечай понравившиеся карточки и сайты, так больше школьников увидит их</string>
-    <string name="third_intro_text">Мы подготовили много интересного. Осталось узнать, где ты учишься</string>
     <string name="share">Поделись ссылкой с друзьями</string>
     <string name="favicon">favicon</string>
     <string name="icon">icon</string>
     <string name="favorite_cards">Здесь будут храниться любимые карточки</string>
-    <string name="find_interesting">Найти интересное</string>
     <string name="empty_favorites">Empty favorites</string>
     <string name="separator">›</string>
+    <string name="background">background</string>
+    <string name="intro_text">Браузер найдёт интересное</string>
+    <string name="start">Начать</string>
+    <string name="intro_description_first">Потяни влево, попробуй</string>
+    <string name="intro_title_first">Что интересно твоим друзьям?</string>
+    <string name="intro_title_second">Отмечай, что понравится</string>
+    <string name="intro_description_second">Тогда здесь будет больше интересного</string>
+    <string name="hand">hand</string>
     <string name="check_internet_connection">Проверьте интернет соединение</string>
-
 </resources>

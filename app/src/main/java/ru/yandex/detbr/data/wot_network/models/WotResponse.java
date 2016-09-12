@@ -22,6 +22,7 @@ public class WotResponse {
 
     public boolean isSafe() {
         return !childSafety.isEmpty() && childSafety.get(0) >= GOOD_REPUTATION &&
-                !trustworthiness.isEmpty() && trustworthiness.get(0) >= GOOD_REPUTATION;
+                !trustworthiness.isEmpty() && trustworthiness.get(0) >= GOOD_REPUTATION ||
+                trustworthiness.isEmpty() && childSafety.isEmpty();
     }
 }

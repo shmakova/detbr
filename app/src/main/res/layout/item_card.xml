@@ -6,6 +6,7 @@
     android:id="@+id/card"
     style="@style/Card"
     app:cardCornerRadius="15dp"
+    app:cardElevation="4dp"
     app:cardUseCompatPadding="true"
     tools:ignore="UnusedAttribute">
 
@@ -28,16 +29,16 @@
 
         <TextView
             android:id="@+id/description"
+            style="@style/CardDescriptionStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
-            android:layout_margin="16dp"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:textColor="@color/description_color"
-            android:textSize="18sp"/>
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textColor="@color/light_transparent"/>
 
-        <include layout="@layout/card_bottom_view"/>
+        <include layout="@layout/bottom_view_card"/>
 
     </RelativeLayout>
 </ru.yandex.detbr.ui.android_views.SquareCardView>
