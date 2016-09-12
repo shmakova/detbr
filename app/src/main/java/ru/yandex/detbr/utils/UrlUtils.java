@@ -71,11 +71,11 @@ public final class UrlUtils {
     }
 
     private static String removeSubdomains(String link) {
-        Pattern pattern = Pattern.compile("^(www\\.|m\\.)(.+)");
+        Pattern pattern = Pattern.compile("(.+\\.)?(www\\.|m\\.)(.+)");
         Matcher matcher = pattern.matcher(link);
 
         if (matcher.matches()) {
-            return matcher.group(2);
+            return matcher.group(3);
         } else {
             return link;
         }
