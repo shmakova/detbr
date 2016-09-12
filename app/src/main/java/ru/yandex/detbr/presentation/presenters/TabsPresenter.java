@@ -47,8 +47,8 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>>
         }
     }
 
-    public void removeTab(int position, Tab tab) {
-        removeTabFromDb(position, tab);
+    public void removeTab(Tab tab) {
+        removeTabFromDb(tab);
     }
 
     @Override
@@ -68,26 +68,12 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>>
         loadTabs(true);
     }
 
-    private void removeTabFromDb(int position, Tab tab) {
-        tabsManager
-                .removeTab(tab)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(deleteResult -> {
-                            tabsManager.updateTabs();
-                            if (isViewAttached()) {
-                                getView().notifyItemRemoved(position);
-                            }
-                        },
-                        throwable -> Timber.e("Error removing tab"),
-                        () -> Timber.e("Completed removing tab"));
-    }
-
     private void removeTabFromDb(Tab tab) {
         tabsManager
                 .removeTab(tab)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(deleteResult -> tabsManager.updateTabs(),
                         throwable -> Timber.e("Error removing tab"),
-                        () -> Timber.e("Completed removing tab"));
+                        () -> Timber.d("Completed removing tab"));
     }
 }

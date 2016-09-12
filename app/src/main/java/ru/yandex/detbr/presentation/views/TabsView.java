@@ -11,5 +11,4 @@ import ru.yandex.detbr.data.tabs.Tab;
  */
 
 public interface TabsView extends MvpLceView<List<Tab>> {
-    void notifyItemRemoved(int position);
 }
