@@ -70,10 +70,10 @@ public final class UrlUtils {
     }
 
     private static String removeWwwOrM(String link) {
-        Pattern p = Pattern.compile("^(www\\.|m\\.)(.+)");
+        Pattern p = Pattern.compile("(.+\\.)?(www\\.|m\\.)(.+)");
         Matcher m = p.matcher(link);
         if (m.matches()) {
-            return m.group(2);
+            return m.group(3);
         } else {
             return link;
         }
