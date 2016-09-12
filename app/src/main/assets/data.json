@@ -8,12 +8,61 @@
       "type": "plain_image"
     },
     {
+      "title": "Pokemon: смотреть все серии",
+      "url": "https://yandex.ru/video/search?text=покемоны&family=yes",
+      "site": "ЯНДЕКС.ВИДЕО",
+      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "category": "pokemon",
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
+      "title": "Невероятные оптические иллюзии от профессора математики",
+      "url": "https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/",
+      "site": "ЛАЙФХАКЕР",
+      "category": "science",
+      "type": "text"
+    },
+    {
+      "title": "Семь чудес Древнего мира",
+      "url": "http://www.putidorogi-nn.ru/7-chudes-sveta/501-sem-chudes-drevnego-mira",
+      "image": "http://www.putidorogi-nn.ru/images/stories/afrika/piramida_heopsa_2.jpg",
+      "site": "САЙТ ЗЕМЛИ",
+      "category": "science",
+      "type": "plain_image"
+    },
+    {
       "title": "Выбираем велосипед для подростка",
       "url": "https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet",
       "image": "https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg",
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
       "category": "bikes",
+      "type": "full_image",
+      "dark": true
+    },
+    {
+      "title": "Венера — мир невыносимой жары и вулканов",
+      "url": "http://saitzemli.ru/article/planeta-venera",
+      "image": "http://saitzemli.ru/imagesforsite/articles/venera/venera-planeta.jpg",
+      "site": "САЙТ ЗЕМЛИ",
+      "category": "science",
+      "type": "plain_image"
+    },
+    {
+      "title": "Покедекс",
+      "url": "http://www.pokemon.com/ru/pokedex/",
+      "image": "https://assets.vg247.com/current//2016/08/pkmn_pokedex.jpg",
+      "category": "pokemon",
+      "type": "plain_image"
+    },
+    {
+      "title": "Выбираем велосипед для подростка",
+      "url": "https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet",
+      "image": "https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg",
+      "site": "ЯНДЕКС.МАРКЕТ",
+      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "category": "sport",
       "type": "full_image",
       "dark": true
     },
@@ -26,26 +75,77 @@
       "type": "text"
     },
     {
+      "title": "Невероятные оптические иллюзии от профессора математики",
+      "url": "https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/",
+      "site": "ЛАЙФХАКЕР",
+      "category": "articles",
+      "type": "text"
+    },
+    {
+      "title": "О ЧИТАХ В POKEMON GO",
+      "url": "http://gopokemongo.ru/o-chitah-v-pokemon-go.html",
+      "image": "http://gopokemongo.ru/wp-content/uploads/2016/07/512x512bb.jpg",
+      "category": "pokemon",
+      "type": "plain_image"
+    },
+    {
+      "title": "На чем кататься летом",
+      "url": "https://market.yandex.ru/articles/na-chem-katatsja-letom?track=fr_325422_snippet",
+      "site": "ЯНДЕКС.МАРКЕТ",
+      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "category": "bikes",
+      "type": "text"
+    },
+    {
       "title": "Pokemon: смотреть все серии",
       "url": "https://yandex.ru/video/search?text=покемоны&family=yes",
-      "site": "ПОИСК В ЯНДЕКСЕ",
+      "site": "ЯНДЕКС.ВИДЕО",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
-      "category": "pokemon",
+      "category": "films",
       "color": "#ffdd55",
       "type": "text"
+    },
+    {
+      "title": "Невероятные оптические иллюзии от профессора математики",
+      "url": "https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/",
+      "site": "ЛАЙФХАКЕР",
+      "category": "articles",
+      "type": "text"
+    },
+    {
+      "title": "Неуловимый барханный кот появился на публике впервые за 10 лет",
+      "url": "https://www.adme.ru/zhizn-zhivotnye/neulovimyj-barhannyj-kot-poyavilsya-na-publike-vpervye-za-10-let-1339765/",
+      "site": "ADME",
+      "image": "https://files4.adme.ru/files/news/part_133/1339765/16452365-Depositphotos_31831607_original-1471343886-650-c845359d8c-1471344018.jpg",
+      "category": "articles",
+      "type": "plain_image"
+    },
+    {
+      "title": "15 крутых дизайнерских вещиц, с которыми жизнь станет приятнее",
+      "url": "https://www.adme.ru/tvorchestvo-dizajn/15-krutyh-dizajnerskih-veschic-s-kotorymi-zhizn-stanet-priyatnee-1152260/",
+      "site": "ADME",
+      "image": "https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg",
+      "category": "articles",
+      "type": "plain_image"
+    },
+    {
+      "title": "5 МИРОВЫХ РЕКОРДОВ POKEMON GO",
+      "url": "http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html",
+      "image": "http://gopokemongo.ru/wp-content/uploads/2016/08/pokemon-go-downloads-breaking-all-records.jpg",
+      "category": "pokemon",
+      "type": "plain_image"
     },
     {
       "title": "Покедекс",
       "url": "http://www.pokemon.com/ru/pokedex/",
       "image": "https://assets.vg247.com/current//2016/08/pkmn_pokedex.jpg",
-      "category": "pokemon",
+      "category": "games",
       "type": "plain_image"
     },
     {
       "title": "12-летняя девочка научилась танцевать только благодаря роликам в интернете",
       "url": "https://www.adme.ru/video/12-letnyaya-devochka-nauchilas-tancevat-tolko-blagodarya-rolikam-na-youtube-1209210/",
       "site": "ADME",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "articles",
       "type": "text"
     },
@@ -54,8 +154,56 @@
       "url": "https://www.adme.ru/zhizn-zhivotnye/esli-by-u-kotov-byli-cari-to-tolko-mejn-kuny-1339165/",
       "site": "ADME",
       "image": "https://scontent-ams3-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13714059_311271969205288_1183699015_n.jpg",
+      "category": "animals",
+      "type": "plain_image"
+    },
+    {
+      "title": "25 безумно милых штуковин, которые каждый захочет иметь в своем доме",
+      "url": "https://www.adme.ru/tvorchestvo-dizajn/30-bezumno-milyh-shtukovin-kotorye-kazhdyj-zahochet-imet-v-svoem-dome-945860/",
+      "site": "ADME",
+      "image": "https://files4.adme.ru/files/news/part_94/945860/preview-25651565-650x341-98-1471442066.jpg",
+      "category": "articles",
+      "type": "plain_image"
+    },
+    {
+      "title": "Такие разные горные велосипеды",
+      "url": "https://market.yandex.ru/articles/takie-raznye-gornye-velosipedy?track=fr_325422_snippet",
+      "site": "ЯНДЕКС.МАРКЕТ",
+      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "category": "bikes",
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
+      "title": "Официальный сайт Pokemon",
+      "url": "http://www.pokemon.com/ru/",
+      "image": "http://assets.pokemon.com/assets/cms2-ru-ru/img/video-games/_tiles/pokemon-sun-moon/08192016/pokemon-sun-moon-169-en.jpg",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "Знакомьтесь, это Самсон — самый большой и обаятельный кот на планете",
+      "url": "https://www.adme.ru/zhizn-zhivotnye/znakomtes-eto-samson-samyj-bolshoj-i-obayatelnyj-kot-na-planete-1342865/",
+      "site": "ADME",
+      "image": "https://files6.adme.ru/files/news/part_134/1342865/preview-16588565-650x341-98-1471705379.jpg",
       "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "animals",
+      "type": "plain_image"
+    },
+    {
+      "title": "Неуловимый барханный кот появился на публике впервые за 10 лет",
+      "url": "https://www.adme.ru/zhizn-zhivotnye/neulovimyj-barhannyj-kot-poyavilsya-na-publike-vpervye-za-10-let-1339765/",
+      "site": "ADME",
+      "image": "https://files4.adme.ru/files/news/part_133/1339765/16452365-Depositphotos_31831607_original-1471343886-650-c845359d8c-1471344018.jpg",
+      "category": "animals",
+      "type": "plain_image"
+    },
+    {
+      "title": "Если бы у котов были цари, то только мейн-куны",
+      "url": "https://www.adme.ru/zhizn-zhivotnye/esli-by-u-kotov-byli-cari-to-tolko-mejn-kuny-1339165/",
+      "site": "ADME",
+      "image": "https://scontent-ams3-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13714059_311271969205288_1183699015_n.jpg",
+      "category": "articles",
       "type": "plain_image"
     },
     {
@@ -67,37 +215,68 @@
       "type": "text"
     },
     {
+      "title": "Почему люди не видели синий цвет до недавнего времени",
+      "url": "https://lifehacker.ru/2015/06/13/blue/",
+      "site": "ЛАЙФХАКЕР",
+      "category": "articles",
+      "type": "text"
+    },
+    {
+      "title": "Поймай волну. Советы серфингиста",
+      "url": "https://market.yandex.ru/articles/pojmaj-volnu-sovety-serfingista?track=fr_325422_snippet",
+      "site": "ЯНДЕКС.МАРКЕТ",
+      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "category": "articles",
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
+      "title": "Мини-игры Pokemon",
+      "url": "http://www.pokemon.com/ru/pokemon-online-games/",
+      "site": "POKEMON.COM",
+      "image": "http://assets.pokemon.com/assets/cms2-ru-ru/img/play-games/_tiles/delphox-fiery-escape/delphox-fiery-escape-gallery-feature.jpg",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "Лонгборд Penny Original 22\"",
+      "url": "https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls",
+      "image": "https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg",
+      "site": "ЯНДЕКС.МАРКЕТ",
+      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "category": "goods",
+      "type": "full_image"
+    },
+    {
       "title": "Большой и добрый великан",
       "url": "https://www.kinopoisk.ru/film/840885",
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/840885.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
       "type": "full_image",
       "dark": true
-
     },
     {
       "title": "15 крутых дизайнерских вещиц, с которыми жизнь станет приятнее",
       "url": "https://www.adme.ru/tvorchestvo-dizajn/15-krutyh-dizajnerskih-veschic-s-kotorymi-zhizn-stanet-priyatnee-1152260/",
       "site": "ADME",
       "image": "https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "goods",
-      "type": "plain_image"
-    },
-    {
-      "title": "Породы собак с фото",
-      "url": "http://www.zoopicture.ru/porody-sobak/",
-      "image": "http://www.zoopicture.ru/assets/2011/08/4709599221_d1b4bba298.jpg",
-      "category": "animals",
       "type": "plain_image"
     },
     {
       "title": "5 МИРОВЫХ РЕКОРДОВ POKEMON GO",
       "url": "http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html",
       "image": "http://gopokemongo.ru/wp-content/uploads/2016/08/pokemon-go-downloads-breaking-all-records.jpg",
-      "category": "pokemon",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "Ассортимент LEGO Star Wars",
+      "url": "http://www.lego.com/ru-ru/starwars/products?icmp=CORU36HomeWNStarWarsRogueOne#/episode-i-vi",
+      "image": "http://cache.lego.com/r/www/r/starwars/-/media/franchises/starwars2015/banners%20for%20all%20sections/2016%202hy/rogue_1_banner_products.jpg?l.r2=-548408727",
+      "site": "LEGO.COM",
+      "category": "games",
       "type": "plain_image"
     },
     {
@@ -105,14 +284,21 @@
       "url": "https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/",
       "site": "ADME",
       "image": "https://files3.adme.ru/files/news/part_129/1299765/10455565-810-1000-53c212670e-1470661968.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
+      "category": "articles",
+      "type": "plain_image"
+    },
+    {
+      "title": "Семь чудес Древнего мира",
+      "url": "http://www.putidorogi-nn.ru/7-chudes-sveta/501-sem-chudes-drevnego-mira",
+      "image": "http://www.putidorogi-nn.ru/images/stories/afrika/piramida_heopsa_2.jpg",
+      "site": "САЙТ ЗЕМЛИ",
       "category": "articles",
       "type": "plain_image"
     },
     {
       "title": "Смотреть Смешарики Пин Код",
       "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
-      "site": "ПОИСК В ЯНДЕКСЕ",
+      "site": "ЯНДЕКС.ВИДЕО",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
       "category": "films",
       "color": "#ffdd55",
@@ -123,8 +309,7 @@
       "url": "https://www.adme.ru/zhizn-zhivotnye/neulovimyj-barhannyj-kot-poyavilsya-na-publike-vpervye-za-10-let-1339765/",
       "site": "ADME",
       "image": "https://files4.adme.ru/files/news/part_133/1339765/16452365-Depositphotos_31831607_original-1471343886-650-c845359d8c-1471344018.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
-      "category": "animals",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -135,12 +320,42 @@
       "type": "plain_image"
     },
     {
+      "title": "15 котов, которых жизнь завела в тупик",
+      "url": "https://www.adme.ru/zhizn-zhivotnye/20-kotov-kotoryh-zhizn-zavela-v-tupik-865660/",
+      "site": "ADME",
+      "image": "https://files1.adme.ru/files/news/part_86/865660/preview-25648715-650x341-98-1471427559.jpg",
+      "category": "animals",
+      "type": "plain_image"
+    },
+    {
       "title": "Такие разные горные велосипеды",
       "url": "https://market.yandex.ru/articles/takie-raznye-gornye-velosipedy?track=fr_325422_snippet",
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
-      "category": "bikes",
+      "category": "sport",
       "color": "#ffdd55",
+      "type": "text"
+    },
+    {
+      "title": "Плетем косы: 3 классных и несложных варианта",
+      "url": "http://www.devchat.ru/my-style/fashion-and-accessories/article/how-to-weave-braids",
+      "image": "http://cdn.multibrand2.pgsitecore.com/ru-RU/-/media/BeingGirl/BeingGirl-RU/Images/Articles/Primary/pletem--kosi-prim.jpg?h=360&w=650&v=1-201606211352&crop=1&sc=1",
+      "site": "ДЕВЧАТ",
+      "category": "goods",
+      "type": "plain_image"
+    },
+    {
+      "title": "15 необычных школ, круче которых только Хогвартс",
+      "url": "https://www.adme.ru/svoboda-kultura/15-neobychnyh-shkol-kruche-kotoryh-tolko-hogvarts-1340565/",
+      "site": "ADME",
+      "image": "https://files5.adme.ru/files/news/part_134/1340565/16480315-makoko-floating-school-1471412588-650-ebd53dd6a2-1471423910.jpg",
+      "category": "articles",
+      "type": "plain_image"
+    },
+    {
+      "title": "Логические задачи",
+      "url": "http://lprobs.ru/section136.p0.html",
+      "category": "science",
       "type": "text"
     },
     {
@@ -160,11 +375,18 @@
       "type": "plain_image"
     },
     {
+      "title": "Мини-игры Pokemon",
+      "url": "http://www.pokemon.com/ru/pokemon-online-games/",
+      "site": "POKEMON.COM",
+      "image": "http://assets.pokemon.com/assets/cms2-ru-ru/img/play-games/_tiles/delphox-fiery-escape/delphox-fiery-escape-gallery-feature.jpg",
+      "category": "pokemon",
+      "type": "plain_image"
+    },
+    {
       "title": "25 безумно милых штуковин, которые каждый захочет иметь в своем доме",
       "url": "https://www.adme.ru/tvorchestvo-dizajn/30-bezumno-milyh-shtukovin-kotorye-kazhdyj-zahochet-imet-v-svoem-dome-945860/",
       "site": "ADME",
       "image": "https://files4.adme.ru/files/news/part_94/945860/preview-25651565-650x341-98-1471442066.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "goods",
       "type": "plain_image"
     },
@@ -173,22 +395,44 @@
       "url": "https://www.adme.ru/zhizn-zhivotnye/znakomtes-eto-samson-samyj-bolshoj-i-obayatelnyj-kot-na-planete-1342865/",
       "site": "ADME",
       "image": "https://files6.adme.ru/files/news/part_134/1342865/preview-16588565-650x341-98-1471705379.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
-      "category": "animals",
+      "category": "articles",
       "type": "plain_image"
     },
     {
       "title": "О ЧИТАХ В POKEMON GO",
       "url": "http://gopokemongo.ru/o-chitah-v-pokemon-go.html",
       "image": "http://gopokemongo.ru/wp-content/uploads/2016/07/512x512bb.jpg",
-      "category": "pokemon",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "Марс — загадочная красная планета",
+      "url": "http://saitzemli.ru/article/planeta-mars",
+      "image": "http://saitzemli.ru/imagesforsite/articles/Mars/mars.jpg",
+      "site": "САЙТ ЗЕМЛИ",
+      "category": "articles",
+      "type": "plain_image"
+    },
+    {
+      "title": "15 необычных школ, круче которых только Хогвартс",
+      "url": "https://www.adme.ru/svoboda-kultura/15-neobychnyh-shkol-kruche-kotoryh-tolko-hogvarts-1340565/",
+      "site": "ADME",
+      "image": "https://files5.adme.ru/files/news/part_134/1340565/16480315-makoko-floating-school-1471412588-650-ebd53dd6a2-1471423910.jpg",
+      "category": "science",
+      "type": "plain_image"
+    },
+    {
+      "title": "Как сделать воздушного змея из обыкновенного пакета",
+      "url": "https://www.adme.ru/svoboda-sdelaj-sam/kak-sdelat-vozdushnogo-zmeya-iz-obyknovennogo-paketa-1341715/",
+      "site": "ADME",
+      "image": "https://files1.adme.ru/files/news/part_134/1341715/16526515-9-1471430969-1000-7df9e3be11-1471511196.jpg",
+      "category": "goods",
       "type": "plain_image"
     },
     {
       "title": "Тест: Правильно ли вы произносите названия известных брендов?",
       "url": "https://www.adme.ru/tvorchestvo-dizajn/test-pravilno-li-vy-proiznosite-nazvaniya-izvestnyh-brendov-1081510/",
       "site": "ADME",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "goods",
       "type": "text"
     },
@@ -199,12 +443,27 @@
       "type": "text"
     },
     {
+      "title": "People Work - Song",
+      "url": "http://learnenglishkids.britishcouncil.org/en/songs/people-work",
+      "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_efd626b1_v1.jpg",
+      "site": "LearnEnglish Kids",
+      "category": "science",
+      "type": "plain_image"
+    },
+    {
       "title": "10 иллюстраций о том, каким видят мир творческие люди",
       "url": "https://www.adme.ru/tvorchestvo-hudozhniki/10-illyustracij-o-tom-kakim-vidyat-mir-tvorcheskie-lyudi-1316415/",
       "site": "ADME",
       "image": "https://files8.adme.ru/files/news/part_131/1316415/12235715-6-1469455007-650-1ccd54f71a-1-1469456115.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "articles",
+      "type": "plain_image"
+    },
+    {
+      "title": "Универсум - Телеканал Карусель",
+      "url": "http://www.karusel-tv.ru/video/16704",
+      "image": "http://im.karusel-tv.ru/logo/autumn-6.png",
+      "site": "Карусель-ТВ",
+      "category": "films",
       "type": "plain_image"
     },
     {
@@ -225,8 +484,7 @@
       "url": "https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/",
       "site": "ADME",
       "image": "https://files3.adme.ru/files/news/part_129/1299765/10455565-810-1000-53c212670e-1470661968.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
-      "category": "articles",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -234,7 +492,6 @@
       "url": "https://www.kinopoisk.ru/film/723988",
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/723988.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
       "type": "full_image",
       "dark": true
@@ -243,7 +500,6 @@
       "title": "Тест: Сможете ли вы узнать логотипы известных брендов?",
       "url": "https://www.adme.ru/tvorchestvo-reklama/test-smozhete-li-vy-uznat-logotipy-izvestnyh-brendov-1302515/",
       "site": "ADME",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "goods",
       "type": "text"
     },
@@ -256,24 +512,40 @@
       "type": "text"
     },
     {
+      "title": "hello перевод на русский (с англ.) алло!, привет!",
+      "url": "https://translate.yandex.ru/m/translate?lang=en-ru&text=hello&family=yes",
+      "site": "ЯНДЕКС.ПЕРЕВОДЧИК",
+      "favicon": "https://translate.yandex.net/main/v2.111.1472810626/i/favicon.png",
+      "category": "science",
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
       "title": "Правила игры «Мафия»",
       "url": "https://bosichkom.com/игры-для-детей/мафия",
       "category": "games",
       "type": "text"
     },
     {
+      "title": "Как сделать воздушного змея из обыкновенного пакета",
+      "url": "https://www.adme.ru/svoboda-sdelaj-sam/kak-sdelat-vozdushnogo-zmeya-iz-obyknovennogo-paketa-1341715/",
+      "site": "ADME",
+      "image": "https://files1.adme.ru/files/news/part_134/1341715/16526515-9-1471430969-1000-7df9e3be11-1471511196.jpg",
+      "category": "articles",
+      "type": "plain_image"
+    },
+    {
       "title": "Посмотрите, как живут настоящие принцессы ХХI века",
       "url": "https://www.adme.ru/zhizn-semya/posmotrite-kak-zhivut-nastoyaschie-princessy-hhi-veka-1342215/",
       "site": "ADME",
       "image": "https://files3.adme.ru/files/news/part_134/1342215/16567965-01-good-1471536155-1000-a8984c6e3f-1-1471602691.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
       "category": "articles",
       "type": "plain_image"
     },
     {
       "title": "Логические задачи",
       "url": "http://lprobs.ru/section136.p0.html",
-      "category": "science",
+      "category": "school",
       "type": "text"
     },
     {
@@ -281,7 +553,6 @@
       "url": "https://www.kinopoisk.ru/film/818145",
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/818145.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
       "type": "full_image",
       "dark": true
@@ -291,8 +562,7 @@
       "url": "https://www.adme.ru/zhizn-zhivotnye/20-kotov-kotoryh-zhizn-zavela-v-tupik-865660/",
       "site": "ADME",
       "image": "https://files1.adme.ru/files/news/part_86/865660/preview-25648715-650x341-98-1471427559.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
-      "category": "animals",
+      "category": "articles",
       "type": "plain_image"
     },
     {
@@ -303,27 +573,51 @@
       "type": "plain_image"
     },
     {
+      "title": "Смотреть Смешарики Пин Код",
+      "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
+      "site": "ЯНДЕКС.ВИДЕО",
+      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "category": "school",
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
+      "title": "Турнир Стихий - Видео LEGO Ninjago",
+      "url": "http://www.lego.com/ru-ru/ninjago/videos/tournament-of-elements-980cc199eab24fdabd13d40840c40d70",
+      "image": "https://i.ytimg.com/vi/4wMyOuqD-ts/maxresdefault.jpg",
+      "site": "LEGO.COM",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
       "title": "Как сделать воздушного змея из обыкновенного пакета",
       "url": "https://www.adme.ru/svoboda-sdelaj-sam/kak-sdelat-vozdushnogo-zmeya-iz-obyknovennogo-paketa-1341715/",
       "site": "ADME",
       "image": "https://files1.adme.ru/files/news/part_134/1341715/16526515-9-1471430969-1000-7df9e3be11-1471511196.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
-      "category": "articles",
+      "category": "school",
       "type": "plain_image"
     },
     {
       "title": "20 ошибок в английском языке, которые делает каждый из нас",
       "url": "https://lifehacker.ru/2014/04/22/20-oshibok-v-anglijskom-yazyke-kotorye-delaet-kazhdyj-iz-nas/",
       "site": "ЛАЙФХАКЕР",
-      "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
       "category": "science",
       "type": "text"
     },
     {
+      "title": "Антистресс игрушка своими руками",
+      "url": "http://www.rukikryki.ru/podelki/igrushki/3584-antistress-igrushka-svoimi-rukami.html",
+      "image": "http://www.rukikryki.ru/uploads/posts/2015-01/thumbs/1420444953_antistress-igrushka-svoimi-rukami-1.jpg",
+      "site": "RukiKryki.ru",
+      "category": "goods",
+      "type": "plain_image"
+    },
+    {
       "title": "Мини-игры Pokemon",
       "url": "http://www.pokemon.com/ru/pokemon-online-games/",
+      "site": "POKEMON.COM",
       "image": "http://assets.pokemon.com/assets/cms2-ru-ru/img/play-games/_tiles/delphox-fiery-escape/delphox-fiery-escape-gallery-feature.jpg",
-      "category": "games",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -331,7 +625,6 @@
       "url": "https://www.kinopoisk.ru/film/770631",
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/770631.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
       "type": "full_image",
       "dark": true
@@ -340,9 +633,17 @@
       "title": "Невероятные оптические иллюзии от профессора математики",
       "url": "https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/",
       "site": "ЛАЙФХАКЕР",
-      "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
-      "category": "science",
+      "category": "school",
       "type": "text"
+    },
+    {
+      "title": "Тайная жизнь домашних животных",
+      "url": "https://www.kinopoisk.ru/film/743088",
+      "site": "КИНОПОИСК",
+      "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
+      "category": "school",
+      "type": "full_image",
+      "dark": true
     },
     {
       "title": "Яндекс.Рефераты",
@@ -354,19 +655,9 @@
       "type": "text"
     },
     {
-      "title": "Варкрафт",
-      "url": "https://www.kinopoisk.ru/film/277328",
-      "site": "КИНОПОИСК",
-      "image": "https://www.kinopoisk.ru/images/film_big/277328.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
-      "category": "films",
-      "type": "full_image",
-      "dark": true
-    },
-    {
       "title": "Смотреть Гравити Фолз",
       "url": "https://yandex.ru/video/search?text=гравити%20фолз&family=yes",
-      "site": "ПОИСК В ЯНДЕКСЕ",
+      "site": "ЯНДЕКС.ВИДЕО",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
       "category": "films",
       "color": "#ffdd55",
@@ -378,7 +669,6 @@
       "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Napoleon_Paul_Delaroche.jpg/280px-Napoleon_Paul_Delaroche.jpg",
       "description": "Великий полководец и государственный деятель, заложивший основы современного французского государства.",
       "site": "ВИКИПЕДИЯ",
-      "favicon": "https://ru.m.wikipedia.org/static/apple-touch/wikipedia.png",
       "category": "science",
       "type": "full_image",
       "dark": true
@@ -387,7 +677,6 @@
       "title": "Почему люди не видели синий цвет до недавнего времени",
       "url": "https://lifehacker.ru/2015/06/13/blue/",
       "site": "ЛАЙФХАКЕР",
-      "favicon": "https://lifehacker.ru/wp-content/themes/lifehacker/static/img/favicon.png",
       "category": "science",
       "type": "text"
     },
@@ -397,7 +686,7 @@
       "image": "https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg",
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
-      "category": "goods",
+      "category": "school",
       "type": "full_image"
     },
     {
@@ -405,7 +694,6 @@
       "url": "https://www.kinopoisk.ru/film/692957",
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/692957.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
       "type": "full_image",
       "dark": true
@@ -413,6 +701,7 @@
     {
       "title": "Блоги Minecraft",
       "url": "http://www.playground.ru/blogs/minecraft/",
+      "site": "PLAYGROUND.RU",
       "image": "http://i.playground.ru/i/91/30/12/00/blog/content/eutr074m.700xauto.jpg",
       "category": "games",
       "type": "plain_image"
@@ -432,8 +721,7 @@
       "url": "https://www.adme.ru/svoboda-kultura/15-neobychnyh-shkol-kruche-kotoryh-tolko-hogvarts-1340565/",
       "site": "ADME",
       "image": "https://files5.adme.ru/files/news/part_134/1340565/16480315-makoko-floating-school-1471412588-650-ebd53dd6a2-1471423910.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
-      "category": "science",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -441,7 +729,6 @@
       "url": "https://www.kinopoisk.ru/film/814016",
       "site": "КИНОПОИСК",
       "image": "https://www.kinopoisk.ru/images/film_big/814016.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
       "category": "films",
       "type": "full_image",
       "dark": true
@@ -456,16 +743,6 @@
       "type": "text"
     },
     {
-      "title": "Тайная жизнь домашних животных",
-      "url": "https://www.kinopoisk.ru/film/743088",
-      "site": "КИНОПОИСК",
-      "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
-      "favicon": "https://st.kp.yandex.net/images/icons/favicon_16x16.png",
-      "category": "school",
-      "type": "full_image",
-      "dark": true
-    },
-    {
       "title": "Марс — загадочная красная планета",
       "url": "http://saitzemli.ru/article/planeta-mars",
       "image": "http://saitzemli.ru/imagesforsite/articles/Mars/mars.jpg",
@@ -474,11 +751,28 @@
       "type": "plain_image"
     },
     {
+      "title": "Исследуй LEGO Nexo Knights",
+      "url": "http://www.lego.com/ru-ru/nexoknights/explorepage/explore-entertainment-room",
+      "image": "http://cache.lego.com/r/www/r/nexoknights/-/media/franchises/nexoknights/explorerpages/explorerpage01/invention%20lab/robin_presenting__720x720.png?l.r2=-659267782",
+      "site": "LEGO.COM",
+      "category": "games",
+      "type": "plain_image"
+    },
+    {
+      "title": "Тайная жизнь домашних животных",
+      "url": "https://www.kinopoisk.ru/film/743088",
+      "site": "КИНОПОИСК",
+      "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
+      "category": "films",
+      "type": "full_image",
+      "dark": true
+    },
+    {
       "title": "Венера — мир невыносимой жары и вулканов",
       "url": "http://saitzemli.ru/article/planeta-venera",
       "image": "http://saitzemli.ru/imagesforsite/articles/venera/venera-planeta.jpg",
       "site": "САЙТ ЗЕМЛИ",
-      "category": "science",
+      "category": "articles",
       "type": "plain_image"
     },
     {
@@ -486,7 +780,7 @@
       "url": "http://www.putidorogi-nn.ru/7-chudes-sveta/501-sem-chudes-drevnego-mira",
       "image": "http://www.putidorogi-nn.ru/images/stories/afrika/piramida_heopsa_2.jpg",
       "site": "САЙТ ЗЕМЛИ",
-      "category": "science",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -494,7 +788,7 @@
       "url": "http://www.devchat.ru/my-style/fashion-and-accessories/article/how-to-weave-braids",
       "image": "http://cdn.multibrand2.pgsitecore.com/ru-RU/-/media/BeingGirl/BeingGirl-RU/Images/Articles/Primary/pletem--kosi-prim.jpg?h=360&w=650&v=1-201606211352&crop=1&sc=1",
       "site": "ДЕВЧАТ",
-      "category": "goods",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -522,27 +816,11 @@
       "type": "plain_image"
     },
     {
-      "title": "Исследуй LEGO Nexo Knights",
-      "url": "http://www.lego.com/ru-ru/nexoknights/explorepage/explore-entertainment-room",
-      "image": "http://cache.lego.com/r/www/r/nexoknights/-/media/franchises/nexoknights/explorerpages/explorerpage01/invention%20lab/robin_presenting__720x720.png?l.r2=-659267782",
-      "site": "LEGO.COM",
-      "category": "games",
-      "type": "plain_image"
-    },
-    {
-      "title": "Турнир Стихий - Видео LEGO Ninjago",
-      "url": "http://www.lego.com/ru-ru/ninjago/videos/tournament-of-elements-980cc199eab24fdabd13d40840c40d70",
-      "image": "https://i.ytimg.com/vi/4wMyOuqD-ts/maxresdefault.jpg",
-      "site": "LEGO.COM",
-      "category": "games",
-      "type": "plain_image"
-    },
-    {
       "title": "Универсум - Телеканал Карусель",
       "url": "http://www.karusel-tv.ru/video/16704",
       "image": "http://im.karusel-tv.ru/logo/autumn-6.png",
       "site": "Карусель-ТВ",
-      "category": "films",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -566,7 +844,7 @@
       "url": "http://learnenglishkids.britishcouncil.org/en/songs/people-work",
       "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_efd626b1_v1.jpg",
       "site": "LearnEnglish Kids",
-      "category": "science",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -574,7 +852,7 @@
       "url": "http://www.rukikryki.ru/podelki/igrushki/3584-antistress-igrushka-svoimi-rukami.html",
       "image": "http://www.rukikryki.ru/uploads/posts/2015-01/thumbs/1420444953_antistress-igrushka-svoimi-rukami-1.jpg",
       "site": "RukiKryki.ru",
-      "category": "goods",
+      "category": "school",
       "type": "plain_image"
     }
   ],

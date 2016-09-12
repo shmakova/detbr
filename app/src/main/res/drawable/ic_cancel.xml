@@ -26,8 +26,8 @@
                 android:color="@color/white"/>
 
             <size
-                android:width="48dp"
-                android:height="48dp"/>
+                android:width="56dp"
+                android:height="56dp"/>
         </shape>
     </item>
 

@@ -15,7 +15,7 @@ public interface MainView extends MvpView {
 
     void showSearchView();
 
-    void showSpeechRecognizer();
-
     void changeBackgroundColor(int color);
+
+    void selectTabAtPosition(int position);
 }

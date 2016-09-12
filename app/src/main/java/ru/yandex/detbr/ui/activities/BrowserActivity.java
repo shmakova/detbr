@@ -30,6 +30,7 @@ import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.di.components.BrowserComponent;
 import ru.yandex.detbr.di.modules.BrowserModule;
+import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.presenters.BrowserPresenter;
 import ru.yandex.detbr.presentation.views.BrowserView;
 
@@ -49,6 +50,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     TextView browserHost;
     @BindView(R.id.browser_title)
     TextView browserTitle;
+    @BindView(R.id.separator)
+    View separator;
 
     @Nullable
     private UrlListener listener;
@@ -192,9 +195,6 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void close() {
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
         finish();
     }
 
@@ -204,12 +204,27 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
+    public void openTabs() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra(NavigationManager.TAB_KEY, NavigationManager.TABS_TAB_POSITION);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
     public void setOnUrlListener(UrlListener listener) {
         this.listener = listener;
     }
 
     @Override
     public void showSearchText(@Nullable String title, @NonNull String host) {
+        if (title == null || title.isEmpty() || host.isEmpty()) {
+            separator.setVisibility(View.GONE);
+        } else {
+            separator.setVisibility(View.VISIBLE);
+        }
+
         browserTitle.setText(title);
         browserHost.setText(host);
     }
@@ -228,10 +243,10 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     public void setLike(boolean like) {
         if (like) {
             fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                    R.drawable.ic_favorite_red_24dp, null));
+                    R.drawable.ic_like_fill, null));
         } else {
             fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                    R.drawable.ic_favorite_border_24dp, null));
+                    R.drawable.ic_like_black_border, null));
         }
     }
 
@@ -251,7 +266,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
                 onBackPressed();
                 return true;
             case R.id.tabs_page:
-                presenter.onHomeClicked();
+                presenter.onTabsClicked();
                 return true;
             case R.id.share:
                 share();

@@ -37,6 +37,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final CardsRepository cardsRepository;
     private Subscription subscription;
+    private String currentUrl;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
@@ -47,6 +48,10 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
         this.likeManager = likeManager;
+    }
+
+    public void onTabsClicked() {
+        getView().openTabs();
     }
 
     private interface UrlCheckListener {
@@ -155,6 +160,11 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (currentUrl != null && currentUrl.equals(url)) {
+                view.goBack();
+                return true;
+            }
+
             String safeUrl = url;
 
             if (url.contains(UrlUtils.GOOGLE_URL) &&
@@ -168,6 +178,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             }
 
             loadUrl(safeUrl);
+            currentUrl = safeUrl;
             return true;
         }
 

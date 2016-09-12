@@ -1,6 +1,5 @@
 package ru.yandex.detbr.managers;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
@@ -9,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
+import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.IntroFragment;
@@ -19,16 +19,15 @@ import ru.yandex.detbr.ui.fragments.TabsFragment;
  */
 
 public class NavigationManager {
+    public final static String TAB_KEY = "TAB_KEY";
+    public final static int CARDS_TAB_POSITION = 0;
+    public final static int FAVORITE_TAB_POSITION = 1;
+    public final static int TABS_TAB_POSITION = 2;
 
-    private NavigationListener listener;
     private FragmentManager fragmentManager;
-    private Activity activity;
+    private MainActivity activity;
 
-    public interface NavigationListener {
-        void onNavigationBack();
-    }
-
-    public void init(FragmentManager fragmentManager, Activity activity) {
+    public void init(FragmentManager fragmentManager, MainActivity activity) {
         this.fragmentManager = fragmentManager;
         this.activity = activity;
     }
@@ -51,14 +50,6 @@ public class NavigationManager {
     }
 
 
-    public void navigateBack(Activity activity) {
-        if (fragmentManager.getBackStackEntryCount() == 1) {
-            activity.finish();
-        } else {
-            fragmentManager.popBackStackImmediate();
-        }
-    }
-
     public void openBrowser(String url) {
         Intent intent = new Intent(activity, BrowserActivity.class);
         intent.setData(Uri.parse(url));
@@ -80,27 +71,5 @@ public class NavigationManager {
 
     public void openIntro() {
         openAsRoot(new IntroFragment());
-    }
-
-    public void onBackPressed() {
-        if (listener != null) {
-            listener.onNavigationBack();
-        }
-    }
-
-    public void finish(Activity activity) {
-        activity.finish();
-    }
-
-    public boolean isRootFragmentVisible() {
-        return fragmentManager.getBackStackEntryCount() <= 1;
-    }
-
-    public NavigationListener getNavigationListener() {
-        return listener;
-    }
-
-    public void setNavigationListener(NavigationListener listener) {
-        this.listener = listener;
     }
 }

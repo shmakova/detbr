@@ -13,7 +13,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/intro"
+        android:contentDescription="@string/choose_your_school"
         android:src="@drawable/schools_pic"
         tools:ignore="UnusedAttribute"/>
 

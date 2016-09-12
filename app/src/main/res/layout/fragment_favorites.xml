@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:layout_marginBottom="4dp"
-              android:layout_marginTop="56dp"
+              android:layout_marginRight="16dp"
+              android:layout_marginLeft="16dp"
+              android:layout_marginTop="96dp"
               android:orientation="vertical">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:letterSpacing="0.037"
-        android:text="@string/favourite_cards_title"
-        android:textAllCaps="true"
-        android:textSize="14sp"
-        tools:ignore="UnusedAttribute"/>
 
     <include layout="@layout/empty_favorites"/>
 

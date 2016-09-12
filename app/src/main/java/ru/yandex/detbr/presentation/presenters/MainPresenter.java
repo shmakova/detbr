@@ -36,14 +36,24 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         this.sharedPreferences = sharedPreferences;
     }
 
-    public void onFirstLoad() {
-        openCards();
-        boolean isFirstStart = sharedPreferences.getBoolean(FIRST_START, true);
-
-        if (isFirstStart) {
-            openIntro();
-        } else {
+    public void onFirstLoad(int tabId) {
+        if (tabId == -1) {
             openCards();
+            boolean isFirstStart = sharedPreferences.getBoolean(FIRST_START, true);
+
+            if (isFirstStart) {
+                openIntro();
+            } else {
+                openCards();
+            }
+        } else {
+            if (tabId == NavigationManager.TABS_TAB_POSITION) {
+                openTabs();
+
+                if (isViewAttached()) {
+                    getView().selectTabAtPosition(NavigationManager.TABS_TAB_POSITION);
+                }
+            }
         }
     }
 
@@ -93,11 +103,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         }
     }
 
-    public void onActionMenuItemSelected(@IdRes int id) {
-        if (id == R.id.action_voice_rec && isViewAttached()) {
-            getView().showSpeechRecognizer();
-        }
-    }
 
     public void onSearchAction(String currentQuery) {
         navigationManager.openBrowser(currentQuery);
