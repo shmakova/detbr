@@ -9,7 +9,9 @@ import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.views.TabsView;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
+import timber.log.Timber;
 
 /**
  * Created by shmakova on 29.08.16.
@@ -40,13 +42,13 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>>
             compositeSubscription.add(
                     positionClicks.subscribe(tab -> {
                         navigationManager.openBrowser(tab.getUrl());
-                        tabsManager.removeTab(tab);
+                        removeTabFromDb(tab);
                     }));
         }
     }
 
-    public void removeTab(Tab tab) {
-        tabsManager.removeTab(tab);
+    public void removeTab(int position, Tab tab) {
+        removeTabFromDb(position, tab);
     }
 
     @Override
@@ -64,5 +66,28 @@ public class TabsPresenter extends BaseRxPresenter<TabsView, List<Tab>>
     @Override
     public void onTabsChange() {
         loadTabs(true);
+    }
+
+    private void removeTabFromDb(int position, Tab tab) {
+        tabsManager
+                .removeTab(tab)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(deleteResult -> {
+                            tabsManager.updateTabs();
+                            if (isViewAttached()) {
+                                getView().notifyItemRemoved(position);
+                            }
+                        },
+                        throwable -> Timber.e("Error removing tab"),
+                        () -> Timber.e("Completed removing tab"));
+    }
+
+    private void removeTabFromDb(Tab tab) {
+        tabsManager
+                .removeTab(tab)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(deleteResult -> tabsManager.updateTabs(),
+                        throwable -> Timber.e("Error removing tab"),
+                        () -> Timber.e("Completed removing tab"));
     }
 }

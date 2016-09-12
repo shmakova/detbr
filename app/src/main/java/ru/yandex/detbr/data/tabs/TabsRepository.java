@@ -1,5 +1,6 @@
 package ru.yandex.detbr.data.tabs;
 
+import com.pushtorefresh.storio.sqlite.operations.delete.DeleteResult;
 import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface TabsRepository {
 
     Observable<PutResult> addTab(Tab tab);
 
-    void removeTab(Tab tab);
+    Observable<DeleteResult> removeTab(Tab tab);
 
-    void removeLastTab();
+    Observable<Object> removeLastTab();
 }

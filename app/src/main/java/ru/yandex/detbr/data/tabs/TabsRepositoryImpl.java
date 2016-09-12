@@ -1,6 +1,7 @@
 package ru.yandex.detbr.data.tabs;
 
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
+import com.pushtorefresh.storio.sqlite.operations.delete.DeleteResult;
 import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
 import com.pushtorefresh.storio.sqlite.queries.Query;
 import com.pushtorefresh.storio.sqlite.queries.RawQuery;
@@ -41,31 +42,30 @@ public class TabsRepositoryImpl implements TabsRepository {
                 .put()
                 .object(tab)
                 .prepare()
-                .asRxObservable();
+                .asRxObservable()
+                .first();
     }
 
     @Override
-    public void removeTab(Tab tab) {
-        // TODO make not on main thread
-        storIOSQLite
+    public Observable<DeleteResult> removeTab(Tab tab) {
+        return storIOSQLite
                 .delete()
                 .object(tab)
                 .prepare()
-                .executeAsBlocking();
+                .asRxObservable()
+                .first();
     }
 
     @Override
-    public void removeLastTab() {
-        Thread thread = new Thread(() -> {
-            storIOSQLite
-                    .executeSQL()
-                    .withQuery(RawQuery.builder()
-                            .query("DELETE FROM " + TabsTable.TABLE + " WHERE " + TabsTable.COLUMN_ID + " = "
-                                    + "(SELECT MAX(" + TabsTable.COLUMN_ID + ") FROM " + TabsTable.TABLE + ")")
-                            .build())
-                    .prepare()
-                    .executeAsBlocking();
-        });
-        thread.start();
+    public Observable<Object> removeLastTab() {
+        return storIOSQLite
+                .executeSQL()
+                .withQuery(RawQuery.builder()
+                        .query("DELETE FROM " + TabsTable.TABLE + " WHERE " + TabsTable.COLUMN_ID + " = "
+                                + "(SELECT MAX(" + TabsTable.COLUMN_ID + ") FROM " + TabsTable.TABLE + ")")
+                        .build())
+                .prepare()
+                .asRxObservable()
+                .first();
     }
 }

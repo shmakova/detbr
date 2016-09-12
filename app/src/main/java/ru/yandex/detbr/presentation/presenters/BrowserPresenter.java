@@ -17,7 +17,6 @@ import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.views.BrowserView;
 import ru.yandex.detbr.utils.UrlUtils;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -37,7 +36,6 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     private final LikeManager likeManager;
     @NonNull
     private final CardsRepository cardsRepository;
-    private Subscription subscription;
     private String currentUrl;
     private CompositeSubscription compositeSubscription;
 
@@ -68,12 +66,8 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             String url = UrlUtils.getUrlFromQuery(query);
             compositeSubscription.add(
                     tabsManager.addTab(Tab.builder().url(url).build())
-                            .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(putResult -> {
-                                        tabsManager.updateTabs();
-                                        Timber.e("putResult ", putResult.toString());
-                                    },
+                            .subscribe(putResult -> tabsManager.updateTabs(),
                                     throwable -> Timber.e("Error adding tab"),
                                     () -> Timber.e("Completed adding tab")));
             loadUrl(url);
@@ -107,7 +101,8 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 wotResponse -> listener.urlChecked(wotResponse.isSafe()),
-                                throwable -> Timber.e(throwable.getMessage(), "wotService.getLinkReputation error")));
+                                throwable -> Timber.e(throwable.getMessage(),
+                                        "wotService.getLinkReputation error")));
     }
 
     public void onLikeClick(String title, String url) {
@@ -150,7 +145,8 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 getView().hideProgress();
                 getView().setLike(likeManager.isUrlLiked(url));
                 webView.postInvalidate();
-                tabsManager.updateTab(Tab.builder()
+
+                updateTab(Tab.builder()
                         .preview(getSnapshot(webView))
                         .url(webView.getUrl())
                         .title(webView.getTitle())
@@ -164,10 +160,6 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 getView().showSearchText(webView.getTitle(), UrlUtils.getHost(url));
                 getView().showProgress();
                 getView().hideLike();
-                tabsManager.updateTab(Tab.builder()
-                        .url(webView.getUrl())
-                        .title(webView.getTitle())
-                        .build());
             }
         }
 
@@ -236,5 +228,21 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 getView().updateProgress(newProgress);
             }
         }
+    }
+
+    private void updateTab(Tab tab) {
+        compositeSubscription.add(
+                tabsManager
+                        .removeLastTab()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(object -> {
+                                    tabsManager.addTab(tab)
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe(putResult -> tabsManager.updateTabs(),
+                                                    throwable -> Timber.e("Error adding tab"),
+                                                    () -> Timber.e("Completed adding tab"));
+                                },
+                                throwable -> Timber.e("Error removing tab"),
+                                () -> Timber.e("Completed removing tab")));
     }
 }
