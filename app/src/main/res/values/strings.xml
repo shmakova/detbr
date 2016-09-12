@@ -35,5 +35,5 @@
     <string name="intro_title_second">Отмечай, что понравится</string>
     <string name="intro_description_second">Тогда здесь будет больше интересного</string>
     <string name="hand">hand</string>
-    <string name="check_internet_connection">Проверьте интернет соединение</string>
+    <string name="check_internet_connection">Проверьте интернет-соединение</string>
 </resources>
