@@ -1,7 +1,9 @@
 package ru.yandex.detbr.presentation.presenters;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
@@ -16,6 +18,7 @@ import ru.yandex.detbr.data.wot_network.WotService;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.views.BrowserView;
+import ru.yandex.detbr.ui.activities.BrowserActivity;
 import ru.yandex.detbr.utils.UrlUtils;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -160,6 +163,13 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if(url.startsWith("tel:") || url.startsWith("mailto:") || url.startsWith("geo:")
+                || url.startsWith("google.streetview:")) {
+                if (isViewAttached()) {
+                    getView().goExternalApp(url);
+                }
+                return true;
+            }
             if (currentUrl != null && currentUrl.equals(url)) {
                 view.goBack();
                 return true;

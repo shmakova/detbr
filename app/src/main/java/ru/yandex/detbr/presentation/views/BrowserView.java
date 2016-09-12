@@ -33,6 +33,8 @@ public interface BrowserView extends MvpView {
 
     void loadPageByUrl(String url);
 
+    void goExternalApp(String url);
+
     void showError();
 
     void showLike();

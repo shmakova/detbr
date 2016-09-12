@@ -155,6 +155,12 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
+    public void goExternalApp(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
+    }
+
+    @Override
     public void showError() {
         webView.loadUrl(CHILD_SAFETY_HTML);
     }
