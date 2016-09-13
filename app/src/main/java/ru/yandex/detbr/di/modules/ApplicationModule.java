@@ -89,8 +89,9 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public SchoolsRepository provideSchoolsRepository(SharedPreferences sharedPreferences) {
-        return new SchoolsRepositoryImpl(sharedPreferences);
+    public SchoolsRepository provideSchoolsRepository(SharedPreferences sharedPreferences,
+                                                      DatabaseReference databaseReference) {
+        return new SchoolsRepositoryImpl(sharedPreferences, databaseReference);
     }
 
     @Provides
