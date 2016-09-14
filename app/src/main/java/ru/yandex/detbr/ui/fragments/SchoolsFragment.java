@@ -4,6 +4,8 @@ package ru.yandex.detbr.ui.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -59,12 +61,12 @@ public class SchoolsFragment
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (!(getActivity() instanceof OnSchoolClickListener)) {
-            throw new ClassCastException(getActivity().toString() + " must implement " +
+        if (!(getParentFragment() instanceof OnSchoolClickListener)) {
+            throw new ClassCastException(getParentFragment().toString() + " must implement " +
                     OnSchoolClickListener.class.getName());
         }
 
-        onSchoolClickListener = (OnSchoolClickListener) getActivity();
+        onSchoolClickListener = (OnSchoolClickListener) getParentFragment();
     }
 
     @Override
@@ -96,6 +98,12 @@ public class SchoolsFragment
         int width = autoCompleteTextView.getLayoutParams().width;
         autoCompleteTextView.setDropDownWidth((int) (width * 1.5));
         autoCompleteTextView.setDropDownHorizontalOffset(-width / 4);
+
+        autoCompleteTextView.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                new Handler(Looper.getMainLooper()).postDelayed(this::onSchoolsAutocompleteTextViewClick, 200);
+            }
+        });
 
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();

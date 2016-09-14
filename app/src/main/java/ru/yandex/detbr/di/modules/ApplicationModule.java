@@ -18,10 +18,14 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.FakeDataRepository;
-import ru.yandex.detbr.data.tabs.FakeTabsRepository;
+import ru.yandex.detbr.data.cards.CardsRepository;
+import ru.yandex.detbr.data.cards.CardsRepositoryImpl;
+import ru.yandex.detbr.data.categories.CategoriesRepository;
+import ru.yandex.detbr.data.categories.CategoriesRepositoryImpl;
+import ru.yandex.detbr.data.schools.SchoolsRepository;
+import ru.yandex.detbr.data.schools.SchoolsRepositoryImpl;
 import ru.yandex.detbr.data.tabs.TabsRepository;
+import ru.yandex.detbr.data.tabs.TabsRepositoryImpl;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
@@ -42,12 +46,6 @@ public class ApplicationModule {
     @Singleton
     SharedPreferences providesSharedPreferences(Application application) {
         return PreferenceManager.getDefaultSharedPreferences(application);
-    }
-
-    @Provides
-    @Singleton
-    DataRepository providesDataRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
-        return new FakeDataRepository(storIOSQLite, databaseReference);
     }
 
     @Provides
@@ -73,14 +71,33 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public LikeManager providesLikeManager(DataRepository dataRepository) {
-        return new LikeManager(dataRepository);
+    public LikeManager providesLikeManager(CardsRepository cardsRepository) {
+        return new LikeManager(cardsRepository);
     }
 
     @Provides
     @Singleton
-    public TabsRepository provideTabsRepository() {
-        return new FakeTabsRepository();
+    public TabsRepository provideTabsRepository(StorIOSQLite storIOSQLite) {
+        return new TabsRepositoryImpl(storIOSQLite);
+    }
+
+    @Provides
+    @Singleton
+    public CardsRepository provideCardsRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
+        return new CardsRepositoryImpl(storIOSQLite, databaseReference);
+    }
+
+    @Provides
+    @Singleton
+    public SchoolsRepository provideSchoolsRepository(SharedPreferences sharedPreferences,
+                                                      DatabaseReference databaseReference) {
+        return new SchoolsRepositoryImpl(sharedPreferences, databaseReference);
+    }
+
+    @Provides
+    @Singleton
+    public CategoriesRepository provideCategoriesRepository(DatabaseReference databaseReference) {
+        return new CategoriesRepositoryImpl(databaseReference);
     }
 
     @Provides

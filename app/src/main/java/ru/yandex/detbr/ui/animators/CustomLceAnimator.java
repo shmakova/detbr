@@ -28,8 +28,8 @@ public final class CustomLceAnimator extends LceAnimator {
     public static void showLoading(@NonNull View loadingView, @NonNull View contentView,
                                    @NonNull View errorView) {
         contentView.setVisibility(View.GONE);
-        errorView.setVisibility(View.VISIBLE);
-        loadingView.setVisibility(View.GONE);
+        errorView.setVisibility(View.GONE);
+        loadingView.setVisibility(View.VISIBLE);
     }
 
     public static void showContent(@NonNull final View loadingView, @NonNull final View contentView,

@@ -1,85 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/main"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              tools:ignore="InconsistentLayout">
+<ru.yandex.detbr.ui.android_views.SquareCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    style="@style/Card"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true"
+    tools:ignore="UnusedAttribute">
 
-    <ru.yandex.detbr.ui.android_views.SquareCardView
-        android:id="@+id/card"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@drawable/first_intro_pic"
-        android:clickable="true"
-        android:elevation="8dp"
-        android:foreground="?android:attr/selectableItemBackground"
-        app:cardCornerRadius="15dp"
-        app:cardUseCompatPadding="true"
-        tools:ignore="UnusedAttribute">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/choose_your_school"
+        android:src="@drawable/schools_pic"
+        tools:ignore="UnusedAttribute"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/intro"
-            android:src="@drawable/third_intro_pic"
-            tools:ignore="UnusedAttribute"/>
-
-
-        <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="250dp"
-            android:layout_gravity="center_horizontal|bottom"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-
-            <FrameLayout
-                android:id="@+id/contentView"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_gravity="center"
-                android:layout_weight="1">
-
-                <include layout="@layout/loading_view"/>
-
-                <include layout="@layout/error_view"/>
-
-                <AutoCompleteTextView
-                    android:id="@+id/schools_autocomplete"
-                    android:layout_width="220dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:completionThreshold="1"
-                    android:ellipsize="end"
-                    android:hint="@string/choose_your_school"
-                    android:imeOptions="actionDone"
-                    android:maxLines="1"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:textAlignment="center"/>
-            </FrameLayout>
-        </LinearLayout>
-
-
-    </ru.yandex.detbr.ui.android_views.SquareCardView>
-
-    <TextView
+    <FrameLayout
+        android:id="@+id/contentView"
         android:layout_width="250dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="3"
-        android:gravity="center"
-        android:text="@string/third_intro_text"
-        android:textColor="@color/transparent_text_color"
-        android:textSize="16sp"/>
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal|top"
+        android:layout_marginTop="24dp">
 
-</LinearLayout>
+        <include layout="@layout/loading_view"/>
+
+        <include layout="@layout/error_view"/>
+
+        <AutoCompleteTextView
+            android:id="@+id/schools_autocomplete"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:completionThreshold="1"
+            android:ellipsize="end"
+            android:hint="@string/choose_your_school"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textAlignment="center"
+            android:textColor="@color/darkest_transparent"
+            android:textSize="22sp"/>
+    </FrameLayout>
+</ru.yandex.detbr.ui.android_views.SquareCardView>
 
 

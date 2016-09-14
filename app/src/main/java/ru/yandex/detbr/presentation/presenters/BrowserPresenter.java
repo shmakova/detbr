@@ -9,17 +9,17 @@ import android.webkit.WebViewClient;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.CardsRepository;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.views.BrowserView;
 import ru.yandex.detbr.utils.UrlUtils;
-import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
 /**
@@ -35,18 +35,24 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final LikeManager likeManager;
     @NonNull
-    private final DataRepository dataRepository;
-    private Subscription subscription;
+    private final CardsRepository cardsRepository;
+    private final CompositeSubscription compositeSubscription;
+    private String currentUrl;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
-                            @NonNull DataRepository dataRepository,
+                            @NonNull CardsRepository cardsRepository,
                             @NonNull LikeManager likeManager) {
 
         this.wotService = wotService;
-        this.dataRepository = dataRepository;
+        this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
         this.likeManager = likeManager;
+        compositeSubscription = new CompositeSubscription();
+    }
+
+    public void onTabsClicked() {
+        getView().openTabs();
     }
 
     private interface UrlCheckListener {
@@ -58,7 +64,12 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         super.attachView(view);
         view.setOnUrlListener(query -> {
             String url = UrlUtils.getUrlFromQuery(query);
-            tabsManager.addTab(Tab.builder().url(url).build());
+            compositeSubscription.add(
+                    tabsManager.addTab(Tab.builder().url(url).build())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(putResult -> tabsManager.updateTabs(),
+                                    throwable -> Timber.e("Error adding tab"),
+                                    () -> Timber.d("Completed adding tab")));
             loadUrl(url);
         });
     }
@@ -84,12 +95,14 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     private void checkUrlBeforeLoad(String url, UrlCheckListener listener) {
         String domain = UrlUtils.getHost(url) + "/";
 
-        subscription = wotService.getLinkReputation(domain)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        wotResponse -> listener.urlChecked(wotResponse.isSafe()),
-                        throwable -> Timber.e(throwable.getMessage(), "wotService.getLinkReputation error"));
+        compositeSubscription.add(
+                wotService.getLinkReputation(domain)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                wotResponse -> listener.urlChecked(wotResponse.isSafe()),
+                                throwable -> Timber.e(throwable.getMessage(),
+                                        "wotService.getLinkReputation error")));
     }
 
     public void onLikeClick(String title, String url) {
@@ -102,7 +115,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
         if (isUrlLiked) {
             isUrlLiked = false;
         } else {
-            dataRepository.saveCard(card);
+            cardsRepository.saveCard(card);
             isUrlLiked = true;
         }
 
@@ -132,7 +145,8 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 getView().hideProgress();
                 getView().setLike(likeManager.isUrlLiked(url));
                 webView.postInvalidate();
-                tabsManager.updateTab(Tab.builder()
+
+                updateTab(Tab.builder()
                         .preview(getSnapshot(webView))
                         .url(webView.getUrl())
                         .title(webView.getTitle())
@@ -146,15 +160,16 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 getView().showSearchText(webView.getTitle(), UrlUtils.getHost(url));
                 getView().showProgress();
                 getView().hideLike();
-                tabsManager.updateTab(Tab.builder()
-                        .url(webView.getUrl())
-                        .title(webView.getTitle())
-                        .build());
             }
         }
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            if (currentUrl != null && currentUrl.equals(url)) {
+                view.goBack();
+                return true;
+            }
+
             String safeUrl = url;
 
             if (url.contains(UrlUtils.GOOGLE_URL) &&
@@ -168,16 +183,20 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             }
 
             loadUrl(safeUrl);
+            currentUrl = safeUrl;
             return true;
         }
 
         private Bitmap getSnapshot(WebView webView) {
             final int width = 320;
             int height = 480;
+            float ratio = (float) height / (float) width;
             Bitmap thumbnail = null;
 
             if (webView.getWidth() > 0 && webView.getHeight() > 0) {
-                Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), webView.getHeight(), Bitmap.Config.ARGB_8888);
+                int webViewHeight = (int) (webView.getWidth() * ratio);
+                int shapshotHeight = webViewHeight > webView.getHeight() ? webView.getHeight() : webViewHeight;
+                Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), shapshotHeight, Bitmap.Config.ARGB_8888);
                 Canvas canvas = new Canvas(bitmap);
                 webView.draw(canvas);
                 float factor = width / (float) webView.getWidth();
@@ -195,8 +214,9 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @Override
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
-        if (!retainInstance && subscription != null && !subscription.isUnsubscribed()) {
-            subscription.unsubscribe();
+
+        if (compositeSubscription.hasSubscriptions()) {
+            compositeSubscription.unsubscribe();
         }
     }
 
@@ -208,5 +228,21 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 getView().updateProgress(newProgress);
             }
         }
+    }
+
+    private void updateTab(Tab tab) {
+        compositeSubscription.add(
+                tabsManager
+                        .removeLastTab()
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(object -> {
+                                    tabsManager.addTab(tab)
+                                            .observeOn(AndroidSchedulers.mainThread())
+                                            .subscribe(putResult -> tabsManager.updateTabs(),
+                                                    throwable -> Timber.e("Error adding tab"),
+                                                    () -> Timber.d("Completed adding tab"));
+                                },
+                                throwable -> Timber.e("Error removing tab"),
+                                () -> Timber.d("Completed removing tab")));
     }
 }

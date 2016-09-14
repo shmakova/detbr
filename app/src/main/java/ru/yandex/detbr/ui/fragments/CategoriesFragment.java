@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.di.components.CategoriesComponent;
 import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.presentation.presenters.CategoriesPresenter;
@@ -49,12 +49,12 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     @BindView(R.id.categories_list)
     RecyclerView categories;
 
-    private OnCategoriesItemClickListener onCategoriesItemClickListener;
+    private OnCategorySelectedListener onCategorySelectedListener;
     private CategoriesComponent categoriesComponent;
     private CategoriesAdapter adapter;
 
-    public interface OnCategoriesItemClickListener {
-        void onCategoriesItemClick(Category category);
+    public interface OnCategorySelectedListener {
+        void onCategorySelected(Category category);
     }
 
     @Override
@@ -73,13 +73,7 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        if (category == null) {
-            adapter = new CategoriesAdapter(false);
-        } else {
-            adapter = new CategoriesAdapter(true);
-        }
-
+        adapter = new CategoriesAdapter();
         categories.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.HORIZONTAL, false);
@@ -129,8 +123,8 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
 
     @Override
     public void showCategoryCards(Category category) {
-        if (onCategoriesItemClickListener != null) {
-            onCategoriesItemClickListener.onCategoriesItemClick(category);
+        if (onCategorySelectedListener != null) {
+            onCategorySelectedListener.onCategorySelected(category);
         }
     }
 
@@ -139,18 +133,18 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     public void onAttach(Context context) {
         super.onAttach(context);
 
-        if (!(getActivity() instanceof OnCategoriesItemClickListener)) {
-            throw new ClassCastException(getActivity().toString() + " must implement " +
-                    OnCategoriesItemClickListener.class.getName());
+        if (!(getParentFragment() instanceof OnCategorySelectedListener)) {
+            throw new ClassCastException(getParentFragment().toString() + " must implement " +
+                    OnCategorySelectedListener.class.getName());
         }
 
-        onCategoriesItemClickListener = (OnCategoriesItemClickListener) getActivity();
+        onCategorySelectedListener = (OnCategorySelectedListener) getParentFragment();
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        onCategoriesItemClickListener = null;
+        onCategorySelectedListener = null;
     }
 
     @Override

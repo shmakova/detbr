@@ -14,7 +14,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
+import ru.yandex.detbr.ui.listeners.OnRemoveTabButtonClickListener;
 import ru.yandex.detbr.utils.UrlUtils;
 import rx.Observable;
 import rx.subjects.PublishSubject;
@@ -26,11 +27,16 @@ import rx.subjects.PublishSubject;
 public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder> {
     private List<Tab> tabs;
     private final PublishSubject<Tab> onClickSubject = PublishSubject.create();
+    private final OnRemoveTabButtonClickListener listener;
+
+    public TabsAdapter(OnRemoveTabButtonClickListener onRemoveTabButtonClickListener) {
+        this.listener = onRemoveTabButtonClickListener;
+    }
 
     @Override
     public TabViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.tabs_item, parent, false);
-        return new TabViewHolder(convertView);
+        View convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tabs, parent, false);
+        return new TabViewHolder(convertView, listener);
     }
 
     @Override
@@ -64,10 +70,13 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
         @BindView(R.id.preview)
         ImageView preview;
 
-        TabViewHolder(View itemView) {
+        private final OnRemoveTabButtonClickListener listener;
+
+        TabViewHolder(View itemView, OnRemoveTabButtonClickListener onRemoveTabButtonClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(v -> onClickSubject.onNext(tabs.get(getAdapterPosition())));
+            listener = onRemoveTabButtonClickListener;
         }
 
         public void bind(Tab tab) {
@@ -92,7 +101,7 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
         @OnClick(R.id.remove_btn)
         void onRemoveButtonClick() {
             final int position = getAdapterPosition();
-            tabs.remove(position);
+            listener.onRemoveButtonClick(tabs.get(position));
             notifyItemRemoved(position);
         }
     }

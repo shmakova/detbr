@@ -5,6 +5,8 @@ import android.util.Patterns;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import timber.log.Timber;
 
@@ -46,11 +48,17 @@ public final class UrlUtils {
     }
 
     public static String getHost(String url) {
-        String host = "";
+        String host = null;
 
         try {
             URI uri = new URI(url);
             host = uri.getHost();
+
+            if (host == null) {
+                host = "";
+            } else {
+                host = removeSubdomains(host);
+            }
         } catch (URISyntaxException e) {
             Timber.e(e, "Error while parsing url");
         }
@@ -60,5 +68,16 @@ public final class UrlUtils {
 
     public static boolean isHttpLink(String url) {
         return url.startsWith(HTTP_PREFIX) || url.startsWith(HTTPS_PREFIX);
+    }
+
+    private static String removeSubdomains(String link) {
+        Pattern pattern = Pattern.compile("(.+\\.)?(www\\.|m\\.)(.+)");
+        Matcher matcher = pattern.matcher(link);
+
+        if (matcher.matches()) {
+            return matcher.group(3);
+        } else {
+            return link;
+        }
     }
 }

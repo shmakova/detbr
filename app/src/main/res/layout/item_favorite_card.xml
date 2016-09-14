@@ -16,6 +16,7 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/FavoriteCardTitleStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -23,25 +24,18 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/transparent_text_color"
-            android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textColor="@color/dark_transparent"/>
 
         <TextView
             android:id="@+id/url"
+            style="@style/UrlStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/title"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:textColor="@color/transparent_text_color"
-            android:textSize="12sp"/>
+            android:layout_marginRight="8dp"/>
 
-        <include layout="@layout/favorite_bottom_view"/>
+        <include layout="@layout/bottom_view_favorite_card"/>
 
     </RelativeLayout>
 </ru.yandex.detbr.ui.android_views.SquareCardView>

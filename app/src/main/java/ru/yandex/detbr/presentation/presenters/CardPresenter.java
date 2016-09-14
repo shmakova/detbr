@@ -2,7 +2,7 @@ package ru.yandex.detbr.presentation.presenters;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.presentation.views.CardItemView;
 

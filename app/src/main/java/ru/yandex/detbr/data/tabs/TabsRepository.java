@@ -1,8 +1,10 @@
 package ru.yandex.detbr.data.tabs;
 
+import com.pushtorefresh.storio.sqlite.operations.delete.DeleteResult;
+import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
+
 import java.util.List;
 
-import ru.yandex.detbr.data.tabs.models.Tab;
 import rx.Observable;
 
 /**
@@ -12,9 +14,9 @@ import rx.Observable;
 public interface TabsRepository {
     Observable<List<Tab>> getSavedTabs();
 
-    void addTab(Tab tab);
+    Observable<PutResult> addTab(Tab tab);
 
-    void removeTab(Tab tab);
+    Observable<DeleteResult> removeTab(Tab tab);
 
-    void removeLastTab();
+    Observable<Object> removeLastTab();
 }

@@ -15,6 +15,8 @@ public interface BrowserView extends MvpView {
 
     void updateProgress(int newProgress);
 
+    void openTabs();
+
     interface UrlListener {
         void onUrl(String url);
     }

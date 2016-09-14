@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.tabs.models.Tab;
+import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.di.components.TabsComponent;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.di.modules.TabsModule;
@@ -69,7 +69,7 @@ public class TabsFragment extends BaseLceFragment<FrameLayout, List<Tab>, TabsVi
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        adapter = tabsComponent.adapter();
+        adapter = new TabsAdapter(tab -> presenter.removeTab(tab));
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);

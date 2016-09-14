@@ -3,14 +3,12 @@ package ru.yandex.detbr.presentation.presenters;
 import android.content.SharedPreferences;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.R;
-import ru.yandex.detbr.data.repository.DataRepository;
-import ru.yandex.detbr.data.repository.models.Card;
-import ru.yandex.detbr.data.repository.models.Category;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.views.MainView;
 
@@ -19,35 +17,50 @@ import ru.yandex.detbr.presentation.views.MainView;
  */
 
 public class MainPresenter extends MvpBasePresenter<MainView> {
-    @NonNull
-    private final SharedPreferences sharedPreferences;
+    private final static String FIRST_START = "FIRST_START";
+
     @NonNull
     private final NavigationManager navigationManager;
     @NonNull
-    private final DataRepository dataRepository;
-    @Nullable
-    private String school;
+    private final LikeManager likeManager;
+    @NonNull
+    private final SharedPreferences sharedPreferences;
 
 
-    public MainPresenter(@NonNull SharedPreferences sharedPreferences,
-                         @NonNull NavigationManager navigationManager,
-                         @NonNull DataRepository dataRepository
+    public MainPresenter(@NonNull NavigationManager navigationManager,
+                         @NonNull LikeManager likeManager,
+                         @NonNull SharedPreferences sharedPreferences
     ) {
-        this.sharedPreferences = sharedPreferences;
         this.navigationManager = navigationManager;
-        this.dataRepository = dataRepository;
+        this.likeManager = likeManager;
+        this.sharedPreferences = sharedPreferences;
     }
 
-    public void onFirstLoad() {
-        loadDataFromSharedPreference();
-
-        if (school == null || school.isEmpty()) {
-            Thread thread = new Thread(() -> {
-                navigationManager.openOnBoarding();
-            });
-            thread.start();
-        } else {
+    public void onFirstLoad(int tabId) {
+        if (tabId == -1) {
             openCards();
+            boolean isFirstStart = sharedPreferences.getBoolean(FIRST_START, true);
+
+            if (isFirstStart) {
+                openIntro();
+            } else {
+                openCards();
+            }
+        } else {
+            if (tabId == NavigationManager.TABS_TAB_POSITION) {
+                openTabs();
+
+                if (isViewAttached()) {
+                    getView().selectTabAtPosition(NavigationManager.TABS_TAB_POSITION);
+                }
+            }
+        }
+    }
+
+    private void openIntro() {
+        if (isViewAttached()) {
+            navigationManager.openIntro();
+            getView().hideNavigationBars();
         }
     }
 
@@ -55,38 +68,24 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         if (isViewAttached()) {
             navigationManager.openCards();
             getView().showNavigationBars();
-            getView().hideToolbar();
+            getView().changeBackgroundColor(R.color.light_background);
         }
     }
 
     private void openFavorites() {
         if (isViewAttached()) {
             navigationManager.openFavorites();
-            getView().showNavigationBars();
-            getView().hideToolbar();
+            getView().showSearchView();
+            getView().changeBackgroundColor(R.color.light_background);
         }
     }
 
     private void openTabs() {
         if (isViewAttached()) {
             navigationManager.openTabs();
-            getView().showNavigationBars();
             getView().hideSearchView();
-            getView().hideToolbar();
+            getView().changeBackgroundColor(R.color.dark_background);
         }
-    }
-
-    private void openCategoryCards(Category category) {
-        if (isViewAttached()) {
-            getView().updateToolbar(category.title(), true, category.color());
-            getView().hideNavigationBars();
-            getView().showToolbar();
-            navigationManager.openCategoryCards(category);
-        }
-    }
-
-    private void loadDataFromSharedPreference() {
-        school = sharedPreferences.getString(DataRepository.SCHOOL_TAG, null);
     }
 
     public void onTabSelected(@IdRes int tabId) {
@@ -104,15 +103,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
         }
     }
 
-    public void onCategoriesItemClick(Category category) {
-        openCategoryCards(category);
-    }
-
-    public void onActionMenuItemSelected(@IdRes int id) {
-        if (id == R.id.action_voice_rec && isViewAttached()) {
-            getView().showSpeechRecognizer();
-        }
-    }
 
     public void onSearchAction(String currentQuery) {
         navigationManager.openBrowser(currentQuery);
@@ -123,13 +113,21 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onLikeClick(Card card) {
-        dataRepository.toggleLike(card.url());
+        likeManager.setLike(card);
     }
 
     public void onBackPressed() {
         if (isViewAttached()) {
             getView().showNavigationBars();
-            getView().hideToolbar();
         }
+    }
+
+    public void onStartClick() {
+        sharedPreferences
+                .edit()
+                .putBoolean(FIRST_START, false)
+                .apply();
+
+        openCards();
     }
 }

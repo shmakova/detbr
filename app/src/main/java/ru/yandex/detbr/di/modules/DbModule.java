@@ -12,11 +12,15 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.data.repository.db.DbOpenHelper;
-import ru.yandex.detbr.data.repository.db.resolvers.CardDeleteResolver;
-import ru.yandex.detbr.data.repository.db.resolvers.CardGetResolver;
-import ru.yandex.detbr.data.repository.db.resolvers.CardPutResolver;
-import ru.yandex.detbr.data.repository.models.Card;
+import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.cards.resolvers.CardDeleteResolver;
+import ru.yandex.detbr.data.cards.resolvers.CardGetResolver;
+import ru.yandex.detbr.data.cards.resolvers.CardPutResolver;
+import ru.yandex.detbr.data.db.DbOpenHelper;
+import ru.yandex.detbr.data.tabs.Tab;
+import ru.yandex.detbr.data.tabs.resolvers.TabDeleteResolver;
+import ru.yandex.detbr.data.tabs.resolvers.TabGetResolver;
+import ru.yandex.detbr.data.tabs.resolvers.TabPutResolver;
 
 
 @Module
@@ -31,6 +35,11 @@ public class DbModule {
                         .putResolver(new CardPutResolver())
                         .getResolver(new CardGetResolver())
                         .deleteResolver(new CardDeleteResolver())
+                        .build())
+                .addTypeMapping(Tab.class, SQLiteTypeMapping.<Tab>builder()
+                        .putResolver(new TabPutResolver())
+                        .getResolver(new TabGetResolver())
+                        .deleteResolver(new TabDeleteResolver())
                         .build())
                 .build();
     }
