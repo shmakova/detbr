@@ -25,6 +25,7 @@ import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.categories.Category;
+import ru.yandex.detbr.data.categories.CategoryClick;
 import ru.yandex.detbr.di.components.CategoriesComponent;
 import ru.yandex.detbr.di.modules.CategoriesModule;
 import ru.yandex.detbr.presentation.presenters.CategoriesPresenter;
@@ -54,7 +55,7 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     private CategoriesAdapter adapter;
 
     public interface OnCategorySelectedListener {
-        void onCategorySelected(Category category);
+        void onCategorySelected(CategoryClick categoryClick);
     }
 
     @Override
@@ -122,9 +123,9 @@ public class CategoriesFragment extends BaseLceFragment<FrameLayout, List<Catego
     }
 
     @Override
-    public void showCategoryCards(Category category) {
+    public void showCategoryCards(CategoryClick categoryClick) {
         if (onCategorySelectedListener != null) {
-            onCategorySelectedListener.onCategorySelected(category);
+            onCategorySelectedListener.onCategorySelected(categoryClick);
         }
     }
 

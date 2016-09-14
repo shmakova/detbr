@@ -10,6 +10,7 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.IntroCardFragmentBuilder;
+import ru.yandex.detbr.ui.fragments.LastCardFragment;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -27,26 +28,30 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Card card = cards.get(position);
-        String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
+        if (position == cards.size()) {
+            return new LastCardFragment();
+        } else {
+            Card card = cards.get(position);
+            String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
 
-        if (firstLoad) {
-            if (position == 0) {
-                return new IntroCardFragmentBuilder(R.layout.fragment_intro_first).build();
-            } else if (position == 1) {
-                return new IntroCardFragmentBuilder(R.layout.fragment_intro_second).build();
+            if (firstLoad) {
+                if (position == 0) {
+                    return new IntroCardFragmentBuilder(R.layout.fragment_intro_first).build();
+                } else if (position == 1) {
+                    return new IntroCardFragmentBuilder(R.layout.fragment_intro_second).build();
+                }
             }
-        }
 
-        switch (type) {
-            case "text":
-                return new CardFragmentBuilder(card, R.layout.item_card).build();
-            case "plain_image":
-                return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
-            case "full_image":
-                return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
-            default:
-                return new CardFragmentBuilder(card, R.layout.item_card).build();
+            switch (type) {
+                case "text":
+                    return new CardFragmentBuilder(card, R.layout.item_card).build();
+                case "plain_image":
+                    return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
+                case "full_image":
+                    return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
+                default:
+                    return new CardFragmentBuilder(card, R.layout.item_card).build();
+            }
         }
     }
 

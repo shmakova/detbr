@@ -25,13 +25,14 @@ import butterknife.BindView;
 import ru.yandex.detbr.App;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
-import ru.yandex.detbr.data.categories.Category;
+import ru.yandex.detbr.data.categories.CategoryClick;
 import ru.yandex.detbr.di.components.CardsComponent;
 import ru.yandex.detbr.di.modules.CardsModule;
 import ru.yandex.detbr.presentation.presenters.CardsPresenter;
 import ru.yandex.detbr.presentation.views.CardsView;
 import ru.yandex.detbr.ui.adapters.CardsFragmentStatePagerAdapter;
 import ru.yandex.detbr.ui.adapters.SchoolsFragmentStatePagerAdapter;
+import ru.yandex.detbr.ui.animators.BackgroundAnimator;
 import ru.yandex.detbr.ui.animators.CustomLceAnimator;
 import ru.yandex.detbr.ui.other.CarouselPageTransformer;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
@@ -53,6 +54,8 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     ViewPager cardsPager;
     @BindView(R.id.category_cards_backward)
     View categoryCardsBackward;
+    @BindView(R.id.previous_category_cards_backward)
+    View previousCardsBackward;
     @BindView(R.id.divider)
     View divider;
 
@@ -140,13 +143,19 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     }
 
     @Override
-    public void setBackgroundColor(String color) {
-        categoryCardsBackward.setBackgroundColor(Color.parseColor(color));
+    public void setBackgroundColor(String color, int x, int y) {
+        BackgroundAnimator.setCategoryCardsBackwardBackgroundColor(
+                categoryCardsBackward,
+                previousCardsBackward,
+                Color.parseColor(color), x, y);
     }
 
     @Override
-    public void setBackgroundColor(@ColorRes int color) {
-        categoryCardsBackward.setBackgroundColor(ContextCompat.getColor(getContext(), color));
+    public void setBackgroundColor(@ColorRes int color, int x, int y) {
+        BackgroundAnimator.setCategoryCardsBackwardBackgroundColor(
+                categoryCardsBackward,
+                previousCardsBackward,
+                ContextCompat.getColor(getContext(), color), x, y);
     }
 
     @Override
@@ -160,8 +169,8 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     }
 
     @Override
-    public void onCategorySelected(Category category) {
-        presenter.onCategorySelected(category);
+    public void onCategorySelected(CategoryClick categoryClick) {
+        presenter.onCategorySelected(categoryClick);
     }
 
     @Override
