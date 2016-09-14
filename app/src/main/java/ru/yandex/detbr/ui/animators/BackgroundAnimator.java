@@ -10,7 +10,10 @@ import android.view.animation.AccelerateInterpolator;
  * Created by shmakova on 14.09.16.
  */
 
-public class BackgroundAnimator {
+public final class BackgroundAnimator {
+    private BackgroundAnimator() {
+    }
+
     public static void setCategoryCardsBackwardBackgroundColor(View backgroundView,
                                                                View previousBackgroundView,
                                                                int color, int x, int y) {
