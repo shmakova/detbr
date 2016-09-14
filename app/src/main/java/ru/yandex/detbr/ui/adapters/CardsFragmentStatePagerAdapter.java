@@ -61,6 +61,6 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return cards.size();
+        return cards.size() + 1;
     }
 }

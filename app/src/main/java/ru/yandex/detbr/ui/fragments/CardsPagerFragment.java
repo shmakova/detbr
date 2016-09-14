@@ -44,7 +44,8 @@ import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>, CardsView, CardsPresenter>
         implements CardsView,
         CategoriesFragment.OnCategorySelectedListener,
-        SchoolsFragment.OnSchoolClickListener {
+        SchoolsFragment.OnSchoolClickListener,
+        LastCardFragment.OnBackButtonClickListener {
     private static final int PAGE_LIMIT = 7;
 
     @Inject
@@ -176,5 +177,10 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     @Override
     public void onSchoolClick() {
         presenter.refresh();
+    }
+
+    @Override
+    public void onBackButtonClick() {
+        cardsPager.setCurrentItem(0, true);
     }
 }
