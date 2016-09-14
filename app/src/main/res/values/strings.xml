@@ -36,4 +36,7 @@
     <string name="intro_description_second">Тогда здесь будет больше интересного</string>
     <string name="hand">hand</string>
     <string name="check_internet_connection">Проверьте интернет-соединение</string>
+    <string name="last">last card</string>
+    <string name="last_card_text">Расскажи одноклассникам о браузере, чтобы здесь было больше карточек</string>
+    <string name="back">К началу</string>
 </resources>

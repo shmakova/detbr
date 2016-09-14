@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import ru.yandex.detbr.data.categories.CategoriesRepository;
 import ru.yandex.detbr.data.categories.Category;
+import ru.yandex.detbr.data.categories.CategoryClick;
 import ru.yandex.detbr.presentation.views.CategoriesView;
 import rx.Observable;
 import rx.subscriptions.CompositeSubscription;
@@ -37,10 +38,10 @@ public class CategoriesPresenter extends BaseRxPresenter<CategoriesView, List<Ca
         subscribe(observable, pullToRefresh);
     }
 
-    public void onCategoryClick(Observable<Category> positionClicks) {
+    public void onCategoryClick(Observable<CategoryClick> positionClicks) {
         if (isViewAttached()) {
             compositeSubscription.add(
-                    positionClicks.subscribe(category -> getView().showCategoryCards(category)));
+                    positionClicks.subscribe(categoryClick -> getView().showCategoryCards(categoryClick)));
         }
     }
 
