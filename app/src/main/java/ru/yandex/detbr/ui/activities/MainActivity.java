@@ -3,6 +3,7 @@ package ru.yandex.detbr.ui.activities;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -162,7 +163,7 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
 
 
     @Override
-    public void changeBackgroundColor(@IdRes int color) {
+    public void changeBackgroundColor(@ColorRes int color) {
         contentWrapper.setBackgroundColor(ContextCompat.getColor(this, color));
     }
 

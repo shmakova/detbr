@@ -17,7 +17,8 @@
             <View
                 android:id="@+id/previous_category_cards_backward"
                 android:layout_height="match_parent"
-                android:layout_width="match_parent"/>
+                android:layout_width="match_parent"
+                android:visibility="gone"/>
 
             <View
                 android:id="@+id/category_cards_backward"
