@@ -165,6 +165,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            Timber.e("YOURL " + url);
             if (currentUrl != null && currentUrl.equals(url)) {
                 view.goBack();
                 return true;
