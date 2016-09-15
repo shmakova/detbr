@@ -145,7 +145,7 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
 
     @Override
     public void setBackgroundColor(String color, int x, int y) {
-        BackgroundAnimator.setCategoryCardsBackwardBackgroundColor(
+        BackgroundAnimator.changeBackgroundColor(
                 categoryCardsBackward,
                 previousCardsBackward,
                 Color.parseColor(color), x, y);
@@ -153,7 +153,7 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
 
     @Override
     public void setBackgroundColor(@ColorRes int color, int x, int y) {
-        BackgroundAnimator.setCategoryCardsBackwardBackgroundColor(
+        BackgroundAnimator.changeBackgroundColor(
                 categoryCardsBackward,
                 previousCardsBackward,
                 ContextCompat.getColor(getContext(), color), x, y);
