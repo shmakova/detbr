@@ -86,10 +86,10 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
                 likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_black));
             }
 
-            if (card.color() != null) {
-                cardView.setCardBackgroundColor(Color.parseColor(card.color()));
-            } else {
+            if (card.color() == null) {
                 cardView.setCardBackgroundColor(ContextCompat.getColor(title.getContext(), R.color.white));
+            } else {
+                cardView.setCardBackgroundColor(Color.parseColor(card.color()));
             }
 
             Glide.with(favicon.getContext())
