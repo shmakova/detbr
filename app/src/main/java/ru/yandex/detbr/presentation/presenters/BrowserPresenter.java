@@ -1,19 +1,25 @@
 package ru.yandex.detbr.presentation.presenters;
 
+import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.http.SslError;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
-import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.views.BrowserView;
 import ru.yandex.detbr.utils.UrlUtils;
@@ -34,7 +40,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final TabsManager tabsManager;
     @NonNull
-    private final LikeManager likeManager;
+    private final Application application;
     @NonNull
     private final CardsRepository cardsRepository;
     private final CompositeSubscription compositeSubscription;
@@ -43,12 +49,12 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
                             @NonNull CardsRepository cardsRepository,
-                            @NonNull LikeManager likeManager) {
+                            @NonNull Application application) {
 
         this.wotService = wotService;
         this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
-        this.likeManager = likeManager;
+        this.application = application;
         compositeSubscription = new CompositeSubscription();
     }
 
@@ -107,59 +113,36 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     public void onLikeClick(String title, String url) {
-        Card newCard = Card.builder()
-                .title(title)
-                .url(url)
-                .build();
+        List<String> likes = new ArrayList<>();
 
-        cardsRepository
-                .saveCard(newCard)
-                .map(card -> {
+        String androidId = Settings.Secure.getString(application.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        likes.add(androidId);
 
-                })
-
-        compositeSubscription.add(
-
-                .map(card -> {
+        compositeSubscription.add(cardsRepository.getCardByUrl(url)
+                .flatMap(card -> {
                     if (card == null) {
+                        final Card newCard = Card.builder()
+                                .title(title)
+                                .url(url)
+                                .like(true)
+                                .likes(likes)
+                                .build();
 
-                        cardsRepository.saveCard(newCard);
-
-                        return newCard;
+                        return cardsRepository.saveCard(newCard);
                     } else {
-                        return card;
+                        return cardsRepository
+                                .setLike(card, !card.like())
+                                .map(putResult -> card.getLikedCard(!card.like()));
                     }
                 })
-                .
                 .subscribeOn(Schedulers.io())
-                .observeOn(mainThread())
-                .subscribe(
-                        card -> {
-                            boolean isUrlLiked = (card != null);
-
-                            if (isUrlLiked) {
-
-                            }
-                        }
-                ));
-        boolean isUrlLiked = likeManager.isUrlLiked(url);
-        Card card = Card.builder()
-                .title(title)
-                .url(url)
-                .build();
-
-        if (isUrlLiked) {
-            isUrlLiked = false;
-        } else {
-            cardsRepository.saveCard(card);
-            isUrlLiked = true;
-        }
-
-        likeManager.setLike(card);
-
-        if (isViewAttached()) {
-            getView().setLike(isUrlLiked);
-        }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(it -> {
+                    if (isViewAttached()) {
+                        getView().setLike(it.like());
+                    }
+                }));
     }
 
     public WebViewClient provideWebViewClient() {
@@ -179,7 +162,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                     getView().showLike();
                 }
                 getView().hideProgress();
-                getView().setLike(likeManager.isUrlLiked(url));
+                getView().setLike(cardsRepository.isUrlLiked(url));
                 webView.postInvalidate();
 
                 updateTab(Tab.builder()
@@ -221,6 +204,11 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             loadUrl(safeUrl);
             currentUrl = safeUrl;
             return true;
+        }
+
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed();
         }
 
         private Bitmap getSnapshot(WebView webView) {

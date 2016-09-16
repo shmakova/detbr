@@ -26,7 +26,6 @@ import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.data.schools.SchoolsRepositoryImpl;
 import ru.yandex.detbr.data.tabs.TabsRepository;
 import ru.yandex.detbr.data.tabs.TabsRepositoryImpl;
-import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
@@ -67,12 +66,6 @@ public class ApplicationModule {
     @Singleton
     public TabsManager providesTabsManager(TabsRepository tabsRepository) {
         return new TabsManager(tabsRepository);
-    }
-
-    @Provides
-    @Singleton
-    public LikeManager providesLikeManager(CardsRepository cardsRepository) {
-        return new LikeManager(cardsRepository);
     }
 
     @Provides

@@ -16,15 +16,15 @@ import rx.Observable;
 public interface CardsRepository {
     Observable<List<Card>> getCardsList();
 
-    Observable<List<Card>> getFavouriteCards();
+    Observable<List<Card>> getFavoriteCards();
 
     Observable<List<Card>> getCardsByCategory(Category category);
 
-    Observable<PutResult> saveFavouriteCard(@NonNull Card card);
-
     Observable<Card> saveCard(Card card);
 
-    Observable<Object> toggleLike(@NonNull Card card);
+    Observable<PutResult> setLike(@NonNull Card card, boolean like);
 
     Observable<Card> getCardByUrl(@NonNull String url);
+
+    boolean isUrlLiked(@NonNull String url);
 }

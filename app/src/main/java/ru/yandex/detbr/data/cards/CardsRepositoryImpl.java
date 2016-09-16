@@ -8,7 +8,6 @@ import com.kelvinapps.rxfirebase.RxFirebaseDatabase;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
 import com.pushtorefresh.storio.sqlite.queries.Query;
-import com.pushtorefresh.storio.sqlite.queries.RawQuery;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,11 +19,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ru.yandex.detbr.data.cards.resolvers.CardPutResolver;
 import ru.yandex.detbr.data.cards.tables.CardsTable;
 import ru.yandex.detbr.data.categories.Category;
 import rx.Observable;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -59,7 +58,7 @@ public class CardsRepositoryImpl implements CardsRepository {
     }
 
     @Override
-    public Observable<List<Card>> getFavouriteCards() {
+    public Observable<List<Card>> getFavoriteCards() {
         return storIOSQLite
                 .get()
                 .listOfObjects(Card.class)
@@ -96,19 +95,6 @@ public class CardsRepositoryImpl implements CardsRepository {
     }
 
     @Override
-    public Observable<PutResult> saveFavouriteCard(@NonNull Card card) {
-        return saveCardToDb(card);
-    }
-
-    private Observable<PutResult> saveCardToDb(@NonNull Card card) {
-        return storIOSQLite
-                .put()
-                .object(card)
-                .prepare()
-                .asRxObservable();
-    }
-
-    @Override
     public Observable<Card> getCardByUrl(@NonNull String url) {
         return storIOSQLite
                 .get()
@@ -121,6 +107,21 @@ public class CardsRepositoryImpl implements CardsRepository {
                 .prepare()
                 .asRxObservable()
                 .first();
+    }
+
+    @Override
+    public boolean isUrlLiked(@NonNull String url) {
+        Card card = storIOSQLite
+                .get()
+                .object(Card.class)
+                .withQuery(Query.builder()
+                        .table(CardsTable.TABLE)
+                        .where(CardsTable.COLUMN_URL + " LIKE ? AND " + CardsTable.COLUMN_LIKE + " = ?")
+                        .whereArgs(url, "1")
+                        .build())
+                .prepare()
+                .executeAsBlocking();
+        return card != null;
     }
 
     private String getImageUrl(@NonNull String url) {
@@ -138,45 +139,20 @@ public class CardsRepositoryImpl implements CardsRepository {
     }
 
     @Override
-    public Observable<Object> toggleLike(@NonNull Card card) {
+    public Observable<PutResult> setLike(@NonNull Card card, boolean like) {
         return storIOSQLite
-                .executeSQL()
-                .withQuery(RawQuery.builder()
-                        .query("UPDATE " + CardsTable.TABLE + " SET "
-                                + CardsTable.COLUMN_LIKE + " = ~" + CardsTable.COLUMN_LIKE + "&1"
-                                + " WHERE " + CardsTable.COLUMN_URL + " LIKE ?")
-                        .args(card.url())
-                        .build())
+                .put()
+                .object(card.getLikedCard(like))
+                .withPutResolver(new CardPutResolver())
                 .prepare()
                 .asRxObservable();
     }
 
     public Observable<Card> saveCard(Card card) {
-        return RxFirebaseDatabase
-                .observeValueEvent(
-                        databaseReference
-                                .child(CARDS)
-                                .orderByChild("url")
-                                .equalTo(card.url())
-                                .limitToLast(1))
-                .map(DataSnapshot::getChildren)
-                .flatMap(dataSnapshots -> Observable.from(dataSnapshots)
-                        .map(Card::create)
-                        .toList()
-                        .map(cards -> cards.isEmpty())
-                )
-                .map(isCardExist -> {
-                    if (isCardExist) {
-                        return null;
-                    } else {
-                        return card;
-                    }
-                })
-                .subscribeOn(Schedulers.io())
+        return Observable.just(card)
                 .map(PUSH_CARD_TO_FIREBASE)
                 .map(SAVE_CARD_TO_DATABASE)
                 .first();
-
     }
 
 
@@ -193,6 +169,7 @@ public class CardsRepositoryImpl implements CardsRepository {
                     Map<String, Object> cardValues = new HashMap<>();
                     cardValues.put("url", card.url());
                     cardValues.put("title", card.title());
+                    cardValues.put("likes", card.likes());
                     String image = getImageUrl(card.url());
 
                     if (image == null || image.isEmpty()) {
@@ -215,29 +192,11 @@ public class CardsRepositoryImpl implements CardsRepository {
             new Func1<Card, Card>() {
                 @Override
                 public Card call(Card card) {
-                    String key = databaseReference.child(CARDS).push().getKey();
-
-                    databaseReference.child(CARDS)
-                            .orderByChild("url")
-                            .equalTo(card.url());
-
-                    Map<String, Object> cardValues = new HashMap<>();
-                    cardValues.put("url", card.url());
-                    cardValues.put("title", card.title());
-                    String image = getImageUrl(card.url());
-
-                    if (image == null || image.isEmpty()) {
-                        cardValues.put("type", Card.TEXT_TYPE);
-                    } else {
-                        cardValues.put("image", image);
-                        cardValues.put("type", Card.PLAIN_IMAGE_TYPE);
-                    }
-
-                    Map<String, Object> childUpdates = new HashMap<>();
-                    childUpdates.put("/cards/" + key, cardValues);
-
-                    databaseReference.updateChildren(childUpdates);
-
+                    storIOSQLite
+                            .put()
+                            .object(card)
+                            .prepare()
+                            .executeAsBlocking();
                     return card;
                 }
             };
