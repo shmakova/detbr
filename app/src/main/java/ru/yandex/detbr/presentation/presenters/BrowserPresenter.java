@@ -4,7 +4,6 @@ import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.http.SslError;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
@@ -12,9 +11,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.data.cards.CardsRepository;
@@ -113,12 +109,6 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     public void onLikeClick(String title, String url) {
-        List<String> likes = new ArrayList<>();
-
-        String androidId = Settings.Secure.getString(application.getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        likes.add(androidId);
-
         compositeSubscription.add(cardsRepository.getCardByUrl(url)
                 .flatMap(card -> {
                     if (card == null) {
@@ -126,7 +116,6 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                                 .title(title)
                                 .url(url)
                                 .like(true)
-                                .likes(likes)
                                 .build();
 
                         return cardsRepository.saveCard(newCard);

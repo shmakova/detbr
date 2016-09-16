@@ -10,7 +10,6 @@ import ru.yandex.detbr.presentation.views.FavoritesView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
-import timber.log.Timber;
 
 /**
  * Created by shmakova on 28.08.16.
@@ -47,10 +46,7 @@ public class FavoritesPresenter extends BaseRxPresenter<FavoritesView, List<Card
         compositeSubscription.add(
                 cardsRepository.setLike(card, !isCardLiked)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                it -> {
-                                    Timber.e("TOGGLED LIKE" + card.like());
-                                }));
+                        .subscribe());
     }
 
     @Override

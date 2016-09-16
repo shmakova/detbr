@@ -169,7 +169,6 @@ public class CardsRepositoryImpl implements CardsRepository {
                     Map<String, Object> cardValues = new HashMap<>();
                     cardValues.put("url", card.url());
                     cardValues.put("title", card.title());
-                    cardValues.put("likes", card.likes());
                     String image = getImageUrl(card.url());
 
                     if (image == null || image.isEmpty()) {

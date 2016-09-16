@@ -7,7 +7,6 @@ import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.presentation.views.CardItemView;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.subscriptions.CompositeSubscription;
-import timber.log.Timber;
 
 /**
  * Created by shmakova on 04.09.16.
@@ -31,7 +30,6 @@ public class CardPresenter extends MvpBasePresenter<CardItemView> {
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
                                 it -> {
-                                    Timber.e("TOGGLED LIKE" + card.like());
                                     if (isViewAttached()) {
                                         getView().setLike(!isCardLiked);
                                     }
