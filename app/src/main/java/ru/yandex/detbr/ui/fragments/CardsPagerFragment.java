@@ -144,24 +144,25 @@ public class CardsPagerFragment extends BaseLceFragment<FrameLayout, List<Card>,
     }
 
     @Override
-    public void setBackgroundColor(String color, int x, int y) {
+    public void setBackgroundColor(String color, @ColorRes int dividerColor, int x, int y) {
         BackgroundAnimator.changeBackgroundColor(
                 categoryCardsBackward,
                 previousCardsBackward,
-                Color.parseColor(color), x, y);
+                divider,
+                Color.parseColor(color),
+                ContextCompat.getColor(getContext(), dividerColor),
+                x, y);
     }
 
     @Override
-    public void setBackgroundColor(@ColorRes int color, int x, int y) {
+    public void setBackgroundColor(@ColorRes int color, @ColorRes int dividerColor, int x, int y) {
         BackgroundAnimator.changeBackgroundColor(
                 categoryCardsBackward,
                 previousCardsBackward,
-                ContextCompat.getColor(getContext(), color), x, y);
-    }
-
-    @Override
-    public void setDividerColor(@ColorRes int color) {
-        divider.setBackgroundColor(ContextCompat.getColor(getContext(), color));
+                divider,
+                ContextCompat.getColor(getContext(), color),
+                ContextCompat.getColor(getContext(), dividerColor),
+                x, y);
     }
 
     @Override

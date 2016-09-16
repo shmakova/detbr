@@ -2,6 +2,8 @@ package ru.yandex.detbr.ui.animators;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
@@ -16,22 +18,31 @@ public final class BackgroundAnimator {
 
     public static void changeBackgroundColor(View backgroundView,
                                              View previousBackgroundView,
-                                             int color, int x, int y) {
+                                             View divider,
+                                             int color,
+                                             int dividerColor,
+                                             int x, int y) {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             previousBackgroundView.setVisibility(View.VISIBLE);
             backgroundView.setBackgroundColor(color);
             int finalRadius = Math.max(backgroundView.getWidth(), backgroundView.getHeight());
-            Animator anim = ViewAnimationUtils.createCircularReveal(backgroundView, x, y, 0, finalRadius);
-            anim.setDuration(300);
-            anim.setInterpolator(new AccelerateInterpolator());
-            anim.start();
-            anim.addListener(new AnimatorListenerAdapter() {
+            AnimatorSet set = new AnimatorSet();
+            Animator backgroundAnimator = ViewAnimationUtils.createCircularReveal(backgroundView, x, y, 0, finalRadius);
+            divider.setBackgroundColor(dividerColor);
+            ObjectAnimator dividerFadeInAnimator = ObjectAnimator.ofFloat(divider, "alpha", 0f, 1f);
+
+            set.playTogether(backgroundAnimator, dividerFadeInAnimator);
+            set.setDuration(300);
+            set.setInterpolator(new AccelerateInterpolator());
+
+            set.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     previousBackgroundView.setBackgroundColor(color);
                     previousBackgroundView.setVisibility(View.GONE);
                 }
             });
+            set.start();
         } else {
             backgroundView.setBackgroundColor(color);
         }

@@ -64,8 +64,11 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
             this.category = null;
 
             if (isViewAttached()) {
-                getView().setBackgroundColor(R.color.light_background, categoryClick.x(), categoryClick.y());
-                getView().setDividerColor(R.color.light_grey);
+                getView().setBackgroundColor(
+                        R.color.light_background,
+                        R.color.light_grey,
+                        categoryClick.x(),
+                        categoryClick.y());
             }
         } else {
             school = schoolsRepository.loadSchool();
@@ -78,8 +81,11 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
             }
 
             if (isViewAttached() && category.color() != null) {
-                getView().setBackgroundColor(category.color(), categoryClick.x(), categoryClick.y());
-                getView().setDividerColor(R.color.dark_transparent_white);
+                getView().setBackgroundColor(
+                        category.color(),
+                        R.color.dark_transparent_white,
+                        categoryClick.x(),
+                        categoryClick.y());
             }
         }
     }
