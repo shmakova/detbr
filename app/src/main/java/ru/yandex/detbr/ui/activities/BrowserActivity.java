@@ -33,6 +33,7 @@ import ru.yandex.detbr.di.modules.BrowserModule;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.presenters.BrowserPresenter;
 import ru.yandex.detbr.presentation.views.BrowserView;
+import ru.yandex.detbr.utils.IntentResolver;
 
 public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresenter> implements
         BrowserView {
@@ -155,9 +156,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
-    public void goExternalApp(String url) {
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-        startActivity(intent);
+    public boolean resolveUrl(String url, LoadUrlListener listener) {
+        return IntentResolver.resolveUrl(this, url, listener);
     }
 
     @Override
