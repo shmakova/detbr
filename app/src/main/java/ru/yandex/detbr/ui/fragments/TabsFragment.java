@@ -72,6 +72,7 @@ public class TabsFragment extends BaseLceFragment<FrameLayout, List<Tab>, TabsVi
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
     }
 
