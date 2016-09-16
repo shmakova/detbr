@@ -24,7 +24,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginTop="16dp"
-            android:textColor="@color/dark_transparent"/>
+            android:textColor="@color/darkest_transparent"/>
 
         <TextView
             android:id="@+id/url"

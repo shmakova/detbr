@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.yandex.detbr.managers.LikeManager;
+import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.presentation.presenters.CardPresenter;
 
 /**
@@ -15,7 +15,7 @@ import ru.yandex.detbr.presentation.presenters.CardPresenter;
 public class CardModule {
     @Provides
     @NonNull
-    public CardPresenter provideCardPresenter(@NonNull LikeManager likeManager) {
-        return new CardPresenter(likeManager);
+    public CardPresenter provideCardPresenter(@NonNull CardsRepository cardsRepository) {
+        return new CardPresenter(cardsRepository);
     }
 }

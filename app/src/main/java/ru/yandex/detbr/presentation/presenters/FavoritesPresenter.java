@@ -6,9 +6,10 @@ import java.util.List;
 
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.data.cards.CardsRepository;
-import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.views.FavoritesView;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by shmakova on 28.08.16.
@@ -17,17 +18,15 @@ import rx.Observable;
 public class FavoritesPresenter extends BaseRxPresenter<FavoritesView, List<Card>> {
     @NonNull
     private final CardsRepository cardsRepository;
-    @NonNull
-    private final NavigationManager navigationManager;
+    private final CompositeSubscription compositeSubscription;
 
-    public FavoritesPresenter(@NonNull CardsRepository cardsRepository,
-                              @NonNull NavigationManager navigationManager) {
+    public FavoritesPresenter(@NonNull CardsRepository cardsRepository) {
         this.cardsRepository = cardsRepository;
-        this.navigationManager = navigationManager;
+        compositeSubscription = new CompositeSubscription();
     }
 
     public void loadCards(boolean pullToRefresh) {
-        Observable<List<Card>> observable = cardsRepository.getFavouriteCards();
+        Observable<List<Card>> observable = cardsRepository.getFavoriteCards();
         subscribe(observable, pullToRefresh);
     }
 
@@ -41,7 +40,21 @@ public class FavoritesPresenter extends BaseRxPresenter<FavoritesView, List<Card
         }
     }
 
-    public void onFindInterestingButtonClick() {
-        navigationManager.openCards();
+    public void onLikeClick(Card card) {
+        boolean isCardLiked = cardsRepository.isUrlLiked(card.url());
+
+        compositeSubscription.add(
+                cardsRepository.setLike(card, !isCardLiked)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe());
+    }
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+
+        if (!retainInstance && compositeSubscription.hasSubscriptions()) {
+            compositeSubscription.unsubscribe();
+        }
     }
 }

@@ -34,12 +34,10 @@ import ru.yandex.detbr.presentation.presenters.MainPresenter;
 import ru.yandex.detbr.presentation.views.MainView;
 import ru.yandex.detbr.ui.fragments.IntroFragment;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
-import ru.yandex.detbr.ui.listeners.OnLikeClickListener;
 import ru.yandex.detbr.ui.other.ViewModifier;
 
 public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> implements
         OnCardsItemClickListener,
-        OnLikeClickListener,
         OnTabSelectListener,
         IntroFragment.OnStartClickListener,
         FloatingSearchView.OnSearchListener,
@@ -101,11 +99,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @Override
     public void onCardsItemClick(Card card) {
         presenter.onCardsItemClick(card);
-    }
-
-    @Override
-    public void onLikeClick(Card card) {
-        presenter.onLikeClick(card);
     }
 
     @Override

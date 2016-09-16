@@ -1,7 +1,8 @@
 package ru.yandex.detbr.data.cards;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+
+import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
 
 import java.util.List;
 
@@ -15,21 +16,15 @@ import rx.Observable;
 public interface CardsRepository {
     Observable<List<Card>> getCardsList();
 
-    Observable<List<Card>> getFavouriteCards();
+    Observable<List<Card>> getFavoriteCards();
 
     Observable<List<Card>> getCardsByCategory(Category category);
 
-    void saveFavouriteCard(String title, String url, @Nullable String cover, boolean like);
+    Observable<Card> saveCard(Card card);
 
-    void saveFavouriteCard(@NonNull Card card);
+    Observable<PutResult> setLike(@NonNull Card card, boolean like);
 
-    void saveCard(Card card);
+    Observable<Card> getCardByUrl(@NonNull String url);
 
-    void toggleLike(@NonNull String url);
-
-    boolean getLikeFromUrl(@NonNull String url);
-
-    boolean isCardExist(@NonNull String url);
-
-    boolean isCardLiked(@NonNull String url);
+    boolean isUrlLiked(@NonNull String url);
 }

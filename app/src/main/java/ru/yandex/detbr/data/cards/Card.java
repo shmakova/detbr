@@ -7,6 +7,8 @@ import com.google.auto.value.AutoValue;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.Exclude;
 
+import java.util.List;
+
 import me.mattlogan.auto.value.firebase.annotation.FirebaseValue;
 import ru.yandex.detbr.utils.UrlUtils;
 
@@ -52,6 +54,9 @@ public abstract class Card implements Parcelable {
 
     public abstract boolean dark();
 
+    @Nullable
+    public abstract List<String> likes();
+
     public String getSiteName() {
         if (site() == null || site().isEmpty()) {
             return UrlUtils.getHost(url());
@@ -72,6 +77,12 @@ public abstract class Card implements Parcelable {
         return new AutoValue_Card.Builder()
                 .like(false)
                 .dark(false);
+    }
+
+    public Card getLikedCard(boolean like) {
+        return new AutoValue_Card.Builder(this)
+                .like(like)
+                .build();
     }
 
     @AutoValue.Builder
@@ -95,6 +106,8 @@ public abstract class Card implements Parcelable {
         public abstract Builder type(@Nullable String type);
 
         public abstract Builder color(@Nullable String color);
+
+        public abstract Builder likes(@Nullable List<String> likes);
 
         public abstract Builder dark(boolean dark);
 

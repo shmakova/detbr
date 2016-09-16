@@ -13,11 +13,9 @@ import ru.yandex.detbr.data.cards.Card;
  */
 
 public interface CardsView extends MvpLceView<List<Card>> {
-    void setBackgroundColor(@ColorRes int color, int x, int y);
+    void setBackgroundColor(@ColorRes int color, @ColorRes int dividerColor, int x, int y);
 
-    void setBackgroundColor(String color, int x, int y);
-
-    void setDividerColor(@ColorRes int color);
+    void setBackgroundColor(String color, @ColorRes int dividerColor, int x, int y);
 
     void showSchoolFragment();
 }
