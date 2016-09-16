@@ -1,6 +1,5 @@
 package ru.yandex.detbr.di.modules;
 
-import android.app.Application;
 import android.support.annotation.NonNull;
 
 import dagger.Module;
@@ -20,8 +19,7 @@ public class BrowserModule {
     @NonNull
     public BrowserPresenter provideBrowserPresenter(@NonNull WotService wotService,
                                                     @NonNull TabsManager tabsManager,
-                                                    @NonNull CardsRepository cardsRepository,
-                                                    @NonNull Application application) {
-        return new BrowserPresenter(wotService, tabsManager, cardsRepository, application);
+                                                    @NonNull CardsRepository cardsRepository) {
+        return new BrowserPresenter(wotService, tabsManager, cardsRepository);
     }
 }

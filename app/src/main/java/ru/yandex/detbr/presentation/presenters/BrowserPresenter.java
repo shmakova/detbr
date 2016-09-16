@@ -1,6 +1,5 @@
 package ru.yandex.detbr.presentation.presenters;
 
-import android.app.Application;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.net.http.SslError;
@@ -36,21 +35,17 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final TabsManager tabsManager;
     @NonNull
-    private final Application application;
-    @NonNull
     private final CardsRepository cardsRepository;
     private final CompositeSubscription compositeSubscription;
     private String currentUrl;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
-                            @NonNull CardsRepository cardsRepository,
-                            @NonNull Application application) {
+                            @NonNull CardsRepository cardsRepository) {
 
         this.wotService = wotService;
         this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
-        this.application = application;
         compositeSubscription = new CompositeSubscription();
     }
 
