@@ -150,13 +150,13 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     public Observable<Card> saveCard(Card card) {
         return Observable.just(card)
-                .map(PUSH_CARD_TO_FIREBASE)
-                .map(SAVE_CARD_TO_DATABASE)
+                .map(pushCardToFirebase)
+                .map(saveCardToDatabase)
                 .first();
     }
 
 
-    private final Func1<Card, Card> PUSH_CARD_TO_FIREBASE =
+    private final Func1<Card, Card> pushCardToFirebase =
             new Func1<Card, Card>() {
                 @Override
                 public Card call(Card card) {
@@ -188,7 +188,7 @@ public class CardsRepositoryImpl implements CardsRepository {
                 }
             };
 
-    private final Func1<Card, Card> SAVE_CARD_TO_DATABASE =
+    private final Func1<Card, Card> saveCardToDatabase =
             new Func1<Card, Card>() {
                 @Override
                 public Card call(Card card) {
