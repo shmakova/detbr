@@ -155,7 +155,7 @@ public class CardsRepositoryImpl implements CardsRepository {
                 .first();
     }
 
-
+    @SuppressWarnings("PMD.AvoidReassigningParameters")
     private final Func1<Card, Card> pushCardToFirebase =
             new Func1<Card, Card>() {
                 @Override

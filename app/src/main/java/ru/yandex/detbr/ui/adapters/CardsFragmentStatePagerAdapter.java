@@ -17,6 +17,8 @@ import ru.yandex.detbr.ui.fragments.LastCardFragment;
  */
 
 public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+    private static final int INTRO_CARDS_COUNT = 2;
+
     private final List<Card> cards;
     private final boolean firstLoad;
 
@@ -39,7 +41,7 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             } else if (position == 1) {
                 return new IntroCardFragmentBuilder(R.layout.fragment_intro_second).build();
             } else {
-                card = cards.get(position - 2);
+                card = cards.get(position - INTRO_CARDS_COUNT);
             }
         } else {
             card = cards.get(position);
@@ -64,6 +66,6 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return cards.size() + (firstLoad? 3 : 1);
+        return cards.size() + 1 + (firstLoad? INTRO_CARDS_COUNT : 0);
     }
 }
