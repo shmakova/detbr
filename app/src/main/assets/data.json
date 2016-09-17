@@ -13,7 +13,7 @@
       "image": "http://img.youtube.com/vi/vRwFdzK-1x8/0.jpg",
       "site": "YouTube",
       "category": "video",
-      "type": "plain_image"
+      "type": "youtube"
     },
     {
       "title": "Pokemon: смотреть все серии",
@@ -88,7 +88,7 @@
       "image": "http://img.youtube.com/vi/CrYEEuNtnUU/0.jpg",
       "site": "YouTube",
       "category": "video",
-      "type": "plain_image"
+      "type": "youtube"
     },
     {
       "title": "О читах в POKEMON GO",
@@ -149,7 +149,7 @@
       "image": "http://img.youtube.com/vi/vRwFdzK-1x8/0.jpg",
       "site": "YouTube",
       "category": "goods",
-      "type": "plain_image"
+      "type": "youtube"
     },
     {
       "title": "Мини-игры Pokemon",
@@ -462,7 +462,7 @@
       "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
       "site": "YouTube",
       "category": "video",
-      "type": "plain_image"
+      "type": "youtube"
     },
     {
       "title": "Яндекс.Рефераты",
@@ -504,7 +504,7 @@
       "image": "http://img.youtube.com/vi/CrYEEuNtnUU/0.jpg",
       "site": "YouTube",
       "category": "goods",
-      "type": "plain_image"
+      "type": "youtube"
     },
     {
       "title": "Лонгборд Penny Original",
@@ -623,7 +623,7 @@
       "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
       "site": "YouTube",
       "category": "goods",
-      "type": "plain_image"
+      "type": "youtube"
     },
     {
       "title": "Сложить сердечко из бумаги",
@@ -720,7 +720,7 @@
       "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
       "site": "YouTube",
       "category": "school",
-      "type": "plain_image"
+      "type": "youtube"
     },
     {
       "title": "Old Macdonald had a farm - Song",

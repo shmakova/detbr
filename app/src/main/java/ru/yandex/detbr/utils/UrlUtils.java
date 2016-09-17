@@ -5,6 +5,8 @@ import android.util.Patterns;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import timber.log.Timber;
 
@@ -22,6 +24,8 @@ public final class UrlUtils {
     public static final String GOOGLE_QUERY_PARAMETER = "q=";
     private static final String HTTP_PREFIX = "http://";
     private static final String HTTPS_PREFIX = "https://";
+    private static final String YOUTUBE_URL_REGEX = "^(https?)?(://)?(www.)?(m.)?((youtube.com)|(youtu.be))/";
+    private static final String[] VIDEO_ID_REGEX = {"\\?vi?=([^&]*)", "watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)", "^([A-Za-z0-9\\-]*)"};
 
     private UrlUtils() {
     }
@@ -60,5 +64,30 @@ public final class UrlUtils {
 
     public static boolean isHttpLink(String url) {
         return url.startsWith(HTTP_PREFIX) || url.startsWith(HTTPS_PREFIX);
+    }
+
+    public static String extractVideoIdFromUrl(String url) {
+        String youTubeLinkWithoutProtocolAndDomain = youTubeLinkWithoutProtocolAndDomain(url);
+
+        for (String regex : VIDEO_ID_REGEX) {
+            Pattern compiledPattern = Pattern.compile(regex);
+            Matcher matcher = compiledPattern.matcher(youTubeLinkWithoutProtocolAndDomain);
+
+            if (matcher.find()) {
+                return matcher.group(1);
+            }
+        }
+
+        return null;
+    }
+
+    private static String youTubeLinkWithoutProtocolAndDomain(String url) {
+        Pattern compiledPattern = Pattern.compile(YOUTUBE_URL_REGEX);
+        Matcher matcher = compiledPattern.matcher(url);
+
+        if (matcher.find()) {
+            return url.replace(matcher.group(), "");
+        }
+        return url;
     }
 }

@@ -49,6 +49,11 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
+        <activity
+            android:name=".ui.activities.YouTubeActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="3c6d9622102ef49c87ae45b7389b6bb5611a0cee"/>
