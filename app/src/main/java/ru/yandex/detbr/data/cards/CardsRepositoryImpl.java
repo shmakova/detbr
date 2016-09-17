@@ -176,6 +176,7 @@ public class CardsRepositoryImpl implements CardsRepository {
                     } else {
                         cardValues.put("image", image);
                         cardValues.put("type", Card.PLAIN_IMAGE_TYPE);
+                        card = card.getCardWithImage(image);
                     }
 
                     Map<String, Object> childUpdates = new HashMap<>();

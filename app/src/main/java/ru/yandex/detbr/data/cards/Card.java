@@ -85,6 +85,12 @@ public abstract class Card implements Parcelable {
                 .build();
     }
 
+    public Card getCardWithImage(String image) {
+        return new AutoValue_Card.Builder(this)
+                .image(image)
+                .build();
+    }
+
     @AutoValue.Builder
     public abstract static class Builder {
         public abstract Builder title(String title);
