@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link type="text/css" rel="stylesheet" href="css/main.css"/>
+    <title>Ничего не найдено</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+<div class="main grey-text darken-1">
+    <div class="row">
+        <p class="center-align"><img src="img/noresult.png"/></p>
+    </div>
+    <div class="row">
+        <p class="center-align grey-text">По твоему запросу у нас
+            <br/>нечего показать :(</p>
+    </div>
+
+    <div class="row">
+        <p class="center-align">
+            <a href="#back"
+               class="waves-effect waves-light btn-large amber lighten-2 black-text history-button"
+               onClick="onLuckyButtonClick();"><i class="material-icons left">casino</i>МНЕ ПОВЕЗЕТ</a>
+        </p>
+    </div>
+</div>
+
+<script>
+    var luckyUrls = [
+        "http://www.rukikryki.ru/podelki/igrushki/3584-antistress-igrushka-svoimi-rukami.html",
+        "http://learnenglishkids.britishcouncil.org/en/songs/people-work",
+        "http://koteko.ru/risuem-koshek/kak-narisovat-koshku-poetapno",
+        "http://learnenglishkids.britishcouncil.org/en/songs/old-macdonald-had-farm",
+        "http://heaclub.ru/kak-narisovat-sobaku-shhenka-risunki-prostym-karandashom-poetapno-dlya-nachinayushhih",
+        "http://www.lego.com/ru-ru/starwars/products?icmp=CORU36HomeWNStarWarsRogueOne#/episode-i-vi",
+        "http://yavmode.ru/moda-2016-65-foto/",
+        "http://www.playground.ru/blogs/minecraft/",
+        "http://www.putidorogi-nn.ru/7-chudes-sveta/501-sem-chudes-drevnego-mira",
+        "http://ru.m.wikihow.com/сделать-бумажный-самолетик",
+        "http://www.lego.com/ru-ru/nexoknights/explorepage/explore-entertainment-room",
+        "http://saitzemli.ru/imagesforsite/articles/Mars/mars.jpg",
+        "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
+        "http://m.popmech.ru/diy/51713-kak-sdelat-bumazhnyy-samoletik-dostoynyy-mirovogo-rekorda/",
+        "https://www.adme.ru/svoboda-kultura/15-neobychnyh-shkol-kruche-kotoryh-tolko-hogvarts-1340565/",
+        "http://ru.m.wikihow.com/сложить-сердечко-из-бумаги"
+    ];
+
+    function onLuckyButtonClick() {
+        window.location.href = luckyUrls[getRandomInt(0, luckyUrls.length)];
+    }
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+
+</script>
+</body>
+</html>
