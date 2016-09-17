@@ -160,7 +160,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url.startsWith("http")) {
+            if (UrlUtils.isHttpLink(url)) {
                 if (currentUrl != null && currentUrl.equals(url)) {
                     view.goBack();
                     return true;

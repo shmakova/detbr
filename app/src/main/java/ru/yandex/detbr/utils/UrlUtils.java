@@ -22,8 +22,11 @@ public final class UrlUtils {
     public static final String GOOGLE_URL = "google.";
     public static final String GOOGLE_SAFE_PARAMETER = "safe=high";
     public static final String GOOGLE_QUERY_PARAMETER = "q=";
+    public static final String BROWSER_FALLBACK_URL = "browser_fallback_url";
+    public static final String MARKET_URL = "market://details?id=";
     private static final String HTTP_PREFIX = "http://";
     private static final String HTTPS_PREFIX = "https://";
+    private static final String INTENT_PREFIX = "intent://";
 
     private UrlUtils() {
     }
@@ -68,6 +71,10 @@ public final class UrlUtils {
 
     public static boolean isHttpLink(String url) {
         return url.startsWith(HTTP_PREFIX) || url.startsWith(HTTPS_PREFIX);
+    }
+
+    public static boolean isIntent(String url) {
+        return url.startsWith(INTENT_PREFIX);
     }
 
     private static String removeSubdomains(String link) {
