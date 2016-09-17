@@ -23,7 +23,6 @@ public abstract class Card implements Parcelable {
     public static final String TEXT_TYPE = "text";
     public static final String PLAIN_IMAGE_TYPE = "plain_image";
     public static final String FULL_IMAGE_TYPE = "full_image";
-    public static final String YOUTUBE_TYPE = "youtube";
 
     public abstract String title();
 

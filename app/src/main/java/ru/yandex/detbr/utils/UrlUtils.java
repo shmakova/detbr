@@ -25,7 +25,7 @@ public final class UrlUtils {
     private static final String HTTP_PREFIX = "http://";
     private static final String HTTPS_PREFIX = "https://";
     private static final String YOUTUBE_URL_REGEX = "^(https?)?(://)?(www.)?(m.)?((youtube.com)|(youtu.be))/";
-    private static final String[] VIDEO_ID_REGEX = {"\\?vi?=([^&]*)", "watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)", "^([A-Za-z0-9\\-]*)"};
+    private static final String[] VIDEO_ID_REGEX = {"\\?vi?=([^&]*)", "watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)"};
 
     private UrlUtils() {
     }
@@ -88,6 +88,7 @@ public final class UrlUtils {
         if (matcher.find()) {
             return url.replace(matcher.group(), "");
         }
+
         return url;
     }
 }

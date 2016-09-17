@@ -105,10 +105,12 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onCardsItemClick(Card card) {
-        if (card.type().equals(Card.YOUTUBE_TYPE)) {
-            navigationManager.openYoutubePlayer(UrlUtils.extractVideoIdFromUrl(card.url()));
-        } else {
+        String videoId = UrlUtils.extractVideoIdFromUrl(card.url());
+
+        if (videoId == null) {
             navigationManager.openBrowser(card.url());
+        } else {
+            navigationManager.openYoutubePlayer(videoId);
         }
     }
 

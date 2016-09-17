@@ -11,9 +11,10 @@ import ru.yandex.detbr.data.tabs.tables.TabsTable;
 public class DbOpenHelper extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 3;
+    private static final String DB_NAME = "detbr_db";
 
     public DbOpenHelper(Context context) {
-        super(context, "detbr_db", null, DB_VERSION);
+        super(context, DB_NAME, null, DB_VERSION);
     }
 
     @Override
@@ -23,7 +24,7 @@ public class DbOpenHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
         // TODO: 01.09.16 удалить после отладки
         sqLiteDatabase.execSQL("DROP TABLE " + CardsTable.TABLE);
         sqLiteDatabase.execSQL("DROP TABLE " + TabsTable.TABLE);

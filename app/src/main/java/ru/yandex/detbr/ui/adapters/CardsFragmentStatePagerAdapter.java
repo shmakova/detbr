@@ -46,7 +46,6 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
                 case Card.TEXT_TYPE:
                     return new CardFragmentBuilder(card, R.layout.item_card).build();
                 case Card.PLAIN_IMAGE_TYPE:
-                case Card.YOUTUBE_TYPE:
                     return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
                 case Card.FULL_IMAGE_TYPE:
                     return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
