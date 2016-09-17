@@ -218,8 +218,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
-    public void showSearchText(@Nullable String title, @NonNull String host) {
-        if (title == null || title.isEmpty() || host.isEmpty()) {
+    public void showSearchText(@Nullable String title, @Nullable String host) {
+        if (title == null || title.isEmpty() || host == null || host.isEmpty()) {
             separator.setVisibility(View.GONE);
         } else {
             separator.setVisibility(View.VISIBLE);

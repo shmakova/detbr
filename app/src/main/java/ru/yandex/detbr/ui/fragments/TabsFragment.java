@@ -29,7 +29,6 @@ import ru.yandex.detbr.presentation.presenters.TabsPresenter;
 import ru.yandex.detbr.presentation.views.TabsView;
 import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.adapters.TabsAdapter;
-import ru.yandex.detbr.ui.other.DividerItemDecoration;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
 /**
@@ -73,9 +72,8 @@ public class TabsFragment extends BaseLceFragment<FrameLayout, List<Tab>, TabsVi
         recyclerView.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),
                 LinearLayoutManager.VERTICAL, false);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.addItemDecoration(
-                new DividerItemDecoration(getActivity(), R.drawable.divider));
     }
 
     @Override

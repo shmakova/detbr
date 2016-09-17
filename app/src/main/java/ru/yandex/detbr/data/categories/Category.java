@@ -56,6 +56,8 @@ public abstract class Category implements Parcelable {
                 return R.drawable.ic_goods;
             case "school":
                 return R.drawable.ic_school;
+            case "video":
+                return R.drawable.ic_video;
             default:
                 return R.drawable.ic_star;
         }

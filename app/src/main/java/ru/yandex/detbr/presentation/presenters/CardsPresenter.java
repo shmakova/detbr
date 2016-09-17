@@ -9,6 +9,7 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.data.categories.Category;
+import ru.yandex.detbr.data.categories.CategoryClick;
 import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.presentation.views.CardsView;
 import rx.Observable;
@@ -55,14 +56,19 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
         }
     }
 
-    public void onCategorySelected(Category category) {
+    public void onCategorySelected(CategoryClick categoryClick) {
+        Category category = categoryClick.category();
+
         if (category.equals(this.category)) {
             loadCards(false);
             this.category = null;
 
             if (isViewAttached()) {
-                getView().setBackgroundColor(R.color.transparent);
-                getView().setDividerColor(R.color.light_grey);
+                getView().setBackgroundColor(
+                        R.color.light_background,
+                        R.color.light_grey,
+                        categoryClick.x(),
+                        categoryClick.y());
             }
         } else {
             school = schoolsRepository.loadSchool();
@@ -75,8 +81,11 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
             }
 
             if (isViewAttached() && category.color() != null) {
-                getView().setBackgroundColor(category.color());
-                getView().setDividerColor(R.color.dark_transparent_white);
+                getView().setBackgroundColor(
+                        category.color(),
+                        R.color.dark_transparent_white,
+                        categoryClick.x(),
+                        categoryClick.y());
             }
         }
     }

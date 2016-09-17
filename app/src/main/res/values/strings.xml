@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Детский Браузер</string>
+    <string name="app_name">Яндекс Школа</string>
     <string name="content">Hello</string>
     <string name="choose_your_school">Выбрать школу</string>
     <string name="search_title">Поиск</string>
@@ -28,7 +28,7 @@
     <string name="empty_favorites">Empty favorites</string>
     <string name="separator">›</string>
     <string name="background">background</string>
-    <string name="intro_text">Браузер найдёт интересное</string>
+    <string name="intro_text">Твой выход\nв интернет</string>
     <string name="start">Начать</string>
     <string name="intro_description_first">Потяни влево, попробуй</string>
     <string name="intro_title_first">Что интересно твоим друзьям?</string>
@@ -36,4 +36,7 @@
     <string name="intro_description_second">Тогда здесь будет больше интересного</string>
     <string name="hand">hand</string>
     <string name="check_internet_connection">Проверьте интернет-соединение</string>
+    <string name="last">last card</string>
+    <string name="last_card_text">Расскажи одноклассникам о браузере, чтобы здесь было больше карточек</string>
+    <string name="back">К началу</string>
 </resources>

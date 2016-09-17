@@ -20,6 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.categories.Category;
+import ru.yandex.detbr.data.categories.CategoryClick;
 import rx.Observable;
 import rx.subjects.PublishSubject;
 
@@ -29,7 +30,7 @@ import rx.subjects.PublishSubject;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder> {
     private List<Category> categories;
-    private final PublishSubject<Category> onClickSubject = PublishSubject.create();
+    private final PublishSubject<CategoryClick> onClickSubject = PublishSubject.create();
     private int selectedItem = -1;
 
     @Override
@@ -44,7 +45,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
         holder.bind(category, position);
     }
 
-    public Observable<Category> getPositionClicks() {
+    public Observable<CategoryClick> getPositionClicks() {
         return onClickSubject.asObservable();
     }
 
@@ -72,7 +73,16 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Ca
             ButterKnife.bind(this, itemView);
 
             View.OnClickListener onClickListener = view -> {
-                onClickSubject.onNext(categories.get(getAdapterPosition()));
+                int[] values = new int[2];
+                view.getLocationOnScreen(values);
+                int x = values[0] + view.getWidth() / 2;
+                int y = values[1] + view.getHeight() / 4;
+
+                onClickSubject.onNext(CategoryClick.create(
+                        categories.get(getAdapterPosition()),
+                        x,
+                        y));
+
                 if (selectedItem == getAdapterPosition()) {
                     selectedItem = -1;
                     categoryText.setTextColor(

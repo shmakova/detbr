@@ -2,7 +2,9 @@ package ru.yandex.detbr.presentation.presenters;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.net.http.SslError;
 import android.support.annotation.NonNull;
+import android.webkit.SslErrorHandler;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -13,7 +15,6 @@ import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
-import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.views.BrowserView;
 import ru.yandex.detbr.utils.UrlUtils;
@@ -21,6 +22,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
+
 
 /**
  * Created by shmakova on 19.08.16.
@@ -33,21 +35,17 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final TabsManager tabsManager;
     @NonNull
-    private final LikeManager likeManager;
-    @NonNull
     private final CardsRepository cardsRepository;
     private final CompositeSubscription compositeSubscription;
     private String currentUrl;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
-                            @NonNull CardsRepository cardsRepository,
-                            @NonNull LikeManager likeManager) {
+                            @NonNull CardsRepository cardsRepository) {
 
         this.wotService = wotService;
         this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
-        this.likeManager = likeManager;
         compositeSubscription = new CompositeSubscription();
     }
 
@@ -106,24 +104,29 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     }
 
     public void onLikeClick(String title, String url) {
-        boolean isUrlLiked = likeManager.isUrlLiked(url);
-        Card card = Card.builder()
-                .title(title)
-                .url(url)
-                .build();
+        compositeSubscription.add(cardsRepository.getCardByUrl(url)
+                .flatMap(card -> {
+                    if (card == null) {
+                        final Card newCard = Card.builder()
+                                .title(title)
+                                .url(url)
+                                .like(true)
+                                .build();
 
-        if (isUrlLiked) {
-            isUrlLiked = false;
-        } else {
-            cardsRepository.saveCard(card);
-            isUrlLiked = true;
-        }
-
-        likeManager.setLike(card);
-
-        if (isViewAttached()) {
-            getView().setLike(isUrlLiked);
-        }
+                        return cardsRepository.saveCard(newCard);
+                    } else {
+                        return cardsRepository
+                                .setLike(card, !card.like())
+                                .map(putResult -> card.getLikedCard(!card.like()));
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(it -> {
+                    if (isViewAttached()) {
+                        getView().setLike(it.like());
+                    }
+                }));
     }
 
     public WebViewClient provideWebViewClient() {
@@ -143,7 +146,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                     getView().showLike();
                 }
                 getView().hideProgress();
-                getView().setLike(likeManager.isUrlLiked(url));
+                getView().setLike(cardsRepository.isUrlLiked(url));
                 webView.postInvalidate();
 
                 updateTab(Tab.builder()
@@ -187,6 +190,11 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
             return true;
         }
 
+        @Override
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed();
+        }
+
         private Bitmap getSnapshot(WebView webView) {
             final int width = 320;
             int height = 480;
@@ -215,7 +223,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     public void detachView(boolean retainInstance) {
         super.detachView(retainInstance);
 
-        if (compositeSubscription.hasSubscriptions()) {
+        if (!retainInstance && compositeSubscription.hasSubscriptions()) {
             compositeSubscription.unsubscribe();
         }
     }
