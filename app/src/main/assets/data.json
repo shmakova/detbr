@@ -8,6 +8,14 @@
       "type": "plain_image"
     },
     {
+      "title": "Красный браслет дружбы",
+      "url": "https://m.youtube.com/watch?v=vRwFdzK-1x8",
+      "image": "http://img.youtube.com/vi/vRwFdzK-1x8/0.jpg",
+      "site": "YouTube",
+      "category": "video",
+      "type": "plain_image"
+    },
+    {
       "title": "Pokemon: смотреть все серии",
       "url": "https://yandex.ru/video/search?text=покемоны&family=yes",
       "site": "ЯНДЕКС.ВИДЕО",
@@ -75,21 +83,22 @@
       "type": "text"
     },
     {
-      "title": "Невероятные оптические иллюзии от профессора математики",
-      "url": "https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/",
-      "site": "ЛАЙФХАКЕР",
-      "category": "articles",
-      "type": "text"
+      "title": "Как плести фенечку из мулине",
+      "url": "https://m.youtube.com/watch?v=CrYEEuNtnUU&feature=youtu.be",
+      "image": "http://img.youtube.com/vi/CrYEEuNtnUU/0.jpg",
+      "site": "YouTube",
+      "category": "video",
+      "type": "plain_image"
     },
     {
-      "title": "О ЧИТАХ В POKEMON GO",
+      "title": "О читах в POKEMON GO",
       "url": "http://gopokemongo.ru/o-chitah-v-pokemon-go.html",
       "image": "http://gopokemongo.ru/wp-content/uploads/2016/07/512x512bb.jpg",
       "category": "pokemon",
       "type": "plain_image"
     },
     {
-      "title": "На чем кататься летом",
+      "title": "На чём кататься летом?",
       "url": "https://market.yandex.ru/articles/na-chem-katatsja-letom?track=fr_325422_snippet",
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
@@ -97,39 +106,7 @@
       "type": "text"
     },
     {
-      "title": "Pokemon: смотреть все серии",
-      "url": "https://yandex.ru/video/search?text=покемоны&family=yes",
-      "site": "ЯНДЕКС.ВИДЕО",
-      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
-      "category": "films",
-      "color": "#ffdd55",
-      "type": "text"
-    },
-    {
-      "title": "Невероятные оптические иллюзии от профессора математики",
-      "url": "https://lifehacker.ru/2016/07/04/kokichi-sugihara-illusion/",
-      "site": "ЛАЙФХАКЕР",
-      "category": "articles",
-      "type": "text"
-    },
-    {
-      "title": "Неуловимый барханный кот появился на публике впервые за 10 лет",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/neulovimyj-barhannyj-kot-poyavilsya-na-publike-vpervye-za-10-let-1339765/",
-      "site": "ADME",
-      "image": "https://files4.adme.ru/files/news/part_133/1339765/16452365-Depositphotos_31831607_original-1471343886-650-c845359d8c-1471344018.jpg",
-      "category": "articles",
-      "type": "plain_image"
-    },
-    {
-      "title": "15 крутых дизайнерских вещиц, с которыми жизнь станет приятнее",
-      "url": "https://www.adme.ru/tvorchestvo-dizajn/15-krutyh-dizajnerskih-veschic-s-kotorymi-zhizn-stanet-priyatnee-1152260/",
-      "site": "ADME",
-      "image": "https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg",
-      "category": "articles",
-      "type": "plain_image"
-    },
-    {
-      "title": "5 МИРОВЫХ РЕКОРДОВ POKEMON GO",
+      "title": "5 мировых рекордов POKEMON GO",
       "url": "http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html",
       "image": "http://gopokemongo.ru/wp-content/uploads/2016/08/pokemon-go-downloads-breaking-all-records.jpg",
       "category": "pokemon",
@@ -140,29 +117,6 @@
       "url": "http://www.pokemon.com/ru/pokedex/",
       "image": "https://assets.vg247.com/current//2016/08/pkmn_pokedex.jpg",
       "category": "games",
-      "type": "plain_image"
-    },
-    {
-      "title": "12-летняя девочка научилась танцевать только благодаря роликам в интернете",
-      "url": "https://www.adme.ru/video/12-letnyaya-devochka-nauchilas-tancevat-tolko-blagodarya-rolikam-na-youtube-1209210/",
-      "site": "ADME",
-      "category": "articles",
-      "type": "text"
-    },
-    {
-      "title": "Если бы у котов были цари, то только мейн-куны",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/esli-by-u-kotov-byli-cari-to-tolko-mejn-kuny-1339165/",
-      "site": "ADME",
-      "image": "https://scontent-ams3-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13714059_311271969205288_1183699015_n.jpg",
-      "category": "animals",
-      "type": "plain_image"
-    },
-    {
-      "title": "25 безумно милых штуковин, которые каждый захочет иметь в своем доме",
-      "url": "https://www.adme.ru/tvorchestvo-dizajn/30-bezumno-milyh-shtukovin-kotorye-kazhdyj-zahochet-imet-v-svoem-dome-945860/",
-      "site": "ADME",
-      "image": "https://files4.adme.ru/files/news/part_94/945860/preview-25651565-650x341-98-1471442066.jpg",
-      "category": "articles",
       "type": "plain_image"
     },
     {
@@ -182,32 +136,7 @@
       "type": "plain_image"
     },
     {
-      "title": "Знакомьтесь, это Самсон — самый большой и обаятельный кот на планете",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/znakomtes-eto-samson-samyj-bolshoj-i-obayatelnyj-kot-na-planete-1342865/",
-      "site": "ADME",
-      "image": "https://files6.adme.ru/files/news/part_134/1342865/preview-16588565-650x341-98-1471705379.jpg",
-      "favicon": "http://iface.adme.ru/@/AdMe/Layouts/i/apple-icon.png",
-      "category": "animals",
-      "type": "plain_image"
-    },
-    {
-      "title": "Неуловимый барханный кот появился на публике впервые за 10 лет",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/neulovimyj-barhannyj-kot-poyavilsya-na-publike-vpervye-za-10-let-1339765/",
-      "site": "ADME",
-      "image": "https://files4.adme.ru/files/news/part_133/1339765/16452365-Depositphotos_31831607_original-1471343886-650-c845359d8c-1471344018.jpg",
-      "category": "animals",
-      "type": "plain_image"
-    },
-    {
-      "title": "Если бы у котов были цари, то только мейн-куны",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/esli-by-u-kotov-byli-cari-to-tolko-mejn-kuny-1339165/",
-      "site": "ADME",
-      "image": "https://scontent-ams3-1.cdninstagram.com/t51.2885-15/s1080x1080/e15/fr/13714059_311271969205288_1183699015_n.jpg",
-      "category": "articles",
-      "type": "plain_image"
-    },
-    {
-      "title": "Как выбрать самокат",
+      "title": "Как выбрать самокат?",
       "url": "https://market.yandex.ru/articles/kak-vybrat-samokat?track=fr_ctlg_list",
       "site": "ЯНДЕКС.МАРКЕТ",
       "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
@@ -215,20 +144,12 @@
       "type": "text"
     },
     {
-      "title": "Почему люди не видели синий цвет до недавнего времени",
-      "url": "https://lifehacker.ru/2015/06/13/blue/",
-      "site": "ЛАЙФХАКЕР",
-      "category": "articles",
-      "type": "text"
-    },
-    {
-      "title": "Поймай волну. Советы серфингиста",
-      "url": "https://market.yandex.ru/articles/pojmaj-volnu-sovety-serfingista?track=fr_325422_snippet",
-      "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
-      "category": "articles",
-      "color": "#ffdd55",
-      "type": "text"
+      "title": "Красный браслет дружбы",
+      "url": "https://m.youtube.com/watch?v=vRwFdzK-1x8",
+      "image": "http://img.youtube.com/vi/vRwFdzK-1x8/0.jpg",
+      "site": "YouTube",
+      "category": "goods",
+      "type": "plain_image"
     },
     {
       "title": "Мини-игры Pokemon",
@@ -239,33 +160,16 @@
       "type": "plain_image"
     },
     {
-      "title": "Лонгборд Penny Original 22\"",
-      "url": "https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls",
-      "image": "https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg",
-      "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
-      "category": "goods",
-      "type": "full_image"
-    },
-    {
       "title": "Большой и добрый великан",
-      "url": "https://www.kinopoisk.ru/film/840885",
-      "site": "КИНОПОИСК",
+      "url": "http://plus.kinopoisk.ru/film/840885/",
+      "site": "КИНОПОИСК+",
       "image": "https://www.kinopoisk.ru/images/film_big/840885.jpg",
       "category": "films",
       "type": "full_image",
       "dark": true
     },
     {
-      "title": "15 крутых дизайнерских вещиц, с которыми жизнь станет приятнее",
-      "url": "https://www.adme.ru/tvorchestvo-dizajn/15-krutyh-dizajnerskih-veschic-s-kotorymi-zhizn-stanet-priyatnee-1152260/",
-      "site": "ADME",
-      "image": "https://files4.adme.ru/files/news/part_115/1152260/preview-16564065-650x341-98-1471597471.jpg",
-      "category": "goods",
-      "type": "plain_image"
-    },
-    {
-      "title": "5 МИРОВЫХ РЕКОРДОВ POKEMON GO",
+      "title": "5 мировых рекордов POKEMON GO",
       "url": "http://gopokemongo.ru/5-mirovyih-rekordov-pokemon-go.html",
       "image": "http://gopokemongo.ru/wp-content/uploads/2016/08/pokemon-go-downloads-breaking-all-records.jpg",
       "category": "games",
@@ -280,50 +184,9 @@
       "type": "plain_image"
     },
     {
-      "title": "11 комиксов о том, как изменилась наша жизнь с появлением интернета",
-      "url": "https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/",
-      "site": "ADME",
-      "image": "https://files3.adme.ru/files/news/part_129/1299765/10455565-810-1000-53c212670e-1470661968.jpg",
-      "category": "articles",
-      "type": "plain_image"
-    },
-    {
-      "title": "Семь чудес Древнего мира",
-      "url": "http://www.putidorogi-nn.ru/7-chudes-sveta/501-sem-chudes-drevnego-mira",
-      "image": "http://www.putidorogi-nn.ru/images/stories/afrika/piramida_heopsa_2.jpg",
-      "site": "САЙТ ЗЕМЛИ",
-      "category": "articles",
-      "type": "plain_image"
-    },
-    {
-      "title": "Смотреть Смешарики Пин Код",
-      "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
-      "site": "ЯНДЕКС.ВИДЕО",
-      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
-      "category": "films",
-      "color": "#ffdd55",
-      "type": "text"
-    },
-    {
-      "title": "Неуловимый барханный кот появился на публике впервые за 10 лет",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/neulovimyj-barhannyj-kot-poyavilsya-na-publike-vpervye-za-10-let-1339765/",
-      "site": "ADME",
-      "image": "https://files4.adme.ru/files/news/part_133/1339765/16452365-Depositphotos_31831607_original-1471343886-650-c845359d8c-1471344018.jpg",
-      "category": "school",
-      "type": "plain_image"
-    },
-    {
       "title": "Породы собак с фото",
       "url": "http://www.zoopicture.ru/porody-sobak/",
       "image": "http://www.zoopicture.ru/assets/2011/08/4709599221_d1b4bba298.jpg",
-      "category": "animals",
-      "type": "plain_image"
-    },
-    {
-      "title": "15 котов, которых жизнь завела в тупик",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/20-kotov-kotoryh-zhizn-zavela-v-tupik-865660/",
-      "site": "ADME",
-      "image": "https://files1.adme.ru/files/news/part_86/865660/preview-25648715-650x341-98-1471427559.jpg",
       "category": "animals",
       "type": "plain_image"
     },
@@ -337,19 +200,11 @@
       "type": "text"
     },
     {
-      "title": "Плетем косы: 3 классных и несложных варианта",
+      "title": "Плетём косы: 3 классных и несложных варианта",
       "url": "http://www.devchat.ru/my-style/fashion-and-accessories/article/how-to-weave-braids",
       "image": "http://cdn.multibrand2.pgsitecore.com/ru-RU/-/media/BeingGirl/BeingGirl-RU/Images/Articles/Primary/pletem--kosi-prim.jpg?h=360&w=650&v=1-201606211352&crop=1&sc=1",
       "site": "ДЕВЧАТ",
       "category": "goods",
-      "type": "plain_image"
-    },
-    {
-      "title": "15 необычных школ, круче которых только Хогвартс",
-      "url": "https://www.adme.ru/svoboda-kultura/15-neobychnyh-shkol-kruche-kotoryh-tolko-hogvarts-1340565/",
-      "site": "ADME",
-      "image": "https://files5.adme.ru/files/news/part_134/1340565/16480315-makoko-floating-school-1471412588-650-ebd53dd6a2-1471423910.jpg",
-      "category": "articles",
       "type": "plain_image"
     },
     {
@@ -368,7 +223,7 @@
       "type": "text"
     },
     {
-      "title": "БОЕВЫЕ ИСКУССТВА ВОСТОКА",
+      "title": "Боевые искусства Востока",
       "url": "http://karate.ru/boevie_iskusstva_vostoka/",
       "image": "http://karate.ru/media/images/2014/7/18/img20979_14.jpg",
       "category": "sport",
@@ -383,34 +238,10 @@
       "type": "plain_image"
     },
     {
-      "title": "25 безумно милых штуковин, которые каждый захочет иметь в своем доме",
-      "url": "https://www.adme.ru/tvorchestvo-dizajn/30-bezumno-milyh-shtukovin-kotorye-kazhdyj-zahochet-imet-v-svoem-dome-945860/",
-      "site": "ADME",
-      "image": "https://files4.adme.ru/files/news/part_94/945860/preview-25651565-650x341-98-1471442066.jpg",
-      "category": "goods",
-      "type": "plain_image"
-    },
-    {
-      "title": "Знакомьтесь, это Самсон — самый большой и обаятельный кот на планете",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/znakomtes-eto-samson-samyj-bolshoj-i-obayatelnyj-kot-na-planete-1342865/",
-      "site": "ADME",
-      "image": "https://files6.adme.ru/files/news/part_134/1342865/preview-16588565-650x341-98-1471705379.jpg",
-      "category": "articles",
-      "type": "plain_image"
-    },
-    {
-      "title": "О ЧИТАХ В POKEMON GO",
+      "title": "О читах в POKEMON GO",
       "url": "http://gopokemongo.ru/o-chitah-v-pokemon-go.html",
       "image": "http://gopokemongo.ru/wp-content/uploads/2016/07/512x512bb.jpg",
       "category": "games",
-      "type": "plain_image"
-    },
-    {
-      "title": "Марс — загадочная красная планета",
-      "url": "http://saitzemli.ru/article/planeta-mars",
-      "image": "http://saitzemli.ru/imagesforsite/articles/Mars/mars.jpg",
-      "site": "САЙТ ЗЕМЛИ",
-      "category": "articles",
       "type": "plain_image"
     },
     {
@@ -422,6 +253,15 @@
       "type": "plain_image"
     },
     {
+      "title": "Pokemon: смотреть все серии",
+      "url": "https://yandex.ru/video/search?text=покемоны&family=yes",
+      "site": "ЯНДЕКС.ВИДЕО",
+      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "category": "video",
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
       "title": "Как сделать воздушного змея из обыкновенного пакета",
       "url": "https://www.adme.ru/svoboda-sdelaj-sam/kak-sdelat-vozdushnogo-zmeya-iz-obyknovennogo-paketa-1341715/",
       "site": "ADME",
@@ -430,20 +270,13 @@
       "type": "plain_image"
     },
     {
-      "title": "Тест: Правильно ли вы произносите названия известных брендов?",
-      "url": "https://www.adme.ru/tvorchestvo-dizajn/test-pravilno-li-vy-proiznosite-nazvaniya-izvestnyh-brendov-1081510/",
-      "site": "ADME",
-      "category": "goods",
-      "type": "text"
-    },
-    {
       "title": "Современные танцы",
       "url": "http://welovedance.ru/site/styles/sovremennye-tantsy",
       "category": "sport",
       "type": "text"
     },
     {
-      "title": "People Work - Song",
+      "title": "People Work - Песня",
       "url": "http://learnenglishkids.britishcouncil.org/en/songs/people-work",
       "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_efd626b1_v1.jpg",
       "site": "LearnEnglish Kids",
@@ -451,19 +284,11 @@
       "type": "plain_image"
     },
     {
-      "title": "10 иллюстраций о том, каким видят мир творческие люди",
-      "url": "https://www.adme.ru/tvorchestvo-hudozhniki/10-illyustracij-o-tom-kakim-vidyat-mir-tvorcheskie-lyudi-1316415/",
-      "site": "ADME",
-      "image": "https://files8.adme.ru/files/news/part_131/1316415/12235715-6-1469455007-650-1ccd54f71a-1-1469456115.jpg",
-      "category": "articles",
-      "type": "plain_image"
-    },
-    {
       "title": "Универсум - Телеканал Карусель",
       "url": "http://www.karusel-tv.ru/video/16704",
       "image": "http://im.karusel-tv.ru/logo/autumn-6.png",
       "site": "Карусель-ТВ",
-      "category": "films",
+      "category": "video",
       "type": "plain_image"
     },
     {
@@ -480,6 +305,15 @@
       "type": "text"
     },
     {
+      "title": "Смотреть Гравити Фолз",
+      "url": "https://yandex.ru/video/search?text=гравити%20фолз&family=yes",
+      "site": "ЯНДЕКС.ВИДЕО",
+      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "category": "video",
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
       "title": "11 комиксов о том, как изменилась наша жизнь с появлением интернета",
       "url": "https://www.adme.ru/zhizn-nostalgiya/11-komiksov-o-tom-kak-izmenilas-nasha-zhizn-s-poyavleniem-interneta-1299765/",
       "site": "ADME",
@@ -489,19 +323,12 @@
     },
     {
       "title": "Алиса в Зазеркалье",
-      "url": "https://www.kinopoisk.ru/film/723988",
-      "site": "КИНОПОИСК",
+      "url": "http://plus.kinopoisk.ru/film/723988/",
+      "site": "КИНОПОИСК+",
       "image": "https://www.kinopoisk.ru/images/film_big/723988.jpg",
       "category": "films",
       "type": "full_image",
       "dark": true
-    },
-    {
-      "title": "Тест: Сможете ли вы узнать логотипы известных брендов?",
-      "url": "https://www.adme.ru/tvorchestvo-reklama/test-smozhete-li-vy-uznat-logotipy-izvestnyh-brendov-1302515/",
-      "site": "ADME",
-      "category": "goods",
-      "type": "text"
     },
     {
       "title": "10 велосипедов для подростков",
@@ -521,26 +348,10 @@
       "type": "text"
     },
     {
-      "title": "Правила игры «Мафия»",
+      "title": "Правила игры Мафия",
       "url": "https://bosichkom.com/игры-для-детей/мафия",
       "category": "games",
       "type": "text"
-    },
-    {
-      "title": "Как сделать воздушного змея из обыкновенного пакета",
-      "url": "https://www.adme.ru/svoboda-sdelaj-sam/kak-sdelat-vozdushnogo-zmeya-iz-obyknovennogo-paketa-1341715/",
-      "site": "ADME",
-      "image": "https://files1.adme.ru/files/news/part_134/1341715/16526515-9-1471430969-1000-7df9e3be11-1471511196.jpg",
-      "category": "articles",
-      "type": "plain_image"
-    },
-    {
-      "title": "Посмотрите, как живут настоящие принцессы ХХI века",
-      "url": "https://www.adme.ru/zhizn-semya/posmotrite-kak-zhivut-nastoyaschie-princessy-hhi-veka-1342215/",
-      "site": "ADME",
-      "image": "https://files3.adme.ru/files/news/part_134/1342215/16567965-01-good-1471536155-1000-a8984c6e3f-1-1471602691.jpg",
-      "category": "articles",
-      "type": "plain_image"
     },
     {
       "title": "Логические задачи",
@@ -550,20 +361,12 @@
     },
     {
       "title": "Ледниковый период: Столкновение неизбежно",
-      "url": "https://www.kinopoisk.ru/film/818145",
-      "site": "КИНОПОИСК",
+      "url": "https://www.plus.kinopoisk.ru/film/818145",
+      "site": "КИНОПОИСК+",
       "image": "https://www.kinopoisk.ru/images/film_big/818145.jpg",
       "category": "films",
       "type": "full_image",
       "dark": true
-    },
-    {
-      "title": "15 котов, которых жизнь завела в тупик",
-      "url": "https://www.adme.ru/zhizn-zhivotnye/20-kotov-kotoryh-zhizn-zavela-v-tupik-865660/",
-      "site": "ADME",
-      "image": "https://files1.adme.ru/files/news/part_86/865660/preview-25648715-650x341-98-1471427559.jpg",
-      "category": "articles",
-      "type": "plain_image"
     },
     {
       "title": "Настольная игра UNO",
@@ -573,7 +376,7 @@
       "type": "plain_image"
     },
     {
-      "title": "Смотреть Смешарики Пин Код",
+      "title": "Смотреть Смешарики Пин-Код",
       "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
       "site": "ЯНДЕКС.ВИДЕО",
       "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
@@ -595,6 +398,14 @@
       "site": "ADME",
       "image": "https://files1.adme.ru/files/news/part_134/1341715/16526515-9-1471430969-1000-7df9e3be11-1471511196.jpg",
       "category": "school",
+      "type": "plain_image"
+    },
+    {
+      "title": "Прыгающая лягушка из бумаги",
+      "url": "http://ru.m.wikihow.com/сложить-лягушку-из-бумаги",
+      "image": "http://pad3.whstatic.com/images/thumb/3/33/Fold-an-Origami-Frog-Intro.jpg/760px-Fold-an-Origami-Frog-Intro.jpg",
+      "site": "WikiHow",
+      "category": "goods",
       "type": "plain_image"
     },
     {
@@ -622,8 +433,8 @@
     },
     {
       "title": "Бэтмен против Супермена: На заре справедливости",
-      "url": "https://www.kinopoisk.ru/film/770631",
-      "site": "КИНОПОИСК",
+      "url": "https://www.plus.kinopoisk.ru/film/770631",
+      "site": "КИНОПОИСК+",
       "image": "https://www.kinopoisk.ru/images/film_big/770631.jpg",
       "category": "films",
       "type": "full_image",
@@ -638,12 +449,20 @@
     },
     {
       "title": "Тайная жизнь домашних животных",
-      "url": "https://www.kinopoisk.ru/film/743088",
-      "site": "КИНОПОИСК",
+      "url": "https://www.plus.kinopoisk.ru/film/743088",
+      "site": "КИНОПОИСК+",
       "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
       "category": "school",
       "type": "full_image",
       "dark": true
+    },
+    {
+      "title": "Браслет дружбы из резинок",
+      "url": "https://m.youtube.com/watch?feature=youtu.be&v=32yY_kDOqls",
+      "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
+      "site": "YouTube",
+      "category": "video",
+      "type": "plain_image"
     },
     {
       "title": "Яндекс.Рефераты",
@@ -655,13 +474,12 @@
       "type": "text"
     },
     {
-      "title": "Смотреть Гравити Фолз",
-      "url": "https://yandex.ru/video/search?text=гравити%20фолз&family=yes",
-      "site": "ЯНДЕКС.ВИДЕО",
-      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
-      "category": "films",
-      "color": "#ffdd55",
-      "type": "text"
+      "title": "Прыгающая лягушка из бумаги",
+      "url": "http://ru.m.wikihow.com/сложить-лягушку-из-бумаги",
+      "image": "http://pad3.whstatic.com/images/thumb/3/33/Fold-an-Origami-Frog-Intro.jpg/760px-Fold-an-Origami-Frog-Intro.jpg",
+      "site": "WikiHow",
+      "category": "school",
+      "type": "plain_image"
     },
     {
       "title": "Наполеон I",
@@ -681,7 +499,15 @@
       "type": "text"
     },
     {
-      "title": "Лонгборд Penny Original 22\"",
+      "title": "Как плести фенечку из мулине",
+      "url": "https://m.youtube.com/watch?v=CrYEEuNtnUU&feature=youtu.be",
+      "image": "http://img.youtube.com/vi/CrYEEuNtnUU/0.jpg",
+      "site": "YouTube",
+      "category": "goods",
+      "type": "plain_image"
+    },
+    {
+      "title": "Лонгборд Penny Original",
       "url": "https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls",
       "image": "https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg",
       "site": "ЯНДЕКС.МАРКЕТ",
@@ -691,12 +517,20 @@
     },
     {
       "title": "В поисках Дори",
-      "url": "https://www.kinopoisk.ru/film/692957",
-      "site": "КИНОПОИСК",
+      "url": "https://www.plus.kinopoisk.ru/film/692957",
+      "site": "КИНОПОИСК+",
       "image": "https://www.kinopoisk.ru/images/film_big/692957.jpg",
       "category": "films",
       "type": "full_image",
       "dark": true
+    },
+    {
+      "title": "Как сделать бумажный самолётик",
+      "url": "http://ru.m.wikihow.com/сделать-бумажный-самолетик",
+      "image": "http://www.popmeh.ru/upload/iblock/c8e/c8ecb853b70caf1ef40a0836ec8c075f.jpg",
+      "site": "WikiHow",
+      "category": "goods",
+      "type": "plain_image"
     },
     {
       "title": "Блоги Minecraft",
@@ -726,12 +560,28 @@
     },
     {
       "title": "Люди Икс: Апокалипсис",
-      "url": "https://www.kinopoisk.ru/film/814016",
-      "site": "КИНОПОИСК",
+      "url": "https://www.plus.kinopoisk.ru/film/814016",
+      "site": "КИНОПОИСК+",
       "image": "https://www.kinopoisk.ru/images/film_big/814016.jpg",
       "category": "films",
       "type": "full_image",
       "dark": true
+    },
+    {
+      "title": "Бумажный самолётик, достойный мирового рекорда",
+      "url": "http://m.popmech.ru/diy/51713-kak-sdelat-bumazhnyy-samoletik-dostoynyy-mirovogo-rekorda/",
+      "image": "http://www.popmeh.ru/upload/iblock/07e/37144-paperairplane_teaser2.jpg",
+      "site": "Популярная механика",
+      "category": "goods",
+      "type": "plain_image"
+    },
+    {
+      "title": "Как нарисовать кошку поэтапно",
+      "url": "http://koteko.ru/risuem-koshek/kak-narisovat-koshku-poetapno",
+      "image": "http://koteko.ru/wp-content/uploads/2013/05/kak-narisovat-koshku-poetapno-4.jpg",
+      "site": "Koteko.ru",
+      "category": "school",
+      "type": "plain_image"
     },
     {
       "title": "hello перевод на русский (с англ.) алло!, привет!",
@@ -739,6 +589,15 @@
       "site": "ЯНДЕКС.ПЕРЕВОДЧИК",
       "favicon": "https://translate.yandex.net/main/v2.111.1472810626/i/favicon.png",
       "category": "school",
+      "color": "#ffdd55",
+      "type": "text"
+    },
+    {
+      "title": "Смотреть Смешарики Пин Код",
+      "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
+      "site": "ЯНДЕКС.ВИДЕО",
+      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "category": "video",
       "color": "#ffdd55",
       "type": "text"
     },
@@ -759,20 +618,36 @@
       "type": "plain_image"
     },
     {
+      "title": "Браслет дружбы из резинок",
+      "url": "https://m.youtube.com/watch?feature=youtu.be&v=32yY_kDOqls",
+      "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
+      "site": "YouTube",
+      "category": "goods",
+      "type": "plain_image"
+    },
+    {
+      "title": "Сложить сердечко из бумаги",
+      "url": "http://ru.m.wikihow.com/сложить-сердечко-из-бумаги",
+      "image": "http://pad1.whstatic.com/images/thumb/0/09/Fold-a-Paper-Heart-Step-8-Version-2.jpg/759px-Fold-a-Paper-Heart-Step-8-Version-2.jpg",
+      "site": "WikiHow",
+      "category": "goods",
+      "type": "plain_image"
+    },
+    {
       "title": "Тайная жизнь домашних животных",
-      "url": "https://www.kinopoisk.ru/film/743088",
-      "site": "КИНОПОИСК",
+      "url": "https://www.plus.kinopoisk.ru/film/743088",
+      "site": "КИНОПОИСК+",
       "image": "https://www.kinopoisk.ru/images/film_big/743088.jpg",
       "category": "films",
       "type": "full_image",
       "dark": true
     },
     {
-      "title": "Венера — мир невыносимой жары и вулканов",
-      "url": "http://saitzemli.ru/article/planeta-venera",
-      "image": "http://saitzemli.ru/imagesforsite/articles/venera/venera-planeta.jpg",
-      "site": "САЙТ ЗЕМЛИ",
-      "category": "articles",
+      "title": "Как сделать бумажный самолётик",
+      "url": "http://ru.m.wikihow.com/сделать-бумажный-самолетик",
+      "image": "http://www.popmeh.ru/upload/iblock/c8e/c8ecb853b70caf1ef40a0836ec8c075f.jpg",
+      "site": "WikiHow",
+      "category": "school",
       "type": "plain_image"
     },
     {
@@ -784,7 +659,7 @@
       "type": "plain_image"
     },
     {
-      "title": "Плетем косы: 3 классных и несложных варианта",
+      "title": "Плетём косы: 3 классных и несложных варианта",
       "url": "http://www.devchat.ru/my-style/fashion-and-accessories/article/how-to-weave-braids",
       "image": "http://cdn.multibrand2.pgsitecore.com/ru-RU/-/media/BeingGirl/BeingGirl-RU/Images/Articles/Primary/pletem--kosi-prim.jpg?h=360&w=650&v=1-201606211352&crop=1&sc=1",
       "site": "ДЕВЧАТ",
@@ -805,6 +680,14 @@
       "image": "http://cache.lego.com/r/www/r/starwars/-/media/franchises/starwars2015/banners%20for%20all%20sections/2016%202hy/rogue_1_banner_products.jpg?l.r2=-548408727",
       "site": "LEGO.COM",
       "category": "school",
+      "type": "plain_image"
+    },
+    {
+      "title": "Нарисовать собаку карандашом",
+      "url": "http://heaclub.ru/kak-narisovat-sobaku-shhenka-risunki-prostym-karandashom-poetapno-dlya-nachinayushhih",
+      "image": "http://heaclub.ru/images/heaclub/2016/06/miniatjura-640x447.jpg",
+      "site": "Heaclub.ru",
+      "category": "goods",
       "type": "plain_image"
     },
     {
@@ -832,11 +715,27 @@
       "type": "plain_image"
     },
     {
+      "title": "Браслет дружбы из резинок",
+      "url": "https://m.youtube.com/watch?feature=youtu.be&v=32yY_kDOqls",
+      "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
+      "site": "YouTube",
+      "category": "school",
+      "type": "plain_image"
+    },
+    {
       "title": "Old Macdonald had a farm - Song",
       "url": "http://learnenglishkids.britishcouncil.org/en/songs/old-macdonald-had-farm",
       "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_58069399_v4.jpg",
       "site": "LearnEnglish Kids",
       "category": "science",
+      "type": "plain_image"
+    },
+    {
+      "title": "Как нарисовать кошку поэтапно",
+      "url": "http://koteko.ru/risuem-koshek/kak-narisovat-koshku-poetapno",
+      "image": "http://koteko.ru/wp-content/uploads/2013/05/kak-narisovat-koshku-poetapno-4.jpg",
+      "site": "Koteko.ru",
+      "category": "goods",
       "type": "plain_image"
     },
     {
@@ -863,11 +762,6 @@
       "color": "#eb352f"
     },
     {
-      "alias": "films",
-      "title": "Фильмы",
-      "color": "#4aa3fd"
-    },
-    {
       "alias": "games",
       "title": "Игры",
       "color": "#cc79ff"
@@ -878,24 +772,24 @@
       "color": "#f7d652"
     },
     {
+      "alias": "goods",
+      "title": "Творчество",
+      "color": "#01f5a8"
+    },
+    {
+      "alias": "video",
+      "title": "Видео",
+      "color": "#e85958"
+    },
+    {
       "alias": "animals",
       "title": "Животные",
       "color": "#e68904"
     },
     {
-      "alias": "bikes",
-      "title": "Велосипеды",
-      "color": "#72c6e7"
-    },
-    {
-      "alias": "articles",
-      "title": "Статьи",
-      "color": "#039BE5"
-    },
-    {
-      "alias": "science",
-      "title": "Наука",
-      "color": "#8840f2"
+      "alias": "films",
+      "title": "Фильмы",
+      "color": "#4aa3fd"
     },
     {
       "alias": "sport",
@@ -903,9 +797,31 @@
       "color": "#aadb48"
     },
     {
-      "alias": "goods",
-      "title": "Предметы",
-      "color": "#01f5a8"
+      "alias": "bikes",
+      "title": "Велосипеды",
+      "color": "#72c6e7"
+    },
+    {
+      "alias": "science",
+      "title": "Наука",
+      "color": "#8840f2"
     }
+  ],
+  "schools": [
+    "ГБОУ г. Москвы лицей №1535",
+    "Лицей НИУ ВШЭ",
+    "ГБОУ г. Москвы центр образования №57 «Пятьдесят седьмая школа»",
+    "ГБОУ г. Москвы лицей «Вторая школа»",
+    "ГБОУ г. Москвы «Многопрофильный лицей №1501»",
+    "ГБОУ г. Москвы «Школа-интернат «Интеллектуал»",
+    "Средняя общеобразовательная школа №179",
+    "СУНЦ МГУ",
+    "ГБОУ Московская гимназия на Юго-Западе №1543",
+    "ГБОУ г. Москвы «Лицей № 1502 при МЭИ»",
+    "ГБОУ г. Москвы «Школа № 1329»",
+    "ГБОУ г. Москвы «Лицей № 1580 при МГТУ имени Н.Э. Баумана»",
+    "Государственное автономное общеобразовательное учреждение города Москвы «Центр образования № 548 «Царицыно»",
+    "ГБОУ г. Москвы «Многопрофильный лицей №1799»",
+    "ГБОУ г. Москвы «Лицейско-гимназический комплекс на Юго-Востоке»"
   ]
 }

@@ -8,7 +8,6 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
-import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.views.MainView;
 
@@ -22,17 +21,13 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     @NonNull
     private final NavigationManager navigationManager;
     @NonNull
-    private final LikeManager likeManager;
-    @NonNull
     private final SharedPreferences sharedPreferences;
 
 
     public MainPresenter(@NonNull NavigationManager navigationManager,
-                         @NonNull LikeManager likeManager,
                          @NonNull SharedPreferences sharedPreferences
     ) {
         this.navigationManager = navigationManager;
-        this.likeManager = likeManager;
         this.sharedPreferences = sharedPreferences;
     }
 
@@ -110,10 +105,6 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
 
     public void onCardsItemClick(Card card) {
         navigationManager.openBrowser(card.url());
-    }
-
-    public void onLikeClick(Card card) {
-        likeManager.setLike(card);
     }
 
     public void onBackPressed() {

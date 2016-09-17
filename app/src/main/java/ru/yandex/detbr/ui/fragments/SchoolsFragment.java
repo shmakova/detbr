@@ -4,6 +4,8 @@ package ru.yandex.detbr.ui.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -92,10 +94,15 @@ public class SchoolsFragment
         schoolsAdapter = new SchoolsAdapter(getActivity(),
                 R.layout.dropdown_item, R.id.item, new ArrayList<>());
         autoCompleteTextView.setAdapter(schoolsAdapter);
-
         int width = autoCompleteTextView.getLayoutParams().width;
         autoCompleteTextView.setDropDownWidth((int) (width * 1.5));
         autoCompleteTextView.setDropDownHorizontalOffset(-width / 4);
+
+        autoCompleteTextView.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                new Handler(Looper.getMainLooper()).postDelayed(this::onSchoolsAutocompleteTextViewClick, 200);
+            }
+        });
 
         autoCompleteTextView.setOnItemClickListener((adapterView, v, i, l) -> {
             hideKeyboard();
@@ -123,6 +130,14 @@ public class SchoolsFragment
         }
     }
 
+    private void showKeyboard() {
+        Activity activity = getActivity();
+        InputMethodManager inputMethodManager =
+                (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        inputMethodManager.showSoftInput(autoCompleteTextView, InputMethodManager.SHOW_IMPLICIT);
+    }
+
     @OnClick(R.id.schools_autocomplete)
     public void onSchoolsAutocompleteTextViewClick() {
         autoCompleteTextView.showDropDown();
@@ -148,5 +163,11 @@ public class SchoolsFragment
     @Override
     public List<String> getData() {
         return (schoolsAdapter == null) ? null : schoolsAdapter.getItems();
+    }
+
+    @OnClick(R.id.card)
+    public void onCardClick() {
+        autoCompleteTextView.requestFocus();
+        showKeyboard();
     }
 }

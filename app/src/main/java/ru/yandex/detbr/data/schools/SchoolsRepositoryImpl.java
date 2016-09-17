@@ -2,7 +2,10 @@ package ru.yandex.detbr.data.schools;
 
 import android.content.SharedPreferences;
 
-import java.util.ArrayList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.kelvinapps.rxfirebase.RxFirebaseDatabase;
+
 import java.util.List;
 
 import rx.Observable;
@@ -13,23 +16,26 @@ import rx.Observable;
 
 public class SchoolsRepositoryImpl implements SchoolsRepository {
     private final static String SCHOOL_TAG = "SCHOOL_TAG";
+    private final static String SCHOOLS = "schools";
 
     private final SharedPreferences sharedPreferences;
+    private final DatabaseReference databaseReference;
 
-    public SchoolsRepositoryImpl(SharedPreferences sharedPreferences) {
+    public SchoolsRepositoryImpl(SharedPreferences sharedPreferences,
+                                 DatabaseReference databaseReference) {
         this.sharedPreferences = sharedPreferences;
+        this.databaseReference = databaseReference;
     }
 
     @Override
     public Observable<List<String>> getSchoolsList() {
-        // TODO: 05.09.16 to firebase
-        List<String> schools = new ArrayList<>();
-        schools.add("ГБОУ г. Москвы лицей №1535");
-        schools.add("ГБОУ г. Москвы центр образования №57 «Пятьдесят седьмая школа»");
-        schools.add("ГБОУ г. Москвы «Многопрофильный лицей №1501»");
-        schools.add("ГБОУ г. Москвы лицей «Вторая школа»");
-        schools.add("ГБОУ г. Москвы «Школа-интернат «Интеллектуал»");
-        return Observable.just(schools);
+        return RxFirebaseDatabase
+                .observeValueEvent(databaseReference.child(SCHOOLS))
+                .map(DataSnapshot::getChildren)
+                .flatMap(dataSnapshots -> Observable.from(dataSnapshots)
+                        .map(dataSnapshot -> dataSnapshot.getValue(String.class))
+                        .toList())
+                .first();
     }
 
     @Override

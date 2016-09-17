@@ -6,7 +6,6 @@ import dagger.Module;
 import dagger.Provides;
 import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.data.wot_network.WotService;
-import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.presentation.presenters.BrowserPresenter;
 
@@ -20,8 +19,7 @@ public class BrowserModule {
     @NonNull
     public BrowserPresenter provideBrowserPresenter(@NonNull WotService wotService,
                                                     @NonNull TabsManager tabsManager,
-                                                    @NonNull CardsRepository cardsRepository,
-                                                    @NonNull LikeManager likeManager) {
-        return new BrowserPresenter(wotService, tabsManager, cardsRepository, likeManager);
+                                                    @NonNull CardsRepository cardsRepository) {
+        return new BrowserPresenter(wotService, tabsManager, cardsRepository);
     }
 }

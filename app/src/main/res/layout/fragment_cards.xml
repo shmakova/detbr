@@ -9,11 +9,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <View
-            android:id="@+id/category_cards_backward"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"/>
+            android:layout_weight="4">
+
+            <View
+                android:id="@+id/previous_category_cards_backward"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:visibility="gone"/>
+
+            <View
+                android:id="@+id/category_cards_backward"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"/>
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"

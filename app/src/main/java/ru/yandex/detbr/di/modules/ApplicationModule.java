@@ -26,7 +26,6 @@ import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.data.schools.SchoolsRepositoryImpl;
 import ru.yandex.detbr.data.tabs.TabsRepository;
 import ru.yandex.detbr.data.tabs.TabsRepositoryImpl;
-import ru.yandex.detbr.managers.LikeManager;
 import ru.yandex.detbr.managers.TabsManager;
 import ru.yandex.detbr.utils.ErrorMessageDeterminer;
 
@@ -71,12 +70,6 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public LikeManager providesLikeManager(CardsRepository cardsRepository) {
-        return new LikeManager(cardsRepository);
-    }
-
-    @Provides
-    @Singleton
     public TabsRepository provideTabsRepository(StorIOSQLite storIOSQLite) {
         return new TabsRepositoryImpl(storIOSQLite);
     }
@@ -89,8 +82,9 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public SchoolsRepository provideSchoolsRepository(SharedPreferences sharedPreferences) {
-        return new SchoolsRepositoryImpl(sharedPreferences);
+    public SchoolsRepository provideSchoolsRepository(SharedPreferences sharedPreferences,
+                                                      DatabaseReference databaseReference) {
+        return new SchoolsRepositoryImpl(sharedPreferences, databaseReference);
     }
 
     @Provides

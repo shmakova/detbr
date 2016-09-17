@@ -102,7 +102,6 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
         void onRemoveButtonClick() {
             final int position = getAdapterPosition();
             listener.onRemoveButtonClick(tabs.get(position));
-            // TODO call when onRemoveButtonClick ends
             notifyItemRemoved(position);
         }
     }

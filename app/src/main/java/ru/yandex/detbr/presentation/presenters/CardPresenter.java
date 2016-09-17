@@ -3,8 +3,10 @@ package ru.yandex.detbr.presentation.presenters;
 import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.data.cards.Card;
-import ru.yandex.detbr.managers.LikeManager;
+import ru.yandex.detbr.data.cards.CardsRepository;
 import ru.yandex.detbr.presentation.views.CardItemView;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by shmakova on 04.09.16.
@@ -12,14 +14,26 @@ import ru.yandex.detbr.presentation.views.CardItemView;
 
 public class CardPresenter extends MvpBasePresenter<CardItemView> {
 
-    private final LikeManager likeManager;
+    private final CardsRepository cardsRepository;
+    private final CompositeSubscription compositeSubscription;
 
-    public CardPresenter(LikeManager likeManager) {
-        this.likeManager = likeManager;
+    public CardPresenter(CardsRepository cardsRepository) {
+        this.cardsRepository = cardsRepository;
+        compositeSubscription = new CompositeSubscription();
     }
 
     public void onLikeClick(Card card) {
-        likeManager.setLike(card);
+        boolean isCardLiked = cardsRepository.isUrlLiked(card.url());
+
+        compositeSubscription.add(
+                cardsRepository.setLike(card, !isCardLiked)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(
+                                it -> {
+                                    if (isViewAttached()) {
+                                        getView().setLike(!isCardLiked);
+                                    }
+                                }));
     }
 
     public void loadCard(Card card) {
@@ -27,7 +41,7 @@ public class CardPresenter extends MvpBasePresenter<CardItemView> {
             getView().setTitle(card.title());
             getView().setSite(card.getSiteName());
 
-            getView().setLike(likeManager.isUrlLiked(card.url()));
+            getView().setLike(cardsRepository.isUrlLiked(card.url()));
 
             if (card.image() != null && !card.image().isEmpty()) {
                 getView().setImage(card.image());
@@ -48,6 +62,15 @@ public class CardPresenter extends MvpBasePresenter<CardItemView> {
             if (card.dark()) {
                 getView().setWhiteText();
             }
+        }
+    }
+
+    @Override
+    public void detachView(boolean retainInstance) {
+        super.detachView(retainInstance);
+
+        if (!retainInstance && compositeSubscription.hasSubscriptions()) {
+            compositeSubscription.unsubscribe();
         }
     }
 }

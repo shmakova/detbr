@@ -1,18 +1,20 @@
 package ru.yandex.detbr.managers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
-import ru.yandex.detbr.ui.activities.MainActivity;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.IntroFragment;
 import ru.yandex.detbr.ui.fragments.TabsFragment;
+import ru.yandex.detbr.utils.ConnectionChecker;
 
 /**
  * Created by shmakova on 29.08.16.
@@ -25,11 +27,13 @@ public class NavigationManager {
     public final static int TABS_TAB_POSITION = 2;
 
     private FragmentManager fragmentManager;
-    private MainActivity activity;
+    private Activity activity;
+    private ConnectionChecker connectionChecker;
 
-    public void init(FragmentManager fragmentManager, MainActivity activity) {
+    public void init(FragmentManager fragmentManager, Activity activity) {
         this.fragmentManager = fragmentManager;
         this.activity = activity;
+        connectionChecker = new ConnectionChecker(activity);
     }
 
     private void openAsRoot(Fragment fragment) {
@@ -51,10 +55,14 @@ public class NavigationManager {
 
 
     public void openBrowser(String url) {
-        Intent intent = new Intent(activity, BrowserActivity.class);
-        intent.setData(Uri.parse(url));
-        intent.setAction(Intent.ACTION_VIEW);
-        activity.startActivity(intent);
+        if (connectionChecker.isNetworkConnected()) {
+            Intent intent = new Intent(activity, BrowserActivity.class);
+            intent.setData(Uri.parse(url));
+            intent.setAction(Intent.ACTION_VIEW);
+            activity.startActivity(intent);
+        } else {
+            Toast.makeText(activity, activity.getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void openCards() {

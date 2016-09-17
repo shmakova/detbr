@@ -10,6 +10,7 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.IntroCardFragmentBuilder;
+import ru.yandex.detbr.ui.fragments.LastCardFragment;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -27,8 +28,10 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Card card = null;
-
+        if (position == cards.size()) {
+            return new LastCardFragment();
+        }
+        Card card;
 
         if (firstLoad) {
             if (position == 0) {
@@ -61,6 +64,6 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return cards.size() + (firstLoad? 2 : 0);
+        return cards.size() + (firstLoad? 3 : 1);
     }
 }

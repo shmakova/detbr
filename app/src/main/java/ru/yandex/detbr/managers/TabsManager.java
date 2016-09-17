@@ -1,11 +1,13 @@
 package ru.yandex.detbr.managers;
 
+import com.pushtorefresh.storio.sqlite.operations.delete.DeleteResult;
+import com.pushtorefresh.storio.sqlite.operations.put.PutResult;
+
 import java.util.List;
 
 import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.data.tabs.TabsRepository;
 import rx.Observable;
-
 /**
  * Created by shmakova on 30.08.16.
  */
@@ -26,29 +28,23 @@ public class TabsManager {
         this.onTabsChangeListener = onTabsChangeListener;
     }
 
-    public void addTab(Tab tab) {
-        tabsRepository.addTab(tab);
-
+    public void updateTabs() {
         if (onTabsChangeListener != null) {
             onTabsChangeListener.onTabsChange();
         }
     }
 
-    public void updateTab(Tab tab) {
-        tabsRepository.removeLastTab();
-        tabsRepository.addTab(tab);
-
-        if (onTabsChangeListener != null) {
-            onTabsChangeListener.onTabsChange();
-        }
+    public Observable<PutResult> addTab(Tab tab) {
+        return tabsRepository.addTab(tab);
     }
 
-    public void removeTab(Tab tab) {
-        tabsRepository.removeTab(tab);
+    public Observable<Object> removeLastTab() {
+        return tabsRepository.removeLastTab();
+    }
 
-        if (onTabsChangeListener != null) {
-            onTabsChangeListener.onTabsChange();
-        }
+
+    public Observable<DeleteResult> removeTab(Tab tab) {
+        return tabsRepository.removeTab(tab);
     }
 
     public Observable<List<Tab>> getTabs() {

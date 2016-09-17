@@ -1,5 +1,7 @@
 package ru.yandex.detbr.presentation.views;
 
+import android.support.annotation.ColorRes;
+
 import com.hannesdorfmann.mosby.mvp.MvpView;
 
 /**
@@ -15,7 +17,7 @@ public interface MainView extends MvpView {
 
     void showSearchView();
 
-    void changeBackgroundColor(int color);
+    void changeBackgroundColor(@ColorRes int color);
 
     void selectTabAtPosition(int position);
 }
