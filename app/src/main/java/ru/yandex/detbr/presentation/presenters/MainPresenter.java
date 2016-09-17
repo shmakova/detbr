@@ -10,6 +10,7 @@ import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.views.MainView;
+import ru.yandex.detbr.utils.UrlUtils;
 
 /**
  * Created by shmakova on 29.08.16.
@@ -104,7 +105,13 @@ public class MainPresenter extends MvpBasePresenter<MainView> {
     }
 
     public void onCardsItemClick(Card card) {
-        navigationManager.openBrowser(card.url());
+        String videoId = UrlUtils.extractVideoIdFromUrl(card.url());
+
+        if (videoId == null) {
+            navigationManager.openBrowser(card.url());
+        } else {
+            navigationManager.openYoutubePlayer(videoId);
+        }
     }
 
     public void onBackPressed() {

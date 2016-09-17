@@ -161,6 +161,8 @@ dependencies {
     }
     compile libraries.playServicesAnalytics
     compile libraries.firebaseDatabase
+
+    compile files('libs/YouTubeAndroidPlayerApi.jar')
 }
 
 configurations.all {
