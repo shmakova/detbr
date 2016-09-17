@@ -13,6 +13,7 @@ import com.hannesdorfmann.mosby.mvp.MvpBasePresenter;
 
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.data.cards.CardsRepository;
+import ru.yandex.detbr.data.stopwords.StopWordsRepository;
 import ru.yandex.detbr.data.tabs.Tab;
 import ru.yandex.detbr.data.wot_network.WotService;
 import ru.yandex.detbr.managers.TabsManager;
@@ -35,17 +36,21 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     @NonNull
     private final TabsManager tabsManager;
     @NonNull
+    private final StopWordsRepository stopWordsRepository;
+    @NonNull
     private final CardsRepository cardsRepository;
     private final CompositeSubscription compositeSubscription;
     private String currentUrl;
 
     public BrowserPresenter(@NonNull WotService wotService,
                             @NonNull TabsManager tabsManager,
-                            @NonNull CardsRepository cardsRepository) {
+                            @NonNull CardsRepository cardsRepository,
+                            @NonNull StopWordsRepository stopWordsRepository) {
 
         this.wotService = wotService;
         this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
+        this.stopWordsRepository = stopWordsRepository;
         compositeSubscription = new CompositeSubscription();
     }
 
@@ -61,14 +66,18 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
     public void attachView(BrowserView view) {
         super.attachView(view);
         view.setOnUrlListener(query -> {
-            String url = UrlUtils.getUrlFromQuery(query);
-            compositeSubscription.add(
-                    tabsManager.addTab(Tab.builder().url(url).build())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(putResult -> tabsManager.updateTabs(),
-                                    throwable -> Timber.e("Error adding tab"),
-                                    () -> Timber.d("Completed adding tab")));
-            loadUrl(url);
+            if (stopWordsRepository.isStopWord(query)) {
+                getView().showLuckyPage();
+            } else {
+                String url = UrlUtils.getUrlFromQuery(query);
+                compositeSubscription.add(
+                        tabsManager.addTab(Tab.builder().url(url).build())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(putResult -> tabsManager.updateTabs(),
+                                        throwable -> Timber.e("Error adding tab"),
+                                        () -> Timber.d("Completed adding tab")));
+                loadUrl(url);
+            }
         });
     }
 
@@ -124,7 +133,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(it -> {
                     if (isViewAttached()) {
-                        getView().setLike(it.like());
+                        getView().showLike(it.like());
                     }
                 }));
     }
@@ -146,7 +155,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                     getView().showLike();
                 }
                 getView().hideProgress();
-                getView().setLike(cardsRepository.isUrlLiked(url));
+                getView().showLike(cardsRepository.isUrlLiked(url));
                 webView.postInvalidate();
 
                 updateTab(Tab.builder()
