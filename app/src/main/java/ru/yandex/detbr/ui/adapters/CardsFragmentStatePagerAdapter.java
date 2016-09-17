@@ -27,17 +27,22 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Card card = cards.get(position);
-        String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
+        Card card = null;
+
 
         if (firstLoad) {
             if (position == 0) {
                 return new IntroCardFragmentBuilder(R.layout.fragment_intro_first).build();
             } else if (position == 1) {
                 return new IntroCardFragmentBuilder(R.layout.fragment_intro_second).build();
+            } else {
+                card = cards.get(position - 2);
             }
+        } else {
+            card = cards.get(position);
         }
 
+        String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
         switch (type) {
             case "text":
                 return new CardFragmentBuilder(card, R.layout.item_card).build();
@@ -56,6 +61,6 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return cards.size();
+        return cards.size() + (firstLoad? 2 : 0);
     }
 }
