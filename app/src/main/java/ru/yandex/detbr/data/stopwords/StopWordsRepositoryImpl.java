@@ -8,8 +8,10 @@ import java.util.Locale;
  * Created by shmakova on 17.09.16.
  */
 
+
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class StopWordsRepositoryImpl implements StopWordsRepository {
-    private List<String> stopWords;
+    private final List<String> stopWords;
 
     public StopWordsRepositoryImpl() {
         stopWords = new ArrayList<>();
