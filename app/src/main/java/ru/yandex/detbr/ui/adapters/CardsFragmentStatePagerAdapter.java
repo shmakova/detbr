@@ -28,7 +28,7 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == cards.size()) {
+        if (position == getCount() - 1) {
             return new LastCardFragment();
         }
         Card card;
