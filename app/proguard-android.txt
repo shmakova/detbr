@@ -4,6 +4,10 @@
 # This rule will properly ProGuard all the model classes in
 # the package com.yourcompany.models. Modify to fit the structure
 # of your app.
--keepclassmembers class ru.yandex.detbr.data.** {
-  *;
-}
+-keepclassmembers class ru.yandex.detbr.data.** { *; }
+
+-keep public class com.google.android.gms.* { public *; }
+-dontwarn com.google.android.gms.**
+
+-keep public class com.google.firebase.* { public *; }
+-dontwarn com.google.firebase.**

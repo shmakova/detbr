@@ -45,7 +45,7 @@ android {
 
         release {
             signingConfig signingConfigs.yamblz
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
     }
@@ -107,22 +107,15 @@ dependencies {
     compile libraries.rxAndroid
     compile libraries.rxFirebase
 
-    compile(libraries.retrofit) {
-        exclude module: 'okhttp'
-    }
+    compile libraries.retrofit
     compile libraries.converterGson
     compile libraries.retrofitRx
 
-    compile libraries.gson
-    compile libraries.okhttp
     compile libraries.glide
     compile libraries.okhttpLogging
 
     compile libraries.fragmentArgs
     apt libraries.fragmentArgsProcessor
-
-    compile libraries.icepick
-    provided libraries.icepickProcessor
 
     compile libraries.bottomBar
     compile libraries.floatingSearchView
@@ -135,13 +128,6 @@ dependencies {
     compile('org.xwalk:xwalk_core_library:21.51.546.6') {
         exclude group: 'com.android.support', module: 'support-v4'
     }
-
-    // Developer tools (Developer Settings)
-    compile libraries.stetho
-    compile libraries.leakCanary
-    compile libraries.tinyDancer
-    compile libraries.lynx
-    compile libraries.processPhoenix
 
     testCompile libraries.junit
     testCompile libraries.robolectric

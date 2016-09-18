@@ -29,4 +29,7 @@
 
     <color name="dark_background">#363636</color>
     <color name="light_background">#f7f7f5</color>
+
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 </resources>

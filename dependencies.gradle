@@ -92,7 +92,6 @@ ext.libraries = [
         autoValueFirebase          : "me.mattlogan.auto.value:auto-value-firebase:$versions.autoValueFirebase",
         autoValueFirebaseAnnotation: "me.mattlogan.auto.value:auto-value-firebase-annotation:$versions.autoValueFirebase",
 
-
         storIO                     : "com.pushtorefresh.storio:sqlite:$versions.storIO",
 
         supportAnnotations         : "com.android.support:support-annotations:$versions.supportLibs",

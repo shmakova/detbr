@@ -16,17 +16,11 @@ import com.arlib.floatingsearchview.suggestions.model.SearchSuggestion;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import butterknife.BindView;
-import icepick.Icepick;
 import ru.yandex.detbr.App;
-import ru.yandex.detbr.BuildConfig;
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
 import ru.yandex.detbr.di.components.MainComponent;
-import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 import ru.yandex.detbr.di.modules.MainModule;
 import ru.yandex.detbr.di.modules.NavigationModule;
 import ru.yandex.detbr.managers.NavigationManager;
@@ -34,7 +28,6 @@ import ru.yandex.detbr.presentation.presenters.MainPresenter;
 import ru.yandex.detbr.presentation.views.MainView;
 import ru.yandex.detbr.ui.fragments.IntroFragment;
 import ru.yandex.detbr.ui.listeners.OnCardsItemClickListener;
-import ru.yandex.detbr.ui.other.ViewModifier;
 
 public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> implements
         OnCardsItemClickListener,
@@ -50,10 +43,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     @BindView(R.id.floating_search_view)
     FloatingSearchView floatingSearchView;
 
-    @Inject
-    @Named(DeveloperSettingsModule.MAIN_ACTIVITY_VIEW_MODIFIER)
-    ViewModifier viewModifier;
-
     private MainComponent mainComponent;
 
     @SuppressLint("InflateParams")
@@ -61,15 +50,9 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         injectDependencies();
         super.onCreate(savedInstanceState);
-        Icepick.restoreInstanceState(this, savedInstanceState);
         Intent intent = getIntent();
         int tabId = intent.getIntExtra(NavigationManager.TAB_KEY, -1);
-
-        if (BuildConfig.DEBUG) {
-            setContentView(viewModifier.modify(getLayoutInflater().inflate(R.layout.activity_main, null)));
-        } else {
-            setContentView(R.layout.activity_main);
-        }
+        setContentView(R.layout.activity_main);
 
         bottomBar.setOnTabSelectListener(this);
         floatingSearchView.setOnSearchListener(this);
@@ -77,12 +60,6 @@ public class MainActivity extends BaseMvpActivity<MainView, MainPresenter> imple
         if (savedInstanceState == null) {
             presenter.onFirstLoad(tabId);
         }
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        Icepick.saveInstanceState(this, outState);
     }
 
     @NonNull

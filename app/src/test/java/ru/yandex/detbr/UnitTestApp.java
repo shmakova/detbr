@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 
 import ru.yandex.detbr.data.developer_settings.DevMetricsProxy;
 import ru.yandex.detbr.di.components.DaggerApplicationComponent;
-import ru.yandex.detbr.di.modules.DeveloperSettingsModule;
 
 @SuppressWarnings("SIC_INNER_SHOULD_BE_STATIC_ANON")
 public class UnitTestApp extends App {

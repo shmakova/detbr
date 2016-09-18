@@ -7,8 +7,6 @@ import android.support.annotation.NonNull;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
-import ru.yandex.detbr.data.developer_settings.DevMetricsProxy;
-import ru.yandex.detbr.data.developer_settings.DeveloperSettingsModel;
 import ru.yandex.detbr.di.components.ApplicationComponent;
 import ru.yandex.detbr.di.components.DaggerApplicationComponent;
 import ru.yandex.detbr.di.modules.ApplicationModule;
@@ -31,12 +29,6 @@ public class App extends Application {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
-
-            DeveloperSettingsModel developerSettingModel = applicationComponent.developerSettingModel();
-            developerSettingModel.apply();
-
-            DevMetricsProxy devMetricsProxy = applicationComponent.devMetricsProxy();
-            devMetricsProxy.apply();
         }
     }
 
