@@ -1,6 +1,7 @@
 package ru.yandex.detbr.ui.delegates;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -79,10 +80,12 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
             if (card.dark()) {
                 title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.white));
                 url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_white));
+                url.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
                 likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_white));
             } else {
                 title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.darkest_transparent));
                 url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.dark_transparent));
+                url.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
                 likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_black));
             }
 
