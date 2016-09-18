@@ -4,7 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,10 +19,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import org.xwalk.core.XWalkGetBitmapCallback;
+import org.xwalk.core.XWalkNavigationHistory;
+import org.xwalk.core.XWalkResourceClient;
+import org.xwalk.core.XWalkUIClient;
+import org.xwalk.core.XWalkView;
+import org.xwalk.core.XWalkWebResourceRequest;
+import org.xwalk.core.XWalkWebResourceResponse;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -33,14 +39,15 @@ import ru.yandex.detbr.di.modules.BrowserModule;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.presenters.BrowserPresenter;
 import ru.yandex.detbr.presentation.views.BrowserView;
+import timber.log.Timber;
 
 public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresenter> implements
         BrowserView {
     private static final String CHILD_SAFETY_HTML = "file:///android_asset/child_safety.html";
     private static final String LUCKY_PAGE_HTML = "file:///android_asset/lucky_page.html";
 
-    @BindView(R.id.webview)
-    WebView webView;
+    @BindView(R.id.xwalkview)
+    XWalkView xWalkView;
     @BindView(R.id.like_fab)
     FloatingActionButton fabLike;
     @BindView(R.id.progress_bar)
@@ -74,7 +81,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         if (savedInstanceState == null) {
             handleIntent(getIntent());
         } else {
-            webView.restoreState(savedInstanceState);
+            xWalkView.restoreState(savedInstanceState);
         }
     }
 
@@ -89,7 +96,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        webView.saveState(outState);
+        xWalkView.saveState(outState);
         super.onSaveInstanceState(outState);
     }
 
@@ -106,30 +113,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
-        webSettings.setAppCacheEnabled(true);
-        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        webSettings.setDatabaseEnabled(true);
-        webSettings.setSupportZoom(true);
-        webSettings.setBuiltInZoomControls(true);
-        webSettings.setDisplayZoomControls(false);
-        webSettings.setAllowContentAccess(true);
-        webSettings.setAllowFileAccess(true);
-        webSettings.setLoadWithOverviewMode(true);
-        webSettings.setUseWideViewPort(true);
-        webView.setDrawingCacheBackgroundColor(Color.WHITE);
-        webView.setFocusableInTouchMode(true);
-        webView.setFocusable(true);
-        webView.setDrawingCacheEnabled(false);
-        webView.setWillNotCacheDrawing(true);
-        webView.setBackgroundColor(Color.WHITE);
-        webView.setScrollbarFadingEnabled(true);
-        webView.setSaveEnabled(true);
-        webView.setNetworkAvailable(true);
-        webView.setWebViewClient(presenter.provideWebViewClient());
-        webView.setWebChromeClient(presenter.provideWebChromeClient());
+        xWalkView.setResourceClient(new MyResourceClient(xWalkView));
+        xWalkView.setUIClient(new MyUIClient(xWalkView));
     }
 
     @Override
@@ -151,13 +136,18 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void loadPageByUrl(String url) {
-        webView.stopLoading();
-        webView.loadUrl(url);
+        xWalkView.stopLoading();
+        xWalkView.load(url, null);
     }
 
     @Override
     public void showError() {
-        webView.loadUrl(CHILD_SAFETY_HTML);
+        xWalkView.load(CHILD_SAFETY_HTML, null);
+    }
+
+    @Override
+    public void showLuckyPage() {
+        xWalkView.load(LUCKY_PAGE_HTML, null);
     }
 
     @Override
@@ -168,11 +158,6 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     @Override
     public void hideLike() {
         fabLike.setVisibility(View.GONE);
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        handleIntent(intent);
     }
 
     private void handleIntent(Intent intent) {
@@ -211,11 +196,6 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         intent.putExtra(NavigationManager.TAB_KEY, NavigationManager.TABS_TAB_POSITION);
         startActivity(intent);
         finish();
-    }
-
-    @Override
-    public void showLuckyPage() {
-        webView.loadUrl(LUCKY_PAGE_HTML);
     }
 
     @Override
@@ -258,8 +238,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
+        if (xWalkView.getNavigationHistory().canGoBack()) {
+            xWalkView.getNavigationHistory().navigate(XWalkNavigationHistory.Direction.BACKWARD, 1);
         } else {
             presenter.onHomeClicked();
         }
@@ -285,18 +265,125 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     private void share() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
+        sendIntent.putExtra(Intent.EXTRA_TEXT, xWalkView.getUrl());
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share)));
     }
 
     @OnClick(R.id.like_fab)
     public void onFabLikeClick() {
-        presenter.onLikeClick(webView.getTitle(), webView.getUrl());
+        presenter.onLikeClick(xWalkView.getTitle(), xWalkView.getUrl());
     }
 
     @OnClick(R.id.toolbar)
     public void onToolbarClick() {
         MenuItemCompat.expandActionView(searchItem);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (xWalkView != null) {
+            xWalkView.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
+
+        if (xWalkView != null) {
+            xWalkView.onNewIntent(intent);
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (xWalkView != null) {
+            xWalkView.pauseTimers();
+            xWalkView.onHide();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (xWalkView != null) {
+            xWalkView.resumeTimers();
+            xWalkView.onShow();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (xWalkView != null) {
+            xWalkView.onDestroy();
+        }
+    }
+
+    class MyResourceClient extends XWalkResourceClient {
+
+        MyResourceClient(XWalkView view) {
+            super(view);
+        }
+
+        @Override
+        public void onLoadStarted(XWalkView view, String url) {
+            Timber.w("onLoadStarted: " + url);
+        }
+
+        @Override
+        public void onLoadFinished(XWalkView view, String url) {
+            Timber.w("onLoadFinished: " + url);
+        }
+
+        @Override
+        public void onProgressChanged(XWalkView view, int newProgress) {
+            Timber.w("onProgressChanged: " + newProgress);
+        }
+
+        @Override
+        public boolean shouldOverrideUrlLoading(XWalkView view, String url) {
+            Timber.w("shouldOverrideUrlLoading: " + url);
+            return super.shouldOverrideUrlLoading(view, url);
+        }
+
+        @Override
+        public XWalkWebResourceResponse shouldInterceptLoadRequest(XWalkView view,
+                                                                   XWalkWebResourceRequest request) {
+            Timber.w("shouldInterceptLoadRequest: url: " + request.getUrl()
+                    + ", method: " + request.getMethod());
+            return super.shouldInterceptLoadRequest(view, request);
+        }
+    }
+
+    /**
+     * Example of XWalkUIClient implementation
+     */
+    class MyUIClient extends XWalkUIClient {
+
+        MyUIClient(XWalkView view) {
+            super(view);
+        }
+
+        @Override
+        public void onPageLoadStarted(XWalkView view, java.lang.String url) {
+            Timber.w("onPageLoadStarted: " + url);
+        }
+
+        @Override
+        public void onPageLoadStopped(XWalkView view, String url, LoadStatus status) {
+            Timber.w("onPageLoadStopped: " + url + ", status: " + status);
+
+            if (status == LoadStatus.FINISHED) {
+                view.captureBitmapAsync(new XWalkGetBitmapCallback() {
+                    @Override
+                    public void onFinishGetBitmap(Bitmap bitmap, int i) {
+                        Timber.w("onFinishGetBitmap: " + bitmap);
+                    }
+                });
+            }
+        }
     }
 }

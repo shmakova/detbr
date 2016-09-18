@@ -87,18 +87,10 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.widget.NestedScrollView
-            android:id="@+id/webview_wrapper"
+        <org.xwalk.core.XWalkView
+            android:id="@+id/xwalkview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <WebView
-                android:id="@+id/webview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-        </android.support.v4.widget.NestedScrollView>
+            android:layout_height="match_parent"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/like_fab"
@@ -108,7 +100,7 @@
             android:layout_margin="16dp"
             android:src="@drawable/ic_like_black_border"
             android:visibility="gone"
-            app:layout_anchor="@id/webview_wrapper"
+            app:layout_anchor="@id/xwalkview"
             app:layout_anchorGravity="bottom|right|end"
             app:layout_behavior="ru.yandex.detbr.ui.behaviors.ScrollAwareFabBehavior"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"

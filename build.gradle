@@ -12,6 +12,8 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://clojars.org/repo/" }
         maven { url "https://jitpack.io" }
+        maven { url "https://jitpack.io" }
+        maven { url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2' }
     }
     dependencies {
         // See dependencies.gradle for declaration of plugins.
@@ -56,6 +58,7 @@ allprojects {
         maven { url 'https://maven.fabric.io/public' }
         maven { url "https://clojars.org/repo/" }
         maven { url "https://jitpack.io" }
+        maven { url 'https://download.01.org/crosswalk/releases/crosswalk/android/maven2' }
     }
 
     // Workaround to prevent Gradle from stealing focus from other apps during tests run/etc.
