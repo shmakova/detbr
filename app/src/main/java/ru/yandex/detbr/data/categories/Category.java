@@ -16,6 +16,8 @@ import ru.yandex.detbr.R;
 @AutoValue
 @FirebaseValue
 public abstract class Category implements Parcelable {
+    public static final String SCHOOL = "school";
+
     public abstract String title();
 
     @Nullable
@@ -64,6 +66,6 @@ public abstract class Category implements Parcelable {
     }
 
     public boolean isSchoolCategory() {
-        return alias().equals("school");
+        return alias().equals(SCHOOL);
     }
 }
