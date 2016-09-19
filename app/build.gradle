@@ -46,7 +46,8 @@ android {
         release {
             signingConfig signingConfigs.yamblz
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            proguardFiles getDefaultProguardFile('proguard-android.txt'),
+                    'proguard-rules.pro'
         }
     }
 
@@ -107,9 +108,14 @@ dependencies {
     compile libraries.rxAndroid
     compile libraries.rxFirebase
 
-    compile libraries.retrofit
+    compile(libraries.retrofit) {
+        exclude module: 'okhttp'
+    }
     compile libraries.converterGson
     compile libraries.retrofitRx
+
+    compile libraries.gson
+    compile libraries.okhttp
 
     compile libraries.glide
     compile libraries.okhttpLogging
