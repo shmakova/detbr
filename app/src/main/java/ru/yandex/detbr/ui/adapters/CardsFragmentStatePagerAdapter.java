@@ -47,16 +47,19 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
             card = cards.get(position);
         }
 
-        String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
-        switch (type) {
-            case "text":
-                return new CardFragmentBuilder(card, R.layout.item_card).build();
-            case "plain_image":
-                return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
-            case "full_image":
-                return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
-            default:
-                return new CardFragmentBuilder(card, R.layout.item_card).build();
+            String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
+            switch (type) {
+                case Card.TEXT_TYPE:
+                    return new CardFragmentBuilder(card, R.layout.item_card).build();
+                case Card.PLAIN_IMAGE_TYPE:
+                    return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
+                case Card.FULL_IMAGE_TYPE:
+                    return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
+                case Card.VIDEO_TYPE:
+                    return new CardFragmentBuilder(card, R.layout.item_video_card).build();
+                default:
+                    return new CardFragmentBuilder(card, R.layout.item_card).build();
+            }
         }
     }
 

@@ -11,7 +11,7 @@ img {
 }
 
 p.grey-text {
-    font-size: 18px;
+    font-size: 18px !important;
     letter-spacing: 0.037em;
 }
 

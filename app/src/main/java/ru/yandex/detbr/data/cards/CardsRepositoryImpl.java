@@ -142,7 +142,7 @@ public class CardsRepositoryImpl implements CardsRepository {
     public Observable<PutResult> setLike(@NonNull Card card, boolean like) {
         return storIOSQLite
                 .put()
-                .object(card.getLikedCard(like))
+                .object(card.withLike(like))
                 .withPutResolver(new CardPutResolver())
                 .prepare()
                 .asRxObservable();
@@ -150,41 +150,46 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     public Observable<Card> saveCard(Card card) {
         return Observable.just(card)
-                .map(pushCardToFirebase)
                 .map(saveCardToDatabase)
+                .map(loadImageForCard)
+                .flatMap(pushCardToFirebase)
                 .first();
     }
 
-    @SuppressWarnings("PMD.AvoidReassigningParameters")
-    private final Func1<Card, Card> pushCardToFirebase =
-            new Func1<Card, Card>() {
+
+    private final Func1<Card, Observable<Card>> pushCardToFirebase =
+            new Func1<Card, Observable<Card>>() {
                 @Override
-                public Card call(Card card) {
-                    String key = databaseReference.child(CARDS).push().getKey();
+                public Observable<Card> call(Card card) {
+                    return RxFirebaseDatabase
+                            .observeSingleValueEvent(
+                                    databaseReference.child(CARDS)
+                                            .orderByChild("url")
+                                            .equalTo(card.url()))
+                            .map(dataSnapshot -> {
+                                if (dataSnapshot.getValue() == null) {
+                                    String key = databaseReference.child(CARDS).push().getKey();
 
-                    databaseReference.child(CARDS)
-                            .orderByChild("url")
-                            .equalTo(card.url());
+                                    Map<String, Object> cardValues = new HashMap<>();
+                                    cardValues.put("url", card.url());
+                                    cardValues.put("title", card.title());
 
-                    Map<String, Object> cardValues = new HashMap<>();
-                    cardValues.put("url", card.url());
-                    cardValues.put("title", card.title());
-                    String image = getImageUrl(card.url());
+                                    if (card.image() == null || card.image().isEmpty()) {
+                                        cardValues.put("type", Card.TEXT_TYPE);
+                                    } else {
+                                        cardValues.put("image", card.image());
+                                        cardValues.put("type", Card.PLAIN_IMAGE_TYPE);
+                                    }
 
-                    if (image == null || image.isEmpty()) {
-                        cardValues.put("type", Card.TEXT_TYPE);
-                    } else {
-                        cardValues.put("image", image);
-                        cardValues.put("type", Card.PLAIN_IMAGE_TYPE);
-                        card = card.getCardWithImage(image);
-                    }
+                                    Map<String, Object> childUpdates = new HashMap<>();
+                                    childUpdates.put("/cards/" + key, cardValues);
 
-                    Map<String, Object> childUpdates = new HashMap<>();
-                    childUpdates.put("/cards/" + key, cardValues);
+                                    databaseReference.updateChildren(childUpdates);
+                                }
 
-                    databaseReference.updateChildren(childUpdates);
-
-                    return card;
+                                return card;
+                            })
+                            .first();
                 }
             };
 
@@ -198,6 +203,14 @@ public class CardsRepositoryImpl implements CardsRepository {
                             .prepare()
                             .executeAsBlocking();
                     return card;
+                }
+            };
+
+    private final Func1<Card, Card> loadImageForCard =
+            new Func1<Card, Card>() {
+                @Override
+                public Card call(Card card) {
+                    return card.withImage(getImageUrl(card.url()));
                 }
             };
 }

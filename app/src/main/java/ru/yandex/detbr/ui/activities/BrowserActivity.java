@@ -38,6 +38,7 @@ import ru.yandex.detbr.utils.IntentResolver;
 public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresenter> implements
         BrowserView {
     private static final String CHILD_SAFETY_HTML = "file:///android_asset/child_safety.html";
+    private static final String LUCKY_PAGE_HTML = "file:///android_asset/lucky_page.html";
 
     @BindView(R.id.webview)
     WebView webView;
@@ -219,6 +220,11 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
+    public void showLuckyPage() {
+        webView.loadUrl(LUCKY_PAGE_HTML);
+    }
+
+    @Override
     public void setOnUrlListener(UrlListener listener) {
         this.listener = listener;
     }
@@ -246,7 +252,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     }
 
     @Override
-    public void setLike(boolean like) {
+    public void showLike(boolean like) {
         if (like) {
             fabLike.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
                     R.drawable.ic_like_fill, null));
