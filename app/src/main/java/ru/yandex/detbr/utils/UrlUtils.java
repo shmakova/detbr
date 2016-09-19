@@ -22,10 +22,14 @@ public final class UrlUtils {
     public static final String GOOGLE_URL = "google.";
     public static final String GOOGLE_SAFE_PARAMETER = "safe=high";
     public static final String GOOGLE_QUERY_PARAMETER = "q=";
+    public static final String BROWSER_FALLBACK_URL = "browser_fallback_url";
+    public static final String MARKET_URL = "market://details?id=";
     private static final String HTTP_PREFIX = "http://";
     private static final String HTTPS_PREFIX = "https://";
+    private static final String INTENT_PREFIX = "intent://";
     private static final String YOUTUBE_URL_REGEX = "^(https?)?(://)?(www.)?(m.)?((youtube.com)|(youtu.be))/";
     private static final String[] VIDEO_ID_REGEX = {"\\?vi?=([^&]*)", "watch\\?.*v=([^&]*)", "(?:embed|vi?)/([^/?]*)"};
+
 
     private UrlUtils() {
     }
@@ -90,5 +94,9 @@ public final class UrlUtils {
         }
 
         return url;
+    }
+
+    public static boolean isIntent(String url) {
+        return url.startsWith(INTENT_PREFIX);
     }
 }

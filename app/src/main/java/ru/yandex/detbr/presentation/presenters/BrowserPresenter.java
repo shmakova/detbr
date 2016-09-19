@@ -177,25 +177,32 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (currentUrl != null && currentUrl.equals(url)) {
-                view.goBack();
+            if (UrlUtils.isHttpLink(url)) {
+                if (currentUrl != null && currentUrl.equals(url)) {
+                    view.goBack();
+                    return true;
+                }
+
+                String safeUrl = url;
+
+                if (url.contains(UrlUtils.GOOGLE_URL) &&
+                        !url.contains(UrlUtils.GOOGLE_SAFE_PARAMETER) &&
+                        url.contains(UrlUtils.GOOGLE_QUERY_PARAMETER)) {
+                    safeUrl += "&" + UrlUtils.GOOGLE_SAFE_PARAMETER;
+                } else if (url.contains(UrlUtils.YANDEX_URL) &&
+                        !url.contains(UrlUtils.YANDEX_SAFE_PARAMETER) &&
+                        url.contains(UrlUtils.YANDEX_QUERY_PARAMETER)) {
+                    safeUrl += "&" + UrlUtils.YANDEX_SAFE_PARAMETER;
+                }
+
+                loadUrl(safeUrl);
+                currentUrl = safeUrl;
                 return true;
+            } else {
+                if (isViewAttached()) {
+                    return getView().resolveUrl(url, BrowserPresenter.this::loadUrl);
+                }
             }
-
-            String safeUrl = url;
-
-            if (url.contains(UrlUtils.GOOGLE_URL) &&
-                    !url.contains(UrlUtils.GOOGLE_SAFE_PARAMETER) &&
-                    url.contains(UrlUtils.GOOGLE_QUERY_PARAMETER)) {
-                safeUrl += "&" + UrlUtils.GOOGLE_SAFE_PARAMETER;
-            } else if (url.contains(UrlUtils.YANDEX_URL) &&
-                    !url.contains(UrlUtils.YANDEX_SAFE_PARAMETER) &&
-                    url.contains(UrlUtils.YANDEX_QUERY_PARAMETER)) {
-                safeUrl += "&" + UrlUtils.YANDEX_SAFE_PARAMETER;
-            }
-
-            loadUrl(safeUrl);
-            currentUrl = safeUrl;
             return true;
         }
 

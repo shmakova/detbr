@@ -23,6 +23,10 @@ public interface BrowserView extends MvpView {
         void onUrl(String url);
     }
 
+    interface LoadUrlListener {
+        void onLoadUrl(String url);
+    }
+
     void setOnUrlListener(UrlListener listener);
 
     void showSearchText(@Nullable String title, @NonNull String host);
@@ -34,6 +38,8 @@ public interface BrowserView extends MvpView {
     void showLike(boolean like);
 
     void loadPageByUrl(String url);
+
+    boolean resolveUrl(String url, LoadUrlListener listener);
 
     void showError();
 

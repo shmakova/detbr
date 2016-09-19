@@ -17,6 +17,9 @@ import ru.yandex.detbr.ui.fragments.LastCardFragment;
  */
 
 public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
+    private static final int INTRO_CARDS_COUNT = 2;
+    private static final int LAST_CARDS_COUNT = 1;
+
     private final List<Card> cards;
     private final boolean firstLoad;
 
@@ -28,34 +31,40 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == cards.size()) {
+        if (position == getCount() - LAST_CARDS_COUNT) {
             return new LastCardFragment();
+        }
+
+        Card card;
+
+        if (firstLoad) {
+            if (position == 0) {
+                return new IntroCardFragmentBuilder(R.layout.fragment_intro_first).build();
+            } else if (position == 1) {
+                return new IntroCardFragmentBuilder(R.layout.fragment_intro_second).build();
+            } else {
+                card = cards.get(position - INTRO_CARDS_COUNT);
+            }
         } else {
-            Card card = cards.get(position);
-            String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
+            card = cards.get(position);
+        }
 
-            if (firstLoad) {
-                if (position == 0) {
-                    return new IntroCardFragmentBuilder(R.layout.fragment_intro_first).build();
-                } else if (position == 1) {
-                    return new IntroCardFragmentBuilder(R.layout.fragment_intro_second).build();
-                }
-            }
+        String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
 
-            switch (type) {
-                case Card.TEXT_TYPE:
-                    return new CardFragmentBuilder(card, R.layout.item_card).build();
-                case Card.PLAIN_IMAGE_TYPE:
-                    return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
-                case Card.FULL_IMAGE_TYPE:
-                    return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
-                case Card.VIDEO_TYPE:
-                    return new CardFragmentBuilder(card, R.layout.item_video_card).build();
-                default:
-                    return new CardFragmentBuilder(card, R.layout.item_card).build();
-            }
+        switch (type) {
+            case Card.TEXT_TYPE:
+                return new CardFragmentBuilder(card, R.layout.item_card).build();
+            case Card.PLAIN_IMAGE_TYPE:
+                return new CardFragmentBuilder(card, R.layout.item_plain_image_card).build();
+            case Card.FULL_IMAGE_TYPE:
+                return new CardFragmentBuilder(card, R.layout.item_full_image_card).build();
+            case Card.VIDEO_TYPE:
+                return new CardFragmentBuilder(card, R.layout.item_video_card).build();
+            default:
+                return new CardFragmentBuilder(card, R.layout.item_card).build();
         }
     }
+
 
     public List<Card> getCards() {
         return cards;
@@ -63,6 +72,6 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return cards.size() + 1;
+        return cards.size() + LAST_CARDS_COUNT + (firstLoad ? INTRO_CARDS_COUNT : 0);
     }
 }

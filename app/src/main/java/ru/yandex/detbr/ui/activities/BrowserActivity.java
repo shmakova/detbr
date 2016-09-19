@@ -33,6 +33,7 @@ import ru.yandex.detbr.di.modules.BrowserModule;
 import ru.yandex.detbr.managers.NavigationManager;
 import ru.yandex.detbr.presentation.presenters.BrowserPresenter;
 import ru.yandex.detbr.presentation.views.BrowserView;
+import ru.yandex.detbr.utils.IntentResolver;
 
 public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresenter> implements
         BrowserView {
@@ -153,6 +154,11 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     public void loadPageByUrl(String url) {
         webView.stopLoading();
         webView.loadUrl(url);
+    }
+
+    @Override
+    public boolean resolveUrl(String url, LoadUrlListener listener) {
+        return IntentResolver.resolveUrl(this, url, listener);
     }
 
     @Override
