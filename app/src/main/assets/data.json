@@ -673,6 +673,15 @@
       "type": "plain_image"
     },
     {
+      "title": "Мега-новость! Светящиеся кроссовки на детях в проекте Голос Дети-2 2015",
+      "url": "https://m.youtube.com/watch?v=PsYD_BRZVgw",
+      "image": "http://golos-show.ru/uploads/ckeditor/pictures/357/content_golos_deti2_poedinki.JPG",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
+    },
+    {
       "title": "Мода 2016",
       "url": "http://yavmode.ru/moda-2016-65-foto/",
       "image": "http://yavmode.ru/wp-content/uploads/2016/03/fash-n-chips.jpg",
@@ -697,6 +706,15 @@
       "type": "plain_image"
     },
     {
+      "title": "Самый маленький FPV квадрокоптер в мире",
+      "url": "https://m.youtube.com/watch?v=hj-6IfErUik",
+      "image": "http://img.youtube.com/vi/hj-6IfErUik/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
+    },
+    {
       "title": "LEGO Star Wars Истребитель Повстанцев",
       "url": "http://www.lego.com/ru-ru/starwars/products/resistance-xwing-fighter-75125",
       "image": "https://mi-od-live-s.legocdn.com/r/www/r/catalogs/-/media/catalogs/products/star%20wars/primary/lego_75125_prod_pri_1488.jpg?l.r2=-795200374",
@@ -711,6 +729,15 @@
       "site": "Карусель-ТВ",
       "category": "school",
       "type": "plain_image"
+    },
+    {
+      "title": "Распаковка посылок",
+      "url": "https://m.youtube.com/watch?v=UOjhT1UnmKQ",
+      "image": "http://img.youtube.com/vi/UOjhT1UnmKQ/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
     },
     {
       "title": "Abracadabra - Song",
@@ -730,6 +757,15 @@
       "type": "video"
     },
     {
+      "title": "Учим танец вместе с Юлей из песни 'Не танцуй'",
+      "url": "https://m.youtube.com/watch?v=mvQoCyCy-LU",
+      "image": "http://img.youtube.com/vi/mvQoCyCy-LU/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
+    },
+    {
       "title": "Old Macdonald had a farm - Song",
       "url": "http://learnenglishkids.britishcouncil.org/en/songs/old-macdonald-had-farm",
       "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_58069399_v4.jpg",
@@ -738,12 +774,30 @@
       "type": "plain_image"
     },
     {
+      "title": "20 лучших лайфхаков для школы | BACK TO SCHOOL 2016",
+      "url": "https://m.youtube.com/watch?v=ZXFOpj8NSig",
+      "image": "http://img.youtube.com/vi/ZXFOpj8NSig/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
+    },
+    {
       "title": "Как нарисовать кошку поэтапно",
       "url": "http://koteko.ru/risuem-koshek/kak-narisovat-koshku-poetapno",
       "image": "http://koteko.ru/wp-content/uploads/2013/05/kak-narisovat-koshku-poetapno-4.jpg",
       "site": "Koteko.ru",
       "category": "creation",
       "type": "plain_image"
+    },
+    {
+      "title": "НЕВЕРОЯТНЫЕ механизмы собранные из ЛЕГО",
+      "url": "https://m.youtube.com/watch?v=L4a7L_-GFf0",
+      "image": "http://img.youtube.com/vi/L4a7L_-GFf0/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
     },
     {
       "title": "People Work - Song",
@@ -760,6 +814,24 @@
       "site": "RukiKryki.ru",
       "category": "school",
       "type": "plain_image"
+    },
+    {
+      "title": "Гроза в канадской провинции Альберта",
+      "url": "https://yandex.ru/images/touch/",
+      "site": "КАРТИНКА ДНЯ",
+      "image": "https://yandex.ru/images/today?size=1920x1200",
+      "category": "creation",
+      "dark": true,
+      "type": "full_image"
+    },
+    {
+      "title": "DIY Emoji Back To School Принадлежности - Тетради, Карандаш Держатель & Закладки",
+      "url": "https://m.youtube.com/watch?v=CLWFn-lCvjo",
+      "image": "http://img.youtube.com/vi/CLWFn-lCvjo/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
     }
   ],
   "categories": [
