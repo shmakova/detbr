@@ -41,4 +41,5 @@
     <string name="back">К началу</string>
     <string name="error_init_failure">Невозможно проиграть видео</string>
     <string name="DEVELOPER_KEY">AIzaSyDky_kn7DJtD05ZTsmcYLhiLsIidr2ZMeM</string>
+    <string name="play">play</string>
 </resources>

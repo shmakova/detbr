@@ -3,6 +3,7 @@ package ru.yandex.detbr.ui.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -189,6 +190,7 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
     public void setWhiteText() {
         title.setTextColor(ContextCompat.getColor(getContext(), R.color.light_transparent_white));
         url.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_white));
+        url.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
         likeButton.setButtonDrawable(ContextCompat.getDrawable(getContext(), R.drawable.like_white));
 
         if (textWrapper != null) {

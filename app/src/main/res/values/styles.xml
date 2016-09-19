@@ -85,4 +85,10 @@
         <item name="android:maxLines">3</item>
         <item name="android:textSize">14sp</item>
     </style>
+
+    <style name="IntroButton">
+        <item name="android:background">@drawable/btn_colored_material</item>
+        <item name="android:textAppearance">@style/TextAppearance.AppCompat.Widget.Button.Inverse
+        </item>
+    </style>
 </resources>
