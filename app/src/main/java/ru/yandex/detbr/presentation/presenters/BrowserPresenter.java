@@ -126,7 +126,7 @@ public class BrowserPresenter extends MvpBasePresenter<BrowserView> {
                     } else {
                         return cardsRepository
                                 .setLike(card, !card.like())
-                                .map(putResult -> card.getLikedCard(!card.like()));
+                                .map(putResult -> card.withLike(!card.like()));
                     }
                 })
                 .subscribeOn(Schedulers.io())
