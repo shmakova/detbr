@@ -150,8 +150,8 @@ public class CardsRepositoryImpl implements CardsRepository {
 
     public Observable<Card> saveCard(Card card) {
         return Observable.just(card)
-                .map(saveCardToDatabase)
                 .map(loadImageForCard)
+                .map(saveCardToDatabase)
                 .flatMap(pushCardToFirebase)
                 .first();
     }
