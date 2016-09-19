@@ -151,7 +151,7 @@
       "image": "http://img.youtube.com/vi/vRwFdzK-1x8/0.jpg",
       "site": "YouTube",
       "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
-      "category": "goods",
+      "category": "creation",
       "type": "video"
     },
     {
@@ -207,7 +207,7 @@
       "url": "http://www.devchat.ru/my-style/fashion-and-accessories/article/how-to-weave-braids",
       "image": "http://cdn.multibrand2.pgsitecore.com/ru-RU/-/media/BeingGirl/BeingGirl-RU/Images/Articles/Primary/pletem--kosi-prim.jpg?h=360&w=650&v=1-201606211352&crop=1&sc=1",
       "site": "ДЕВЧАТ",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -269,7 +269,7 @@
       "url": "https://www.adme.ru/svoboda-sdelaj-sam/kak-sdelat-vozdushnogo-zmeya-iz-obyknovennogo-paketa-1341715/",
       "site": "ADME",
       "image": "https://files1.adme.ru/files/news/part_134/1341715/16526515-9-1471430969-1000-7df9e3be11-1471511196.jpg",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -408,7 +408,7 @@
       "url": "http://ru.m.wikihow.com/сложить-лягушку-из-бумаги",
       "image": "http://pad3.whstatic.com/images/thumb/3/33/Fold-an-Origami-Frog-Intro.jpg/760px-Fold-an-Origami-Frog-Intro.jpg",
       "site": "WikiHow",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -423,7 +423,7 @@
       "url": "http://www.rukikryki.ru/podelki/igrushki/3584-antistress-igrushka-svoimi-rukami.html",
       "image": "http://www.rukikryki.ru/uploads/posts/2015-01/thumbs/1420444953_antistress-igrushka-svoimi-rukami-1.jpg",
       "site": "RukiKryki.ru",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -507,7 +507,7 @@
       "url": "https://m.youtube.com/watch?v=CrYEEuNtnUU&feature=youtu.be",
       "image": "http://img.youtube.com/vi/CrYEEuNtnUU/0.jpg",
       "site": "YouTube",
-      "category": "goods",
+      "category": "creation",
       "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
       "type": "video"
     },
@@ -534,7 +534,7 @@
       "url": "http://ru.m.wikihow.com/сделать-бумажный-самолетик",
       "image": "http://www.popmeh.ru/upload/iblock/c8e/c8ecb853b70caf1ef40a0836ec8c075f.jpg",
       "site": "WikiHow",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -577,7 +577,7 @@
       "url": "http://m.popmech.ru/diy/51713-kak-sdelat-bumazhnyy-samoletik-dostoynyy-mirovogo-rekorda/",
       "image": "http://www.popmeh.ru/upload/iblock/07e/37144-paperairplane_teaser2.jpg",
       "site": "Популярная механика",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -628,7 +628,7 @@
       "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
       "site": "YouTube",
       "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
-      "category": "goods",
+      "category": "creation",
       "type": "video"
     },
     {
@@ -636,7 +636,7 @@
       "url": "http://ru.m.wikihow.com/сложить-сердечко-из-бумаги",
       "image": "http://pad1.whstatic.com/images/thumb/0/09/Fold-a-Paper-Heart-Step-8-Version-2.jpg/759px-Fold-a-Paper-Heart-Step-8-Version-2.jpg",
       "site": "WikiHow",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -677,7 +677,7 @@
       "url": "http://yavmode.ru/moda-2016-65-foto/",
       "image": "http://yavmode.ru/wp-content/uploads/2016/03/fash-n-chips.jpg",
       "site": "Я В МОДЕ",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -693,7 +693,7 @@
       "url": "http://heaclub.ru/kak-narisovat-sobaku-shhenka-risunki-prostym-karandashom-poetapno-dlya-nachinayushhih",
       "image": "http://heaclub.ru/images/heaclub/2016/06/miniatjura-640x447.jpg",
       "site": "Heaclub.ru",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -742,7 +742,7 @@
       "url": "http://koteko.ru/risuem-koshek/kak-narisovat-koshku-poetapno",
       "image": "http://koteko.ru/wp-content/uploads/2013/05/kak-narisovat-koshku-poetapno-4.jpg",
       "site": "Koteko.ru",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -784,7 +784,7 @@
       "color": "#f7d652"
     },
     {
-      "alias": "goods",
+      "alias": "creation",
       "title": "Творчество",
       "color": "#01f5a8"
     },
@@ -805,7 +805,7 @@
     },
     {
       "alias": "bikes",
-      "title": "Велосипеды",
+      "title": "Велики",
       "color": "#72c6e7"
     },
     {
