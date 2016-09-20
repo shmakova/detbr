@@ -1,17 +1,17 @@
 package ru.yandex.detbr.ui.delegates;
 
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hannesdorfmann.adapterdelegates2.AbsListItemAdapterDelegate;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import java.util.List;
 
@@ -62,44 +62,48 @@ public class ImageCardAdapterDelegate extends AbsListItemAdapterDelegate<Card, C
         @BindView(R.id.url)
         TextView url;
         @BindView(R.id.like_btn)
-        CheckBox likeButton;
+        LikeButton likeButton;
 
         ImageCardViewHolder(View itemView, OnCardClickListener onCardClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             listener = onCardClickListener;
+            likeButton.setOnLikeListener(new OnLikeListener() {
+                @Override
+                public void liked(LikeButton likeButton) {
+                    listener.onLikeClick(getAdapterPosition());
+                }
+
+                @Override
+                public void unLiked(LikeButton likeButton) {
+                    listener.onLikeClick(getAdapterPosition());
+                }
+            });
 
         }
 
         void bind(Card card) {
+            if (card.dark()) {
+                likeButton.setUnlikeDrawableRes(R.drawable.ic_like_white_border);
+            } else {
+                likeButton.setUnlikeDrawableRes(R.drawable.ic_like_black_border);
+            }
+
             title.setText(card.title());
             url.setText(card.getSiteName());
-            likeButton.setChecked(card.like());
+            likeButton.setLiked(card.like());
 
             Glide.with(cover.getContext())
                     .load(card.image())
                     .centerCrop()
                     .crossFade()
                     .into(cover);
-
-            if (card.dark()) {
-                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_white));
-            } else {
-                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_black));
-            }
         }
 
         @OnClick(R.id.card)
         void onCardClick() {
             if (listener != null) {
                 listener.onCardClick(getAdapterPosition());
-            }
-        }
-
-        @OnClick(R.id.like_btn)
-        void onLikeClick() {
-            if (listener != null) {
-                listener.onLikeClick(getAdapterPosition());
             }
         }
     }

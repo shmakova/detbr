@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<CheckBox
+<com.like.LikeButton
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/like_btn"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:button="@drawable/like_black"
     android:gravity="center"
-    android:paddingBottom="8dp"
-    android:paddingRight="8dp"
-    android:paddingTop="8dp"
+    android:layout_marginBottom="-4dp"
+    android:layout_marginRight="-4dp"
+    app:anim_scale_factor="2"
+    app:circle_end_color="@color/dark_yellow"
+    app:circle_start_color="@color/light_yellow"
+    app:dots_primary_color="@color/dark_yellow"
+    app:dots_secondary_color="@color/light_yellow"
+    app:icon_size="24dp"
+    app:like_drawable="@drawable/ic_like_fill"
+    app:unlike_drawable="@drawable/ic_like_black_border"
     tools:ignore="RtlHardcoded,RtlSymmetry"/>
