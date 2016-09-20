@@ -8,9 +8,11 @@ import java.util.List;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.data.cards.Card;
+import ru.yandex.detbr.data.categories.Category;
 import ru.yandex.detbr.ui.fragments.CardFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.IntroCardFragmentBuilder;
 import ru.yandex.detbr.ui.fragments.LastCardFragment;
+import ru.yandex.detbr.ui.fragments.ShareFragment;
 
 /**
  * Created by shmakova on 22.08.16.
@@ -19,6 +21,7 @@ import ru.yandex.detbr.ui.fragments.LastCardFragment;
 public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     private static final int INTRO_CARDS_COUNT = 2;
     private static final int LAST_CARDS_COUNT = 1;
+
 
     private final List<Card> cards;
     private final boolean firstLoad;
@@ -50,6 +53,10 @@ public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
         }
 
         String type = card.type() == null || card.type().isEmpty() ? Card.TEXT_TYPE : card.type();
+
+        if (card.category() != null && card.category().equals(Category.SCHOOL) && position == 3) {
+            return new ShareFragment();
+        }
 
         switch (type) {
             case Card.TEXT_TYPE:

@@ -117,6 +117,7 @@ dependencies {
     compile libraries.okhttp
     compile libraries.glide
     compile libraries.okhttpLogging
+    compile libraries.likeButton
 
     compile libraries.fragmentArgs
     apt libraries.fragmentArgsProcessor
