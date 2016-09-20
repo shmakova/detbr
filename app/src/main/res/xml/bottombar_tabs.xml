@@ -2,17 +2,17 @@
 <tabs>
     <tab
         id="@+id/tab_cards"
-        icon="@drawable/ic_cards"
+        icon="@drawable/ic_cards_fill"
         title="@string/cards"
         barColorWhenSelected="@color/white"/>
     <tab
         id="@+id/tab_favorites"
-        icon="@drawable/ic_like_black_border"
+        icon="@drawable/ic_favorite_fill"
         title="@string/favorites"
         barColorWhenSelected="@color/white"/>
     <tab
         id="@+id/tab_tabs"
-        icon="@drawable/ic_tabs"
+        icon="@drawable/ic_tabs_fill"
         title="@string/tabs"
         barColorWhenSelected="@color/darkest_grey"
         activeColor="@color/white"/>
