@@ -17,5 +17,5 @@ public interface WotService {
     String API_KEY_VALUE = "268548cfb0c277d2b49401be4a87e36d081051eb";
 
     @GET("public_link_json2")
-    Single<WotResponse> getLinkReputation(@Query("hosts") String sort);
+    Single<WotResponse> getLinkReputation(@Query("hosts") String hosts);
 }
