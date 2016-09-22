@@ -17,8 +17,14 @@ public interface BrowserView extends MvpView {
 
     void openTabs();
 
+    void showLuckyPage();
+
     interface UrlListener {
         void onUrl(String url);
+    }
+
+    interface LoadUrlListener {
+        void onLoadUrl(String url);
     }
 
     void setOnUrlListener(UrlListener listener);
@@ -29,9 +35,11 @@ public interface BrowserView extends MvpView {
 
     void hideProgress();
 
-    void setLike(boolean like);
+    void showLike(boolean like);
 
     void loadPageByUrl(String url);
+
+    boolean resolveUrl(String url, LoadUrlListener listener);
 
     void showError();
 

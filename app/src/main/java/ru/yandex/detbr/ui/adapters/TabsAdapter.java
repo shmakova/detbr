@@ -91,7 +91,7 @@ public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder>
 
             preview.setImageDrawable(ContextCompat.getDrawable(
                     preview.getContext(),
-                    R.drawable.ic_broken_image_black_24dp));
+                    R.drawable.ic_empty_tab));
 
             if (tab.getPreview() != null) {
                 preview.setImageBitmap(tab.getPreview());

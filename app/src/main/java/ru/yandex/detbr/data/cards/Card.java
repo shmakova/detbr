@@ -23,9 +23,12 @@ public abstract class Card implements Parcelable {
     public static final String TEXT_TYPE = "text";
     public static final String PLAIN_IMAGE_TYPE = "plain_image";
     public static final String FULL_IMAGE_TYPE = "full_image";
+    public static final String VIDEO_TYPE = "video";
 
+    @Nullable
     public abstract String title();
 
+    @Nullable
     public abstract String url();
 
     @Nullable
@@ -79,9 +82,15 @@ public abstract class Card implements Parcelable {
                 .dark(false);
     }
 
-    public Card getLikedCard(boolean like) {
+    public Card withLike(boolean like) {
         return new AutoValue_Card.Builder(this)
                 .like(like)
+                .build();
+    }
+
+    public Card withImage(String image) {
+        return new AutoValue_Card.Builder(this)
+                .image(image)
                 .build();
     }
 

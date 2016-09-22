@@ -24,6 +24,8 @@ import ru.yandex.detbr.data.categories.CategoriesRepository;
 import ru.yandex.detbr.data.categories.CategoriesRepositoryImpl;
 import ru.yandex.detbr.data.schools.SchoolsRepository;
 import ru.yandex.detbr.data.schools.SchoolsRepositoryImpl;
+import ru.yandex.detbr.data.stopwords.StopWordsRepository;
+import ru.yandex.detbr.data.stopwords.StopWordsRepositoryImpl;
 import ru.yandex.detbr.data.tabs.TabsRepository;
 import ru.yandex.detbr.data.tabs.TabsRepositoryImpl;
 import ru.yandex.detbr.managers.TabsManager;
@@ -91,6 +93,12 @@ public class ApplicationModule {
     @Singleton
     public CategoriesRepository provideCategoriesRepository(DatabaseReference databaseReference) {
         return new CategoriesRepositoryImpl(databaseReference);
+    }
+
+    @Provides
+    @Singleton
+    public StopWordsRepository provideStopWordsRepository(DatabaseReference databaseReference) {
+        return new StopWordsRepositoryImpl();
     }
 
     @Provides

@@ -74,7 +74,7 @@ public class CardsPresenter extends BaseRxPresenter<CardsView, List<Card>> {
             school = schoolsRepository.loadSchool();
             this.category = category;
 
-            if (category.isSchoolCategory() && school == null) {
+            if (category.isSchoolCategory() && (school == null || school.isEmpty())) {
                 showSchoolFragment();
             } else {
                 loadCardsByCategory(category, false);

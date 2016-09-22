@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/start_btn"
         android:layout_centerHorizontal="true"
-        android:letterSpacing="0.019"
+        android:letterSpacing="0.01"
         android:text="@string/intro_text"
         android:textAlignment="center"
         android:textColor="@color/black"
@@ -30,7 +30,7 @@
 
     <Button
         android:id="@+id/start_btn"
-        style="@style/Widget.AppCompat.Button.Colored"
+        style="@style/IntroButton"
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_alignParentBottom="true"

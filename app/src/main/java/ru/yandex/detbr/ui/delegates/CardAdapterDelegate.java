@@ -1,6 +1,7 @@
 package ru.yandex.detbr.ui.delegates;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
@@ -8,12 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.hannesdorfmann.adapterdelegates2.AbsListItemAdapterDelegate;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import java.util.List;
 
@@ -57,7 +59,7 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         @BindView(R.id.url)
         TextView url;
         @BindView(R.id.like_btn)
-        CheckBox likeButton;
+        LikeButton likeButton;
         @BindView(R.id.card)
         CardView cardView;
         @BindView(R.id.favicon)
@@ -69,22 +71,36 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
             super(itemView);
             ButterKnife.bind(this, itemView);
             listener = onCardClickListener;
+            likeButton.setOnLikeListener(new OnLikeListener() {
+                @Override
+                public void liked(LikeButton likeButton) {
+                    listener.onLikeClick(getAdapterPosition());
+                }
+
+                @Override
+                public void unLiked(LikeButton likeButton) {
+                    listener.onLikeClick(getAdapterPosition());
+                }
+            });
         }
 
         void bind(Card card) {
             title.setText(card.title());
             url.setText(card.getSiteName());
-            likeButton.setChecked(card.like());
 
             if (card.dark()) {
                 title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.white));
                 url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.transparent_white));
-                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_white));
+                url.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+                likeButton.setUnlikeDrawableRes(R.drawable.ic_like_white_border);
             } else {
                 title.setTextColor(ContextCompat.getColor(title.getContext(), R.color.darkest_transparent));
                 url.setTextColor(ContextCompat.getColor(url.getContext(), R.color.dark_transparent));
-                likeButton.setButtonDrawable(ContextCompat.getDrawable(likeButton.getContext(), R.drawable.like_black));
+                url.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
+                likeButton.setUnlikeDrawableRes(R.drawable.ic_like_black_border);
             }
+
+            likeButton.setLiked(card.like());
 
             if (card.color() == null) {
                 cardView.setCardBackgroundColor(ContextCompat.getColor(title.getContext(), R.color.white));
@@ -103,13 +119,6 @@ public class CardAdapterDelegate extends AbsListItemAdapterDelegate<Card, Card, 
         void onCardClick() {
             if (listener != null) {
                 listener.onCardClick(getAdapterPosition());
-            }
-        }
-
-        @OnClick(R.id.like_btn)
-        void onLikeClick() {
-            if (listener != null) {
-                listener.onLikeClick(getAdapterPosition());
             }
         }
     }

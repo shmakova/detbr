@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import ru.yandex.detbr.R;
 import ru.yandex.detbr.ui.activities.BrowserActivity;
+import ru.yandex.detbr.ui.activities.YouTubeActivity;
 import ru.yandex.detbr.ui.fragments.CardsPagerFragment;
 import ru.yandex.detbr.ui.fragments.FavoritesFragment;
 import ru.yandex.detbr.ui.fragments.IntroFragment;
@@ -63,6 +64,12 @@ public class NavigationManager {
         } else {
             Toast.makeText(activity, activity.getString(R.string.check_internet_connection), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void openYoutubePlayer(String videoId) {
+        Intent intent = new Intent(activity, YouTubeActivity.class);
+        intent.putExtra(YouTubeActivity.KEY_VIDEO_ID, videoId);
+        activity.startActivity(intent);
     }
 
     public void openCards() {

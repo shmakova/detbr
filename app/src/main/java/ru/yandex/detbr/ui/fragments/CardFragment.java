@@ -3,6 +3,7 @@ package ru.yandex.detbr.ui.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +12,6 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.hannesdorfmann.fragmentargs.FragmentArgs;
 import com.hannesdorfmann.fragmentargs.annotation.Arg;
 import com.hannesdorfmann.fragmentargs.annotation.FragmentWithArgs;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -48,7 +50,7 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
     @BindView(R.id.url)
     TextView url;
     @BindView(R.id.like_btn)
-    CheckBox likeButton;
+    LikeButton likeButton;
     @Nullable
     @BindView(R.id.image)
     ImageView image;
@@ -94,6 +96,17 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        likeButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                presenter.onLikeClick(card);
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                presenter.onLikeClick(card);
+            }
+        });
         presenter.loadCard(card);
     }
 
@@ -133,11 +146,6 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
         return true;
     }
 
-    @OnClick(R.id.like_btn)
-    public void onLikeButtonClick() {
-        presenter.onLikeClick(card);
-    }
-
     @Override
     public void setTitle(String title) {
         this.title.setText(title);
@@ -145,7 +153,7 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
 
     @Override
     public void setLike(boolean like) {
-        likeButton.setChecked(like);
+        likeButton.setLiked(like);
     }
 
     @Override
@@ -189,7 +197,8 @@ public class CardFragment extends BaseMvpFragment<CardItemView, CardPresenter> i
     public void setWhiteText() {
         title.setTextColor(ContextCompat.getColor(getContext(), R.color.light_transparent_white));
         url.setTextColor(ContextCompat.getColor(getContext(), R.color.transparent_white));
-        likeButton.setButtonDrawable(ContextCompat.getDrawable(getContext(), R.drawable.like_white));
+        url.setTypeface(Typeface.create("sans-serif-medium", Typeface.NORMAL));
+        likeButton.setUnlikeDrawableRes(R.drawable.ic_like_white_border);
 
         if (textWrapper != null) {
             textWrapper.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.gradient_black));

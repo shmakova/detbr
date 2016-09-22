@@ -12,14 +12,15 @@
       "url": "https://m.youtube.com/watch?v=vRwFdzK-1x8",
       "image": "http://img.youtube.com/vi/vRwFdzK-1x8/0.jpg",
       "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
       "category": "video",
-      "type": "plain_image"
+      "type": "video"
     },
     {
       "title": "Pokemon: смотреть все серии",
       "url": "https://yandex.ru/video/search?text=покемоны&family=yes",
       "site": "ЯНДЕКС.ВИДЕО",
-      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "favicon": "https://www.dropbox.com/s/hdbt4gsmp4q7zyk/yandex.png?dl=1",
       "category": "pokemon",
       "color": "#ffdd55",
       "type": "text"
@@ -44,7 +45,7 @@
       "url": "https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet",
       "image": "https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "bikes",
       "type": "full_image",
       "dark": true
@@ -69,7 +70,7 @@
       "url": "https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka?track=fr_325422_snippet",
       "image": "https://cs-ellpic.yandex.net/cms_resources/navigation/pages/42467/rdt056c6k40ksqvq36kmd8ra2o_720x540@x1.jpg",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "sport",
       "type": "full_image",
       "dark": true
@@ -78,7 +79,7 @@
       "title": "На чем кататься летом",
       "url": "https://market.yandex.ru/articles/na-chem-katatsja-letom?track=fr_325422_snippet",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "sport",
       "type": "text"
     },
@@ -87,8 +88,9 @@
       "url": "https://m.youtube.com/watch?v=CrYEEuNtnUU&feature=youtu.be",
       "image": "http://img.youtube.com/vi/CrYEEuNtnUU/0.jpg",
       "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
       "category": "video",
-      "type": "plain_image"
+      "type": "video"
     },
     {
       "title": "О читах в POKEMON GO",
@@ -101,7 +103,7 @@
       "title": "На чём кататься летом?",
       "url": "https://market.yandex.ru/articles/na-chem-katatsja-letom?track=fr_325422_snippet",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "bikes",
       "type": "text"
     },
@@ -123,7 +125,7 @@
       "title": "Такие разные горные велосипеды",
       "url": "https://market.yandex.ru/articles/takie-raznye-gornye-velosipedy?track=fr_325422_snippet",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "bikes",
       "color": "#ffdd55",
       "type": "text"
@@ -139,7 +141,7 @@
       "title": "Как выбрать самокат?",
       "url": "https://market.yandex.ru/articles/kak-vybrat-samokat?track=fr_ctlg_list",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "sport",
       "type": "text"
     },
@@ -148,8 +150,9 @@
       "url": "https://m.youtube.com/watch?v=vRwFdzK-1x8",
       "image": "http://img.youtube.com/vi/vRwFdzK-1x8/0.jpg",
       "site": "YouTube",
-      "category": "goods",
-      "type": "plain_image"
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "creation",
+      "type": "video"
     },
     {
       "title": "Мини-игры Pokemon",
@@ -194,7 +197,7 @@
       "title": "Такие разные горные велосипеды",
       "url": "https://market.yandex.ru/articles/takie-raznye-gornye-velosipedy?track=fr_325422_snippet",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "sport",
       "color": "#ffdd55",
       "type": "text"
@@ -204,7 +207,7 @@
       "url": "http://www.devchat.ru/my-style/fashion-and-accessories/article/how-to-weave-braids",
       "image": "http://cdn.multibrand2.pgsitecore.com/ru-RU/-/media/BeingGirl/BeingGirl-RU/Images/Articles/Primary/pletem--kosi-prim.jpg?h=360&w=650&v=1-201606211352&crop=1&sc=1",
       "site": "ДЕВЧАТ",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -217,7 +220,7 @@
       "title": "Поймай волну. Советы серфингиста",
       "url": "https://market.yandex.ru/articles/pojmaj-volnu-sovety-serfingista?track=fr_325422_snippet",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "sport",
       "color": "#ffdd55",
       "type": "text"
@@ -256,7 +259,7 @@
       "title": "Pokemon: смотреть все серии",
       "url": "https://yandex.ru/video/search?text=покемоны&family=yes",
       "site": "ЯНДЕКС.ВИДЕО",
-      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "favicon": "https://www.dropbox.com/s/hdbt4gsmp4q7zyk/yandex.png?dl=1",
       "category": "video",
       "color": "#ffdd55",
       "type": "text"
@@ -266,7 +269,7 @@
       "url": "https://www.adme.ru/svoboda-sdelaj-sam/kak-sdelat-vozdushnogo-zmeya-iz-obyknovennogo-paketa-1341715/",
       "site": "ADME",
       "image": "https://files1.adme.ru/files/news/part_134/1341715/16526515-9-1471430969-1000-7df9e3be11-1471511196.jpg",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -308,7 +311,7 @@
       "title": "Смотреть Гравити Фолз",
       "url": "https://yandex.ru/video/search?text=гравити%20фолз&family=yes",
       "site": "ЯНДЕКС.ВИДЕО",
-      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "favicon": "https://www.dropbox.com/s/hdbt4gsmp4q7zyk/yandex.png?dl=1",
       "category": "video",
       "color": "#ffdd55",
       "type": "text"
@@ -334,7 +337,7 @@
       "title": "10 велосипедов для подростков",
       "url": "https://market.yandex.ru/articles/vybiraem-velosiped-dlja-podrostka",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "bikes",
       "type": "text"
     },
@@ -379,7 +382,7 @@
       "title": "Смотреть Смешарики Пин-Код",
       "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
       "site": "ЯНДЕКС.ВИДЕО",
-      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "favicon": "https://www.dropbox.com/s/hdbt4gsmp4q7zyk/yandex.png?dl=1",
       "category": "school",
       "color": "#ffdd55",
       "type": "text"
@@ -405,7 +408,7 @@
       "url": "http://ru.m.wikihow.com/сложить-лягушку-из-бумаги",
       "image": "http://pad3.whstatic.com/images/thumb/3/33/Fold-an-Origami-Frog-Intro.jpg/760px-Fold-an-Origami-Frog-Intro.jpg",
       "site": "WikiHow",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -420,7 +423,7 @@
       "url": "http://www.rukikryki.ru/podelki/igrushki/3584-antistress-igrushka-svoimi-rukami.html",
       "image": "http://www.rukikryki.ru/uploads/posts/2015-01/thumbs/1420444953_antistress-igrushka-svoimi-rukami-1.jpg",
       "site": "RukiKryki.ru",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -461,8 +464,9 @@
       "url": "https://m.youtube.com/watch?feature=youtu.be&v=32yY_kDOqls",
       "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
       "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
       "category": "video",
-      "type": "plain_image"
+      "type": "video"
     },
     {
       "title": "Яндекс.Рефераты",
@@ -503,15 +507,16 @@
       "url": "https://m.youtube.com/watch?v=CrYEEuNtnUU&feature=youtu.be",
       "image": "http://img.youtube.com/vi/CrYEEuNtnUU/0.jpg",
       "site": "YouTube",
-      "category": "goods",
-      "type": "plain_image"
+      "category": "creation",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "type": "video"
     },
     {
       "title": "Лонгборд Penny Original",
       "url": "https://market.yandex.ru/product/10821104?hid=91577&track=cms_bestsell_artcls",
       "image": "https://mdata.yandex.net/i?path=b0517140217_img_id1704454932646973526.jpeg",
       "site": "ЯНДЕКС.МАРКЕТ",
-      "favicon": "https://yastatic.net/market-export/_/i/favicon-16.png",
+      "favicon": "https://yastatic.net/market-export/_/i/tiles/market-logo-120x120.png",
       "category": "school",
       "type": "full_image"
     },
@@ -529,7 +534,7 @@
       "url": "http://ru.m.wikihow.com/сделать-бумажный-самолетик",
       "image": "http://www.popmeh.ru/upload/iblock/c8e/c8ecb853b70caf1ef40a0836ec8c075f.jpg",
       "site": "WikiHow",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -572,7 +577,7 @@
       "url": "http://m.popmech.ru/diy/51713-kak-sdelat-bumazhnyy-samoletik-dostoynyy-mirovogo-rekorda/",
       "image": "http://www.popmeh.ru/upload/iblock/07e/37144-paperairplane_teaser2.jpg",
       "site": "Популярная механика",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -596,7 +601,7 @@
       "title": "Смотреть Смешарики Пин Код",
       "url": "https://yandex.ru/video/search?text=смешарики%20пин%20код&family=yes",
       "site": "ЯНДЕКС.ВИДЕО",
-      "favicon": "https://yastatic.net/morda-logo/i/apple-touch-icon/ru-76x76.png",
+      "favicon": "https://www.dropbox.com/s/hdbt4gsmp4q7zyk/yandex.png?dl=1",
       "category": "video",
       "color": "#ffdd55",
       "type": "text"
@@ -622,15 +627,16 @@
       "url": "https://m.youtube.com/watch?feature=youtu.be&v=32yY_kDOqls",
       "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
       "site": "YouTube",
-      "category": "goods",
-      "type": "plain_image"
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "creation",
+      "type": "video"
     },
     {
       "title": "Сложить сердечко из бумаги",
       "url": "http://ru.m.wikihow.com/сложить-сердечко-из-бумаги",
       "image": "http://pad1.whstatic.com/images/thumb/0/09/Fold-a-Paper-Heart-Step-8-Version-2.jpg/759px-Fold-a-Paper-Heart-Step-8-Version-2.jpg",
       "site": "WikiHow",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -667,11 +673,20 @@
       "type": "plain_image"
     },
     {
+      "title": "Мега-новость! Светящиеся кроссовки на детях в проекте Голос Дети-2 2015",
+      "url": "https://m.youtube.com/watch?v=PsYD_BRZVgw",
+      "image": "http://golos-show.ru/uploads/ckeditor/pictures/357/content_golos_deti2_poedinki.JPG",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
+    },
+    {
       "title": "Мода 2016",
       "url": "http://yavmode.ru/moda-2016-65-foto/",
       "image": "http://yavmode.ru/wp-content/uploads/2016/03/fash-n-chips.jpg",
       "site": "Я В МОДЕ",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
     },
     {
@@ -687,8 +702,17 @@
       "url": "http://heaclub.ru/kak-narisovat-sobaku-shhenka-risunki-prostym-karandashom-poetapno-dlya-nachinayushhih",
       "image": "http://heaclub.ru/images/heaclub/2016/06/miniatjura-640x447.jpg",
       "site": "Heaclub.ru",
-      "category": "goods",
+      "category": "creation",
       "type": "plain_image"
+    },
+    {
+      "title": "Самый маленький FPV квадрокоптер в мире",
+      "url": "https://m.youtube.com/watch?v=hj-6IfErUik",
+      "image": "http://img.youtube.com/vi/hj-6IfErUik/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
     },
     {
       "title": "LEGO Star Wars Истребитель Повстанцев",
@@ -707,6 +731,15 @@
       "type": "plain_image"
     },
     {
+      "title": "Распаковка посылок",
+      "url": "https://m.youtube.com/watch?v=UOjhT1UnmKQ",
+      "image": "http://img.youtube.com/vi/UOjhT1UnmKQ/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
+    },
+    {
       "title": "Abracadabra - Song",
       "url": "http://learnenglishkids.britishcouncil.org/en/songs/abracadabra",
       "image": "http://thumbs.cdn-ec.viddler.com/thumbnail_2_5f31e87f_v1.jpg",
@@ -719,8 +752,18 @@
       "url": "https://m.youtube.com/watch?feature=youtu.be&v=32yY_kDOqls",
       "image": "http://img.youtube.com/vi/32yY_kDOqls/0.jpg",
       "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
       "category": "school",
-      "type": "plain_image"
+      "type": "video"
+    },
+    {
+      "title": "Учим танец вместе с Юлей из песни 'Не танцуй'",
+      "url": "https://m.youtube.com/watch?v=mvQoCyCy-LU",
+      "image": "http://img.youtube.com/vi/mvQoCyCy-LU/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
     },
     {
       "title": "Old Macdonald had a farm - Song",
@@ -731,12 +774,13 @@
       "type": "plain_image"
     },
     {
-      "title": "Как нарисовать кошку поэтапно",
-      "url": "http://koteko.ru/risuem-koshek/kak-narisovat-koshku-poetapno",
-      "image": "http://koteko.ru/wp-content/uploads/2013/05/kak-narisovat-koshku-poetapno-4.jpg",
-      "site": "Koteko.ru",
-      "category": "goods",
-      "type": "plain_image"
+      "title": "20 лучших лайфхаков для школы | BACK TO SCHOOL 2016",
+      "url": "https://m.youtube.com/watch?v=ZXFOpj8NSig",
+      "image": "http://img.youtube.com/vi/ZXFOpj8NSig/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
     },
     {
       "title": "People Work - Song",
@@ -753,13 +797,53 @@
       "site": "RukiKryki.ru",
       "category": "school",
       "type": "plain_image"
+    },
+    {
+      "title": "Как нарисовать кошку поэтапно",
+      "url": "http://koteko.ru/risuem-koshek/kak-narisovat-koshku-poetapno",
+      "image": "http://koteko.ru/wp-content/uploads/2013/05/kak-narisovat-koshku-poetapno-4.jpg",
+      "site": "Koteko.ru",
+      "category": "creation",
+      "type": "plain_image"
+    },
+    {
+      "title": "НЕВЕРОЯТНЫЕ механизмы собранные из ЛЕГО",
+      "url": "https://m.youtube.com/watch?v=L4a7L_-GFf0",
+      "image": "http://img.youtube.com/vi/L4a7L_-GFf0/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
+    },
+    {
+      "title": "С прищуром, Jason Sims",
+      "url": "https://yandex.ru/images/touch/",
+      "site": "КАРТИНКА ДНЯ",
+      "image": "https://yandex.ru/images/today?size=1920x1200",
+      "category": "creation",
+      "dark": true,
+      "type": "full_image"
+    },
+    {
+      "title": "DIY Emoji Back To School Принадлежности - Тетради, Карандаш Держатель & Закладки",
+      "url": "https://m.youtube.com/watch?v=CLWFn-lCvjo",
+      "image": "http://img.youtube.com/vi/CLWFn-lCvjo/0.jpg",
+      "site": "YouTube",
+      "favicon": "http://s.ytimg.com/yts/img/favicon_48-vfl1s0rGh.png",
+      "category": "video",
+      "type": "video"
     }
   ],
   "categories": [
     {
       "alias": "school",
       "title": "Популярное в школе",
-      "color": "#eb352f"
+      "color": "#0080ff"
+    },
+    {
+      "alias": "video",
+      "title": "Видео",
+      "color": "#fd3947"
     },
     {
       "alias": "games",
@@ -772,14 +856,9 @@
       "color": "#f7d652"
     },
     {
-      "alias": "goods",
+      "alias": "creation",
       "title": "Творчество",
       "color": "#01f5a8"
-    },
-    {
-      "alias": "video",
-      "title": "Видео",
-      "color": "#e85958"
     },
     {
       "alias": "animals",
@@ -798,7 +877,7 @@
     },
     {
       "alias": "bikes",
-      "title": "Велосипеды",
+      "title": "Велики",
       "color": "#72c6e7"
     },
     {
