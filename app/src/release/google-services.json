@@ -1,43 +1,49 @@
 {
   "project_info": {
-    "project_number": "580306497468",
-    "firebase_url": "https://fir-detbr.firebaseio.com",
-    "project_id": "firebase-detbr",
-    "storage_bucket": "firebase-detbr.appspot.com"
+    "project_number": "221259681697",
+    "firebase_url": "https://detbr-shmakova.firebaseio.com",
+    "project_id": "detbr-shmakova",
+    "storage_bucket": "detbr-shmakova.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:580306497468:android:e550f89c4057b0d6",
+        "mobilesdk_app_id": "1:221259681697:android:53399b6b663cfa87",
         "android_client_info": {
-          "package_name": "ru.yandex.detbr"
+          "package_name": "ru.shmakova.detbr"
         }
       },
       "oauth_client": [
         {
-          "client_id": "580306497468-5joqh37no0ahgr3hf5gfr5n9j7clvqav.apps.googleusercontent.com",
-          "client_type": 3
+          "client_id": "221259681697-ogtterh5u24l2a8m1k8237n28g7rjkkm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.shmakova.detbr.debug",
+            "certificate_hash": "826E79920B501688D84712EAA65547989B4EA43F"
+          }
         },
         {
-          "client_id": "580306497468-h31bhg92b21e171sgavvemm1881jn0oe.apps.googleusercontent.com",
+          "client_id": "221259681697-5ombr1qurk877am4dl9tjm28ps0hfgnd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDky_kn7DJtD05ZTsmcYLhiLsIidr2ZMeM"
+          "current_key": "AIzaSyCYKE7BHxxGET8cahgBXDLNYNcx5kAK0-U"
         }
       ],
       "services": {
         "analytics_service": {
-          "status": 2,
-          "analytics_property": {
-            "tracking_id": "UA-82691491-1"
-          }
+          "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "221259681697-5ombr1qurk877am4dl9tjm28ps0hfgnd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

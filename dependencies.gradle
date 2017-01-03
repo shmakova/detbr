@@ -3,11 +3,11 @@ ext.versions = [
         name                         : '1.0',
 
         minSdk                       : 16,
-        targetSdk                    : 24,
-        compileSdk                   : 24,
-        buildTools                   : '24.0.1',
+        targetSdk                    : 25,
+        compileSdk                   : 25,
+        buildTools                   : '25.0.2',
 
-        androidGradlePlugin          : '2.2.0-rc2',
+        androidGradlePlugin          : '2.2.3',
         aptGradlePlugin              : '1.8',
         retrolambdaGradlePlugin      : '3.2.5',
         lombokGradlePlugin           : '0.2.3.a2',
@@ -32,7 +32,7 @@ ext.versions = [
 
         storIO                       : '1.10.0',
 
-        supportLibs                  : '24.1.1',
+        supportLibs                  : '25.1.0',
         butterKnife                  : '8.2.1',
         timber                       : '4.2.0',
 

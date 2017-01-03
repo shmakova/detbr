@@ -12,7 +12,7 @@ android {
     buildToolsVersion versions.buildTools
 
     defaultConfig {
-        applicationId 'ru.yandex.detbr'
+        applicationId 'ru.shmakova.detbr'
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
         versionCode versions.code
@@ -44,7 +44,6 @@ android {
         }
 
         release {
-            signingConfig signingConfigs.yamblz
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }

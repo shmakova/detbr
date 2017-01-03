@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <ru.yandex.detbr.ui.android_views.SquareCardView
+        <ru.shmakova.detbr.ui.android_views.SquareCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
@@ -34,7 +34,7 @@
                 android:layout_gravity="center"
                 android:layout_marginRight="4dp"
                 android:src="@drawable/ic_empty_tab"/>
-        </ru.yandex.detbr.ui.android_views.SquareCardView>
+        </ru.shmakova.detbr.ui.android_views.SquareCardView>
 
 
         <LinearLayout

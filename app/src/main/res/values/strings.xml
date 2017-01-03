@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Яндекс Школа</string>
+    <string name="app_name">Детский браузер</string>
     <string name="content">Hello</string>
     <string name="choose_your_school">Выбрать школу</string>
     <string name="search_title">Поиск</string>
