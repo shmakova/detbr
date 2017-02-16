@@ -110,7 +110,7 @@
             android:visibility="gone"
             app:layout_anchor="@id/webview_wrapper"
             app:layout_anchorGravity="bottom|right|end"
-            app:layout_behavior="ru.yandex.detbr.ui.behaviors.ScrollAwareFabBehavior"
+            app:layout_behavior="ru.shmakova.detbr.ui.behaviors.ScrollAwareFabBehavior"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
             tools:ignore="RtlHardcoded"/>
 

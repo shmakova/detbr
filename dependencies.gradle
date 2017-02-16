@@ -1,5 +1,5 @@
 ext.versions = [
-        code                         : 7,
+        code                         : 8,
         name                         : '1.0',
 
         minSdk                       : 16,
@@ -8,33 +8,33 @@ ext.versions = [
         buildTools                   : '25.0.2',
 
         androidGradlePlugin          : '2.2.3',
-        aptGradlePlugin              : '1.8',
-        retrolambdaGradlePlugin      : '3.2.5',
+        retrolambdaGradlePlugin      : '3.3.1',
         lombokGradlePlugin           : '0.2.3.a2',
-        jacocoGradlePlugin           : '0.7.6.201602180812',
+        jacocoGradlePlugin           : '0.7.7.201606060606',
         androidDevMetricsGradlePlugin: '0.4',
         errorProneVersion            : '0.0.8',
         errorProneCoreVersion        : '2.0.9',
-        dexcountPlugin               : '0.5.4',
+        dexcountPlugin               : '0.6.1',
         versionsGradlePlugin         : '0.13.0',
         fabricGradlePlugin           : '1.+',
         googleServicesGradlePlugin   : '3.0.0',
 
-        rxJava                       : '1.1.8',
+        rxJava                       : '1.2.5',
         rxAndroid                    : '1.2.1',
-        rxFirebase                   : '0.0.12',
+        rxFirebase                   : '0.0.15',
 
-        dagger                       : '2.6',
+        dagger                       : '2.7',
 
         autoValue                    : '1.2',
-        autoValueParcel              : '0.2.4-rc2',
-        autoValueFirebase            : '0.2.1',
+        autoValueParcel              : '0.2.5',
+        autoValueFirebase            : '1.0.1',
 
-        storIO                       : '1.10.0',
+        storIO                       : '1.12.2',
 
-        supportLibs                  : '25.1.0',
-        butterKnife                  : '8.2.1',
-        timber                       : '4.2.0',
+        supportLibs                  : '25.1.1',
+        multidex                     : '1.0.1',
+        butterKnife                  : '8.4.0',
+        timber                       : '4.3.1',
 
         jsoup                        : '1.8.3',
 
@@ -67,8 +67,8 @@ ext.versions = [
         mockito                      : '1.10.19',
         supportTestRunner            : '0.5',
 
-        crashlytics                  : '2.6.2@aar',
-        playServices                 : '9.4.0',
+        crashlytics                  : '2.6.6@aar',
+        playServices                 : '10.0.1',
 ]
 
 ext.gradlePlugins = [
@@ -95,22 +95,23 @@ ext.libraries = [
         autoValueFirebaseAnnotation: "me.mattlogan.auto.value:auto-value-firebase-annotation:$versions.autoValueFirebase",
 
 
-        storIO                     : "com.pushtorefresh.storio:sqlite:$versions.storIO",
+        storIO             : "com.pushtorefresh.storio:sqlite:$versions.storIO",
 
-        supportAnnotations         : "com.android.support:support-annotations:$versions.supportLibs",
-        supportAppCompat           : "com.android.support:appcompat-v7:$versions.supportLibs",
-        supportDesign              : "com.android.support:design:$versions.supportLibs",
-        supportRecyclerView        : "com.android.support:recyclerview-v7:$versions.supportLibs",
-        supportCardView            : "com.android.support:cardview-v7:$versions.supportLibs",
+        supportAnnotations : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat   : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign      : "com.android.support:design:$versions.supportLibs",
+        supportRecyclerView: "com.android.support:recyclerview-v7:$versions.supportLibs",
+        supportCardView    : "com.android.support:cardview-v7:$versions.supportLibs",
+        supportMultidex    : "com.android.support:multidex:$versions.multidex",
 
-        butterKnife                : "com.jakewharton:butterknife:$versions.butterKnife",
-        butterKnifeCompiler        : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
-        timber                     : "com.jakewharton.timber:timber:$versions.timber",
+        butterKnife        : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler: "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        timber             : "com.jakewharton.timber:timber:$versions.timber",
 
-        jsoup                      : "org.jsoup:jsoup:$versions.jsoup",
+        jsoup              : "org.jsoup:jsoup:$versions.jsoup",
 
-        rxJava                     : "io.reactivex:rxjava:$versions.rxJava",
-        rxAndroid                  : "io.reactivex:rxandroid:$versions.rxAndroid",
+        rxJava             : "io.reactivex:rxjava:$versions.rxJava",
+        rxAndroid          : "io.reactivex:rxandroid:$versions.rxAndroid",
         rxFirebase                 : "com.kelvinapps:rxfirebase:$versions.rxFirebase",
 
         retrofit                   : "com.squareup.retrofit2:retrofit:$versions.retrofit",

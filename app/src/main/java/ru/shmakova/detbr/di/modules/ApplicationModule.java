@@ -7,8 +7,7 @@ import android.os.Looper;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.database.DatabaseReference;
 import com.pushtorefresh.storio.sqlite.StorIOSQLite;
 
@@ -17,7 +16,6 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import ru.shmakova.detbr.R;
 import ru.shmakova.detbr.data.cards.CardsRepository;
 import ru.shmakova.detbr.data.cards.CardsRepositoryImpl;
 import ru.shmakova.detbr.data.categories.CategoriesRepository;
@@ -51,60 +49,57 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    Tracker providesTracker(Application application) {
-        synchronized (this) {
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(application);
-            return analytics.newTracker(R.xml.global_tracker);
-        }
+    FirebaseAnalytics providesAnalytics(Application application) {
+        return FirebaseAnalytics.getInstance(application);
     }
 
     @Provides
     @Singleton
-    public ErrorMessageDeterminer providesErrorMessageDeterminer() {
+    ErrorMessageDeterminer providesErrorMessageDeterminer() {
         return new ErrorMessageDeterminer();
     }
 
     @Provides
     @Singleton
-    public TabsManager providesTabsManager(TabsRepository tabsRepository) {
+    TabsManager providesTabsManager(TabsRepository tabsRepository) {
         return new TabsManager(tabsRepository);
     }
 
     @Provides
     @Singleton
-    public TabsRepository provideTabsRepository(StorIOSQLite storIOSQLite) {
+    TabsRepository provideTabsRepository(StorIOSQLite storIOSQLite) {
         return new TabsRepositoryImpl(storIOSQLite);
     }
 
     @Provides
     @Singleton
-    public CardsRepository provideCardsRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
+    CardsRepository provideCardsRepository(StorIOSQLite storIOSQLite, DatabaseReference databaseReference) {
         return new CardsRepositoryImpl(storIOSQLite, databaseReference);
     }
 
     @Provides
     @Singleton
-    public SchoolsRepository provideSchoolsRepository(SharedPreferences sharedPreferences,
-                                                      DatabaseReference databaseReference) {
+    SchoolsRepository provideSchoolsRepository(SharedPreferences sharedPreferences,
+                                               DatabaseReference databaseReference) {
         return new SchoolsRepositoryImpl(sharedPreferences, databaseReference);
     }
 
     @Provides
     @Singleton
-    public CategoriesRepository provideCategoriesRepository(DatabaseReference databaseReference) {
+    CategoriesRepository provideCategoriesRepository(DatabaseReference databaseReference) {
         return new CategoriesRepositoryImpl(databaseReference);
     }
 
     @Provides
     @Singleton
-    public StopWordsRepository provideStopWordsRepository(DatabaseReference databaseReference) {
+    StopWordsRepository provideStopWordsRepository(DatabaseReference databaseReference) {
         return new StopWordsRepositoryImpl();
     }
 
     @Provides
     @NonNull
     @Singleton
-    public Application provideApp() {
+    Application provideApp() {
         return application;
     }
 
@@ -112,7 +107,7 @@ public class ApplicationModule {
     @NonNull
     @Named(MAIN_THREAD_HANDLER)
     @Singleton
-    public Handler provideMainThreadHandler() {
+    Handler provideMainThreadHandler() {
         return new Handler(Looper.getMainLooper());
     }
 

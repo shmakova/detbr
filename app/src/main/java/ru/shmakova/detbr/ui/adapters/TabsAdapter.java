@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -25,7 +26,7 @@ import rx.subjects.PublishSubject;
  */
 
 public class TabsAdapter extends RecyclerView.Adapter<TabsAdapter.TabViewHolder> {
-    private List<Tab> tabs;
+    private List<Tab> tabs = new ArrayList<>();
     private final PublishSubject<Tab> onClickSubject = PublishSubject.create();
     private final OnRemoveTabButtonClickListener listener;
 

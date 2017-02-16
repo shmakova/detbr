@@ -25,9 +25,9 @@ public class DbOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-        // TODO: 01.09.16 удалить после отладки
         sqLiteDatabase.execSQL("DROP TABLE " + CardsTable.TABLE);
         sqLiteDatabase.execSQL("DROP TABLE " + TabsTable.TABLE);
-        onCreate(sqLiteDatabase);
+        sqLiteDatabase.execSQL(CardsTable.getCreateTableQuery());
+        sqLiteDatabase.execSQL(TabsTable.getCreateTableQuery());
     }
 }

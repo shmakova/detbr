@@ -49,6 +49,37 @@
           "status": 2
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221259681697:android:5e10017b22ea8692",
+        "android_client_info": {
+          "package_name": "ru.shmakova.detbr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221259681697-5ombr1qurk877am4dl9tjm28ps0hfgnd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYKE7BHxxGET8cahgBXDLNYNcx5kAK0-U"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
     }
   ],
   "configuration_version": "1"
