@@ -29,11 +29,11 @@ import ru.shmakova.detbr.app.di.modules.CardsModule;
 import ru.shmakova.detbr.base.BaseLceFragment;
 import ru.shmakova.detbr.card.LastCardFragment;
 import ru.shmakova.detbr.categories.CategoriesFragment;
+import ru.shmakova.detbr.categories.CategoriesFragmentBuilder;
 import ru.shmakova.detbr.data.cards.Card;
 import ru.shmakova.detbr.data.categories.CategoryClick;
 import ru.shmakova.detbr.ui.animators.BackgroundAnimator;
 import ru.shmakova.detbr.ui.animators.CustomLceAnimator;
-import ru.shmakova.detbr.ui.fragments.CategoriesFragmentBuilder;
 import ru.shmakova.detbr.ui.other.CarouselPageTransformer;
 import ru.shmakova.detbr.utils.ErrorMessageDeterminer;
 

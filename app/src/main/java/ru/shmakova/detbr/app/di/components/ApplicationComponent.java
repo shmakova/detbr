@@ -19,7 +19,6 @@ import ru.shmakova.detbr.app.di.modules.FirebaseModule;
 import ru.shmakova.detbr.app.di.modules.MainModule;
 import ru.shmakova.detbr.app.di.modules.NavigationModule;
 import ru.shmakova.detbr.app.di.modules.TabsModule;
-import ru.shmakova.detbr.app.di.modules.WotNetworkModule;
 import ru.shmakova.detbr.data.developer_settings.DevMetricsProxy;
 import ru.shmakova.detbr.data.developer_settings.DeveloperSettingsModel;
 import ru.shmakova.detbr.data.developer_settings.LeakCanaryProxy;
@@ -29,7 +28,6 @@ import ru.shmakova.detbr.main.MainActivity;
 @Component(modules = {
         ApplicationModule.class,
         DeveloperSettingsModule.class,
-        WotNetworkModule.class,
         FirebaseModule.class,
         DbModule.class
 })

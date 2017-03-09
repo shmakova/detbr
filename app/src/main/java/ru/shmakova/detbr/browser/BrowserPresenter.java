@@ -2,7 +2,6 @@ package ru.shmakova.detbr.browser;
 
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
-import android.support.v4.util.Pair;
 
 import org.xwalk.core.XWalkGetBitmapCallback;
 import org.xwalk.core.XWalkResourceClient;
@@ -14,24 +13,16 @@ import ru.shmakova.detbr.data.cards.Card;
 import ru.shmakova.detbr.data.cards.CardsRepository;
 import ru.shmakova.detbr.data.stopwords.StopWordsRepository;
 import ru.shmakova.detbr.data.tabs.Tab;
-import ru.shmakova.detbr.data.wot_network.WotService;
 import ru.shmakova.detbr.tabs.TabsManager;
 import ru.shmakova.detbr.utils.UrlUtils;
-import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import rx.subjects.PublishSubject;
 import timber.log.Timber;
 
 public class BrowserPresenter extends BasePresenter<BrowserView> {
     private static final String CHILD_SAFETY_HTML = "file:///android_asset/child_safety.html";
     private static final String LUCKY_PAGE_HTML = "file:///android_asset/lucky_page.html";
 
-    @NonNull
-    private final PublishSubject<Pair<String, XWalkView>> interceptUrlEvents = PublishSubject.create();
-
-    @NonNull
-    private final WotService wotService;
     @NonNull
     private final TabsManager tabsManager;
     @NonNull
@@ -41,12 +32,9 @@ public class BrowserPresenter extends BasePresenter<BrowserView> {
 
     private String currentUrl;
 
-    public BrowserPresenter(@NonNull WotService wotService,
-                            @NonNull TabsManager tabsManager,
+    public BrowserPresenter(@NonNull TabsManager tabsManager,
                             @NonNull CardsRepository cardsRepository,
                             @NonNull StopWordsRepository stopWordsRepository) {
-
-        this.wotService = wotService;
         this.cardsRepository = cardsRepository;
         this.tabsManager = tabsManager;
         this.stopWordsRepository = stopWordsRepository;
@@ -64,37 +52,13 @@ public class BrowserPresenter extends BasePresenter<BrowserView> {
                 getView().loadUrlEvents()
                         // stopWordsRepository.isStopWord(query)) getView().showLuckyPage();
                         .map(UrlUtils::getUrlFromQuery)
-                        .switchMap(url -> wotService.getLinkReputation(UrlUtils.getHost(url) + "/")
-                                .toObservable()
-                                .switchMap(wotResponse -> {
-                                    if (wotResponse.isSafe()) {
-                                        return Observable.just(url);
-                                    } else {
-                                        return Observable.just(CHILD_SAFETY_HTML);
-                                    }
-                                })
-                                .switchMap(checkedUrl -> tabsManager
-                                        .addTab(Tab.builder().url(url).build())
-                                        .doOnNext(putResult -> tabsManager.updateTabs())
-                                        .map(o -> url))
-                                .subscribeOn(Schedulers.io()))
+                        .switchMap(checkedUrl -> tabsManager
+                                .addTab(Tab.builder().url(checkedUrl).build())
+                                .doOnNext(putResult -> tabsManager.updateTabs())
+                                .map(o -> checkedUrl))
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(url -> getView().loadPageByUrl(url)),
-                interceptUrlEvents.switchMap(urlXWalkViewPair -> wotService.getLinkReputation(UrlUtils.getHost(urlXWalkViewPair.first) + "/")
-                        .toObservable()
-                        .switchMap(wotResponse -> {
-                            if (wotResponse.isSafe()) {
-                                return Observable.just(urlXWalkViewPair.first);
-                            } else {
-                                return Observable.just(CHILD_SAFETY_HTML);
-                            }
-                        }).switchMap(checkedUrl -> tabsManager
-                                .addTab(Tab.builder().url(urlXWalkViewPair.first).build())
-                                .doOnNext(putResult -> tabsManager.updateTabs())
-                                .map(o -> urlXWalkViewPair))
-                        .subscribeOn(Schedulers.io()))
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(urlXWalkViewPair -> urlXWalkViewPair.second.loadUrl(urlXWalkViewPair.first)),
                 getView().likeClicks()
                         .switchMap(titleUrlPair -> cardsRepository
                                 .getCardByUrl(titleUrlPair.second)
@@ -161,8 +125,7 @@ public class BrowserPresenter extends BasePresenter<BrowserView> {
                     safeUrl += "&" + UrlUtils.YANDEX_SAFE_PARAMETER;
                 }
 
-                interceptUrlEvents.onNext(new Pair<>(safeUrl, view));
-                currentUrl = safeUrl;
+                view.loadUrl(safeUrl);
                 return true;
             }
 

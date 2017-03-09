@@ -7,12 +7,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import java.util.List;
 
 import ru.shmakova.detbr.R;
+import ru.shmakova.detbr.card.CardFragmentBuilder;
+import ru.shmakova.detbr.card.IntroCardFragmentBuilder;
 import ru.shmakova.detbr.card.LastCardFragment;
 import ru.shmakova.detbr.card.ShareFragment;
 import ru.shmakova.detbr.data.cards.Card;
 import ru.shmakova.detbr.data.categories.Category;
-import ru.shmakova.detbr.ui.fragments.CardFragmentBuilder;
-import ru.shmakova.detbr.ui.fragments.IntroCardFragmentBuilder;
 
 public class CardsFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     private static final int INTRO_CARDS_COUNT = 2;
