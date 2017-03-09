@@ -4,9 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-/**
- * Created by user on 11.09.16.
- */
 @SuppressWarnings("PMD.UseVarargs")
 public class ConnectionChecker {
     private final Context context;

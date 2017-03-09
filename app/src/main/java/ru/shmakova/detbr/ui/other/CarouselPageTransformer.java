@@ -3,10 +3,6 @@ package ru.shmakova.detbr.ui.other;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-/**
- * Created by shmakova on 09.09.16.
- */
-
 public class CarouselPageTransformer implements ViewPager.PageTransformer {
     private static final float MIN_SCALE = 0.75f;
 

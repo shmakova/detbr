@@ -13,10 +13,6 @@ import java.io.ByteArrayOutputStream;
 import ru.shmakova.detbr.data.tabs.Tab;
 import ru.shmakova.detbr.data.tabs.tables.TabsTable;
 
-/**
- * Created by user on 04.09.16.
- */
-
 public class TabPutResolver extends DefaultPutResolver<Tab> {
     @Override
     @NonNull

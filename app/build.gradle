@@ -41,7 +41,6 @@ android {
         debug {
             signingConfig signingConfigs.yamblz
             applicationIdSuffix '.debug'
-            multiDexEnabled true
         }
 
         release {
@@ -57,7 +56,6 @@ android {
 
         disable 'GoogleAppIndexingWarning' // App does not have deep linking.
         disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.
-        disable 'UnusedResources'
         disable 'TrustAllX509TrustManager' // problems in Jsoup-library
     }
 
@@ -89,6 +87,8 @@ dependencies {
     compile libraries.supportRecyclerView
     compile libraries.supportCardView
     compile libraries.supportMultidex
+
+    compile libraries.crosswalk
 
     provided libraries.autoValue
     annotationProcessor libraries.autoValue

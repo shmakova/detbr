@@ -5,10 +5,6 @@ import retrofit2.http.Query;
 import ru.shmakova.detbr.data.wot_network.models.WotResponse;
 import rx.Single;
 
-/**
- * Created by shmakova on 25.08.16.
- */
-
 public interface WotService {
     String BASE_URL = "http://api.mywot.com/0.4/";
 

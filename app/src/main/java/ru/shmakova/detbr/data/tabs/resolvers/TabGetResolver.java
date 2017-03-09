@@ -14,10 +14,6 @@ import ru.shmakova.detbr.data.tabs.Tab;
 import ru.shmakova.detbr.data.tabs.tables.TabsTable;
 import timber.log.Timber;
 
-/**
- * Created by user on 04.09.16.
- */
-
 public class TabGetResolver extends DefaultGetResolver<Tab> {
     @Override
     @NonNull
@@ -46,5 +42,3 @@ public class TabGetResolver extends DefaultGetResolver<Tab> {
         return bitmapPreview;
     }
 }
-
-

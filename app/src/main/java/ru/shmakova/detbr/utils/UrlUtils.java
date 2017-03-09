@@ -10,10 +10,6 @@ import java.util.regex.Pattern;
 
 import timber.log.Timber;
 
-/**
- * Created by shmakova on 28.08.16.
- */
-
 public final class UrlUtils {
     public static final String YANDEX_SEARCH_URL = "https://yandex.ru/yandsearch?family=yes&lr=213&text=";
     public static final String YANDEX_URL = "yandex.";

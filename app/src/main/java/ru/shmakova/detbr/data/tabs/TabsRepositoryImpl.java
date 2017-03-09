@@ -11,10 +11,6 @@ import java.util.List;
 import ru.shmakova.detbr.data.tabs.tables.TabsTable;
 import rx.Observable;
 
-/**
- * Created by shmakova on 29.08.16.
- */
-
 public class TabsRepositoryImpl implements TabsRepository {
     private final StorIOSQLite storIOSQLite;
 

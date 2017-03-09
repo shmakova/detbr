@@ -2,12 +2,12 @@ ext.versions = [
         code                         : 8,
         name                         : '1.0',
 
-        minSdk                       : 16,
+        minSdk                       : 19,
         targetSdk                    : 25,
         compileSdk                   : 25,
         buildTools                   : '25.0.2',
 
-        androidGradlePlugin          : '2.2.3',
+        androidGradlePlugin          : '2.3.0',
         retrolambdaGradlePlugin      : '3.3.1',
         lombokGradlePlugin           : '0.2.3.a2',
         jacocoGradlePlugin           : '0.7.7.201606060606',
@@ -24,6 +24,7 @@ ext.versions = [
         rxFirebase                   : '0.0.15',
 
         dagger                       : '2.7',
+        crosswalk                    : '23.53.589.4',
 
         autoValue                    : '1.2',
         autoValueParcel              : '0.2.5',
@@ -31,7 +32,7 @@ ext.versions = [
 
         storIO                       : '1.12.2',
 
-        supportLibs                  : '25.1.1',
+        supportLibs                  : '25.2.0',
         multidex                     : '1.0.1',
         butterKnife                  : '8.4.0',
         timber                       : '4.3.1',
@@ -94,24 +95,25 @@ ext.libraries = [
         autoValueFirebase          : "me.mattlogan.auto.value:auto-value-firebase:$versions.autoValueFirebase",
         autoValueFirebaseAnnotation: "me.mattlogan.auto.value:auto-value-firebase-annotation:$versions.autoValueFirebase",
 
+        crosswalk                  : "org.xwalk:xwalk_core_library:$versions.crosswalk",
 
-        storIO             : "com.pushtorefresh.storio:sqlite:$versions.storIO",
+        storIO                     : "com.pushtorefresh.storio:sqlite:$versions.storIO",
 
-        supportAnnotations : "com.android.support:support-annotations:$versions.supportLibs",
-        supportAppCompat   : "com.android.support:appcompat-v7:$versions.supportLibs",
-        supportDesign      : "com.android.support:design:$versions.supportLibs",
-        supportRecyclerView: "com.android.support:recyclerview-v7:$versions.supportLibs",
-        supportCardView    : "com.android.support:cardview-v7:$versions.supportLibs",
-        supportMultidex    : "com.android.support:multidex:$versions.multidex",
+        supportAnnotations         : "com.android.support:support-annotations:$versions.supportLibs",
+        supportAppCompat           : "com.android.support:appcompat-v7:$versions.supportLibs",
+        supportDesign              : "com.android.support:design:$versions.supportLibs",
+        supportRecyclerView        : "com.android.support:recyclerview-v7:$versions.supportLibs",
+        supportCardView            : "com.android.support:cardview-v7:$versions.supportLibs",
+        supportMultidex            : "com.android.support:multidex:$versions.multidex",
 
-        butterKnife        : "com.jakewharton:butterknife:$versions.butterKnife",
-        butterKnifeCompiler: "com.jakewharton:butterknife-compiler:$versions.butterKnife",
-        timber             : "com.jakewharton.timber:timber:$versions.timber",
+        butterKnife                : "com.jakewharton:butterknife:$versions.butterKnife",
+        butterKnifeCompiler        : "com.jakewharton:butterknife-compiler:$versions.butterKnife",
+        timber                     : "com.jakewharton.timber:timber:$versions.timber",
 
-        jsoup              : "org.jsoup:jsoup:$versions.jsoup",
+        jsoup                      : "org.jsoup:jsoup:$versions.jsoup",
 
-        rxJava             : "io.reactivex:rxjava:$versions.rxJava",
-        rxAndroid          : "io.reactivex:rxandroid:$versions.rxAndroid",
+        rxJava                     : "io.reactivex:rxjava:$versions.rxJava",
+        rxAndroid                  : "io.reactivex:rxandroid:$versions.rxAndroid",
         rxFirebase                 : "com.kelvinapps:rxfirebase:$versions.rxFirebase",
 
         retrofit                   : "com.squareup.retrofit2:retrofit:$versions.retrofit",

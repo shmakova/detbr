@@ -5,11 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 
-
-/**
- * Created by shmakova on 29.08.16.
- */
-
 @AutoValue
 public abstract class Tab {
     @Nullable

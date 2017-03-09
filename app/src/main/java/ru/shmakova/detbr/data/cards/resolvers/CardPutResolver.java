@@ -10,7 +10,6 @@ import com.pushtorefresh.storio.sqlite.queries.UpdateQuery;
 import ru.shmakova.detbr.data.cards.Card;
 import ru.shmakova.detbr.data.cards.tables.CardsTable;
 
-
 public class CardPutResolver extends DefaultPutResolver<Card> {
     @Override
     @NonNull

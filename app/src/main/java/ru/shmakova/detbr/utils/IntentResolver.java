@@ -7,12 +7,8 @@ import android.net.Uri;
 
 import java.net.URISyntaxException;
 
-import ru.shmakova.detbr.presentation.views.BrowserView;
+import ru.shmakova.detbr.browser.BrowserView;
 import timber.log.Timber;
-
-/**
- * Created by user on 16.09.16.
- */
 
 public final class IntentResolver {
     private IntentResolver() {

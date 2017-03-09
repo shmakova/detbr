@@ -8,7 +8,7 @@
     android:layout_marginBottom="24dp"
     android:orientation="vertical">
 
-    <ru.shmakova.detbr.ui.android_views.SquareCardView
+    <ru.shmakova.detbr.card.SquareCardView
         android:id="@+id/card"
         style="@style/Card"
         app:cardCornerRadius="15dp"
@@ -31,7 +31,7 @@
             <include layout="@layout/bottom_view_favorite_card"/>
 
         </RelativeLayout>
-    </ru.shmakova.detbr.ui.android_views.SquareCardView>
+    </ru.shmakova.detbr.card.SquareCardView>
 
     <TextView
         android:id="@+id/title"

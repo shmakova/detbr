@@ -8,10 +8,6 @@ import com.pushtorefresh.storio.sqlite.queries.DeleteQuery;
 import ru.shmakova.detbr.data.cards.Card;
 import ru.shmakova.detbr.data.cards.tables.CardsTable;
 
-/**
- * Created by user on 28.08.16.
- */
-
 public class CardDeleteResolver extends DefaultDeleteResolver<Card> {
     @Override
     @NonNull
@@ -23,4 +19,3 @@ public class CardDeleteResolver extends DefaultDeleteResolver<Card> {
                 .build();
     }
 }
-

@@ -2,7 +2,7 @@ package ru.shmakova.detbr.data.developer_settings;
 
 import org.junit.Test;
 
-import ru.shmakova.detbr.App;
+import ru.shmakova.detbr.app.App;
 
 import static org.mockito.Mockito.mock;
 

@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import ru.shmakova.detbr.data.cards.tables.CardsTable;
 import ru.shmakova.detbr.data.tabs.tables.TabsTable;
 
-
 public class DbOpenHelper extends SQLiteOpenHelper {
 
     private static final int DB_VERSION = 3;

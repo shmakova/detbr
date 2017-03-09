@@ -42,7 +42,7 @@
     <string name="error_init_failure">Невозможно проиграть видео</string>
     <string name="DEVELOPER_KEY">AIzaSyDky_kn7DJtD05ZTsmcYLhiLsIidr2ZMeM</string>
     <string name="play">play</string>
-    <string name="share_app_text">Привет! Браузер с популярным в школе! Вот ссылка http://bit.ly/yashkola</string>
+    <string name="share_app_text">Привет! Браузер с популярным в школе! Вот ссылка http://bit.ly/detbrapp</string>
     <string name="share_title">Пора рассказать друзьям в школе!</string>
     <string name="share_description">Нажми на карточку и не отпускай</string>
 </resources>

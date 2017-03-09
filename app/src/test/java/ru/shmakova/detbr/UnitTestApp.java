@@ -3,9 +3,10 @@ package ru.shmakova.detbr;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
+import ru.shmakova.detbr.app.App;
+import ru.shmakova.detbr.app.di.components.DaggerApplicationComponent;
+import ru.shmakova.detbr.app.di.modules.DeveloperSettingsModule;
 import ru.shmakova.detbr.data.developer_settings.DevMetricsProxy;
-import ru.shmakova.detbr.di.components.DaggerApplicationComponent;
-import ru.shmakova.detbr.di.modules.DeveloperSettingsModule;
 
 @SuppressWarnings("SIC_INNER_SHOULD_BE_STATIC_ANON")
 public class UnitTestApp extends App {

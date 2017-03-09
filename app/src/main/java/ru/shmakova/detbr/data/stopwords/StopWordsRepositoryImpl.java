@@ -4,11 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Created by shmakova on 17.09.16.
- */
-
-
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public class StopWordsRepositoryImpl implements StopWordsRepository {
     private final List<String> stopWords;

@@ -9,10 +9,6 @@ import java.util.List;
 import ru.shmakova.detbr.data.categories.Category;
 import rx.Observable;
 
-/**
- * Created by shmakova on 08.09.16.
- */
-
 public interface CardsRepository {
     Observable<List<Card>> getCardsList();
 

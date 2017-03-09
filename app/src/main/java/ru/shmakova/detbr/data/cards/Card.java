@@ -12,11 +12,6 @@ import java.util.List;
 import me.mattlogan.auto.value.firebase.annotation.FirebaseValue;
 import ru.shmakova.detbr.utils.UrlUtils;
 
-
-/**
- * Created by shmakova on 21.08.16.
- */
-
 @AutoValue
 @FirebaseValue
 public abstract class Card implements Parcelable {

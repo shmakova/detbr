@@ -6,10 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by shmakova on 25.08.16.
- */
-
 public class WotResponse {
     private static final int GOOD_REPUTATION = 50;
 

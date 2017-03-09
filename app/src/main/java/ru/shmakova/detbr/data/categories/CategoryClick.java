@@ -2,10 +2,6 @@ package ru.shmakova.detbr.data.categories;
 
 import com.google.auto.value.AutoValue;
 
-/**
- * Created by shmakova on 14.09.16.
- */
-
 @AutoValue
 public abstract class CategoryClick {
     public abstract Category category();

@@ -8,6 +8,8 @@ import org.robolectric.annotation.Config;
 
 import java.lang.reflect.Method;
 
+import ru.shmakova.detbr.app.App;
+
 // Custom runner allows us set config in one place instead of setting it in each test class.
 public class YamblzRobolectricUnitTestRunner extends RobolectricGradleTestRunner {
 

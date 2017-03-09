@@ -7,10 +7,6 @@ import java.util.List;
 
 import rx.Observable;
 
-/**
- * Created by shmakova on 29.08.16.
- */
-
 public interface TabsRepository {
     Observable<List<Tab>> getSavedTabs();
 

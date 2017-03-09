@@ -26,10 +26,6 @@ import rx.Observable;
 import rx.functions.Func1;
 import timber.log.Timber;
 
-/**
- * Created by shmakova on 08.09.16.
- */
-
 public class CardsRepositoryImpl implements CardsRepository {
     private final static String CARDS = "cards";
 

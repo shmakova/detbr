@@ -8,10 +8,6 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.AccelerateInterpolator;
 
-/**
- * Created by shmakova on 14.09.16.
- */
-
 public final class BackgroundAnimator {
     private BackgroundAnimator() {
     }

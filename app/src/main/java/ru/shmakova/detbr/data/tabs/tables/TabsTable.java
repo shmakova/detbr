@@ -2,10 +2,6 @@ package ru.shmakova.detbr.data.tabs.tables;
 
 import android.support.annotation.NonNull;
 
-/**
- * Created by user on 02.09.16.
- */
-
 public final class TabsTable {
     @NonNull
     public static final String TABLE = "tabs_table";

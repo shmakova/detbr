@@ -8,10 +8,6 @@ import com.pushtorefresh.storio.sqlite.queries.DeleteQuery;
 import ru.shmakova.detbr.data.tabs.Tab;
 import ru.shmakova.detbr.data.tabs.tables.TabsTable;
 
-/**
- * Created by user on 04.09.16.
- */
-
 public class TabDeleteResolver extends DefaultDeleteResolver<Tab> {
     @Override
     @NonNull

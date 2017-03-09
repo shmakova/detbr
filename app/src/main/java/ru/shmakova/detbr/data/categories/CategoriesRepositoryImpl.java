@@ -8,10 +8,6 @@ import java.util.List;
 
 import rx.Observable;
 
-/**
- * Created by shmakova on 08.09.16.
- */
-
 public class CategoriesRepositoryImpl implements CategoriesRepository {
     private final DatabaseReference databaseReference;
 

@@ -10,10 +10,6 @@ import android.view.animation.AccelerateInterpolator;
 
 import com.hannesdorfmann.mosby.mvp.lce.LceAnimator;
 
-/**
- * Created by shmakova on 31.08.16.
- */
-
 public final class CustomLceAnimator extends LceAnimator {
 
     private CustomLceAnimator() {
