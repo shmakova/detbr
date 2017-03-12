@@ -4,9 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.support.v4.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.animation.AccelerateInterpolator;
 
 public final class BackgroundAnimator {
     private BackgroundAnimator() {
@@ -29,7 +29,7 @@ public final class BackgroundAnimator {
 
             set.playTogether(backgroundAnimator, dividerFadeInAnimator);
             set.setDuration(300);
-            set.setInterpolator(new AccelerateInterpolator());
+            set.setInterpolator(new FastOutSlowInInterpolator());
 
             set.addListener(new AnimatorListenerAdapter() {
                 @Override

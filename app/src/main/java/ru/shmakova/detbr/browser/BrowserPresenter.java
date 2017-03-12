@@ -1,12 +1,13 @@
 package ru.shmakova.detbr.browser;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.net.http.SslError;
 import android.support.annotation.NonNull;
-
-import org.xwalk.core.XWalkGetBitmapCallback;
-import org.xwalk.core.XWalkResourceClient;
-import org.xwalk.core.XWalkUIClient;
-import org.xwalk.core.XWalkView;
+import android.webkit.SslErrorHandler;
+import android.webkit.WebChromeClient;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import ru.shmakova.detbr.base.BasePresenter;
 import ru.shmakova.detbr.data.cards.Card;
@@ -17,12 +18,8 @@ import ru.shmakova.detbr.tabs.TabsManager;
 import ru.shmakova.detbr.utils.UrlUtils;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 public class BrowserPresenter extends BasePresenter<BrowserView> {
-    private static final String CHILD_SAFETY_HTML = "file:///android_asset/child_safety.html";
-    private static final String LUCKY_PAGE_HTML = "file:///android_asset/lucky_page.html";
-
     @NonNull
     private final TabsManager tabsManager;
     @NonNull
@@ -93,99 +90,78 @@ public class BrowserPresenter extends BasePresenter<BrowserView> {
         }
     }
 
-    public XWalkResourceClient provideResourceClient(XWalkView xWalkView) {
-        return new BrowserResourceClient(xWalkView);
+    public WebViewClient provideWebViewClient() {
+        return new BrowserWebViewClient();
     }
 
-    public XWalkUIClient provideXWalkUIClient(XWalkView xWalkView) {
-        return new BrowserWalkUIClient(xWalkView);
+    public WebChromeClient provideWebChromeClient() {
+        return new BrowserWebChromeClient();
     }
 
-    private class BrowserResourceClient extends XWalkResourceClient {
-        public BrowserResourceClient(XWalkView view) {
-            super(view);
-        }
-
+    private class BrowserWebViewClient extends WebViewClient {
         @Override
-        public boolean shouldOverrideUrlLoading(XWalkView view, String url) {
-            if (UrlUtils.isHttpLink(url)) {
-                if (currentUrl != null && currentUrl.equals(url)) {
-                    return true;
-                }
-
-                String safeUrl = url;
-
-                if (url.contains(UrlUtils.GOOGLE_URL) &&
-                        !url.contains(UrlUtils.GOOGLE_SAFE_PARAMETER) &&
-                        url.contains(UrlUtils.GOOGLE_QUERY_PARAMETER)) {
-                    safeUrl += "&" + UrlUtils.GOOGLE_SAFE_PARAMETER;
-                } else if (url.contains(UrlUtils.YANDEX_URL) &&
-                        !url.contains(UrlUtils.YANDEX_SAFE_PARAMETER) &&
-                        url.contains(UrlUtils.YANDEX_QUERY_PARAMETER)) {
-                    safeUrl += "&" + UrlUtils.YANDEX_SAFE_PARAMETER;
-                }
-
-                view.loadUrl(safeUrl);
-                return true;
-            }
-
-            return false;
-        }
-
-
-        @Override
-        public void onProgressChanged(XWalkView view, int newProgress) {
-            Timber.d("onProgressChanged: %s", newProgress);
-
+        public void onPageFinished(@NonNull WebView webView, String url) {
             if (isViewAttached()) {
-                getView().updateProgress(newProgress);
+                if (UrlUtils.isHttpLink(url)) {
+                    getView().showSearchText(webView.getTitle(), UrlUtils.getHost(url));
+                    getView().showLike();
+                }
+                getView().hideProgress();
+                getView().showLike(cardsRepository.isUrlLiked(url));
+                webView.postInvalidate();
+
+                updateTab(Tab.builder()
+                        .preview(getSnapshot(webView))
+                        .url(webView.getUrl())
+                        .title(webView.getTitle())
+                        .build());
             }
         }
-    }
-
-    private class BrowserWalkUIClient extends XWalkUIClient {
-        public BrowserWalkUIClient(XWalkView view) {
-            super(view);
-        }
 
         @Override
-        public void onPageLoadStarted(XWalkView view, String url) {
-            Timber.d("onPageLoadStarted: %s", url);
-
+        public void onPageStarted(WebView webView, String url, Bitmap favicon) {
             if (isViewAttached()) {
-                getView().showSearchText(view.getTitle(), UrlUtils.getHost(url));
+                getView().showSearchText(webView.getTitle(), UrlUtils.getHost(url));
                 getView().showProgress();
                 getView().hideLike();
             }
         }
 
         @Override
-        public void onPageLoadStopped(XWalkView view, String url, LoadStatus status) {
-            Timber.d("onPageLoadStopped: %s, status: %s", url, status);
+        public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+            handler.proceed();
+        }
 
-            if (isViewAttached()) {
-                if (UrlUtils.isHttpLink(url)) {
-                    getView().showSearchText(view.getTitle(), UrlUtils.getHost(url));
-                    getView().showLike();
-                }
-                getView().hideProgress();
-                getView().showLike(cardsRepository.isUrlLiked(url));
-                view.postInvalidate();
+        private Bitmap getSnapshot(WebView webView) {
+            final int width = 320;
+            int height = 480;
+            float ratio = (float) height / (float) width;
+            Bitmap thumbnail = null;
+
+            if (webView.getWidth() > 0 && webView.getHeight() > 0) {
+                int webViewHeight = (int) (webView.getWidth() * ratio);
+                int shapshotHeight = webViewHeight > webView.getHeight() ? webView.getHeight() : webViewHeight;
+                Bitmap bitmap = Bitmap.createBitmap(webView.getWidth(), shapshotHeight, Bitmap.Config.ARGB_8888);
+                Canvas canvas = new Canvas(bitmap);
+                webView.draw(canvas);
+                float factor = width / (float) webView.getWidth();
+                Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, width, (int) (bitmap.getHeight() * factor), true);
+                height = height > scaledBitmap.getHeight() ? scaledBitmap.getHeight() : height;
+                thumbnail = Bitmap.createBitmap(scaledBitmap, 0, 0, width, height);
+                bitmap.recycle();
+                scaledBitmap.recycle();
             }
 
-            if (status == LoadStatus.FINISHED) {
-                view.captureBitmapAsync(new XWalkGetBitmapCallback() {
-                    @Override
-                    public void onFinishGetBitmap(Bitmap bitmap, int i) {
-                        Timber.d("onFinishGetBitmap: %s", bitmap);
+            return thumbnail;
+        }
+    }
 
-                        updateTab(Tab.builder()
-                                .preview(bitmap)
-                                .url(view.getUrl())
-                                .title(view.getTitle())
-                                .build());
-                    }
-                });
+    private class BrowserWebChromeClient extends WebChromeClient {
+        @Override
+        public void onProgressChanged(WebView view, int newProgress) {
+            super.onProgressChanged(view, newProgress);
+            if (isViewAttached()) {
+                getView().updateProgress(newProgress);
             }
         }
     }

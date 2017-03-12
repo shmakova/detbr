@@ -1,9 +1,11 @@
 package ru.shmakova.detbr.browser;
 
 import android.annotation.SuppressLint;
+import android.app.ActivityManager;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,11 +21,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import org.xwalk.core.XWalkNavigationHistory;
-import org.xwalk.core.XWalkView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -42,14 +44,15 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         BrowserView {
     private static final String CHILD_SAFETY_HTML = "file:///android_asset/child_safety.html";
     private static final String LUCKY_PAGE_HTML = "file:///android_asset/lucky_page.html";
+    private static final int VPN_REQUEST_CODE = 300;
 
     @NonNull
     private final PublishSubject<String> loadUrlEvents = PublishSubject.create();
     @NonNull
     private final PublishSubject<Pair<String, String>> likeClicks = PublishSubject.create();
 
-    @BindView(R.id.xwalkview)
-    XWalkView xWalkView;
+    @BindView(R.id.webview)
+    WebView webView;
     @BindView(R.id.like_fab)
     FloatingActionButton fabLike;
     @BindView(R.id.progress_bar)
@@ -67,6 +70,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     private BrowserComponent browserComponent;
     private SearchView searchView;
     private MenuItem searchItem;
+    private String currentQuery;
 
     @SuppressLint("InflateParams")
     @Override
@@ -81,9 +85,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         if (savedInstanceState == null) {
             handleIntent(getIntent());
         } else {
-            xWalkView.restoreState(savedInstanceState);
+            webView.restoreState(savedInstanceState);
         }
-
     }
 
     private void initActionBar() {
@@ -97,7 +100,7 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        xWalkView.saveState(outState);
+        webView.saveState(outState);
         super.onSaveInstanceState(outState);
     }
 
@@ -112,9 +115,32 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         return browserComponent.presenter();
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private void initWebView() {
-        xWalkView.setResourceClient(presenter.provideResourceClient(xWalkView));
-        xWalkView.setUIClient(presenter.provideXWalkUIClient(xWalkView));
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
+        webSettings.setAppCacheEnabled(true);
+        webSettings.setCacheMode(WebSettings.LOAD_DEFAULT);
+        webSettings.setDatabaseEnabled(true);
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+        webSettings.setAllowContentAccess(true);
+        webSettings.setAllowFileAccess(true);
+        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setUseWideViewPort(true);
+        webView.setDrawingCacheBackgroundColor(Color.WHITE);
+        webView.setFocusableInTouchMode(true);
+        webView.setFocusable(true);
+        webView.setDrawingCacheEnabled(false);
+        webView.setWillNotCacheDrawing(true);
+        webView.setBackgroundColor(Color.WHITE);
+        webView.setScrollbarFadingEnabled(true);
+        webView.setSaveEnabled(true);
+        webView.setNetworkAvailable(true);
+        webView.setWebViewClient(presenter.provideWebViewClient());
+        webView.setWebChromeClient(presenter.provideWebChromeClient());
     }
 
     @Override
@@ -136,18 +162,13 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void loadPageByUrl(String url) {
-        xWalkView.stopLoading();
-        xWalkView.loadUrl(url);
+        webView.stopLoading();
+        webView.loadUrl(url);
     }
 
     @Override
     public boolean resolveUrl(String url, LoadUrlListener listener) {
         return IntentResolver.resolveUrl(this, url, listener);
-    }
-
-    @Override
-    public void showLuckyPage() {
-        xWalkView.loadUrl(LUCKY_PAGE_HTML);
     }
 
     @Override
@@ -158,6 +179,11 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     @Override
     public void hideLike() {
         fabLike.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        handleIntent(intent);
     }
 
     @Override
@@ -184,7 +210,18 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
             searchView.setQuery(query, false);
         }
 
-        loadUrlEvents.onNext(query);
+        if (isServiceRunning(SafeVpnService.class)) {
+            loadUrlEvents.onNext(query);
+        } else {
+            currentQuery = query;
+            Intent serviceIntent = SafeVpnService.prepare(getApplicationContext());
+
+            if (serviceIntent != null) {
+                startActivityForResult(serviceIntent, VPN_REQUEST_CODE);
+            } else {
+                onActivityResult(VPN_REQUEST_CODE, RESULT_OK, null);
+            }
+        }
     }
 
     @Override
@@ -204,6 +241,11 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
         intent.putExtra(NavigationManager.TAB_KEY, NavigationManager.TABS_TAB_POSITION);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void showLuckyPage() {
+        webView.loadUrl(LUCKY_PAGE_HTML);
     }
 
     @Override
@@ -241,8 +283,8 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     public void onBackPressed() {
-        if (xWalkView.getNavigationHistory().canGoBack()) {
-            xWalkView.getNavigationHistory().navigate(XWalkNavigationHistory.Direction.BACKWARD, 1);
+        if (webView.canGoBack()) {
+            webView.goBack();
         } else {
             presenter.onHomeClicked();
         }
@@ -268,14 +310,14 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
     private void share() {
         Intent sendIntent = new Intent();
         sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, xWalkView.getUrl());
+        sendIntent.putExtra(Intent.EXTRA_TEXT, webView.getUrl());
         sendIntent.setType("text/plain");
         startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share)));
     }
 
     @OnClick(R.id.like_fab)
     public void onFabLikeClick() {
-        likeClicks.onNext(new Pair<>(xWalkView.getTitle(), xWalkView.getUrl()));
+        likeClicks.onNext(new Pair<>(webView.getTitle(), webView.getUrl()));
     }
 
     @OnClick(R.id.toolbar)
@@ -285,43 +327,24 @@ public class BrowserActivity extends BaseMvpActivity<BrowserView, BrowserPresent
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (xWalkView != null) {
-            xWalkView.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == VPN_REQUEST_CODE && resultCode == RESULT_OK) {
+            Intent intent = new Intent(this, SafeVpnService.class);
+            startService(intent);
+            loadUrlEvents.onNext(currentQuery);
+        } else {
+            Toast.makeText(this, "HUI", Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    protected void onNewIntent(Intent intent) {
-        handleIntent(intent);
+    private boolean isServiceRunning(@NonNull Class<?> serviceClass) {
+        ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
 
-        if (xWalkView != null) {
-            xWalkView.onNewIntent(intent);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
         }
-    }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (xWalkView != null) {
-            xWalkView.pauseTimers();
-            xWalkView.onHide();
-        }
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (xWalkView != null) {
-            xWalkView.resumeTimers();
-            xWalkView.onShow();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (xWalkView != null) {
-            xWalkView.onDestroy();
-        }
+        return false;
     }
 }

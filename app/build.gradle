@@ -86,9 +86,6 @@ dependencies {
     compile libraries.supportDesign
     compile libraries.supportRecyclerView
     compile libraries.supportCardView
-    compile libraries.supportMultidex
-
-    compile libraries.crosswalk
 
     provided libraries.autoValue
     annotationProcessor libraries.autoValue

@@ -1,8 +1,8 @@
 package ru.shmakova.detbr.app;
 
+import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.multidex.MultiDexApplication;
 
 import com.crashlytics.android.Crashlytics;
 
@@ -15,7 +15,7 @@ import ru.shmakova.detbr.data.developer_settings.DevMetricsProxy;
 import ru.shmakova.detbr.data.developer_settings.DeveloperSettingsModel;
 import timber.log.Timber;
 
-public class App extends MultiDexApplication {
+public class App extends Application {
     private ApplicationComponent applicationComponent;
 
     // Prevent need in a singleton (global) reference to the application object.
